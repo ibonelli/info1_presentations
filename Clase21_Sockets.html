@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Sockets avanzado</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Sockets Avanzado</h1>
+					<h3>O como atender varios pedidos al mismo tiempo...</h3>
+					<p>
+						<small>Ing. Ignacio Javier Bonelli</small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Hay dos formas:</h3>
+					<ul>
+						<li>Una fácil de implementar, pero dificil de programar</li>
+							<ul><li>Usamos send()/recv() como NONBLOCKING</li></ul>
+						<li>Otra mas dificil de implementar, pero mucho mas elegante</li>
+							<ul><li>Creamos distintos procesos: fork()</li></ul>
+					</ul>
+				</section>
+
+				<!-- Nested vertical slides: NONBLOCKING -->
+				<section data-background="#007777">
+					<section>
+						<h2>NONBLOCKING</h2>
+						<p>Parte no bloqueante de sockets_3client_nonblocking.c</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+    printf("wait...");
+    do {
+        n = recv(sockfd,buffer,255,MSG_DONTWAIT);
+        printf(".");
+    } while (n == -1);
+						</code></pre>
+						</br>
+						<p>Trabajando en modo no bloqueante, retorna:</p>
+						<ul>
+							<li>-1 si no llegó nada.</li>
+							<li>>0 si llegaron datos.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>¿Y el resto del código?</h2>
+						<p>Mayormente no cambia. Tenemos los mismo pasos:</p>
+						<ol>
+							<li>Creacion con socket()</li>
+							<li>Armado de la estructura serv_addr</li>
+							<li>Conexión al socket con connect()</li>
+							<li>Envio/recepción de datos con send()/recv()</li>
+							<li>Cierre del socket</li>
+						</ol>
+					</section>
+					<section>
+						<h2>¿Y en el servidor cambia algo?</h2>
+						<p>No en este ejemplo, pero se puede cambiar el server a una máquina de estados. De esa manera y como no bloqueante se pueden manejar multiples conexiones simultaneamente.</p>
+						<p>Pero para poder manejar distintos sockets es mejor usar fork()</p>
+						</br>
+						<p>Compilar los ejemplos de código:</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o client sockets_3client_nonblocking.c
+$ gcc -o server sockets_3server_nonblocking.c
+						</code></pre>
+						</ul>
+					</section>
+				</section>
+
+				<section data-background="#4d7e65">
+					<section>
+						<h2>Usando fork()</h2>
+						<p>Fork nos permite crear un proceso "hijo", copia del "padre".</p>
+						</br><p>man 2 fork</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;unistd.h&gt;
+pid_t fork(void);
+						</code></pre>
+						</br><p>El proceso hijo es un duplicado del padre, pero</br>tiene un PID distinto (valor retornado pid_t).</p> 
+					</section>
+					<section>
+						<h2>Ejemplo1:</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o ej1 ej_fork.c
+						</code></pre>
+						</br><h2>Funciones</h2>
+						<ul>
+							<li>getpid() - Obtiene el PID del proceso actual.</li>
+							<li>getppid() - Obtiene el PID del proceso hijo.</li>
+							<li>wait() - Espera a que un proceso cambie de estado.</li>
+						</ul>
+					</section>
+					<section>
+						<p>man 2 wait</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+pid_t wait(int *status);
+pid_t waitpid(pid_t pid, int *status, int options);
+						</code></pre>
+						</br><h2>Ejemplo2:</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+gcc -o ej2 ej_fork_kill.c
+						</code></pre>
+						</ul>
+						</br><p>Para el segundo ejemplo utilizaremos los comandos:</p>
+						<ul>
+							<li>kill - Dado un PID lo "mata".</li>
+							<li>ps - Lista los procesos corriendo en la máquina.</li>
+							<li>top / htop - Monitoreo "online" de procesos.</li>
+							<ul>
+								<li>top viene, htop hay que instalarlo.</li>
+							</ul>
+						</ul>
+					</section>
+				</section>
+
+				<section data-background="#8c4738">
+					<section>
+						<h2>Ejemplo TCP fork</h2>
+						<p></p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o ej3-tcp-clt tcp-cliente.c
+$ gcc -o ej3-tcp-svr tcp-servidor.c
+						</code></pre>
+						</br>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ ./ej3-tcp-svr
+$ ./ej3-tcp-clt 127.0.0.1
+$ ./ej3-tcp-clt 127.0.0.1
+...
+$ ps ax | grep ej3
+						</code></pre>
+					</section>
+					<section>
+						<h2>Ejemplo UDP fork</h2>
+						<p></p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o ej4-udp-clt udp-cliente.c
+$ gcc -o ej4-udp-svr udp-servidor.c
+						</code></pre>
+						</br>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ ./ej4-udp-svr
+$ ./ej4-udp-clt 127.0.0.1 Hola
+$ ./ej4-udp-clt 127.0.0.1 Mundo
+						</code></pre>
+					</section>
+					<section>
+						<h2>Ejemplo Allegro/TCP pooling</h2>
+						<p></p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o al08_keyboard_client al08_keyboard_client.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
+$ gcc -o al08_keyboard_server al08_keyboard_server.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
+						</code></pre>
+						</br>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ ./al08_keyboard_server
+$ ./al08_keyboard_client 127.0.0.1
+						</code></pre>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

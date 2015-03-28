@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Presentacion de la materia y Estructura del computador</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+
+<section>
+<h1>Informática 1</h1>
+<ul>
+<li><h2>Ing. Ignacio Javier Bonelli  <small>(Profesor)</small></h2></li>
+<li><h2>Ing. Hector Levi  <small>(JTP)</small></h2></li>
+</ul>
+<br /><br /><br />
+<h3>Curso: R1021</h3>
+<ul>
+<li>Sábado de 08:30 a 12:30 hs</li>
+<li>Medrano</li>
+</ul>
+</section><section>
+<h2>Preguntas sobre ustedes...</h2>
+<ul>
+<li>Recursantes? Finales? </li>
+<li>Técnicos o Bachiller? (otros?) </li>
+<li>Formación en programación? Lenguaje? </li>
+<li>Cantidad de materias cursando? </li>
+<li>Como pasaron el curso de ingreso? </li>
+</ul>
+</section>
+
+</section><section data-background="#007777">
+
+<section>
+<h2>Informática 1</h2>
+<ul>
+<li>Materia exigente para los que no tienen ninguna formación en programación. </li>
+<li>Única materia del departamento de electrónica en el primer nivel. </li>
+<li>Contenidos mínimos: <ul>
+<li>Estructura de una computadora. Sistemas de numeración y aritmética binaria. Diagramas de flujo. </li>
+<li>Introducción al lenguaje C. Control de flujo en C. Funciones en C. Punteros y arreglos en C </li>
+<li>Estructuras y uniones en C. Campos de bits. Manejo de archivos en C. Archivos de texto y archivos binarios. </li>
+<li>Uso del lenguaje C en aplicaciones de bajo nivel. Operaciones a nivel de bits. </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Por que programar?</h2>
+<ul>
+<li>Para las generaciones modernas aprender a programar debería ser como aprender a leer, escribir o matemáticas. Una materia básica:<ul>
+<li>Iniciativa EEUU: <a href="http://www.code.org">www.code.org</a></li>
+<li>Iniciativa GCBA: <a href="http://www.codecademy.com/">www.codecademy.com</a></li>
+<li>Articulo reciente LN: <a href="http://www.lanacion.com.ar/1567438-aprender-a-programar-como-se-aprende-a-leer">Aprender a programar como se aprende a leer</a></li>
+</ul>
+</li>
+<li>Programación:<ul>
+<li>Estructuras lógicas (paradigmas) </li>
+<li>Lenguajes (como codificar) </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Electrónica <small>vs</small> Sistemas</h2>
+<ul>
+<li>Sistemas: Grandes, abstracción, no instalan su maquina, no saben de hardware, etc... </li>
+<li>Electrónica: Mundo Analógico inicialmente (y todavía un poco). Ahora mucho Digital. Por lo tanto programación es IMPORTANTE. <ul>
+<li>Digitales Antes: Inicialmente baja integración, por lo tanto solo compuertas lógicas, contadores, divisores, etc... </li>
+<li>Digitales Ahora: MicroControlador, MicroProcesador, DSP, SoC, FPGA. </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Electrónica Digital <small>vs</small> Analógica</h2>
+<ul>
+	<li>Electrónica Analógica
+	<ul>
+		<li>Electrónica Aplicada
+			<ul>
+			<li>Amplificadores (mono etapa y multi-etapa), Realimentación (negativa y positiva) <ul>
+			<li>Mono Etapa =&gt; Electrónica Básica </li>
+			<li>Multi Etapa =&gt; Electrónica de bloques (nuevamente abstracción) </li>
+			</ul>
+		</li>
+		<li>Sistemas analógicos de transmisión de señales: Moduladores, Realimentación, etc.. </li>
+	</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Electrónica Digital <small>vs</small> Analógica</h2>
+<ul>
+	<li>Electrónica Analógica
+		<ul>
+			<li>Teoría de Circuitos: Filtros (y otras cosas)
+				<ul>
+					<li>Pasivos y con elementos simples </li>
+					<li>Activos con amplificadores multi-etapa (nuevamente abstracción) </li>
+					<li>Digitales usando lo que se ve en "Análisis de señales y sistemas" (aka Matemática Discreta) </li>
+				</ul>
+			</li>
+			<li>Sistemas de control
+				<ul>
+					<li>Analógicos, realimentados, etc... </li>
+					<li>Digitales con lógica programada </li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Resumiendo</h2>
+<ul>
+<li>Razones de aprende informática 1 en Electrónica: <ul>
+<li>La conquista del mundo digital en todo lo referente a electrónica. </li>
+<li>Necesidad de programación en electrónica tanto para microcontroladores como computadoras </li>
+</ul>
+</li>
+<li>Por Qué los temas: <ul>
+<li>Programación Estructurada: Estrategias para resolver problemas y paradigmas de la programación. Dividir problemas en partes. </li>
+<li>Lenguaje C: Ampliamente usado, sintaxis extendida, posibilidad de programar estructuradamente, rapidez de ejecución, gran flexibilidad, amplia librería, etc... </li>
+<li>Linux: Código abierto, facilidades en C, mucha documentación, etc... </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Temario Abreviado</h2>
+<ul>
+<li>Estructura de una Computadora </li>
+<li>Sistemas de Numeración y representación numérica </li>
+<li>Introducción a la Programación Estructurada </li>
+<li>El soporte del Sistema Operativo </li>
+<li>Introducción al Lenguaje C </li>
+<li>Control de Flujo en Lenguaje C </li>
+<li>Funciones en Lenguaje C </li>
+<li>Arreglos en C </li>
+<li>Punteros en C </li>
+<li>Manejo de Strings </li>
+<li>Manejo de archivos en C </li>
+<li>Uso del Lenguaje C en aplicaciones de bajo nivel y operaciones de Bits </li>
+<li>Librerías avanzadas: Paralelismo, funciones gráficas, etc... </li>
+</ul>
+</section><section>
+<h2>Evaluaciones</h2>
+<ul>
+<li>Primer parcial a principio de Junio: Punteros, String, Arreglos, Argumentos main, Funciones, ... </li>
+<li>Segundo parcial a fines de Septiembre: Listas, Ordenamiento, Archivos, Sockets, etc... </li>
+<li>TPO: Se debe entregar en Diciembre junto con el informe. </li>
+<li>Laboratorios </li>
+<li>Carpeta de trabajos prácticos individual y SVN </li>
+<li>El segundo examen es un trabajo práctico integrador obligatorio (TPO). </li>
+<li>Recuperatorios en Diciembre y en Febrero</li>
+</ul>
+</section>
+
+<section>
+<h2>La Universidad</h2>
+<ul>
+	<li>Dedicación, paciencia y decisión </li>
+	<li>Aprender a aprender </li>
+	<li>Búsqueda de fuentes de información </li>
+	<li>La cursadas y los finales </li>
+	<li>Programa de carrera </li>
+</ul>
+<br /><br />
+<h3>Confucio (551-478 a. C.) pensador/filosofo chino:</h3>
+<blockquote>
+	<ul>
+		<li>"Me lo contaron y lo olvidé;</li>
+		<li>lo vi y lo entendí;</li>
+		<li>lo hice y lo aprendí".</li>
+	</ul>
+</blockquote>
+</section>
+
+<section>
+<h2>Contacto</h2>
+<ul>
+<li><a href="http://www.campusvirtual.frba.utn.edu.ar/especialidad/course/view.php?id=504">www.campusvirtual.frba.utn.edu.ar</a></li>
+<li>Mails: <ul>
+<li><a href="mailto:ibonelli@frba.utn.edu.ar">ibonelli@frba.utn.edu.ar</a></li>
+<li><a href="mailto:hectorlevi@yahoo.com.ar">hectorlevi@yahoo.com.ar</a></li>
+</ul>
+</li>
+<li><a href="http://info.nachodigital.com.ar/doku.php">info.nachodigital.com.ar</a></li>
+<li><a href="https://docs.google.com/forms/d/1XLmk0L82gbcqpVMN2iXXLlH7YGLaMyJ3no7uRXnvMrU/viewform?usp=send_form">Formulario "inscripción"</a></li>
+</ul>
+</section><section>
+<h2>SVN</h2>
+<ul>
+<li>Necesitan usuario del SGE<ul>
+<li><a href="http://svn.electron.frba.utn.edu.ar/info1/r1021/">svn.electron.frba.utn.edu.ar/info1/r1021/</a></li>
+</ul>
+</li>
+<li>Carpeta publica (con presentaciones):<ul>
+<li><a href="http://svn.electron.frba.utn.edu.ar/info1/r1021/public/">svn.electron.frba.utn.edu.ar/info1/r1021/public/</a></li>
+</ul>
+</li>
+<li>Lo usaremos para entrega del proyecto (y puede que prácticos)</li>
+</ul>
+</section><section>
+<h2>Software Libre</h2>
+<ul>
+<li>Linux y el software libre<ul>
+<li>Que significa software libre</li>
+<li>Por que usar? Ventajas y desventajas... </li>
+</ul>
+</li>
+<li>Linux e Informática 1<ul>
+<li>Opciones: Multibooteo o maquina virtual</li>
+<li>DVD de la Cátedra: Debian KDE</li>
+</ul>
+</li>
+<li>Entorno de trabajo<ul>
+<li>Shell, CLI, gcc, editor texto </li>
+<li>IDE: Geany, QT creator o Eclipse CDT </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Bibliografía Obligatoria</h2>
+<ul>
+<li>H.M. Deitel, P.J.Deitel. <span style="color: #4FC7CF;">Como programar C, C++ y Java</span>, 4o Edición . Editorial: Pearson Addison-Wesley. </li>
+<li>B. Kernighan, D.Ritchie. <span style="color: #4FC7CF;">El lenguaje de programación C</span>, 2o Edición. Prentice Hall. </li>
+<li>R. Stevens(2005). <span style="color: #4FC7CF;">Programación Avanzada en el entorno UNIX</span>, 2o Edición. Addison Wesley. </li>
+<li>L. Null, J. Lobur. <span style="color: #4FC7CF;">Essentials of Computer Organization and Architecture</span>. Pennsylvania State University. Jones and Bartlett Publishers </li>
+<li>W. Stallings. <span style="color: #4FC7CF;">Organización y Arquitectura de Computadores</span> 7a. Edición. Ed. Prentice Hall. </li>
+<li>W.H. Press, S.A. Teukolsky, W.T. Vetterling, B.P. Flannery. <span style="color: #4FC7CF;">Numerical recipes in C</span>. Editorial Cambridge University Press. </li>
+</ul>
+</section><section>
+<h2>Material de referencia</h2>
+<h3>Material Español</h3>
+<ul>
+<li><a href="http://es.wikibooks.org/wiki/Fundamentos_de_programaci%C3%B3n">es.wikibooks.org/wiki/Fundamentos_de_programacion</a></li>
+<li><a href="http://es.wikibooks.org/wiki/Introducci%C3%B3n_a_Linux">es.wikibooks.org/wiki/Introduccion_a_Linux</a></li>
+<li><a href="http://es.wikibooks.org/wiki/Programaci%C3%B3n_en_C">es.wikibooks.org/wiki/Programacion_en_C</a></li>
+</ul>
+<br /><br />
+<h3>Material en ingles</h3>
+<ul>
+<li><a href="http://en.wikibooks.org/wiki/Subject:Computing">en.wikibooks.org/wiki/Subject:Computing</a></li>
+<li><a href="http://en.wikibooks.org/wiki/Algorithms">en.wikibooks.org/wiki/Algorithms</a></li>
+<li><a href="http://en.wikibooks.org/wiki/Computer_Programming">en.wikibooks.org/wiki/Computer_Programming</a></li>
+</ul>
+</section>
+
+</section><section data-background="#4d7e65">
+
+<section>
+<h2>Que hace una computadora</h2>
+<ul>
+<li>Almacena datos (texto, música, videos, etc...) </li>
+<li>Muestra datos </li>
+<li>Procesa datos (operaciones aritmético lógicas) </li>
+<li>Interactua con el mundo físico <ul>
+<li>Toma datos </li>
+<li>Controla dispositivos externos </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Estructura de una Computadora</h2>
+<ul>
+<li>PC </li>
+<li>Notebook </li>
+<li>Tabletas </li>
+<li>Celular </li>
+<li>Smart TV </li>
+<li>Etc... </li>
+</ul>
+<br /><br />
+<h2>¿Cuales son sus partes?</h2>
+<ul>
+<li>Identificación de partes comunes </li>
+<li>Como se organizan? </li>
+<li>Que hay dentro </li>
+</ul>
+</section>
+
+<section>
+<h2>Estructura de una Computadora</h2>
+<ul>
+	<li>Unidades fundamentales (bit y byte) y sus múltiplos. </li>
+	<li>Memoria:
+		<ul>
+			<li>Definición de memoria</li>
+			<li>Capacidad de memoria</li>
+			<li>Tipos de memoria</li>
+		</ul>
+	</li>
+	<li>Unidad Central del Proceso (CPU):
+		<ul>
+			<li>Unidad Aritmética y Lógica (ALU)</li>
+			<li>Unidad de Control (interno y externo)</li>
+			<li>Registros (Generales, Contador de Programa, etc...)</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Estructura de una Computadora</h2>
+<ul>
+	<li>Dispositivos de entrada/salida (I/O)</li>
+	<li>Ejecución de instrucciones:
+		<ul>
+			<li>Fase de búsqueda de instrucciones</li>
+			<li>Secuencia de Instrucciones (Programa)</li>
+		</ul>
+	</li> 
+	<li>Conceptos de Hardware y Software:
+		<ul>
+			<li>Interacción entre ambos elementos.</li>
+		</ul>
+	</li> 
+	<li>Diferentes plataformas:
+		<ul>
+			<li>PC</li>
+			<li>Embeeded PC</li>
+			<li>Microcontroladores</li>
+			<li>Celulares</li>
+		</ul>
+	</li> 
+</ul>
+</section>
+
+<section>
+<h2>CPU</h2>
+<img src="files/clase01/8088.gif"/>
+</section><section>
+<h2>Computadora</h2>
+<img src="files/clase01/estructura_computadora1.gif"/>
+</section><section>
+<h2>Computadora</h2>
+<img src="files/clase01/estructura_computadora2.png"/>
+</section><section>
+<h2>Almacenamiento</h2>
+<ul>
+<li>Los bytes almacenados pueden representar <ul>
+<li>Un número (sistemas de representación numérica) </li>
+<li>Un código (como por ejemplo caracteres – ASCII) </li>
+<li>Instrucciones </li>
+</ul>
+</li>
+<li>Medios: <ul>
+<li>Memoria (RAM, ROM, FLASH...)</li>
+<li>Discos Magnéticos (HDD)</li>
+<li>Discos Ópticos (CD, DVD, BlueRay...)</li>
+<li>Pendrives</li>
+<li>Sdcard</li>
+<li>etc... </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h1>Unidad 1<h1>
+<h2>Estructura de una Computadora</h2>
+<ul>
+<li>Antecedentes históricos </li>
+<li>Definición de unidades fundamentales (bit y byte) y sus múltiplos </li>
+<li>Definición de memoria. Capacidad de memoria. Tipos de memoria </li>
+<li>Buses </li>
+<li>Unidad Central del Proceso (CPU) </li>
+<li>Unidad Aritmética y Lógica (ALU) </li>
+<li>Unidad de Control | Contador de Programa </li>
+</ul>
+</section>
+
+<section>
+<h1>Unidad 1<h1>
+<h2>Estructura de una Computadora</h2>
+<ul>
+<li>Dispositivos de entrada/salida (I/O) </li>
+<li>Ejecución de instrucciones. Fase de búsqueda de instrucciones. Secuencia de Instrucciones: Programa. </li>
+<li>Conceptos de Hardware y Software. Interacción entre ambos elementos. </li>
+<li>Asimilación de los conceptos teóricos enunciados en el modelo teórico, de modo que los alumnos puedan verificarlos tangiblemente en diferentes plataformas: PC, Embeeded PC, Microcontroladores. </li>
+</ul>
+</section>
+
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
