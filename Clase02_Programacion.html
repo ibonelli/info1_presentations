@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Programación</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+
+<section>
+<h1>Unidad 3:</h1>
+<h2>Introducción a la Programación Estructurada</h2>
+</section><section>
+<h3>Introducción a la Programación Estructurada</h3>
+<ul>
+<li>Interpretación de enunciados. </li>
+<li>Ideas sobre programas y datos. Algoritmos. </li>
+<li>Estructuras Básicas de Programación. Secuencia. Selección. Iteración. Salto Incondicional. Eliminación del Salto Incondicional. </li>
+<li>Primer Paradigma de Programación; Programación Estructurada. Pseudocódigo. Implementación de algoritmos sencillos. </li>
+<li>Utilización del Modelo Top Down para desarrollo de problemas de programación paso a paso. </li>
+</ul>
+</section><section>
+<h1>Unidad 5:</h1>
+<h2>Introducción al Lenguaje C</h2>
+</section><section>
+<h3>Introducción al Lenguaje C</h3>
+<ul>
+<li>Elementos del lenguaje C. Introducción a la sintaxis del lenguaje C. Primer ejemplo: Hola Mundo. </li>
+<li>Identificación de los elementos de sintaxis. Uso del compilador. Tipos de datos, tamaño, y declaraciones. </li>
+<li>Constantes. Declaraciones. Operadores aritméticos, relacionales y lógicos. Cast. Jerarquía de operadores. </li>
+<li>Operadores de evaluación (expresiones condicionales). Operadores de Asignación. Precedencia. </li>
+<li>Preprocesador. Archivos de cabecera. Encabezador stdio.h. Entrada y salida con formato. </li>
+<li>Funciones básicas de entrada salida: scanf (), printf (), getch(), getc(), getchar(), gets(). </li>
+</ul>
+</section><section>
+<h2>Introducción a la Programación Estructurada</h2>
+</section><section>
+<h2>¿Para qué programamos?</h2>
+<h3>¡Para resolver problemas!</h3>
+</br></br>
+<h2>¿Pero como encaro la</h2>
+<h2>resolución de un problema?</h2>
+</section><section>
+<h2>Resolución de problemas</h2>
+<ul>
+<li>Para que tengamos un problema hace falta: <ul>
+<li>Un <span style="color: #4FC7CF;">objetivo</span> que se quiere alcanzar </li>
+<li>Un punto de partida e <span style="color: #4FC7CF;">incertidumbre</span> en el camino a seguir para alcanzar el objetivo </li>
+<li>Un conjunto de <span style="color: #4FC7CF;">desafíos</span> que deberemos vencer para poder alcanzar nuestro objetivo </li>
+</ul>
+</li>
+</ul>
+</br></br>
+<p>Solución: <span style="color: #4FC7CF;">Procedimiento o serie de procedimientos que nos permitirán alcanzar nuestro objetivo.</span></p>
+</section><section>
+<h2>Como resolver el problema (pasos)</h2>
+<ul>
+<li>Identificar el problema y entenderlo </li>
+<li>Desarrollar alternativas de solución </li>
+<li>Seleccionar la "mejor" alternativa de solución </li>
+<li>Implementar la solución y comprobar su validez </li>
+<li>Establecer las correcciones necesarias </li>
+</ul>
+</section>
+
+<section>
+	<h2>Como resolver problemas de computo</h2>
+	<ul>
+		<li>Identificar el problema: <ul>
+			<li>Cuales son los datos, de que tipo son, cantidad de datos, etc... </li>
+			<li>Resultado/datos esperados al terminar el programa. </li>
+			</ul>
+		</li>
+		<li>Alternativas de solución <ul>
+			<li>Algoritmos posibles a usar </li>
+			<li>Herramientas/Librerías a usar </li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+<h2>Como resolver problemas de computo</h2>
+<ul>
+<li>Seleccionar la "mejor" alternativa de solución <ul>
+<li>Siempre hay muchas formas de llegar a una solución, debemos encontrar la mas óptima de acuerdo a nuestras restricciones </li>
+</ul>
+</li>
+<li>Implementar la solución y comprobar su validez <ul>
+<li>Siempre debemos probar que las cosas funcionen como esperábamos Un buen diseño incluye dentro del mismo los casos de prueba. </li>
+</ul>
+</li>
+<li>Establecer las correcciones necesarias <ul>
+<li>Siempre hay errores que hay que depurar. </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>División de los problemas</h2>
+<ul>
+<li>Dos aproximaciones posibles: <ul>
+<li>Diseño descendente (Top-down): O mas comúnmente conocido como razonamiento deductivo, análisis o descomposición. </li>
+<li>Diseño ascendente (Bottom-up): Es la contraparte de top-down, también denominado síntesis. Usaremos partes existentes para construir una solución. </li>
+</ul>
+</li>
+</ul>
+</br></br>
+<p>Mas en: <a href="http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design">wikipedia.org/wiki/Top-down_and_bottom-up_design</a></p>
+</section><section>
+<h2>Diseño descendente (Top-down)</h2>
+<ul>
+<li>Se descompone el sistema en partes para descubrir los sub-sistemas o módulos que lo componen. Inicialmente estos sub-sistemas serán cajas negras. </li>
+<li>Se trabaja primero en una visión global. Hasta que esta visión no es lograda no se analizan los sub-sistemas que la componen. </li>
+<li>Una vez terminado el nivel superior se analizan los sub-sistemas resultantes. </li>
+<li>Este proceso continua hasta que todos los sub-sistemas estén especificados (y dejen de ser "cajas negras"). </li>
+<li>Hasta que el proceso de descubrimiento no está terminado no se puede comenzar a programar o hacer pruebas. </li>
+</ul>
+</section><section>
+<h2>Diseño ascendente (Bottom-up)</h2>
+<ul>
+<li>Se juntan partes conocidas hasta llegar a tener un sistema "emergente" que solucione el problema. </li>
+<li>También es conocido como aproximación "orgánica". O sea el sistema se va construyendo o creciendo (como un organismo) hasta poder resolver el problema. </li>
+<li>Una de las ventajas es que permite hacer pruebas mucho antes que Top-Down. </li>
+</ul>
+</section><section>
+<h2>¿Visiones contrapuestas?</h2>
+<ul>
+<li>A pesar de ser dos formas opuestas de resolver/analizar problemas generalmente se utilizan en forma conjunta. </li>
+<li>La experiencia demuestra que lo mas conveniente (y rápido) es tratar de reutilizar código y usar librerías. </li>
+<li>El resultado es hacer un diseño descendente pero buscando sub-sistemas ya conocidos e implementados en librerías o problemas previos. </li>
+</ul>
+</section><section>
+<h2>Ejemplo de 3 niveles</h2>
+<p style="color: #4FC7CF;">Nivel superior, funciones principales. Solución usando el lenguaje del problema y enfocado en su solución.</p></br>
+<p>Sub-sistemas o módulos. Buscan especificar las cajas negras del nivel superior. No tienen necesariamente el lenguaje del problema. Se buscan comportamientos comunes y generales. Los módulos resultantes pueden ser reutilizados para resolver otros problemas.</p></br>
+<p style="color: #4FC7CF;">Nivel inferior. Son los módulos que no se pueden subdividir mas. Se llegó a algo concreto que necesita ser implementado. Un ejemplo sería el control del hardware.</p>
+</section><section>
+<h2>Características de la modularización</h2>
+<ul>
+<li>Todo programa tiene un módulo principal </li>
+<li>Dicho módulo primario se divide en sub-sistemas que a su vez ejecutan una tarea única. </li>
+<li>Estos sub-sistemas deben codificarse de manera independiente de cualquier otra actividad. </li>
+<li>Al finalizar su función volverán al módulo principal. </li>
+<li>Esta independencia significa que ningún módulo será accesado directamente por otro, a excepción de sus propios sub-módulos y el módulo principal. </li>
+</ul>
+</section><section>
+<h2>Uso de subprogramas (o funciones)</h2>
+<ul>
+<li>Razones para crear un subprograma <ul>
+<li>Reducir la complejidad del programa ("divide y vencerás") </li>
+<li>Eliminar código duplicado </li>
+<li>Limitar los efectos de los cambios (aislar aspectos concretos) </li>
+<li>Ocultar detalles de implementación (p.ej. algoritmos complejos) </li>
+<li>Promover la re-utilización de código </li>
+<li>Mejorar la legibilidad del código </li>
+<li>Facilitar la portabilidad del código </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Bueno, podemos resolver problemas...</h2>
+</br>
+<h2>¿Y como programamos?</h2>
+</section><section>
+<h2>Historia de la programación</h2>
+<ul>
+<li>Inicios <ul>
+<li>Lenguaje de máquina : Unos y Ceros </li>
+</ul>
+</li>
+<li>1940 <ul>
+<li>Lenguaje Ensamblador : Mnemonicos </li>
+</ul>
+</li>
+<li>1950 <ul>
+<li>Lenguajes de Alto nivel : Basic, Cobol, Fortran, etc… <ul>
+<li>Sentencias GOTO =&gt; Código Espagueti </li>
+<li>Cantidad de líneas 20.000 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>1970 <ul>
+<li>Programación Estructurada : Pascal, C, etc… <ul>
+<li>Bifurcación y control (while/for/switch/etc..) </li>
+<li>Cantidad máxima de líneas 50.000 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+	<h2>Historia de la programación</h2>
+	<img src="files/clase02/01_hist_prog.png"/>
+</section>
+<section fullscreen-img="files/clase02/01_hist_prog.png" fullscreen-size="contain">
+</section>
+
+<section>
+<h2>Lenguajes de programación</h2>
+<ul>
+	<li>Lenguaje máquina:
+		<ul>
+			<li>El único que entiende directamente la CPU del ordenador. </li>
+			<li>Depende del modelo de ordenador (CPU). </li>
+			<li>Muy difícil programar (binario, cadenas de ceros y unos). </li>
+		</ul>
+	</li>
+	<li>Lenguaje ensamblador:
+		<ul>
+			<li>Equivalente al lenguaje máquina pero comprensible por los humanos, cada línea de código se traduce en una instrucción de máquina. </li>
+			<li>Programas difíciles de entender y mantener, solo programas chicos o en los que la velocidad es un factor primordial. </li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Lenguajes de programación</h2>
+<ul>
+	<li>Lenguajes de alto nivel:
+		<ul>
+			<li>Permiten que el programador exprese el procesamiento de datos de forma simbólica sin tener en cuenta los detalles específicos de la máquina Están orientados al problema y no a la maquina. </li>
+			<li>Independientes del modelo de ordenador, son portables. </li>
+			<li>Proporcionan un mayor nivel de abstracción, productividad, reusabilidad y mantenibilidad </li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Lenguaje de Alto Nivel</h2>
+<ul>
+<li>Basado en una estructura gramatical que permite el anidamiento de instrucciones. </li>
+<li>Cuenta con un conjunto de palabras reservadas, para codificar estructuras de control y/o instrucciones. </li>
+<li>Permite el uso de símbolos aritméticos y/o relacionales. </li>
+<li>Permite la realización de programas independiente del Hardware (un ejemplo es la posibilidad de olvidarse del direccionamiento de memoria). </li>
+</ul>
+</section>
+
+<section>
+<h2>Programas compilados e interpretados</h2>
+<ul>
+	<li>Existen dos tipos de forma de ejecución:
+		<ul>
+			<li>Interpretado:
+				<ul>
+					<li>Para ejecutar el programa hace falta un entorno o programa de ejecución.</li>
+					<li>Este programa o interprete ejecuta el código directamente.</li>
+					<li>Ejemplos: Python, JavaScript, PHP, Perl...</li>
+				</ul>
+			</li>
+			<li>Compilado:
+				<ul>
+					<li>El programa pasa por un proceso de traducción del lenguaje en que se encuentra escrito (p.ej. C) a código de máquina.</li>
+					<li>El resultado es un programa que se ejecuta solo (sin necesidad de un interprete)</li>
+					<li>Ejemplos: C, C++, Pascal, Java...</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Programas compilados e interpretados</h2>
+<ul>
+<li>Existen dos tipos de forma de ejecución:
+<ul>
+<li>Interpretado:
+<ul>
+<li>Ventajas: Depuración mas sencilla e independencia del sistema operativo/hardware.</li>
+<li>Desventajas: La ejecución es bastante mas lenta.<br /></li>
+</ul></li>
+<li>Compilado:
+<ul>
+<li>Ventajas: Mas rápido ya que corre directamente en la máquina</li>
+<li>Desventajas: Mucho mas difícil de mantener y probar. Se debe hacer una versión del programa para cada sistema operativo y hardware donde se quiera correr.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+
+<section>
+<h1>Terminología (1)</h1>
+<ul>
+<li><span style="color: #4FC7CF;">Software:</span> Conjunto de instrucciones que le dicen al hardware que hacer. </li>
+<li><span style="color: #4FC7CF;">Lenguaje de programación:</span> Lenguaje que permite escribir un software. </li>
+<li><span style="color: #4FC7CF;">Programa:</span> Representación de algún software en un lenguaje de programación específico. </li>
+</ul>
+</section>
+
+<section>
+<h1>Terminología (2)</h1>
+<ul>
+<li><span style="color: #4FC7CF;">Aplicación:</span> Software que le permite al computador realizar una tarea específica. </li>
+<li><span style="color: #4FC7CF;">Entorno de desarrollo:</span> Aplicación construida especialmente para el desarrollo de nuevo software. </li>
+<li><span style="color: #4FC7CF;">Sistema Operativo:</span> Software encargado de administrar los recursos del sistema. Ofrece un conjunto de primitivas (funciones) a otro software, que le permite a este ultimo ser tan independiente de la arquitectura de hardware como sea posible </li>
+</ul>
+</section>
+
+<section>
+<h2>¿Se programa siempre igual?</h2>
+<h2>¿Que diferencias hay entre los lenguajes?</h2>
+</section>
+
+<section>
+<h2>Tipos de paradigmas de programación</h2>
+<ul>
+	<li>Imperativo (o por procedimientos):
+		<ul>
+			<li>Describe la programación en términos del estado del programa y sentencias que cambian dicho estado. </li>
+			<li>Los programas imperativos son un conjunto de instrucciones que le indican al computador cómo realizar una tarea.</li>
+			<li>Dentro de este existen:
+				<ul>
+					<li>Programación Estructurada </li>
+					<li>Programación Orientado a objetos </li>
+					<li>Programación Orientada a aspectos </li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Tipos de paradigmas de programación</h2>
+<ul>
+	<li>Declarativo:
+		<ul>
+			<li>Las sentencias que se utilizan describen el problema que se quiere solucionar, pero no las instrucciones necesarias para solucionarlo. </li>
+			<li>Existen 3 subtipos: Lógicos, Algebraicos o Funcionales. </li>
+			<li>Un lenguaje que representa este paradigma es SQL. </li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Paradigma de programación</br>que vamos a ver</h2>
+<ul>
+	<li>Programación estructurada:
+		<ul>
+			<li>Se utilizan únicamente subrutinas y tres estructuras: secuencia, selección (if y switch) e iteración (bucles for y while). </li>
+			<li>Mejora la claridad, calidad y tiempo de desarrollo de un programa. </li>
+			<li>Normalmente se utiliza Pascal para enseñar este paradigma, pero también se puede usar C. </li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Otros</br>paradigmas de programación</br>usados</h2>
+<ul>
+	<li>Orientado a objetos: Usa los objetos en sus interacciones. Está basado en varias técnicas: Encapsulamiento, Herencia, Abstracción, Clasificación y Polimorfismo. </li>
+	<li>Programación Orientada a Aspectos: Es relativamente reciente. Intenta permitir una adecuada modularización de las aplicaciones y posibilitar una mejor separación de incumbencias. </li>
+</ul>
+</section>
+
+<section>
+<h2>Paradigmas de programación</h2>
+<ul>
+<li>Programación imperativa: <ul>
+<li><a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_imperativa">http://es.wikipedia.org/wiki/Programación_imperativa</a></li>
+</ul>
+</li>
+<li>Programación declarativa: <ul>
+<li><a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_declarativa">http://es.wikipedia.org/wiki/Programación_declarativa</a></li>
+</ul>
+</li>
+<li>Programación estructurada (info1 e info2): <ul>
+<li><a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_estructurada">http://es.wikipedia.org/wiki/Programación_estructurada</a></li>
+</ul>
+</li>
+<li>Programación orientada a objetos (intro en info2): <ul>
+<li><a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos">http://es.wikipedia.org/wiki/Programación_orientada_a_objetos</a></li>
+</ul>
+</li>
+<li>Programación orientada a aspectos: <ul>
+<li><a href="http://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_aspectos">http://es.wikipedia.org/wiki/Programación_orientada_a_aspectos</a></li>
+</ul>
+</li>
+</ul>
+</section>
+
+</section>
+
+<section data-background="#007777">
+
+<section>
+<h1>Comencemos a programar...</h1>
+</section><section>
+<h1>Algoritmo</h1>
+<ul>
+	<li>Es un <span style="color: #4FC7CF;">Método</span> para resolver cierto tipo de <span style="color: #4FC7CF;">problema</span> mediante una <span style="color: #4FC7CF;">secuencia de pasos</span> precisos, definidos y finitos </li>
+	<li>Un algoritmo es una serie de operaciones detalladas y consecutivas (algo así como una receta de cocina)</li>
+	<li>Un algoritmo es un conjunto de reglas para resolver una cierta clase de problemas</li>
+	<li>Se puede formular de muchas formas, pero siempre cuidando de que no exista ambigüedad</li>
+</ul>
+</section>
+
+<section>
+<h2>¿Cómo se describe un algoritmo?</h2>
+<ul>
+<li>Lenguaje natural </li>
+<li>Pseudo código </li>
+<li>Diagramas (Estructogramas) </li>
+<li>Lenguaje de programación </li>
+</ul>
+</br></br>
+<p>La precisión es importante. Un algoritmo</br>no puede ser descrito de forma ambigua.</p>
+</section>
+
+<section>
+<h1>Ejemplo de Algoritmo</h1>
+<p>Descripción de un problema real en clase (llevar un botella desde el primer banco al último rincon mas extremo de la clase)</p>
+</section>
+
+<section>
+<h2>Ejemplo de Algoritmo</h2>
+<h3>Problema: Sumar dos números</h3>
+<p>Primero lenguaje natural, luego pseudocódigo</p>
+<ul>
+	<li><span style="color: #4FC7CF;">Solución en lenguaje natural</span>
+		<ul>
+			<li>Entrada: Dos números.</li>
+			<li>Salida: Guardar el resultado de la suma en memoria e imprimir el mismo por pantalla.</li>
+		</ul>
+	</li>
+	<li><span style="color: #4FC7CF;">Proceso en peudocódigo</span>
+		<ul>
+			<li>Leer el 1er número</li>
+			<li>Leer el 2do número</li>
+			<li>Añadir los dos números</li>
+			<li>Guardar el resultado en la memoria</li>
+			<li>Imprimir el resultado por pantalla</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+	<h2>Diagrama</h2>
+	<img src="files/clase02/02_diagrama.png"/>
+</section>
+
+<section>
+<h3>Programa en C para sumar dos números</h3>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+int main (void)
+{
+	int num1, num2, suma;
+
+	/* Entradas */
+	printf("Introduzca el número 1?");
+	scanf("%d", &num1);
+	printf("Introduzca el número 2?");
+	scanf("%d", &num2);
+
+	/* Procesos */
+	suma = num1 + num2;
+	printf("El resultado de la suma es %d", suma); /*Salidas*/
+
+	return 0;
+}
+</code></pre>
+</section>
+
+<section>
+<h3>Programa en Java para sumar dos números</h3>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="java">
+import java.io.*
+public class Suma
+{
+	private int num1, num2, suma;
+	public static void main(String args)
+	{
+		// Entradas
+		System.out.println ("Introduce el número1?");
+		num1 = System.in.readInt ();
+		System.out.println ("Introduce el número2?");
+		num2 = System.in.readInt ();
+
+		// Salidas
+		suma = num1 + num2;
+		System.out.printl ("El resultado de la suma es: " + suma);
+	}
+}
+</code></pre>
+</section>
+
+<section>
+<h2>Inicios de la</br>programación estructurada</br>(1966)</h2>
+</section>
+
+<section>
+<h2>Teorema de Böhm y Jacopini (1966)</h2>
+<p>Cualquier programa de ordenador puede diseñarse e implementarse utilizando únicamente las tres construcciones estructuradas (secuencia, selección e iteración; esto es, sin sentencias goto)</p>
+</br></br>
+<ul style="font-size: 75%;">
+	<li>Böhm, C. &amp; Jacopini, G.: "Flow diagrams, Turing machines, and languages only with two formation rules". Communications of the Association for Computing Machinery (ACM), 1966, Vol. 9, No. 5, pp. 366-371</li>
+	<li>Dijkstra, E.W.: "Goto statement considered harmful". Communications of the ACM, 1968, Vol. 11, No. 3, pp. 147-148</li>
+</ul>
+</section>
+
+<section>
+<h2>Teorema de Böhm y Jacopini (1)</h2>
+<ul>
+	<li>"Secuencia": Conjunto de sentencias o acciones que se ejecutan sucesivamente y en orden (asignaciones, llamadas a rutinas, ...) </li>
+	<li>"Selección": Estructura de control condicional, produce una bifurcación en la ejecución en base a una decisión. Esto es usualmente expresado con palabras clave como <span style="color: #4FC7CF;">if..then..else..endif, switch, o case.</span></li>
+	<li>"Iteración": Estructura de control repetitiva, realiza una serie de pasos en forma repetitiva. Esto es usualmente expresado con palabras clave como <span style="color: #4FC7CF;">while, repeat, for o do..until.</span></li>
+</ul>
+</br></br>
+<p style="font-size: 75%;">Se recomienda que cada bucle sólo debe tener un solo punto de entrada</br>y un sólo punto de salida.</p>
+<p style="font-size: 60%;">Muchos lenguajes refuerzan que solo haya un punto de entrada,</br>pero pocos refuerzan que solo haya un punto de salida.</p>
+<p style="font-size: 50%;">Mas en: <a href="http://es.wikipedia.org/wiki/Diagrama_Nassi-Shneidermang">http://es.wikipedia.org/wiki/Diagrama_Nassi-Shneidermang</a></p>
+</section>
+
+<section>
+<h2>Secuencia</h2>
+<img src="files/clase02/03_diagrama_secuencia.png"/>
+</section>
+
+<section>
+<h2>Selección</h2>
+<img src="files/clase02/04_diagrama_seleccion.png"/>
+</section>
+
+<section>
+<h2>Iteración</h2>
+<img src="files/clase02/05_diagrama_iteracion.png"/>
+</section>
+
+<section>
+<h2>La programación estructurada</br>se consolida (1970)</h2>
+</section>
+
+<section>
+<h2>Programación estructurada</h2>
+<ul>
+<li>El teorema de Böhm y Jacopini evolucionaron en lo que llamamos programación estructurada. </li>
+<li>La idea central es: <ul>
+<li>Las estructuras de control de un programa sólo deben tener un punto de entrada y un punto de salida. </li>
+<li>No deben haber bucles infinitos </li>
+</ul>
+</li>
+<li>Esto es muy importante por que: <ul>
+<li>Mejora la productividad de los programadores. </li>
+<li>Mejora la legibilidad del código resultante. </li>
+<li>Escribimos código, no sólo para que lo traduzca el compilador, sino para que lo puedan leer otras personas. </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplo: Encontrar el máximo</br>de tres números enteros</h3>
+<ul>
+<li>Use secuencia y selección </li>
+<li>Realizar: <ul>
+<li>Desarrollo paso a paso </li>
+<li>Elaborar en seudocódigo </li>
+<li>Elaborar Diagrama N-S (chapin) o flujograma </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Máximo tres enteros, seudocódigo</h3>
+<pre><code>DECLARACIONES:
+    a, b, c: enteros
+INICIO
+    //Entradas
+    IMPRIMIR "Ingrese a"
+    LEER (a)
+    IMPRIMIR "Ingrese b"
+    LEER (b)
+    IMPRIMIR "Ingrese c"
+    LEER (c)
+si (a &gt; b) entonces
+    si (a &gt; c) IMPRIMIR "El mayor es a =", a
+    si_no IMPRIMIR "El mayor es c =", c
+si_no
+    si (b &gt; c) IMPRIMIR "El mayor es b =", b
+    si _no IMPRIMIR "El mayor es c =", c
+FIN
+</code></pre>
+</section>
+
+<section>
+<h3>Máximo tres enteros, Diagrama NS/Chapin</h3>
+<img src="files/clase02/06_chapin_numeros_enteros.png"/>
+</section>
+
+<section>
+<h3>Ya tenemos una forma de</br>controlar el flujo del programa...</h3>
+<h2>¿Que mas nos falta?</h2>
+</section>
+
+<section>
+<h2>Elementos de la programación</h2>
+<ul>
+<li>¿Que son a, b y c? <ul>
+<li>¡Variables! </li>
+</ul>
+</li>
+<li>¿Como traducimos el pseudocódigo a lenguaje C? <ul>
+<li>Sintaxis </li>
+<li>Control de flujo y condiciones </li>
+<li>Tipos de dato </li>
+<li>Palabras claves </li>
+<li>Librerías básicas </li>
+</ul>
+</li>
+<li>¿Como hacemos un programa que compile? ¿Como debe formarse el módulo principal?</li>
+</ul>
+<pre><code>int main(void) {
+	/* cuerpo del programa */
+	return 0;
+}</code></pre>
+</section>
+
+<section>
+<h2>Ahora si, programemos en C</h2>
+</section>
+
+<section>
+<h2>¡Hola mundo!</h2>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+int main (void)
+{
+	printf("Hola Mundo!");
+
+	return 0;
+}
+</code></pre>
+</br></br>
+<h3>Compilemos y corramos el programa</h3>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+$ gcc -o hola_mundo hola_mundo.c
+$ ./hola_mundo
+</code></pre>
+</section>
+
+<section>
+<h4>Ejercicios:</h4>
+</br>
+<h4>Realizar los siguientes programas</h4>
+<ol style="font-size: 75%;">
+	<li>Dado un número entero verificar si ese número es par o impar </li>
+	<li>Dado el número 3 realizar la sucesión número 3, 33, 333, hasta 10 sucesiones. </li>
+	<li>Dado un número entero positivo, debe calcular su factorial. Tener en cuenta que 0! = 1, 1! = 1, n! = (n-1)! * n </li>
+	<li>Leer un programa que lea dos números flotantes desde teclado y calcule e imprima su suma, resta, producto y división. Verificar que el divisor no sea cero. </li>
+	<li>Dados tres lados que corresponden a un triangulo, determinar que tipo de triangulo se trata (equilatero, isósceles o escaleno). </li>
+</ol>
+</br></br>
+<h4>Generar:</h4>
+<p style="font-size: 75%;">Pseudocódigo, diagrama, código en C y compilar.</p>
+</section>
+
+<section>
+<h1>Fin Clase2</h1>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Constantes y Variables</h2>
+<ul>
+<li>Variables: <ul>
+<li>Una variable es una posición de memoria con un nombre y se usa para guardar/mantener un valor que puede ser modificado por el programa. </li>
+<li>En C todas las variables deben ser declaradas explícitamente (esto no es así en otros lenguajes). </li>
+</ul>
+</li>
+<li>Constantes: <ul>
+<li>Valores que no cambian a lo largo de todo el programa (por ejemplo pi: 3.1416) </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Algunas clases de Variables</h2>
+<ul>
+<li>Almacenamiento temporal <ul>
+<li style="font-size: 75%;">Las variables son contenedores de datos o valores en memoria que cambian durante la ejecución </li>
+</ul>
+</li>
+<li>Contador <ul>
+<li style="font-size: 75%;">Es una variable entera para llevar la cuenta de eventos del proceso </li>
+<li style="font-size: 75%;">Se usa generalmente para control de lazo </li>
+<li style="font-size: 75%;">El incremento en general es unitario </li>
+</ul>
+</li>
+<li>Acumulador <ul>
+<li style="font-size: 75%;">Es una variable que se utiliza como totalizador de cantidades </li>
+</ul>
+</li>
+<li>Indicador o flag (bandera) <ul>
+<li style="font-size: 75%;">Es una variable binaria que toma uno de dos valores posibles: verdadero o falso, si/no, igual cero (0) o distinto de cero </li>
+<li style="font-size: 75%;">Permite saber si el programa paso por determinado camino y tomar una decisión en consecuencia </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Tipos de variables en C</h3>
+<img src="files/clase02/11_basic_types.png"/>
+</section>
+
+<section>
+<h3>Control: Selección</h3>
+<ul class="col" style="width: 400px;">
+<pre><code data-trim class="cpp">
+if (condicion) {
+	sentencia1;
+	sentencia2;
+	sentencia3;
+}
+
+
+if (codicion) {
+	sentencia1;
+	sentencia2;
+	sentencia3;
+} else {
+	sentencia4;
+	sentencia5;
+	sentencia6;
+}
+</code></pre>
+</ul>
+<ul class="col" style="width: 400px;">
+<pre><code data-trim class="cpp">
+switch (variable) {
+	case 1:
+		sentencia1;
+		sentencia2;
+		break;
+
+	case 2:
+		sentencia3;
+		sentencia4;
+		break;
+
+	...
+	case 'a':
+		sentencia8;
+		sentencia9;
+		break;
+}
+</code></pre>
+</ul>
+</section>
+
+<section>
+<h3>Control: Iteración</h3>
+<ul class="col" style="width: 400px;">
+<pre><code data-trim class="cpp">
+do {
+	sentencia1;
+	sentencia2;
+	sentencia3;
+} while (condicion);
+
+while (condicion) {
+	sentencia1;
+	sentencia2;
+	sentencia3;
+}
+</code></pre>
+</ul>
+<ul class="col" style="width: 400px;">
+<pre><code data-trim class="cpp">
+for (ini;cond;paso) {
+	sentencia1;
+	sentencia2;
+	sentencia3;
+}
+</code></pre>
+</ul>
+<ul style="font-size: 75%;">
+<li>Donde para el for:<ul>
+<li>ini: Sentencia que se ejecuta antes de iniciar el for</li>
+<li>cond: Condición para permanecer en el for, si es falsa salimos del for</li>
+<li>paso: Sentencia que se ejecuta luego de terminar el ciclo</br>y antes de evaluar "cond"</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h1>Control</h1>
+<p>(Imagen del libro "como programar c/c++" de deitel)</p>
+</section><section>
+<h1>Condiciones</h1>
+<ul>
+<li>Las condiciones son sentencias lógicas que siempre daran como resultado verdadero o falso </li>
+<li>C usa varios operadores de comparación y operadores lógicos (ver tabla precedencia operadores siguiente slide) </li>
+<li>Valores lógicos en C: <ul>
+<li>Falso: Si el valor es 0x00 es considerado falso </li>
+<li>Verdadero: Cualquier valor distinto de cero será verdadero. C no especifica un valor particular. </li>
+</ul>
+</li>
+<li>Ejemplos: <ul>
+<li>a &gt; b, a == 10, a &gt;= c, a != 20 </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1>Tabla de precedencia de operadores</h1>
+</section><section>
+<h1>Funciones mas básicas</h1>
+<ul>
+<li>Imprimir en pantalla: <ul>
+<li>int printf ( const char *format [, argument, ...]); </li>
+</ul>
+</li>
+<li>
+<p>Leer del teclado: </p>
+<ul>
+<li>int scanf ( const char *format [, address, ...]); </li>
+</ul>
+</li>
+<li>
+<p>Format: </p>
+<ul>
+<li>%d | Decimal integer </li>
+<li>%s | Character string </li>
+<li>%c | Character </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1>Sentencias en C</h1>
+<ul>
+<li>Las sentencias en C son terminadas por un punto y coma (;). <ul>
+<li>Un salto de párrafo (CRLF) no da información al compilador, solo agrega "forma" al código. </li>
+<li>Existen diversos estándares de codificación, en todos se usa el salto de párrafo. </li>
+</ul>
+</li>
+<li>Se puede armar un bloque de sentencias usando encerrando grupos de sentencias entre llaves ( { } ). </li>
+</ul>
+</section><section>
+<h1>Bueno, ahora tenemos todas las partes.</h1>
+<h1>¡Escribamos el programa en C!</h1>
+</section><section>
+<h1>Ejemplo:</h1>
+<h2>Encontrar el máximo de tres números enteros</h2>
+</section><section>
+<h1>Ademas de los operadores y la sintaxis...</h1>
+<h1>¿Que otras cosas trae C?</h1>
+</section><section>
+<h1>Palabras reservadas (C89)</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">auto</th>
+<th align="left">double</th>
+<th align="left">int</th>
+<th align="left">struct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">break</td>
+<td align="left">else</td>
+<td align="left">long</td>
+<td align="left">switch</td>
+</tr>
+<tr class="even">
+<td align="left">case</td>
+<td align="left">enum</td>
+<td align="left">register</td>
+<td align="left">typedef</td>
+</tr>
+<tr class="odd">
+<td align="left">char</td>
+<td align="left">extern</td>
+<td align="left">return</td>
+<td align="left">union</td>
+</tr>
+<tr class="even">
+<td align="left">const</td>
+<td align="left">float</td>
+<td align="left">short</td>
+<td align="left">unsigned</td>
+</tr>
+<tr class="odd">
+<td align="left">continue</td>
+<td align="left">for</td>
+<td align="left">signed</td>
+<td align="left">void</td>
+</tr>
+<tr class="even">
+<td align="left">default</td>
+<td align="left">goto</td>
+<td align="left">sizeof</td>
+<td align="left">volatile</td>
+</tr>
+<tr class="odd">
+<td align="left">do</td>
+<td align="left">if</td>
+<td align="left">static</td>
+<td align="left">while</td>
+</tr>
+</tbody>
+</table>
+</section><section>
+<h1>Palabras reservadas (C99)</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">auto</th>
+<th align="left">double</th>
+<th align="left">int</th>
+<th align="left">struct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">break</td>
+<td align="left">else</td>
+<td align="left">long</td>
+<td align="left">switch</td>
+</tr>
+<tr class="even">
+<td align="left">case</td>
+<td align="left">enum</td>
+<td align="left">register</td>
+<td align="left">typedef</td>
+</tr>
+<tr class="odd">
+<td align="left">char</td>
+<td align="left">extern</td>
+<td align="left">return</td>
+<td align="left">union</td>
+</tr>
+<tr class="even">
+<td align="left">const</td>
+<td align="left">float</td>
+<td align="left">short</td>
+<td align="left">unsigned</td>
+</tr>
+<tr class="odd">
+<td align="left">continue</td>
+<td align="left">for</td>
+<td align="left">signed</td>
+<td align="left">void</td>
+</tr>
+<tr class="even">
+<td align="left">default</td>
+<td align="left">goto</td>
+<td align="left">sizeof</td>
+<td align="left">volatile</td>
+</tr>
+<tr class="odd">
+<td align="left">do</td>
+<td align="left">if</td>
+<td align="left">static</td>
+<td align="left">while</td>
+</tr>
+<tr class="even">
+<td align="left">_Bool</td>
+<td align="left">_Imaginary</td>
+<td align="left">restrict</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">_Complex</td>
+<td align="left">inline</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</section><section>
+<h1>Librerías</h1>
+<ul>
+<li>stdio.h : Libreria de entrada/salida (pantalla, teclado, archivos y flujos en general) </li>
+<li>alloc.h : Manejo de memoria </li>
+<li>string.h : Manejo de cadenas de texto </li>
+<li>math.h : Funciones matemáticas (seno, coseno, log, etc..) </li>
+<li>complex.h : Manipulación de números complejos </li>
+<li>ctype.h : Clasificación de caracteres </li>
+<li>time.h : Define un tipo de dato tiempo y funciones relacionadas con tiempos </li>
+<li>stdbool.h : Define el tipo de dato booleano (C99) </li>
+<li>Otras... </li>
+</ul>
+</section>
+
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
