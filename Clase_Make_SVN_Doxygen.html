@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Herramientas de programación: Make, SVN y Doxygen</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Make, SVN y Doxygen</h1>
+					<h3>Para programar hacen falta herramientas</h3>
+					<p>
+						<small>Ing. Ignacio Javier Bonelli</small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Programar es dificil...</h3>
+					<h2>¡Necesitamos ayuda!</h2>
+					<ul>
+						<li>Compilar muchos archivos se complica...</li>
+							<ul><li>¡Necesitamos a make!</li></ul>
+						<li>¿Como llevamos un registro de que hicimos?</li>
+							<ul><li>Puedo usar un sistema de versionado como SVN...</li></ul>
+						<li>Por que lo programé así?!?</li>
+							<ul>
+								<li>Necesito escribir notas, documentar...</li>
+								<li>Doxygen me puede ayudar :)</li>
+							</ul>
+					</ul>
+				</section>
+
+				<!-- Nested vertical slides: MAKE -->
+				<section data-background="#007777">
+					<section>
+						<h2>MAKE</h2>
+						<h3>Automatización del proceso decompilación</h3>
+						<ul>
+							<li>Nos permite "programar" el proceso de compilación y linkeo.</li>
+							<li>Ademas permite automatizar otros tipos de tareas (similar a shell scripting).</li>
+							<li>Una diferencia importante (con shell scripting) es que make tiene registro de los cambios que se hacen en los archivos que debe utilizar. Si no hay cambios, no realiza ninguna tarea.</li>
+							<li>No está limitado por lenguajes de programación, tiene mas que ver con procesos con archivos de entrada (fuentes) y salida (binarios).</li>
+							<li>El make ejecuta ciertas reglas que obtiene de un archivo llamado “Makefile”</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Ejemplo sencillo</h2>
+						<p>hellomake.c</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include "hellomake.h"
+
+int main() {
+  // call a function in another file
+  myPrintHelloMake();
+
+  return(0);
+}
+						</code></pre>
+						<p>hellomake.h</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+/* Example include file */
+
+void myPrintHelloMake(void);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Ejemplo sencillo</h2>
+						<p>hellofunc.c</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include "hellomake.h"
+#include &lt;stdio.h&gt;
+
+void myPrintHelloMake(void) {
+
+  printf("Hello makefiles!\n");
+
+  return;
+}
+						</code></pre>
+						<br>
+						<p>Normalmente esto lo compilariamos haciendo:</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="bash">
+$ gcc -o hellomake hellomake.c hellofunc.c -Wall
+						</code></pre>
+					</section>
+					<section>
+						<h2>Nuestro primer makefile</h2>
+						<p>Compilar de esta manera tiene dos desventajas:</p>
+						<ol>
+							<li>Cada vez que compilamos tenemos que tipear todo ese largo string/comando.</li>
+							<li>Si solo cambiamos un fuente (.c) debemos recompilar todo cada vez. Dependiendo de la cantidad de codigo esto puede resultar lento e ineficiente.</li>
+						</ol>
+						<br><br><br>
+						<b>Makefile</b>
+						<!-- Code highlightjs : http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html !-->
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="makefile">
+hellomake: hellomake.c hellofunc.c
+	gcc -o hellomake hellomake.c hellofunc.c -Wall
+						</code></pre>
+					</section>
+					<section>
+						<h2>Explicando lo que hicimos...</h2>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="makefile">
+target: dependencia/s
+	comando/s
+						</code></pre>
+						<ul>
+							<li>Los <i>target</i> seran nuestros productos (archivos de salida).</li>
+							<li>Para poder crearlos deberemos respetar las <i>dependencia/s</i> (que existan los archivos).</li>
+							<li>Si las dependencias se cumplen make ejecutara <i>comando/s</i>.</li>
+							<li>Es importante que antes de <i>comando/s</i> deber ser un TAB (no espacios).</li>
+							<li>Una vez guardado en el archivo <i>Makefile</i> para compilar solo ejecutaremos <i>make</i>.</li>
+						</ul>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="bash">
+$ make ; ls -l hellomake
+gcc -o hellomake hellomake.c hellofunc.c -Wall
+-rwxr-xr-x 1 ignacio ignacio 4997 Jul  4 18:49 hellomake
+						</code></pre>
+					</section>
+					<section>
+						<h2>Haciendo las cosas mas flexibles...</h2>
+						<b>Makefile 2</b>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+CC=gcc
+CFLAGS=-Wall
+
+hellomake: hellomake.c hellofunc.c
+	$(CC) -o hellomake hellomake.c hellofunc.c $(CFLAGS)
+						</code></pre>
+						<p>Ahora al compilador lo llamamos por referencia en una <i>variable</i> y los flags del compilador los pasamos de la misma manera.</p>
+					</section>
+					<section>
+						<h2>Usemos mas dependecias</h2>
+						<b>Makefile 3</b>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+CC = gcc
+CFLAGS = -Wall
+DEPS = hellomake.h
+
+all: hellomake hellofunc
+	$(CC) hellomake.o hellofunc.o -o app $(CFLAGS)
+
+hellomake: hellomake.c $(DEPS)
+	$(CC) -c -o hellomake.o hellomake.c $(CFLAGS)
+
+hellofunc: hellofunc.c $(DEPS)
+	$(CC) -c -o hellofunc.o hellofunc.c $(CFLAGS)
+						</code></pre>
+						<p>Tenemos mas targets, y mas dependencias:</p>
+						<ul>
+							<li>Ahora para hacer <i>all</i> necesitamos antes compilar <i>hellomake</i> y <i>hellofunc</i>.</li>
+							<li>Y para hacer <i>hellomake</i> y <i>hellofunc</i> necesitamos <i>hellomake.h</i> declarado ahora como una <i>variable</i>.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>¿Y si limpiamos tambien?</h2>
+						<b>Makefile 4</b>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+CC = gcc
+CFLAGS = -Wall
+DEPS = hellomake.h
+
+all: hellomake hellofunc
+	$(CC) hellomake.o hellofunc.o -o app $(CFLAGS)
+hellomake: hellomake.c $(DEPS)
+	$(CC) -c -o hellomake.o hellomake.c $(CFLAGS)
+hellofunc: hellofunc.c $(DEPS)
+	$(CC) -c -o hellofunc.o hellofunc.c $(CFLAGS)
+clean:
+	rm -f *.o app
+						</code></pre>
+						<p>Podemos tener targets sin dependencias. El mas comun es el que limpia todo lo creado.</p><p>Lo podemos ejecturar invocando directamente el target:</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ make clean
+						</code></pre>
+					</section>
+					<section>
+						<h2>Complicando el asunto...</h2>
+						<b>Makefile 5</b>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+CC=gcc
+CFLAGS=-Wall
+DEPS = hellomake.h
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+hellomake: hellomake.o hellofunc.o 
+	gcc -o hellomake hellomake.o hellofunc.o $(CFLAGS)
+						</code></pre>
+						<p>Es muy similar al Makefile 3, pero ahora parametrizamos las dependencias...</p>
+					</section>
+					<section>
+						<h2>Complicando el asunto...</h2>
+						<b>Makefile 5</b>
+						<ul>
+							<li>Utilizamos <i>%.o</i> y <i>%.c</i> donde <i>%</i> es: La expresion regular para coincidir con los nombres de los archivos con la extension deseada.</li>
+							<li>El <i>$@</i> es una macro que devuelve el nombre del target donde se lo utiliza.</li>
+							<li>Luego <i>$<</i>: nos devuelve el nombre de la primer dependencia de un determinado target.</li>
+							<li>No lo usamos en el ejemplo, pero <i>$^</i> nos devuelve el nombre de todas las dependencias de un determinado target.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Para cerrar:</h2>
+						<b>Makefile 6</b>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+CC=gcc
+CFLAGS=-Wall
+DEPS = hellomake.h
+OBJ = hellomake.o hellofunc.o
+LIBS = -lm
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+hellomake: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+clean:
+	rm -f *.o hellomake
+						</code></pre>
+						<p>Que es similar al Makefile 5, pero ahora parametrizamos todo y agregamos la librería <i>math.h</i>.</p>
+					</section>
+				</section>
+
+				<section data-background="#4d7e65">
+					<section>
+						<h2>SVN</h2>
+						<h4>Subversion: Uno de los sistemas de control de versiones.</h4>
+						<p>El problema:</p>
+						<a href="./files/clase_make/svn_model_01_big.png">
+							<img src="./files/clase_make/svn_model_01.png" alt="Problema: Necesitamos control de versiones!">
+						</a>
+						<p>Si trabajamos en equipo y en un repositorio comun es muy fácil tener conflictos y "pisar" el trabajo de otros.</p>
+					</section>
+					<section>
+						<h2>SVN</h2>
+						<p>Hay varias razones para usar un sistema de control de versiones:</p>
+						<ul>
+							<li>Para trabajar en equipo sin pisar el trabajo de otros y delegar en el sistema la detección de conflictos.</li>
+							<li>Mantener un historial de como fue cambiando el código, y poder explicar por que se hicieron los cambios.</li>
+							<li>Tener una herramienta que nos ayude a resolver los conflictos cuando estos ocurran.</li>
+							<li>Poder hacer cambios drasticos respetando el trabajo de otros (a esto se llama branching).</li>
+						</ul>
+					</section>
+					<section>
+						<h2>SVN</h2>
+						<p>Como trabajamos con SVN:</p>
+						<a href="./files/clase_make/svn_model_02_big.png">
+							<img src="./files/clase_make/svn_model_02.png" alt="Como funciona SVN 1">
+						</a>
+						<a href="./files/clase_make/svn_model_03_big.png">
+							<img src="./files/clase_make/svn_model_03_small.png" alt="Como funciona SVN 2">
+						</a>
+					</section>
+					<section>
+						<h2>SVN</h2>
+						<p>Veamos un poco los comandos (1)</p>
+						<ul>
+							<li>Install:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
+$ sudo apt-get install subversion
+								</code></pre>
+							<li>CheckOut:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
+$ svn co http://svn.electron.frba.utn.edu.ar/info1/r1021/public/
+								</code></pre>
+							<li>Ver el historial:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
+$ svn log
+								</code></pre>
+							<li>Ayuda del comando log:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
+$ svn help log
+								</code></pre>
+						</ul>
+					</section>
+					<section>
+						<h2>SVN</h2>
+						<p>Veamos un poco los comandos (2)</p>
+						<ul>
+							<li>Agregar archivos</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
+$ svn add ./*
+								</code></pre>
+							<li>Ver cambios:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
+$ svn st
+								</code></pre>
+							<li>Commit:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
+$ svn ci -m "Descripción cambios"
+								</code></pre>
+							<li>Traerse los cambios:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
+$ svn up
+								</code></pre>
+						</ul>
+					</section>
+					<section>
+						<h2>KDESVN</h2>
+						<h3>¿Y si la hacemos mas fácil?</h3>
+						<p>Install:</p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install kdesvn
+						</code></pre>
+						<a href="./files/clase_make/kdesvn.png">
+							<img src="./files/clase_make/kdesvn_small.png" alt="KDESVN screenshot">
+						</a>
+					</section>
+				</section>
+
+				<section data-background="#8c4738">
+					<h2>Doxygen</h2>
+					<p>Usaremos los apuntes del Ing. Jerónimo F. Atencio</p>
+					<br>
+					<p>Para instalarlo:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install doxygen doxygen-gui
+					</code></pre>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -825,78 +825,146 @@ for (ini;cond;paso) {
 </ul>
 <ul style="font-size: 75%;">
 <li>Donde para el for:<ul>
-<li>ini: Sentencia que se ejecuta antes de iniciar el for</li>
-<li>cond: Condición para permanecer en el for, si es falsa salimos del for</li>
-<li>paso: Sentencia que se ejecuta luego de terminar el ciclo</br>y antes de evaluar "cond"</li>
+<li><span style="color: #F0E68C;">ini</span>: Sentencia que se ejecuta antes de iniciar el for</li>
+<li><span style="color: #F0E68C;">cond</span>: Condición para permanecer en el for, si es falsa salimos del for</li>
+<li><span style="color: #F0E68C;">paso</span>: Sentencia que se ejecuta luego de terminar el ciclo</br>y antes de evaluar "cond"</li>
 </ul>
 </li>
 </ul>
 </section>
 
 <section>
-<h1>Control</h1>
-<p>(Imagen del libro "como programar c/c++" de deitel)</p>
-</section><section>
+<h2>Control</h2>
+<p style="font-style: italic; font-size: 75%;">(Imagen del libro "como programar c/c++" de deitel)</p>
+<a href="./files/clase02/31_Diagrams_full.jpg">
+	<img src="./files/clase02/31_Diagrams.jpg" alt="Tabla de precedencia de operadores">
+</a>
+</section>
+
+<section>
 <h1>Condiciones</h1>
 <ul>
 <li>Las condiciones son sentencias lógicas que siempre daran como resultado verdadero o falso </li>
-<li>C usa varios operadores de comparación y operadores lógicos (ver tabla precedencia operadores siguiente slide) </li>
+<li>C usa varios operadores de comparación y operadores lógicos <span style="color: #F0E68C;">(ver tabla precedencia operadores siguiente slide)</span></li>
 <li>Valores lógicos en C: <ul>
 <li>Falso: Si el valor es 0x00 es considerado falso </li>
 <li>Verdadero: Cualquier valor distinto de cero será verdadero. C no especifica un valor particular. </li>
 </ul>
 </li>
 <li>Ejemplos: <ul>
-<li>a &gt; b, a == 10, a &gt;= c, a != 20 </li>
+<li>
+	<pre style="width: 450px;"><code style="width: 450px;" class="cpp">a &gt; b,   a == 10,   a &gt;= c,   a != 20</code></pre>
+</li>
 </ul>
 </li>
 </ul>
-</section><section>
-<h1>Tabla de precedencia de operadores</h1>
-</section><section>
-<h1>Funciones mas básicas</h1>
+</section>
+
+<section>
+<h2>Tabla de precedencia de operadores</h2>
+<a href="./files/clase02/21_Precedencia_Operadores.gif">
+	<img src="./files/clase02/21_Precedencia_Operadores.gif" alt="Tabla de precedencia de operadores">
+</a>
+</section>
+
+<section>
+<h2>Funciones básicas</h2>
 <ul>
 <li>Imprimir en pantalla: <ul>
-<li>int printf ( const char *format [, argument, ...]); </li>
+<li>
+	<pre style="width: 610px;"><code style="width: 610px;" class="cpp">int printf ( const char *format [, argument, ...]);</code></pre>
+</li>
 </ul>
 </li>
 <li>
 <p>Leer del teclado: </p>
 <ul>
-<li>int scanf ( const char *format [, address, ...]); </li>
+<li>
+	<pre style="width: 610px;"><code style="width: 610px;" class="cpp">int scanf ( const char *format [, address, ...]);</code></pre>
+</li>
 </ul>
 </li>
 <li>
 <p>Format: </p>
 <ul>
-<li>%d | Decimal integer </li>
-<li>%s | Character string </li>
-<li>%c | Character </li>
+<li><span style="color: #F0E68C;">%d</span> | Decimal integer </li>
+<li><span style="color: #F0E68C;">%s</span> | Character string </li>
+<li><span style="color: #F0E68C;">%c</span> | Character </li>
 </ul>
 </li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h1>Sentencias en C</h1>
 <ul>
-<li>Las sentencias en C son terminadas por un punto y coma (;). <ul>
-<li>Un salto de párrafo (CRLF) no da información al compilador, solo agrega "forma" al código. </li>
-<li>Existen diversos estándares de codificación, en todos se usa el salto de párrafo. </li>
+<li>Las sentencias en C son terminadas por un punto y coma (<span style="color: #F0E68C;">;</span>)<ul>
+<li>Un salto de párrafo (<span style="color: #F0E68C;">CRLF</span>) no da información al compilador, solo agrega "forma" al código (recordar lo visto como código obfuscado)</li>
+<li>Existen diversos estándares de codificación, en todos se usa el salto de párrafo</li>
 </ul>
 </li>
-<li>Se puede armar un bloque de sentencias usando encerrando grupos de sentencias entre llaves ( { } ). </li>
+<li>Se puede armar un bloque de sentencias usando encerrando grupos de sentencias entre llaves ( <span style="color: #F0E68C;">{ }</span> )</li>
 </ul>
-</section><section>
-<h1>Bueno, ahora tenemos todas las partes.</h1>
-<h1>¡Escribamos el programa en C!</h1>
-</section><section>
-<h1>Ejemplo:</h1>
-<h2>Encontrar el máximo de tres números enteros</h2>
-</section><section>
-<h1>Ademas de los operadores y la sintaxis...</h1>
-<h1>¿Que otras cosas trae C?</h1>
-</section><section>
-<h1>Palabras reservadas (C89)</h1>
-<table>
+</section>
+
+<section>
+<h3>Bueno, ahora tenemos todas las partes...</h3>
+<h2>¡Escribamos el programa en C!</h2>
+</section>
+
+<section>
+<h2>Ejemplo:</h2>
+<h3>Encontrar el máximo de tres números enteros</h3>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+
+int main (void)
+{
+	int a, b, c;
+
+	/* Entradas */
+	printf("Ingrese a");
+	scanf("%d", &a);
+	printf("Ingrese b");
+	scanf("%d", &b);
+	printf("Ingrese c");
+	scanf("%d", &c);
+
+// sigue...
+</code></pre>
+</section>
+
+<section>
+<h2>Ejemplo:</h2>
+<h3>Encontrar el máximo de tres números enteros</h3>
+<pre><code class="cpp">// continuando...
+
+    /* Procesos */
+    if(a>b) {
+        if(a>c) {
+            printf("El mayor es a = %d", a);
+        } else {
+            printf("El mayor es c = %d", c);
+        }
+    } else {
+          if(b>c) {
+              printf("El mayor es b = %d", b);
+          } else {
+              printf("El mayor es c = %d", c);
+          }
+      }
+      return 0;
+}
+</code></pre>
+</section>
+
+<section>
+<h3>Ademas de los operadores y la sintaxis...</h3>
+<h2>¿Que otras cosas trae C?</h2>
+</section>
+
+<section>
+<h2>Palabras reservadas (C89)</h2>
+<table class="reveal">
 <thead>
 <tr class="header">
 <th align="left">auto</th>
@@ -950,9 +1018,11 @@ for (ini;cond;paso) {
 </tr>
 </tbody>
 </table>
-</section><section>
-<h1>Palabras reservadas (C99)</h1>
-<table>
+</section>
+
+<section>
+<h2>Palabras reservadas (C99)</h2>
+<table class="reveal">
 <thead>
 <tr class="header">
 <th align="left">auto</th>
@@ -1018,17 +1088,19 @@ for (ini;cond;paso) {
 </tr>
 </tbody>
 </table>
-</section><section>
+</section>
+
+<section>
 <h1>Librerías</h1>
 <ul>
-<li>stdio.h : Libreria de entrada/salida (pantalla, teclado, archivos y flujos en general) </li>
-<li>alloc.h : Manejo de memoria </li>
-<li>string.h : Manejo de cadenas de texto </li>
-<li>math.h : Funciones matemáticas (seno, coseno, log, etc..) </li>
-<li>complex.h : Manipulación de números complejos </li>
-<li>ctype.h : Clasificación de caracteres </li>
-<li>time.h : Define un tipo de dato tiempo y funciones relacionadas con tiempos </li>
-<li>stdbool.h : Define el tipo de dato booleano (C99) </li>
+<li><span style="color: #F0E68C;">stdio.h</span> : Libreria de entrada/salida (pantalla, teclado, archivos y flujos en general) </li>
+<li><span style="color: #F0E68C;">alloc.h</span> : Manejo de memoria </li>
+<li><span style="color: #F0E68C;">string.h</span> : Manejo de cadenas de texto </li>
+<li><span style="color: #F0E68C;">math.h</span> : Funciones matemáticas (seno, coseno, log, etc..) </li>
+<li><span style="color: #F0E68C;">complex.h</span> : Manipulación de números complejos </li>
+<li><span style="color: #F0E68C;">ctype.h</span> : Clasificación de caracteres </li>
+<li><span style="color: #F0E68C;">time.h</span> : Define un tipo de dato tiempo y funciones relacionadas con tiempos </li>
+<li><span style="color: #F0E68C;">stdbool.h</span> : Define el tipo de dato booleano (C99) </li>
 <li>Otras... </li>
 </ul>
 </section>
