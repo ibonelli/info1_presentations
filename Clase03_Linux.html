@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Programación</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+
+<section>
+<h3>El soporte del Sistema Operativo</h3>
+<h2>Unidad4</h2>
+<ul>
+<li>Conceptos Básicos sobre Sistemas Operativos modernos. </li>
+<li>Objeto y Funciones principales de un sistema operativo. </li>
+<li>Tipos de sistemas Operativos. </li>
+<li>Referencias a Sistemas de uso cotidiano: Introducción a Linux. </li>
+<li>Herramientas de desarrollo: El Compilador. El Linker. Su relación con el Hardware y el Sistema Operativo. </li>
+<li>Introducción al desarrollo de software: Programa fuente, programa objeto, programa ejecutable. </li>
+<li>Fases de compilación y vinculación de programas, en el entorno de un sistema operativo. </li>
+</ul>
+</section><section>
+<h2>¿Que es un sistema operativo?</h2>
+<ul>
+<li>Un sistema operativo (SO) es una colección de programas que se encargan de administrar los recursos del computador. </li>
+<li>Nos permite una forma común de acceso al hardware sencillo (sin necesidad de conocer detalles escabrosos). </li>
+<li>Cuando se enciende el computador el SO toma el control del mismo. </li>
+<li>Normalmente presenta un login </li>
+<li>Una vez logueado se pueden utilizar aplicaciones y a través de éstas acceder a los recursos de hardware del sistema </li>
+<li>Provee una colección de funciones (o Aplication Programming Interface / API) que nos permite programar para ese SO </li>
+</ul>
+</section><section>
+<h2>¿Como se compone?</h2>
+<ul>
+<li>El SO tiene dos partes fundamentales: </li>
+<li>El kernel (núcleo) que es el "programa" que nos abstrae del hardware y provee la API. </li>
+<li>Los programas que corren para que el sistema funcione (fdisk, ifconfig, route, dhclient, etc...) </li>
+<li>Una interfaz de usuario. Hay dos tipos: <ul>
+<li>Command Line Interface (CLI) - Donde escribiremos comandos </li>
+<li>Graphical User Interface (GUI) - El entorno gráfico que es mas común ahora y sencillo de usar. Aquí el escritorio hace de shell </li>
+</ul>
+</li>
+<li>Otros programas que son necesarios para que el sistema funcione (rm, mv, cp, ls, ln, etc...) </li>
+</ul>
+</section><section>
+<h2>¿Terminal / Consola?</h2>
+<ul>
+<li>Al inicio de los sistemas de cómputo la interfaz del shell era en modo texto </li>
+<li>Aun hoy se sigue utilizando debido a su agilidad y a la potencia de los comandos en muchos casos. </li>
+<li>Esta interfaz se conoce actualmente como modo consola, terminal, shell, etc... </li>
+<li>Vamos a compilar usando la misma directamente. </li>
+<li>Versiones: bash, csh, sh, etc... <ul>
+<li>Diferencias: Mayormente la forma de hacer scripts </li>
+<li>El lenguaje de scripting para shell es de muy alto nivel, interpretado y lento. Pero da mucha flexibilidad a los administradores de sistemas. </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Interfaces Gráficas</h2>
+<ul>
+<li>¿Que hay debajo?<ul>
+<li>XFree86/Xorg (<a href="www.x.org">www.x.org</a>)</li>
+</ul>
+</li>
+<li>¿Puedo elegir entre escritorios?<ul>
+<li>Gestor de Pantalla (o Display Manager) <ul>
+<li>KDM (de KDE) </li>
+<li>GDM (de GNOME) </li>
+<li>LXDM (de Lxde) </li>
+<li>LightDM </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</br></br>
+<p><a href="http://en.wikipedia.org/wiki/Linux#Desktop">http://en.wikipedia.org/wiki/Linux#Desktop</a></p>
+</section>
+
+<section>
+<h2>Escritorios (Desktop)</h2>
+<ul>
+	<li>KDE (QT library)</li>
+	<li>GNOME (GTK+ library)</li>
+	<li>Unity (Ubuntu)</li>
+	<li>Xfce (librerias muy livianas)
+		<ul style="font-size: 70%; font-family: monospace;">
+			<li>apt-get install xfce4</li>
+		</ul>
+	</li>
+	<li>Lxde (librerias livianas
+		<ul style="font-size: 70%; font-family: monospace;">
+			<li>apt-get install lxde</li>
+		</ul>
+	</li>
+	<li>Sugar (MIT OLPC)</li>
+	<li>MATE (GNOME2 fork)</li>
+	<li>Maui-Project (usa QT)</li>
+</ul>
+</br></br>
+<p>Para leer mas sobre escritorios: <a href="http://www.nachodigital.com.ar/content/linux-desktop">El Linux Desktop</a></p>
+</section>
+
+<section>
+<h2>Ejemplos...</h2>
+<p>(LXDE, MATE/GNOME2 &amp; KDE)</p>
+</section>
+
+<section>
+<h3>Un poquito de historia (1)</h3>
+<h2>Primero fue Unix</h2>
+<ul>
+<li>En 1970 Ken Thompson y Dennis Ritchie lograron comenzar con Unix: Desarrollaron un sistema de archivos</li>
+<li>El sistema operativo era multitarea y multiusuario</li>
+<li>Tenía un intérprete de comandos</li>
+<li>En 1972 se tomó la decisión de escribir nuevamente UNIX en C.</li>
+<li>En 1975 Berkeley desarrolló y publicó su propio sucedáneo de UNIX: Berkeley Software Distribution (BSD)‏</li>
+</ul>
+</section>
+
+<section>
+<h3>Un poquito de historia (2)</h3>
+<h2>Primero fue Unix</h2>
+<ul>
+<li>Luego de esto sucede una gran proliferación de sistemas UNIX con distintas orientaciones. AT&amp;T decidé combinar varias versiones desarrolladas en distintas universidades y empresas, dando origen en 1983 al Unix System V (Incluía pipes, el editor Vi y la biblioteca curses)‏ </li>
+<li>En 1991 Linus Torvalds empezó a trabajar en un reemplazo no comercial para MINIX. Esto terminó en un núcleo (kernel) para computadoras con arquitectura de procesador Intel 80386 que mimetizaba muchas de las funcionalidades de UNIX y lo lanzó en forma de código abierto bajo el nombre de Linux. </li>
+</ul>
+</section>
+
+<section>
+<h2>Free Software Foundation = GNU</h2>
+<ul>
+<li>GNU es un sistema operativo similar a Unix que es software libre y respeta su libertad. Puede instalar versiones de GNU basadas en Linux que son completamente software libre. </li>
+<li>El software que se publica debe ser software libre. Para que sea libre hay que publicarlo bajo una licencia de software libre. Generalmente utilizamos la Licencia Pública General de GNU (GPL de GNU) </li>
+<li>¿Otras licencias? Free-BSD
+	<ul>
+		<li>Mayormente servidores también Unix</li>
+		<li>Núcleo del sistema operativo MacOSX</li>
+	</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Linux y GNU</h2>
+<ul>
+<li>GNU no es Linux, originalmente Free Software Foundation planeo hacer un sistema completo GNU.</li>
+<li>El proyecto GNU nace en 1984 y Linux se une y logra el primer sistema operativo (junto a las herramientas ya desarrolladas por el proyecto GNU como el GCC) sacar el primer sistema operativo 100% libre en 1992. </li>
+</ul>
+</br>
+</br>
+<p><a href="http://www.gnu.org/home.es.html">www.gnu.org</a>  &amp;  <a href="http://www.freebsd.org/">www.freebsd.org</a></p>
+</section>
+
+<section>
+<h2>Llega Linux</h2>
+<ul>
+<li>La historia del núcleo de Linux está fuertemente vinculada a la del proyecto GNU.</li>
+	<ul>
+		<li>El proyecto GNU, iniciado en 1983 por Richard Stallman, tiene como objetivo el desarrollo de un sistema operativo Unix completo compuesto enteramente de software libre.</li>
+		<li>Cuando la primera versión del núcleo de Linux fue liberada en 1991, el proyecto GNU ya había producido varios de los componentes del sistema operativo, incluyendo un intérprete de comandos, una biblioteca C y un compilador, pero aún no contaba con el núcleo que permitiera completar el sistema operativo.</li>
+	</ul>
+</ul>
+</section>
+
+<section>
+<h2>Llega Linux</h2>
+<ul>
+<li>Entonces, el núcleo creado por Linus Torvalds, quien se encontraba por entonces estudiando en la Universidad de Helsinki, llenó el "espacio" final que el sistema operativo de GNU necesitaba. </li>
+<li>En 1992, el núcleo Linux fue combinado con los programas desarrollados por el Proyecto GNU, dando como resultado el Sistema Operativo GNU/Linux. </li>
+<li>GNU/Linux fue desarrollado bajo licencia GPL. </li>
+</ul>
+</section>
+
+<section>
+<h2>Linux: 1993 a 1995</h2>
+<ul>
+<li>1993: Más de 100 desarrolladores trabajan sobre el núcleo Linux. En este año también el proyecto de Wine comienza su desarrollo. También, la distribución más antigua actualmente activa, Slackware, es liberada por primera vez. Más tarde en el mismo año, el Proyecto Debian es establecido. </li>
+<li>1994: Se libera la versión 1.0 de Linux. Esta versión está, por primera vez, disponible en la red. El proyecto XFree86 contribuye con una interfaz gráfica de usuario (GUI). En este año las empresas Red Hat y SUSE publican la versión 1.0. </li>
+<li>1995: Kernel v1.2. Linux es portado a DEC y a SUN SPARC. Durante los años siguientes es portado a un número cada vez mayor de plataformas. </li>
+</ul>
+</section>
+
+<section>
+<h2>Linux: 1993 a 1999</h2>
+<ul>
+<li>1996: La versión 2.0 del núcleo Linux es liberada. El mayor cambio es que se hace multiprocesador transformándose en una alternativa muy atractiva para empresas. </li>
+<li>1997: Varios programas propietarios son liberados para Linux: Adabas D, Netscape y StarOffice (entre otros). </li>
+<li>1998: IBM, Compaq y Oracle (entre otras) anuncian soporte para Linux. Se comienza a desarrollar el interfaz gráfica de usuario KDE. </li>
+<li>1999: Linux v2.2 con soporte a SMP mejorado. Comienza GNOME. </li>
+</ul>
+</section>
+
+<section>
+<h2>Linux: 2000 a 2005</h2>
+<ul>
+<li>2000: StarOffice pasa a ser GPL </li>
+<li>2001: Linux v2.4 soportando hasta 64 Gb de RAM, sistemas de 64 bits, dispositivos USB y un sistema de archivos journaling. </li>
+<li>2002: OpenOffice.org libera la versión 1.0 de su Suite de oficina. Mozilla es también liberado. </li>
+<li>2004: El equipo de XFree86 se desintegra y se forma la fundación X.Org, que provoca un desarrollo considerablemente más rápido del servidor X para Linux. </li>
+<li>2005: El proyecto openSUSE es comenzado como una distribución libre de la comunidad de Novell. </li>
+</ul>
+</section>
+
+<section>
+<h2>Linux: 2006 a hoy</h2>
+<ul>
+<li>2006: Comienza el uso de efectos acelerados por hardware sobre el escritorio Linux. Oracle publica su propia distribución de Red Hat. </li>
+<li>2007: Dell es el primer fabricante principal de computadoras en vender una computadora personal de escritorio con Ubuntu instalado. </li>
+<li>2008: Primer teléfono Android (El kernel de Android es basado en el de Linux) </li>
+<li>2011: Version 3.0 of the Linux kernel is released </li>
+<li>2012: Se lanza al mercado Raspberry Pi (computadora del tamaño de una tarjeta de crédito con ARM y Linux) </li>
+</ul>
+</section>
+
+<section>
+<h2>¿Que son las distribuciones?</h2>
+<ul>
+<li>Conjunto de software (SO, software de base y software de oficina o servidor) </li>
+<li>Compilación: El software libre se distribuye como código fuente. Por lo tanto hay que compilarlo para luego poder distribuir los binarios</li>
+<li>Pre-configuraciones: Si distribuimos binarios estos inicialmente no tendran configuración alguna y no podran trabajar en conjunto. Entonces la distribución nos ahorrará un montón de trabajo.</li>
+<li>Manejo de paquetes: Las distintas distribuciones tienen distintos motores de manejo de paquetes</li>
+</ul>
+</section>
+
+<section>
+<h3>Distribuciones</h3>
+<ul>
+<li><a href="http://www.redhat.com">RedHat</a> (y sus herederos como <a href="http://www.fedoraproject.org">Fedora</a> y <a href="http://www.centos.org">CentOS</a>) usan rpm</li>
+<li><a href="http://www.debian.org">Debian</a> (y sus herederos como <a href="http://www.ubuntu.com">Ubuntu</a> y <a href="http://www.linuxmint.com">Mint</a>) usan deb/dpkg/apt-get/synaptic</li>
+<li><a href="https://www.archlinux.org/">ArchLinux</a>: Apuntada a desarrolladores (usa pacman)</li>
+<li><a href="http://www.opensuse.org">OpenSuse</a> usa YaST (SuSE Linux es de Novell desde el 2003)</li>
+<li><a href="http://www.slackware.com">Slackware</a>: Una de las distribuciones originales</li>
+<li>Otras interesantes: <a href="http://www.damnsmalllinux.org">Damn Small Linux</a> & <a href="http://puppylinux.org/">Puppy Linux</a></li>
+<li>Related Links:
+	<ul>
+		<li><a href="http://www.freebsd.org">FreeBSD</a>  &&  <a href="http://www.linuxiso.org">LinuxISO</a></li>
+		<li><a href="http://distrowatch.com/dwres.php?resource=major">Top Ten Distributions</a> (por DistroWatch que tiene ISOs)</li>
+	</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+<section>
+<section>
+<h2>El kernel</h2>
+<img src="files/clase03/Linux_Kernel_Proposito.png"/>
+</section>
+<section>
+<h2>Introducción a Linux: El kernel</h2>
+<h3>Propósito del Kernel</h3>
+<ul>
+<li>El kernel presenta una interfaz común a todos los procesos. Permitiendo una abstracción del hardware. </li>
+<li>Los procesos son escritos sin ninguna necesidad de conocer el hardware o arquitectura de la computadora en que se están ejecutando. </li>
+<li>Linux además provee un ambiente de multitarea en forma transparente al usuario: <ul>
+<li>De esta manera cada proceso puede trabajar como si fuera el único proceso en la computadora </li>
+<li>El Kernel se ocupa de mantener esta abstracción y la seguridad entre procesos. </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>El kernel: Caracteristicas (I)</h2>
+<ul>
+<li>Pensado para ser portable </li>
+<li>Soporte para sistemas multi-procesador </li>
+<li>Soporte para diversos sistemas de archivo: <ul>
+<li>raiserFS, ext2, ext3, ntfs, fat16, fat32, NFS, SMB, etc… </li>
+</ul>
+</li>
+<li>Apunta a ser compatible con POSIX y la especificación estándar de Unix (www.unix.org). </li>
+<li>Amplio soporte de Hardware </li>
+</ul>
+</section>
+
+<section>
+<h2>El kernel: Caracteristicas (II)</h2>
+<ul>
+<li>Escrito en lenguaje C (GCC), junto a unas pequeñas secciones de código escritas con el lenguaje Ensamblador. </li>
+<li>Núcleo monolítico híbrido: Utiliza módulos dinámicos. </li>
+<li>Primer plataforma 32-bit x86-based PCs (386 o superior), otras arquitecturas: <ul>
+<li>AMD x86-64, ARM, Intel IA-64, Alpha, Sun SPARC, PowerPC, MIPS, IBM/390, HP PA-RISC, Atmel AVR32, etc... </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Subsistemas</h2>
+<img src="files/clase03/Linux_Kernel_Partes.png"/>
+</section>
+
+<section>
+<h2>El kernel: Subsistemas</h2>
+<ul>
+<li>SCI: Provee la conexión entre el espacio de usuario y el kernel. </li>
+<li>PM (scheduler): Permite la ejecución multitarea en forma transparente. </li>
+<li>MM: Maneja la memoria virtual (cache vs. física)‏ </li>
+<li>VFS: Provee una interfaz común a todos los distintos sistemas de archivo soportados por Linux. </li>
+<li>NS: Se encarga de proveer una abstracción de la red. </li>
+<li>DD: Aquí se encuentra la mayoría del código. Estos permiten una abstracción del hardware haciendolo usable. </li>
+<li>Arch: Código dependiente de la arquitectura. </li>
+</ul>
+</section>
+
+<section>
+<h2>El kernel: Versiones</h2>
+<ul>
+	<li>Hasta el kernel 2.6 las versiones con segundo número impar eran de desarrollo. Pero a partir del núcleo 2.6 se dejó esta costumbre y se utiliza una sola versión. </li>
+	<li>Para reflejar cambios se introdujo una numeración de 4 digitos donde el tercero implica mejoras y el cuarto bug fixes. </li>
+	<li>Ultimas versiones
+		<ul>
+			<li>stable: 4.0.1</li>
+			<li>stable: 3.19.6</li>
+			<li>longterm: 3.18.12</li>
+		</ul>
+	</li>
+</ul>
+</br></br>
+<p><a href="https://www.kernel.org/">Página del equipo del Kernel</a> & <a href="http://es.wikipedia.org/wiki/N%C3%BAcleo_Linux#Versiones">mas sobre versiones</a></p>
+</section>
+
+<section>
+<h2>El kernel: Soporte a µC</h2>
+<ul>
+<li>Si se tiene un procesador con manejador de memoria paginado (PMMU) y está portado GCC para esa plataforma se puede portar Linux. </li>
+<li>Los µC no tienen manejador de memoria. Por eso hay una rama de Linux que no necesita MMU.</li>
+<li><a href="http://www.uclinux.org">www.uclinux.org</a></li>
+</ul>
+</section>
+<section>
+<h2>¿Y nosotros para que lo vamos a usar?</h2>
+</section>
+<section>
+<h2>Compiladores</h2>
+<img src="files/clase03/Compiladores.png"/>
+</section>
+<section>
+<h2>Compiladores</h2>
+<ul>
+<li>Traducen nuestro código fuente en código de máquina (o sea dependiente de la arquitectura del procesador). </li>
+<li>El código generado es reubicable en memoria y se puede enlazar con otros códigos. </li>
+<li>Esto facilita y reduce el tiempo de compilación, solo se compila lo que cambió y luego se arma el ejecutable. </li>
+</ul>
+</section>
+<section>
+<h2>Linker</h2>
+<img src="files/clase03/Linker.png"/>
+</section>
+<section>
+<h2>Linker</h2>
+<ul>
+	<li>Es un programa que toma los objetos generados en los primeros pasos del proceso de compilación (compilador) y la información de todos los recursos necesarios (bibliotecas)</li>
+	<li>Quita aquellos recursos que no necesita (p/ej tabla de símbolos), y enlaza el código objeto con su(s) biblioteca(s)</li>
+	<li>Finalmente produce un archivo ejecutable (o una biblioteca)</li>
+</ul>
+</section>
+<section>
+<h2>Clase2</h2>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Entornos de compilación (I)</h2>
+<h3>(Integrated Development Enviroment o IDE)</h3>
+<ul>
+<li>GPL / Open Source<ul>
+<li>Geany (GCC, muy pequeño y liviano) </li>
+<li>Eclipse (Inicialmente JAVA. Muy grande y pensado como un Framework. Mucho otros IDE. Un ejemplo es el compilador de Code Red Tech usado en informática 2 con Kit ARM) </li>
+<li>QT Creator (GCC + librerias QT, también usado en informática 2 para desarrollos en entornos gráficos) </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Entornos de compilación (II)</h2>
+<ul>
+	<li>GPL / Open Source
+		<ul>
+			<li>CodeBlocks (GCC + Entorno de desarrollo Win/Lin/Mac cross-platform usando librerías wxWidget) </li>
+			<li>wxDev-C++ (GCC + Entorno de desarrollo para Windows -solamente- usando librerías del proyecto wxWidgets) </li>
+		</ul>
+	</li>
+	<li>Propietarios/Pagos:
+		<ul>
+			<li>Microsoft Visual Studio (actualmente .NET) </li>
+			<li>CodeWarrior (entorno de desarrollo motorola) </li>
+		</ul>
+	</li>
+</ul>
+</section><section>
+<h2>El GCC</h2>
+<ul>
+<li>GNU Compiler Collection (GCC) <ul>
+<li>http://gcc.gnu.org/ </li>
+</ul>
+</li>
+<li>Lenguajes: <ul>
+<li>C, C++ &amp; Objective-C </li>
+<li>Fortran &amp; Java </li>
+<li>Ada &amp; Go </li>
+</ul>
+</li>
+<li>Ampliamente usado y muchas plataformas: <ul>
+<li>Alpha, amd64, arm, x86, , x86_64, ia64, m68k, mips, powerPC, sparc, mas... </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Compilando con GCC (I)</h2>
+<ul>
+	<li>Compilando
+		<ul>
+			<li>compilo directamente a binario:
+				<ul style="font-size: 85%; font-family: monospace;">
+					<li>gcc -o hola hola.c</li>
+				</ul>
+			</li>
+			<li>Compilador para mostrar errores:
+				<ul style="font-size: 85%; font-family: monospace;">
+					<li>gcc -Wall -o hola hola.c</li>
+				</ul>
+			</li>
+			<li>Para agregar información de debugging:
+				<ul style="font-size: 85%; font-family: monospace;">
+					<li>gcc -Wall -g -o hola hola.c</li>
+				</ul>
+			</li>
+			<li>Solo compilo (no linkeo):
+				<ul style="font-size: 85%; font-family: monospace;">
+					<li>gcc -c -o hola.o hola.c</li>
+				</ul>
+			</li>
+			<li>Compilo con información adicional:
+				<ul style="font-size: 85%; font-family: monospace;">
+					<li>gcc -c -g -o hola.o hola.c</li>
+				</ul>
+			</li>
+			<li>Para ver el código assembler:
+				<ul style="font-size: 85%; font-family: monospace;">
+					<li>gcc -S hola.c -o -</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Compilando con GCC (II)</h2>
+<ul>
+	<li>Utilidades
+		<ul>
+			<li>file hola.o (información sobre el programa objeto)</li>
+			<li>objdump -htr hola.o (información detallada)</li>
+		</ul>
+	</li>
+	<li>Enlace o linkeo
+		<ul>
+			<li>ld -o hola hola.c -lc (enlace de un objeto)</li>
+			<li>gcc -g -o hola hola.o -v (información adicional sobre las librerías usadas)</li>
+		</ul>
+	</li>
+	<li>Debugging
+		<ul>
+			<li>gdb -tui (GNU debugger)
+				<ul>
+					<li>file hola</li>
+					<li>break main</li>
+					<li>run</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</br></br>
+<p><a href="http://cseweb.ucsd.edu/classes/wi11/cse141/tutorial_gcc_gdb.html">Tutorial GCC y GDB</a> & <a href="http://www.network-theory.co.uk/docs/gccintro/gccintro_38.html">GCC intro</a> & <a href="http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html">Opciones de debug</a></p>
+</section>
+</section>
+
+<section>
+<section>
+<h1>Usando Linux</h1>
+</section>
+<section>
+<h3>Comandos mas comunes (I)</h3>
+<ul>
+<li>bash: Interprete de comandos<ul>
+<li>TAB / Shift + PageUp / Shift + PageDown </li>
+<li>"|, &gt;, &gt;&gt;, &lt;, &lt;&lt;" : pipes </li>
+<li>Scripting </li>
+</ul>
+</li>
+<li>man - Manual de los distintos programas </li>
+<li>"ls"(dir) - Nos lista los contenidos de los directorios. <ul>
+<li>Algunas opciones útiles: ls -l, ls -a y ls -la </li>
+</ul>
+</li>
+<li>"cd"(cd) - Cambia de directorio. Ej: cd /home </li>
+<li>"cp"(copy)  - Copia un archivo de un directorio a otro </li>
+<li>"mkdir"(md) - crea un nuevo subdirectorio </li>
+<li>"rm"(del) - Borra un archivo o directorio </li>
+</ul>
+</section>
+
+<section>
+<h3>Comandos mas comunes (II)</h3>
+<ul>
+<li>"mv"(ren/move) - Con mv se pueden hacer dos cosas: Renombrar o mover un archivo. </li>
+<li>"rmdir"(deltree) - Remueve un directorio </li>
+<li>"pwd" - indica el directorio en el que estás parado </li>
+<li>"clear" (cls) - Borra la pantalla </li>
+<li>"find" - Busca un archivo de acuerdo a un patrón. <ul>
+<li>Ej: find / -name squid (busca el archivo squid en todo el sistema)‏ </li>
+</ul>
+</li>
+<li>"locate" - Parecido al find pero trabaja con una base. <ul>
+<li>Para actualizar esta base se utiliza "updatedb" </li>
+</ul>
+</li>
+<li>"date" - Muestra la hora y el día </li>
+</ul>
+</section>
+
+<section>
+<h3>Comandos mas comunes (III)</h3>
+<ul>
+<li>"df" - Muestra cuánto espacio ocupado y libre hay en las particiones </li>
+<li>"du" - Muestra cuánto espacio ocupan los archivos de un determinado directorio<br>
+</li>
+<li>"free" - Muestra recursos libres de sistema<br>
+</li>
+<li>"ps" - process status: provee información acerca de los jobs/procesos que están corriendo. </li>
+<li>"cat, more"(type) - Vuelca el contenido de un archivo por consola. </li>
+<li>"less"(more) - Permite mostrar el contenido de un archivo y recorrerlo. </li>
+<li>"grep" - Busca texto en un archivo </li>
+<li>"tail,head" - Muestra las últimas/primeras 10 filas de un archivo </li>
+</ul>
+</section><section>
+<h2>La estructura del sistema de archivos</h2>
+<p>...
+Estructura de directorios
+Estructura de directorios
+Estructura de directorios
+Estructura de directorios
+...</p>
+</section><section>
+<h2>Permisos en Linux</h2>
+<p>...
+Permisos en Linux
+Permisos en Linux
+Permisos en Linux
+...</p>
+</section><section>
+<h2>Permisos en Linux</h2>
+<ul>
+<li>chown: Cambia el propietario de un archivo o varios<ul>
+<li>(-R:recursivo)‏</li>
+</ul>
+</li>
+<li>chmod: Cambia los permisos de acceso de un archivo<ul>
+<li>(-R:recursivo)</li>
+</ul>
+</li>
+</ul>
+<p>Por Ejemplo : chmod 421 {archivo}
+<em> Si damos por ejemplo permiso 066 =&gt; Permiso de lectura/escritura al propietario y grupo.
+</em> Existe también la posibilidad de hacerlo más humano:
+    * chmod u+X [archivo] =&gt; Este ejemplo hace ejecutable por el usuario al directorio archivo.
+    * chmod g-x * =&gt; Este ejemplo hace ejecutable por el grupo a los archivos y/o directorios de la ruta actual.</p>
+</section>
+
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
