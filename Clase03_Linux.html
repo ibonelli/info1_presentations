@@ -270,10 +270,10 @@
 <section>
 <h3>Distribuciones</h3>
 <ul>
-<li><a href="http://www.redhat.com">RedHat</a> (y sus herederos como <a href="http://www.fedoraproject.org">Fedora</a> y <a href="http://www.centos.org">CentOS</a>) usan rpm</li>
-<li><a href="http://www.debian.org">Debian</a> (y sus herederos como <a href="http://www.ubuntu.com">Ubuntu</a> y <a href="http://www.linuxmint.com">Mint</a>) usan deb/dpkg/apt-get/synaptic</li>
+<li><a href="http://www.redhat.com">RedHat</a> (y sus herederos como <a href="http://www.fedoraproject.org">Fedora</a> y <a href="http://www.centos.org">CentOS</a>) usan <a href="http://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified">YUM</a>/RPM</li>
+<li><a href="http://www.debian.org">Debian</a> (y sus herederos como <a href="http://www.ubuntu.com">Ubuntu</a> y <a href="http://www.linuxmint.com">Mint</a>) usan deb/<a href="http://en.wikipedia.org/wiki/Dpkg">dpkg</a>/apt-get/synaptic</li>
 <li><a href="https://www.archlinux.org/">ArchLinux</a>: Apuntada a desarrolladores (usa pacman)</li>
-<li><a href="http://www.opensuse.org">OpenSuse</a> usa YaST (SuSE Linux es de Novell desde el 2003)</li>
+<li><a href="http://www.opensuse.org">OpenSuse</a> usa <a href="https://en.opensuse.org/Package_management">YaST</a> (SuSE Linux es de Novell desde el 2003)</li>
 <li><a href="http://www.slackware.com">Slackware</a>: Una de las distribuciones originales</li>
 <li>Otras interesantes: <a href="http://www.damnsmalllinux.org">Damn Small Linux</a> & <a href="http://puppylinux.org/">Puppy Linux</a></li>
 <li>Related Links:
@@ -284,6 +284,31 @@
 </li>
 </ul>
 </li>
+</ul>
+</section>
+<section>
+<h2>Manejo de paquetes</h2>
+<ul>
+	<li>Repositorio</li>
+	<ul>
+		<li>Versiones (de la distribución)</li>
+		<ul>
+			<li>Arquitectura (i386, amd64, etc...)</li>
+			<ul>
+				<li>Paquetes (geany, lxde, etc...)</li>
+			</ul>
+		</ul>
+	</ul>
+</ul>
+</br></br>
+<p>De los repositorios se guarda el indice de los paquetes disponibles y su información</p>
+</br>
+<ul>
+	<li>Ejemplos:</li>
+	<ul style="font-size: 85%; font-family: monospace;">
+		<li>apt-cache search gnome | grep shell | less -S</li>
+		<li>apt-cache search geany</li>
+	</ul>
 </ul>
 </section>
 </section>
@@ -352,6 +377,15 @@
 </section>
 
 <section>
+<h2>El kernel:</h2>
+<h3>Bajando a un ejemplo desde C</h3>
+<ul>
+	<li>Por ejemplo mis scanf()/printf() como van pasando por las capas de software hasta llegar al hardware?</li>
+	<li>Pasamos por: Mi aplicación, llamado al SO: Kernel, Drivers, finalmente accede el SO al hardware</li>
+</ul>
+</section>
+
+<section>
 <h2>El kernel: Versiones</h2>
 <ul>
 	<li>Hasta el kernel 2.6 las versiones con segundo número impar eran de desarrollo. Pero a partir del núcleo 2.6 se dejó esta costumbre y se utiliza una sola versión. </li>
@@ -369,7 +403,8 @@
 </section>
 
 <section>
-<h2>El kernel: Soporte a µC</h2>
+<h2>El kernel:</h2>
+<h3>Soporte a microControladores</h3>
 <ul>
 <li>Si se tiene un procesador con manejador de memoria paginado (PMMU) y está portado GCC para esa plataforma se puede portar Linux. </li>
 <li>Los µC no tienen manejador de memoria. Por eso hay una rama de Linux que no necesita MMU.</li>
@@ -416,7 +451,9 @@
 <li>GPL / Open Source<ul>
 <li>Geany (GCC, muy pequeño y liviano) </li>
 <li>Eclipse (Inicialmente JAVA. Muy grande y pensado como un Framework. Mucho otros IDE. Un ejemplo es el compilador de Code Red Tech usado en informática 2 con Kit ARM) </li>
+	<li>apt-get install eclipse-cdt</li>
 <li>QT Creator (GCC + librerias QT, también usado en informática 2 para desarrollos en entornos gráficos) </li>
+	<li>apt-get install qtcreator</li>
 </ul>
 </li>
 </ul>
@@ -464,38 +501,39 @@
 	<li>Compilando
 		<ul>
 			<li>compilo directamente a binario:
-				<ul style="font-size: 85%; font-family: monospace;">
+				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
 					<li>gcc -o hola hola.c</li>
 				</ul>
 			</li>
 			<li>Compilador para mostrar errores:
-				<ul style="font-size: 85%; font-family: monospace;">
+				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
 					<li>gcc -Wall -o hola hola.c</li>
 				</ul>
 			</li>
 			<li>Para agregar información de debugging:
-				<ul style="font-size: 85%; font-family: monospace;">
+				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
 					<li>gcc -Wall -g -o hola hola.c</li>
 				</ul>
 			</li>
 			<li>Solo compilo (no linkeo):
-				<ul style="font-size: 85%; font-family: monospace;">
+				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
 					<li>gcc -c -o hola.o hola.c</li>
 				</ul>
 			</li>
 			<li>Compilo con información adicional:
-				<ul style="font-size: 85%; font-family: monospace;">
+				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
 					<li>gcc -c -g -o hola.o hola.c</li>
 				</ul>
 			</li>
 			<li>Para ver el código assembler:
-				<ul style="font-size: 85%; font-family: monospace;">
+				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
 					<li>gcc -S hola.c -o -</li>
 				</ul>
 			</li>
 		</ul>
 	</li>
 </ul>
+</br></br><p align="right" style="font-size: 60%; font-family: monospace;">Archivo ejemplo: <a href="./files/clase03/hola.c">hola.c</a></p>
 </section>
 
 <section>
@@ -503,24 +541,24 @@
 <ul>
 	<li>Utilidades
 		<ul>
-			<li>file hola.o (información sobre el programa objeto)</li>
-			<li>objdump -htr hola.o (información detallada)</li>
+			<li><span style="color: #4FC7CF;">file hola.o</span> - información sobre el programa objeto</li>
+			<li><span style="color: #4FC7CF;">objdump -htr hola.o</span> - información detallada</li>
 		</ul>
 	</li>
 	<li>Enlace o linkeo
 		<ul>
-			<li>ld -o hola hola.c -lc (enlace de un objeto)</li>
-			<li>gcc -g -o hola hola.o -v (información adicional sobre las librerías usadas)</li>
+			<li><span style="color: #4FC7CF;">ld -o hola hola.c -lc</span> - enlace de un objeto</li>
+			<li><span style="color: #4FC7CF;">gcc -g -o hola hola.o -v</span> - información adicional sobre las librerías usadas</li>
 		</ul>
 	</li>
 	<li>Debugging
 		<ul>
-			<li>gdb -tui (GNU debugger)
-				<ul>
-					<li>file hola</li>
-					<li>break main</li>
-					<li>run</li>
-				</ul>
+			<li><span style="color: #4FC7CF;">gdb -tui</span> - GNU debugger
+				<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+file hola
+break main
+run
+				</code></pre>
 			</li>
 		</ul>
 	</li>
@@ -543,83 +581,392 @@
 <li>Scripting </li>
 </ul>
 </li>
-<li>man - Manual de los distintos programas </li>
-<li>"ls"(dir) - Nos lista los contenidos de los directorios. <ul>
+<li><span style="color: #4FC7CF;">man</span> - Manual de los distintos programas </li>
+<li><span style="color: #4FC7CF;">ls</span> (dir) - Nos lista los contenidos de los directorios. <ul>
 <li>Algunas opciones útiles: ls -l, ls -a y ls -la </li>
 </ul>
 </li>
-<li>"cd"(cd) - Cambia de directorio. Ej: cd /home </li>
-<li>"cp"(copy)  - Copia un archivo de un directorio a otro </li>
-<li>"mkdir"(md) - crea un nuevo subdirectorio </li>
-<li>"rm"(del) - Borra un archivo o directorio </li>
+<li><span style="color: #4FC7CF;">cd</span> (cd) - Cambia de directorio. Ej: cd /home </li>
+<li><span style="color: #4FC7CF;">cp</span> (copy)  - Copia un archivo de un directorio a otro </li>
+<li><span style="color: #4FC7CF;">mkdir</span> (md) - crea un nuevo subdirectorio </li>
+<li><span style="color: #4FC7CF;">rm</span> (del) - Borra un archivo o directorio </li>
 </ul>
 </section>
 
 <section>
 <h3>Comandos mas comunes (II)</h3>
 <ul>
-<li>"mv"(ren/move) - Con mv se pueden hacer dos cosas: Renombrar o mover un archivo. </li>
-<li>"rmdir"(deltree) - Remueve un directorio </li>
-<li>"pwd" - indica el directorio en el que estás parado </li>
-<li>"clear" (cls) - Borra la pantalla </li>
-<li>"find" - Busca un archivo de acuerdo a un patrón. <ul>
-<li>Ej: find / -name squid (busca el archivo squid en todo el sistema)‏ </li>
-</ul>
-</li>
-<li>"locate" - Parecido al find pero trabaja con una base. <ul>
-<li>Para actualizar esta base se utiliza "updatedb" </li>
-</ul>
-</li>
-<li>"date" - Muestra la hora y el día </li>
+	<li><span style="color: #4FC7CF;">mv</span> (ren/move) - Con mv se pueden hacer dos cosas: Renombrar o mover un archivo. </li>
+	<li><span style="color: #4FC7CF;">rmdir</span> (deltree) - Remueve un directorio </li>
+	<li><span style="color: #4FC7CF;">pwd</span> - indica el directorio en el que estás parado </li>
+	<li><span style="color: #4FC7CF;">clear</span> (cls) - Borra la pantalla </li>
+	<li><span style="color: #4FC7CF;">find</span> - Busca un archivo de acuerdo a un patrón.<ul>
+		<li>Ej: <span style="color: #4FC7CF; font-size: 85%; font-family: monospace;">find / -name squid</span><ul>
+			<li>busca el archivo squid en todo el sistema</li></ul></li>
+		</ul>
+	</li>
+	<li><span style="color: #4FC7CF;">locate</span> - Parecido al find pero trabaja con una base<ul>
+		<li>Para actualizar esta base se utiliza <span style="color: #4FC7CF;">updatedb</span> (como root)</li>
+		</ul>
+	</li>
+	<li><span style="color: #4FC7CF;">date</span> - Muestra la hora y el día</li>
 </ul>
 </section>
 
 <section>
 <h3>Comandos mas comunes (III)</h3>
 <ul>
-<li>"df" - Muestra cuánto espacio ocupado y libre hay en las particiones </li>
-<li>"du" - Muestra cuánto espacio ocupan los archivos de un determinado directorio<br>
-</li>
-<li>"free" - Muestra recursos libres de sistema<br>
-</li>
-<li>"ps" - process status: provee información acerca de los jobs/procesos que están corriendo. </li>
-<li>"cat, more"(type) - Vuelca el contenido de un archivo por consola. </li>
-<li>"less"(more) - Permite mostrar el contenido de un archivo y recorrerlo. </li>
-<li>"grep" - Busca texto en un archivo </li>
-<li>"tail,head" - Muestra las últimas/primeras 10 filas de un archivo </li>
+<li><span style="color: #4FC7CF;">df</span> - Muestra cuánto espacio ocupado y libre hay en las particiones</li>
+<li><span style="color: #4FC7CF;">du</span> - Muestra cuánto espacio ocupan los archivos de un determinado directorio</li>
+<li><span style="color: #4FC7CF;">free</span> - Muestra recursos libres de sistema</li>
+<li><span style="color: #4FC7CF;">ps</span> - process status: provee información acerca de los jobs/procesos que están corriendo</li>
+<li><span style="color: #4FC7CF;">cat, more</span> (type) - Vuelca el contenido de un archivo por consola</li>
+<li><span style="color: #4FC7CF;">less</span> (more) - Permite mostrar el contenido de un archivo y recorrerlo</li>
+<li><span style="color: #4FC7CF;">grep</span> - Busca texto en un archivo</li>
+<li><span style="color: #4FC7CF;">tail,head</span> - Muestra las últimas/primeras 10 filas de un archivo</li>
 </ul>
-</section><section>
-<h2>La estructura del sistema de archivos</h2>
-<p>...
-Estructura de directorios
-Estructura de directorios
-Estructura de directorios
-Estructura de directorios
-...</p>
-</section><section>
+</section>
+
+<section>
+<h3>La estructura del sistema de archivos (I)</h3>
+<h4>Filesystem Hierarchy Standard (FHS)</h4>
+<div align="center" class="centered-object">
+<center>
+<table border="1" cellpadding="4" cellspacing="0" width="85%" style="padding:4px;page-break-inside:avoid;">
+	<thead>
+		<tr>
+			<th>
+				<p>Directorio.</p>
+			</th>
+			<th>
+				<p>Descripción</p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/bin</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Programas binarios esenciales (como son cp, mv, ls, rm, mkdir, etc.),</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/boot</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Archivos utilizados durante el inicio del sistema (núcleo y discos RAM),</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/dev</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Dispositivos esenciales,</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/etc</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Archivos de configuración utilizados en todo el sistema y que son específicos del anfitrión.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/lib y</br>   /lib64</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Bibliotecas compartidas esenciales para los binarios de /bin, /sbin y el núcleo del sistema. /lib64 corresponde al directorio utilizado por sistemas de 64-bit.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+</div>
+</section>
+
+<section>
+<h3>La estructura del sistema de archivos (II)</h3>
+<h4>Filesystem Hierarchy Standard (FHS)</h4>
+<div align="center" class="centered-object">
+<center>
+<table border="1" cellpadding="4" cellspacing="0" width="85%" style="padding:4px;page-break-inside:avoid;">
+	<thead>
+		<tr>
+			<th>
+				<p>Directorio.</p>
+			</th>
+			<th>
+				<p>Descripción</p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/home</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Directorios de inicio de los usuarios locales.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/mnt</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Sistemas de archivos montados temporalmente.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/media</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Puntos de montaje para dispositivos de medios, como son las unidades lectoras de discos compactos.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/opt</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Paquetes de aplicaciones de terceros.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/proc</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Sistema de archivos virtual que documenta sucesos y estados del núcleo. Contiene, principalmente, archivos de texto.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+</div>
+</section>
+
+<section>
+<h3>La estructura del sistema de archivos (II)</h3>
+<h4>Filesystem Hierarchy Standard (FHS)</h4>
+<div align="center" class="centered-object">
+<center>
+<table border="1" cellpadding="4" cellspacing="0" width="85%" style="padding:4px;page-break-inside:avoid;">
+	<thead>
+		<tr>
+			<th>
+				<p>Directorio.</p>
+			</th>
+			<th>
+				<p>Descripción</p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/root</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Directorio de inicio del usuario root (super-usuario).</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/sbin</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Binarios de administración de sistema.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/tmp</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Archivos temporales</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/usr</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Jerarquía secundaria para datos compartidos de solo lectura (Unix system resources).</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/usr/src</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Códigos fuente. Normalmente aquí se instala el código fuente del Kernel de Linux cuando lo instalamos.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/usr/bin</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Programas binarios (que no son del sistema). Programas particulares del usuario (no el sistema) se instalan aquí.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+</div>
+</section>
+
+<section>
+<h3>La estructura del sistema de archivos (II)</h3>
+<h4>Filesystem Hierarchy Standard (FHS)</h4>
+<div align="center" class="centered-object">
+<center>
+<table border="1" cellpadding="4" cellspacing="0" width="85%" style="padding:4px;page-break-inside:avoid;">
+	<thead>
+		<tr>
+			<th>
+				<p>Directorio.</p>
+			</th>
+			<th>
+				<p>Descripción</p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/var</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Archivos variables, como son bitácoras, bases de datos, directorio raíz de servidores HTTP y FTP, colas de correo, archivos temporales, etc.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/var/log</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Archivos y directorios, utilizados para almacenar las bitácoras de eventos del sistema.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/var/mail</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Directorio para almacenar los buzones de correo de usuarios. </p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/var/tmp</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Archivos temporales que prevalecen después de un reinicio.</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="30%" valign="top" align="left" style="width:30%;vertical-align:top; text-align:left;padding:4px; font-size: 150%;">
+				<pre>/var/lib</pre>
+			</td>
+			<td width="70%" valign="top" align="left" style="width:70%;vertical-align:top; text-align:left; font-size: 75%;">
+				<p>Información de estado variable. Algunos servidores como MySQL almacenan sus bases de datos dentro de este directorio.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+<p style="font-size: 75%;"><a href="http://www.alcancelibre.org/staticpages/index.php/estandar-jerarquia-sistema-archivos">Mas sobre sobre FHS</a>, <a href="http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-es-4/s1-filesystem-fhs.html">articulo MIT (esp)</a> y <a href="http://es.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">FHS en wikipedia</a></p>
+</div>
+</section>
+
+<section>
 <h2>Permisos en Linux</h2>
-<p>...
-Permisos en Linux
-Permisos en Linux
-Permisos en Linux
-...</p>
-</section><section>
+<p>Linux, tanto como Unix, es un sistema multiusuario</p>
+</br>
+<p>Los permisos de cualquier archivo cuenta con tres partes:</p>
+<ul>
+	<li>Permisos de propietario<ul>
+		<li>Permisos de grupo<ul>
+			<li>Permisos de resto</li>
+			</ul></li>
+		</ul></li>
+	</ul></li>
+</ul>
+</br></br>
+<p>Por lo tanto un archivo pertenece a un propietario y a un determinado grupo y, según los permisos que tenga asociados el archivo, se podrá acceder a él o no.</p>
+</section>
+
+<section>
+<h2>Permisos en Linux</h2>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+[ignacio@thinkpad /]$ ls -l
+total 173
+drwx--x--x    2 root     root         4096 Jun 10  2002 bin
+drwx--x--x    3 root     root         1024 Jun 17 11:59 boot
+drwx--x--x   14 root     root        81920 Jun 24 03:30 dev
+drwx--x--x   66 root     root         8192 Jun 23 14:57 etc
+drwxr-xr-x    3 root     root         8192 Jun 10  2002 faqs
+drwx--xr-x   23 root     root         4096 Jun 22 04:07 home
+drwx--x--x    7 root     root         4096 Jun 10  2002 lib
+drwx--x--x    8 root     root         4096 Jun 10  2002 mnt
+drwx--x--x    3 root     root         4096 Jun  6 10:03 opt
+dr-xr-xr-x  148 root     root            0 Jun 17 08:56 proc
+drwxr-x---   10 root     root         4096 Jun 23 13:16 root
+drwx--x--x    2 root     root         4096 Jun 10  2002 sbin
+drwx------    2 root     root         4096 Jun 18 21:20 scripts
+</code></pre>
+</section>
+
+<section>
 <h2>Permisos en Linux</h2>
 <ul>
-<li>chown: Cambia el propietario de un archivo o varios<ul>
-<li>(-R:recursivo)‏</li>
+	<li>chown: Cambia el propietario de un archivo o varios</li>
+	<li>chmod: Cambia los permisos de acceso de un archivo</li>
+	<ul>
+		<li style="font-size: 75%;">Para ambos podemos agregar el modificador -R (recursivo)‏</li>
+	</ul>
 </ul>
-</li>
-<li>chmod: Cambia los permisos de acceso de un archivo<ul>
-<li>(-R:recursivo)</li>
+</br></br>
+<p>Por Ejemplo:</p>
+<img src="files/clase03/Linux_permissions.jpg"/>
+<p>En este ejemplo damos el permiso 066, esto es permiso de lectura/escritura al propietario y grupo.</p>
+</section>
+
+<section>
+<h2>Permisos en Linux</h2>
+<p>Existe también la posibilidad de hacerlo más humano:</p>
+<ul>
+	<li style="font-size: 70%; font-family: monospace;">chmod u+X &lt;archivo&gt;<ul>
+		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace ejecutable por el usuario al directorio archivo.</li></ul>
+	</li>
+	<li style="font-size: 70%; font-family: monospace;">chmod g-x &lt;archivo&gt;<ul>
+		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace ejecutable por el grupo a los archivos </br>y/o directorios de la ruta actual.</li></ul>
+	</li>
 </ul>
-</li>
+</br></br>
+<p>Usando chown: <span style="font-style: italic">Se le pasa el nombre de usuario y grupo</span></p>
+<ul>
+	<li style="font-size: 70%; font-family: monospace;">chown [usuario]:[grupo] &lt;archivo&gt;<ul>
+		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace ejecutable por el usuario al directorio archivo.</li></ul>
+	</li>
+</section>
+
+<section>
+<h2>Ejemplos de código:</h2>
+<ul>
+	<li><a href="./files/clase03/sumar.c">sumar.c</a></li>
+	<li><a href="./files/clase03/maximo_de_3.c">maximo_de_3.c</a></li>
+	<li><a href="./files/clase03/factorial.c">factorial.c</a></li>
 </ul>
-<p>Por Ejemplo : chmod 421 {archivo}
-<em> Si damos por ejemplo permiso 066 =&gt; Permiso de lectura/escritura al propietario y grupo.
-</em> Existe también la posibilidad de hacerlo más humano:
-    * chmod u+X [archivo] =&gt; Este ejemplo hace ejecutable por el usuario al directorio archivo.
-    * chmod g-x * =&gt; Este ejemplo hace ejecutable por el grupo a los archivos y/o directorios de la ruta actual.</p>
 </section>
 
 </section>

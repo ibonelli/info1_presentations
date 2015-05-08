@@ -5,9 +5,9 @@ int main (void)
 	int num1, num2, suma;
 
 	/* Entradas */
-	printf("Introduzca el número 1?");
+	printf("Introduzca el numero 1?");
 	scanf("%d", &num1);
-	printf("Introduzca el número 2?");
+	printf("Introduzca el numero 2?");
 	scanf("%d", &num2);
 
 	/* Procesos */
