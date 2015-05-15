@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Info1 - Programación</title>
+		<title>Info1 - Linux</title>
 
 		<meta name="description" content="Info1 - Programación">
 		<meta name="author" content="Ignacio J. Bonelli">
@@ -275,6 +275,7 @@
 <li><a href="https://www.archlinux.org/">ArchLinux</a>: Apuntada a desarrolladores (usa pacman)</li>
 <li><a href="http://www.opensuse.org">OpenSuse</a> usa <a href="https://en.opensuse.org/Package_management">YaST</a> (SuSE Linux es de Novell desde el 2003)</li>
 <li><a href="http://www.slackware.com">Slackware</a>: Una de las distribuciones originales</li>
+<li><a href="https://www.kali.org">Kali</a>: Distribución específica para hacer análisis de seguridad</li>
 <li>Otras interesantes: <a href="http://www.damnsmalllinux.org">Damn Small Linux</a> & <a href="http://puppylinux.org/">Puppy Linux</a></li>
 <li>Related Links:
 	<ul>
@@ -450,10 +451,14 @@
 <ul>
 <li>GPL / Open Source<ul>
 <li>Geany (GCC, muy pequeño y liviano) </li>
-<li>Eclipse (Inicialmente JAVA. Muy grande y pensado como un Framework. Mucho otros IDE. Un ejemplo es el compilador de Code Red Tech usado en informática 2 con Kit ARM) </li>
-	<li>apt-get install eclipse-cdt</li>
+<li>Eclipse (Inicialmente JAVA. Muy grande y pensado como un Framework. Mucho otros IDE. Un ejemplo es el compilador de Code Red Tech usado en informática 2 con Kit ARM)</li>
+	<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+		<li>apt-get install eclipse-cdt</li>
+	</ul>
 <li>QT Creator (GCC + librerias QT, también usado en informática 2 para desarrollos en entornos gráficos) </li>
-	<li>apt-get install qtcreator</li>
+	<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+		<li>apt-get install qtcreator</li>
+	</ul>
 </ul>
 </li>
 </ul>
@@ -470,8 +475,9 @@
 	</li>
 	<li>Propietarios/Pagos:
 		<ul>
-			<li>Microsoft Visual Studio (actualmente .NET) </li>
-			<li>CodeWarrior (entorno de desarrollo motorola) </li>
+			<li>Microsoft Visual Studio (actualmente .NET)</li>
+			<li>CodeWarrior (entorno de desarrollo motorola)</li>
+			<li>XCode (de Apple)</li>
 		</ul>
 	</li>
 </ul>
@@ -533,7 +539,7 @@
 		</ul>
 	</li>
 </ul>
-</br></br><p align="right" style="font-size: 60%; font-family: monospace;">Archivo ejemplo: <a href="./files/clase03/hola.c">hola.c</a></p>
+</br></br><p align="left" style="font-size: 60%; font-family: monospace;">Archivo ejemplo: <a href="./files/clase03/hola.c">hola.c</a></p>
 </section>
 
 <section>
@@ -547,7 +553,7 @@
 	</li>
 	<li>Enlace o linkeo
 		<ul>
-			<li><span style="color: #4FC7CF;">ld -o hola hola.c -lc</span> - enlace de un objeto</li>
+			<li><span style="color: #4FC7CF;">ld -o hola hola.o -lc</span> - enlace de un objeto (ERROR PROBAR!!)</li>
 			<li><span style="color: #4FC7CF;">gcc -g -o hola hola.o -v</span> - información adicional sobre las librerías usadas</li>
 		</ul>
 	</li>
@@ -938,7 +944,7 @@ drwx------    2 root     root         4096 Jun 18 21:20 scripts
 </br></br>
 <p>Por Ejemplo:</p>
 <img src="files/clase03/Linux_permissions.jpg"/>
-<p>En este ejemplo damos el permiso 066, esto es permiso de lectura/escritura al propietario y grupo.</p>
+<p>En este ejemplo damos el permiso 421, esto es permiso de lectura al propietario/usuario, escritura al grupo y ejecución a cualquier otro.</p>
 </section>
 
 <section>
@@ -949,7 +955,7 @@ drwx------    2 root     root         4096 Jun 18 21:20 scripts
 		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace ejecutable por el usuario al directorio archivo.</li></ul>
 	</li>
 	<li style="font-size: 70%; font-family: monospace;">chmod g-x &lt;archivo&gt;<ul>
-		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace ejecutable por el grupo a los archivos </br>y/o directorios de la ruta actual.</li></ul>
+		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace no ejecutable por el grupo a los archivos </br>y/o directorios de la ruta actual.</li></ul>
 	</li>
 </ul>
 </br></br>

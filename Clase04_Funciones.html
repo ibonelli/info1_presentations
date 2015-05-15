@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Linux</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+<section>
+<h3>Organización de ahora en mas</h3>
+<ul>
+<li>Las clases serán: <ul>
+<li>50% práctica </li>
+<li>50% teoría </li>
+</ul>
+</li>
+<li>Las clases incluiran al menos un ejercicio a resolver. </li>
+<li>Muchos temas avanzados se dejarán para el segundo cuatrimestre enfocandonos en los temas básico y afianzar la programación. </li>
+</ul>
+</section><section>
+<h2>Sabemos programar...</h2>
+<h1>¿Y ahora que?</h1>
+</section><section>
+<h1>Temas que siguen...</h1>
+<ul>
+<li>Programación estructurada... ¿Como dividimos en sub-sistemas?<ul>
+<li style="color: #4FC7CF;">!Funciones!</li>
+</ul>
+</li>
+<li>Tipos de datos en C... ¿Eso es todo o hay tipos de datos compuestos? ¿Se puede hacer agrupaciones de datos?<ul>
+<li style="color: #4FC7CF;">Estructuras de datos en C</li>
+<li style="color: #4FC7CF;">Vectores, Matrices</li>
+<li style="color: #4FC7CF;">Strings</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+<section>
+<section>
+<h1>Funciones</h1>
+</section><section>
+<h2>¿Para que sirven las funciones?</h2>
+<ul>
+<li>No repetir varias veces el mismo código </li>
+<li>Ordenar el código jerárquicamente (Top Down) </li>
+<li>Facilitar la comprensión del código </li>
+<li>Distribuir o separar el trabajo entre programadores </li>
+<li>Realizar trabajos más complejos descompuestos en partes mas simples </li>
+<li>Generan modularidad: Sólo se conoce la forma de llamarlas (interfaces) y no interesa cómo operan por dentro. </li>
+</ul>
+</section><section>
+<h2>¿Usamos funciones ya?</h2>
+<ul>
+<li>Funciones usadas hasta aquí:<ul>
+<li style="font-size: 85%; font-family: monospace; color: #4FC7CF;">main()</li>
+<li style="font-size: 85%; font-family: monospace; color: #4FC7CF;">printf() &amp; scanf()</li>
+<li style="font-size: 85%; font-family: monospace; color: #4FC7CF;">sqrt()</li>
+</ul>
+</li>
+<li>¿Como las incluimos?<ul>
+<li style="font-size: 85%; font-family: monospace; color: #4FC7CF;">#include</li>
+<li>¡Las librerias tienen funciones dentro!</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Uso de funciones (I)</h2>
+<ul>
+<li>Razones para crear una función:<ul>
+<li>Reducir la complejidad del programa ("divide y vencerás")</li>
+<li>Eliminar código duplicado </li>
+<li>Limitar los efectos de los cambios (aislar aspectos concretos)</li>
+<li>Ocultar detalles de implementación (por ejemplo en algoritmos complejos)</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Uso de funciones (II)</h2>
+<ul>
+<li>(mas) razones para crear una función:<ul>
+<li>Promover la reutilización de código (p.ej. familias de productos, bibliotecas de funciones)</li>
+<li>Mejorar la legibilidad del código</li>
+<li>Facilitar la portabilidad del código</li>
+<li>Crear bibliotecas</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Características de las funciones (I)</h2>
+<ul>
+<li>Un programa esta formado por funciones </li>
+<li>En C no se pueden definir funciones anidadas </li>
+<li>Si puede haber anidamiento de llamada </li>
+<li>Está permitida la recursividad (llamarse a si misma) </li>
+</ul>
+</section><section>
+<h2>Características de las funciones (II)</h2>
+<ul>
+<li>Desde una función se puede llamar a cualquier otra </li>
+<li>Si no se indica otro tipo, las funciones son de tipo "int" por defecto </li>
+<li>El mecanismo de pasaje de parámetros es por valor </li>
+<li>Siempre devuelven un valor (puede ser void) </li>
+</ul>
+</section><section>
+<h2>Características de las funciones (III)</h2>
+<ul>
+<li>La función "main()":<ul>
+<li>Todo programa debe contener una función llamada "main()" </li>
+<li>Es el punto de inicio, es la función por cual comienza la ejecución del programa, es invocada (llamada) desde el sistema operativo (SO) cuando se ejecuta el programa </li>
+<li>También devuelve un valor al medio de llamada (SO) </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Definiendo funciones (I)</h2>
+<ul>
+<li>Definir el problema que la función debe resolver y dar un nombre significativo (y no ambiguo) a la función </li>
+<li>Establecer cómo se puede probar el funcionamiento correcto de la función </li>
+<li>Declaración: <ul>
+<li>Escribir la declaración de la función establece el tipo de la devolución y los tipos y parámetros que recibe (cabecera de la función) </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Definiendo funciones (II)</h2>
+<ul>
+<li>Implementado la función: <ul>
+<li>Determinar el algoritmo más adecuado para resolver el problema </li>
+<li>Describir los pasos principales del algoritmo como comentarios </li>
+<li>Rellenar el código correspondiente luego de cada comentario </li>
+<li>Determinar como verificar el correcto funcionamiento </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Ejemplo Función</h2>
+<ul>
+<li>Calcule el área de un circulo <ul>
+<li>Escribir una función a la cual se le envíe el valor del radio y calcule y devuelva el valor del área del circulo, la función trabaja con tipo float </li>
+</ul>
+</li>
+</ul>
+</br></br>
+<img src="files/clase04/01_Formula_Area_Circulo.png"/>
+</section>
+
+<section>
+<h2>Partes Función</h2>
+<img src="files/clase04/02_Funciones_Partes.png"/>
+</section>
+
+<section>
+<h2>Cómo se invoca (usa) una función</h2>
+<ul>
+<li>Puede ser llamada desde cualquier parte del programa, luego de ser definida.</li>
+<li>Por esa razón a veces las funciones se declaran y definen al principio del programa (antes del main)</li>
+</ul>
+</br></br>
+<p>Ejemplo de llamada a función (invocación):</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+void main(void)
+{
+  float area, radio = 2;
+
+  area = areaCirculo(radio);
+  printf("area de circulo de radio %f = %f\n", radio, area);
+}
+</code></pre>
+</section>
+
+
+<section>
+<h2>Otra forma de invocar una función</h2>
+<ul>
+<li>Mientras hayan sido declaradas previamente las funciones pueden invocarse desde cualquier lado, incluso dentro de un llamado a otra función. </li>
+</ul>
+</br></br>
+<p>Ejemplo de invocación dentro de un llamado:</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+void main(void)
+{
+  printf("area de circulo de radio 2 = %f\n", areaCirculo(2));
+}
+</code></pre>
+</section>
+
+<section>
+<h2>Donde pongo la función (I)</h2>
+<p>Opción 1: Función al principio del archivo</p>
+<ul>
+	<li>Si pongo todo dentro del mismo archivo, puedo poner primero la implementación y luego el main()</li>
+	<li>De esta manera C ya conoce a la función y no necesita la declaración del prototipo.</li>
+	<li>Igual cabe aclarar que es mas correcto/ordernado dividir los funciones y librerías en archivos distintos.</li>
+</ul>
+</section>
+
+<section>
+<h2>Donde pongo la función (I)</h2>
+<h3>Opc1: Función antes de main()</h3>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+float areaCirculo(float r)
+{
+	float supCir;
+	supCir = 3.14 * r * r;
+	return supCir;
+}
+
+void main(void)
+{
+  float area, radio = 2;
+  area = areaCirculo(radio);
+  printf("area de circulo de radio %f = %f\n", radio, area);
+}
+</code></pre>
+</section>
+
+<section>
+<h2>Donde pongo la función (II)</h2>
+<p>Opción 2: Función luego del main</p>
+<ul>
+	<li>También ponemos todo dentro en un mismo archivo, pero...</li>
+	<li>Como la implementación esta después debo agregar el prototipo</li>
+	<li>En la versión anterior, como está antes, me "ahorro" la declaración del prototipo</li>
+</ul>
+</section>
+
+<section>
+<h2>Donde pongo la función (II)</h2>
+<h3>Opc2: Función después de main()</h3>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+float areaCirculo(float);
+
+void main(void)
+{
+  printf("area de circulo de radio 2 = %f\n", areaCirculo(2));
+}
+
+float areaCirculo(float r)
+{
+	float supCir;
+	supCir = 3.14 * r * r;
+	return supCir;
+}
+</code></pre>
+</section>
+
+<section>
+<h2>División de Archivos (I)</h2>
+<p>milib.h</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+float areaCirculo(float);
+</code></pre>
+<p>milib.c</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+float areaCirculo(float r)
+{
+	float supCir;
+	supCir = 3.14 * r * r;
+	return supCir;
+}
+</code></pre>
+</section>
+
+<section>
+<h2>División de Archivos (II)</h2>
+<p>miprog.c</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+#include "milib.h"
+
+void main(void)
+{
+  float area, radio = 2;
+
+  area = areaCirculo(radio);
+  printf("area de circulo de radio %f = %f\n", radio, area);
+}
+</code></pre>
+</section>
+
+<section>
+<h2>División de Archivos (III)</h2>
+<h3>¿Como compilamos esto?</h3>
+</br></br>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+gcc -o supcirc miprog.c milib.c
+</code></pre>
+</section>
+
+<section>
+<h2>Variables: Alcance</h2>
+<ul>
+<li>Reglas de alcance: <ul>
+<li>Variables locales: Solo pueden accederse dentro de la función (o bloque) donde fueron declaradas. No mantienen su valor entre llamados. </li>
+<li>Variables globales: Se pueden acceder desde cualquier parte del programa o función y el valor es único para todo el programa. </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Variables: Tipo de almacenamiento (I)</h2>
+<ul>
+<li>Clases de Almacenamiento:<ul>
+<li>Externas (<span style="color: #4FC7CF;">extern</span>): Da visibilidad a variables declaradas en otros módulos/archivos y compiladas separadamente. El enlace lo resuelve el linker, no el compilador. </li>
+<li>Registros (<span style="color: #4FC7CF;">register</span>): Se le hace explicito al compilador que la variable se usará muy frecuentemente. Es una sugerencia, por lo tanto si es posible el compilador alojará la variable en registros del procesador en lugar de la memoria principal. Un ejemplo donde es útil usar este modificador es para variables de iteración en ciclos for. </li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Variables: Tipo de almacenamiento (II)</h2>
+<ul>
+<li>Clases de Almacenamiento:<ul>
+	<li>Estáticas (<span style="color: #4FC7CF;">static</span>) - Se inicializan una sola vez y conservan su valor entre llamadas a la misma función.</li>
+	<li>Volatiles (<span style="color: #4FC7CF;">volatile</span>) - Le informa al compilador que:<ul>
+		<li>La variable puede ser modificada de forma externa al flujo del programa</li>
+		<li>No debe aplicar optimizaciones a la variable cuando el programa sea compilado</li>
+		</ul>
+	</li>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Convención de llamado a funciones en el lenguaje C</h3>
+<ul class="col" style="width: 200px; padding: 40px; display: inline-block; vertical-align: top;">
+	<li>Pasaje de variables en el stack</li>
+	</br>
+	<li>Variables locales en el stack</li>
+</ul>
+<ul class="col" style="width: 600px;">
+<img src="files/clase04/03_Funciones_ Llamados-y-stack.png"/>
+</ul>
+</section>
+
+<section>
+<h2>Reglas de alcance y visibilidad (I)</h2>
+<ul>
+<li>Las variables sólo son conocidas dentro del bloque en que han sido declarados y en los bloques anidados internos a estos (objetos o variables locales) </li>
+<li>Las declaraciones van al principio de cualquier bloque (sentencias encerradas entre <span style="color: #4FC7CF;">{</span> y <span style="color: #4FC7CF;">}</span>) </li>
+<li>Las variables declaradas fuera de todo bloque o función son globales (y valen dentro del módulo) </li>
+</ul>
+</section><section>
+<h2>Reglas de alcance y visibilidad (II)</h2>
+<ul>
+<li>Las variables locales: <ul>
+<li>Mejoran la portabilidad de las funciones </li>
+<li>Dan mas independencia a la función y refuerzan el concepto de programación estructurada. </li>
+</ul>
+</li>
+<li>¡En informática 1 siempre usaremos variables locales!<ul>
+<li>¿Excepciones en otras materias? ¡Si, sistemas embebidos!</li>
+</ul>
+</li>
+</ul>
+</section>
+<section>
+<h2>Ejemplos de código:</h2>
+<ul>
+	<li><a href="./files/clase04/ej_superficie_circulo.c">ej_superficie_circulo.c</a></li>
+	<li><a href="./files/clase04/ej_func_dado.zip">ej_func_dado.zip</a></li>
+</ul>
+</section>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
