@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Linux</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+<section>
+<h2>Introducción a punteros</h2>
+<h2>Definición de arreglos, estructuras y cadenas de texto</h2>
+</section>
+
+<section>
+<h1>Punteros</h1>
+<ul>
+	<li>Las variables que vimos hasta ahora son variables que contienen datos que tienen correlación con el mundo real/matemático </li>
+	<li>Las variables puntero tienen direcciones de memoria. Sirven para guardar donde se encuentran las variables comunes en la computadora. </li>
+	<li>Las variables puntero permiten acceso por referencia a variables comunes </li>
+	<li>Los punteros son evidentes en cuando se usa código assembler y son una de las cosas que hacen potente (y complicado) usar al lenguaje C </li>
+</ul>
+</section>
+
+<section>
+<h1>Punteros</h1>
+<ul class="col" style="width: 450px; display: inline-block; vertical-align: top;">
+<img src="files/clase05/01a_punteros.png"/>
+</ul>
+<ul class="col" style="width: 400px;">
+<img src="files/clase05/01b_punteros.png"/>
+</ul>
+</section>
+
+<section>
+<h2>¿Cómo usar punteros en C?</h2>
+<ul>
+<li>Hay cuatro usos u operaciones básicas: <ul>
+<li>Declarar una variable puntero a un tipo </li>
+<li>Conocer y guardar la dirección de una variable </li>
+<li>Obtener o recuperar el valor al qué apunta un puntero </li>
+<li>Recibir un puntero como parámetro (en una función) </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Declarar una variable tipo puntero</h2>
+<ul>
+<li>Declaración de un puntero<ul>
+<li>Sintaxis: 
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+tipo_de_variable_apuntada *nombre_del_puntero;</code></pre>
+</li>
+</ul>
+</li>
+<li>Ejemplos:<ul>
+	<li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+int *p</code></pre></li>
+	<ul>
+		<li style="font-size: 28px;">Declara un puntero <span style="color: #4FC7CF;">p</span>, que se utilizará para apuntar a un <span style="color: #4FC7CF;">entero</span>, se dice que <span style="color: #4FC7CF;">p</span> es un <span style="color: #4FC7CF;">puntero a int</span></li>
+	</ul> 
+	<li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+char *pc</code></pre></li>
+	<ul>
+		<li style="font-size: 28px;">Declara el puntero <span style="color: #4FC7CF;">pc</span>, que se utilizará para apuntar a un <span style="color: #4FC7CF;">carácter</span>, se dice que <span style="color: #4FC7CF;">pc</span> es un <span style="color: #4FC7CF;">puntero a char</span></li>
+	</ul> 
+</ul>
+</section>
+
+<section>
+<h2>Conocer la dirección de una variable</h2>
+<h3>(operador <span style="color: #4FC7CF;">&amp;</span>)</h3>
+<ul>
+	<li><span style="color: #4FC7CF;">&amp;</span>variable</li>
+		<ul>
+			<li>Devuelve la dirección en memoria de la variable</li>
+		</ul>
+</ul>
+<p style="text-align: left;">Ejemplo:</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+/* Declaro y creo en memoria una variable entera */
+
+int v1, v2 = 10 ;
+
+/* Declaro y creo un puntero a un entero.
+ * Contendrá la dirección de una variable entera
+ */
+
+int *pint ;
+
+/* Inicializo el puntero con la dirección de memoria de la 
+ * variable. Donde está el puntero se guardó la dirección
+ * de la variable entera
+ */
+
+pint = &v2;
+</code></pre>
+</section>
+
+<section>
+<h3>Ahora que vimos el operador <span style="color: #4FC7CF;">&amp;</span>...</h3>
+<h2>¿Pueden ver por qué scanf() usa <span style="color: #4FC7CF;">&amp;</span>?</h2>
+</section>
+
+<section>
+<h2>Saber a qué apunta un puntero</h2>
+<h3>(operador <span style="color: #4FC7CF;">*</span>)</h3>
+<p><span style="color: #4FC7CF;">*</span> puntero devuelve el valor de lo<br/>que está siendo apuntado por puntero</p>
+<ul class="col" style="width: 400px;">
+<p style="text-align: left;">Ejemplo:</p>
+<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
+int n = 10, m;
+int p;
+p = &n;
+m = p;
+</code></pre>
+<br/>
+<p style="text-align: left;">En el ejemplo...</p>
+<ul>
+	<li>¿cuánto vale p?</li>
+	<li>¿cuánto vale m?</li>
+</ul>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+<img src="files/clase05/03_punteros.png"/>
+</ul>
+</section>
+
+<section>
+<h2>Regla práctica operadores puntero</h2>
+<ul>
+	<br/>
+	<li>El operador <span style="color: #4FC7CF;">*</span> tiene dos usos, en la definición/declaración indica que la variable es del tipo puntero.</li>
+	<br/>
+	<li>El operador <span style="color: #4FC7CF;">*</span> significa "<span style="color: #4FC7CF;">contenido de</span>" cuando se usa en el cuerpo del programa.</li>
+	<br/>
+	<li>El operador <span style="color: #4FC7CF;">&amp;</span> significa "<span style="color: #4FC7CF;">dirección de</span>".</li>
+</ul>
+</section>
+
+<section>
+<h2>Recibir un puntero como parámetro</h2>
+<br/>
+<pre><code data-trim style="font-size: 32px; padding: 15px;" class="cpp">
+void fn(char *s)
+</code></pre>
+<br/>
+<ul>
+	<li>La función fn recibe un puntero a carácter
+	<ul>
+		<li>Se denomina pasaje por referencia </li>
+	</ul>
+	</li>
+	<br/>
+	<li>Cuando se invoca fn, en la posición del argumento s se debe pasar una dirección de una variable de tipo char </li>
+	<br/>
+	<li>Se utiliza o sirve para hacer funciones que trabajan directamente sobre los valores de la variables originales y no sobre copias locales de los valores de esas variables </li>
+</ul>
+</section>
+
+<section>
+<h2>Paso de argumentos a funciones (I)</h2>
+<h3 style="color: #4FC7CF;">Paso por valor</h3>
+<br/>
+<ul>
+<li>El paso de parámetros por valor consiste en copiar el contenido de la variable que queremos pasar en otra dentro del ámbito local de la subrutina </li>
+<br/>
+<li>Se tendrán dos valores duplicados e independientes, con lo que la modificación de uno no afecta al otro. </li>
+</ul>
+</section>
+
+<section>
+<h2>Paso de argumentos a funciones (I)</h2>
+<h3 style="color: #4FC7CF;">Paso por valor</h3>
+<br/>
+<p style="text-align: left;">Ejemplo:</p>
+<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
+void mifunc(int a, int b) {
+	a++;
+	b=b+2;
+	return a+b;
+}
+</code></pre>
+<br/><br/>
+<p>Ver correr: <a href="files/clase05/func_por_valor.c">func_por_valor.c</a></p>
+</section>
+
+<section>
+<h2>Paso de argumentos a funciones (II)</h2>
+<h3 style="color: #4FC7CF;">Paso por referencia</h3>
+<br/>
+<ul>
+<li>El paso de parámetros por referencia consiste en proporcionar a la subrutina a la que se le quiere pasar el argumento la dirección de memoria del dato. </li>
+<br/>
+<li>En este caso se tiene un único valor referenciado (o apuntado) desde dos puntos diferentes, el programa principal y la subrutina a la que se le pasa el argumento, por lo que cualquier acción sobre el parámetro se realiza sobre la misma posición de memoria. </li>
+</ul>
+</section>
+
+<section>
+<h2>Paso de argumentos a funciones (II)</h2>
+<h3 style="color: #4FC7CF;">Paso por referencia</h3>
+<br/>
+<p style="text-align: left;">Ejemplo:</p>
+<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
+int mifunc(int *a, int *b) {
+	(*a)++;
+	(*b)=(*b)+2;
+	return (*a)+(*b);
+}
+</code></pre>
+<br/><br/>
+<p>Ver correr: <a href="files/clase05/func_por_referencia.c">func_por_referencia.c</a> y <a href="files/clase05/func_por_referencia_v2.c">func_por_referencia_v2.c</a></p>
+</section>
+
+<section>
+<h2>Entendiendo como funciona scanf()</h2>
+<ul>
+	<li>Código:
+		<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
+scanf("%i", &amp;a);
+		</code></pre>
+	</li>
+	<ul>
+		<li>Llama a la función scanf, lo ingresado por el usuario lo almacena en la variable "a"</li>
+		<li>"a" es una variable del main, y cambia en el main</li>
+		<li>Localmente (dentro de scanf) solo tendremos un puntero o referencia a la variable del main.</li>
+	</ul>
+	<br/>
+	<li>Otros lenguajes que no usan punteros, tienen funciones de ingreso de datos de esta forma:
+		<ul>
+			<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="pascal">
+a = input("%i")
+			</code></pre>
+		</ul>
+	</li>
+</section>
+</section>
+
+<section>
+<section>
+<h1>Arreglos</h1>
+</section>
+
+<section>
+<h1>Arreglos (I)</h1>
+<ul>
+<li>Los arreglos son agrupaciones de un mismo tipo de dato que pueden ser accedidos mediante un subindice</li>
+<li>A los arreglos también se los llama array</li>
+<li>Se pueden declarar arreglos de cualquiera de los tipos básicos de C (char, float, int, etc...)</li>
+<li>Tienen una base (puntero) común y a partir de la misma se van "apilando" la cantidad de elementos que esté definida.</li>
+</ul>
+</section>
+
+<section>
+<h1>Arreglos (II)</h1>
+<ul>
+<li>El tamaño del arreglo se define en la declaración del mismo y no puede cambiar:<ul>
+<li>El límite no es reforzado o protegido por el lenguaje.</li>
+<li>Puedo leer/escribir elementos que no esten definidos y el compilador no me va avisar</li>
+<li>Esto trae muchos problemas y errores en C</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Declaración de arreglos unidimensionales</h2>
+<ul>
+	<li>Declaración<ul>
+		<li>&lt;tipo-base&gt; &lt;identificador&gt;[&lt;NumElementos&gt;];</li>
+		</ul>
+	</li>
+</ul>
+<br/><br/>
+<p style="text-align: left;">Ejemplo:</p>
+<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
+int vec[20];
+</code></pre>
+<br/>
+<ul>
+<img src="files/clase05/11_Arreglos.png"/>
+</ul>
+</section>
+
+<section>
+<h2>Declaración de arreglos unidimensionales</h2>
+<ul>
+	<li>Declaración con asignación<ul>
+		<li>&lt;tipo-base&gt; &lt;identificador&gt;[&lt;NumElementos&gt;] = {valor1, valor2, valor3,...};</li>
+		</ul>
+	</li>
+</ul>
+<br/><br/>
+<p style="text-align: left;">Ejemplo:</p>
+<pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
+int edades[5] = {17, 19, 21, 20, 18};
+
+int edades[ ] = {17, 19, 21, 20, 18};
+</code></pre>
+</section>
+
+<section>
+<h2>Declaración de Arreglos: Ejemplos (I)</h2>
+<ul>
+<br/>
+<li>Declaración de un arreglo de 50 enteros (0 a 49):
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+int A[50];
+</code></pre></li>
+<br/>
+<li>Declaración de un arreglo de 100 caracteres (0 a 99): 
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+char A[100];
+</code></pre></li>
+<br/>
+<li>Declaración e inicialización de un arreglo de 10 enteros: 
+<pre style="width: 800px;"><code data-trim style="font-size: 28px; padding: 15px; width: 800px;" class="cpp">
+int A[10] = {2, 5, 8, 100, 1, 2, 100, 5, 5, 5}
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h2>Declaración de Arreglos: Ejemplos (II)</h2>
+<ul>
+<br/>
+<li>Inicialización parcial: El resto no se inicializa (contiene basura) 
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+int A[100] = {25, 5, 100, 25, 5}
+</code></pre></li>
+<br/>
+<li>Declaración e inicialización de un arreglo de 10 caracteres: 
+<pre style="width: 1050px;"><code data-trim style="font-size: 28px; padding: 15px; width: 1050px;" class="cpp">
+char A[10] = {'a', 'z', 'E', 'e', 65, '\65', '@', 'U', '*', '\n'}
+</code></pre></li>
+<br/>
+<li>Determinación del tamaño de un arreglo en forma implícita: 
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+int A[] = {5, 10, 2, 15, 20}
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h2>Mas ejemplos de uso (I)</h2>
+<ul>
+<li>Asignación de un valor a la sexta posición de un arreglo de enteros: 
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+A[5] = 200;
+</code></pre></li>
+<li>Impresión de un arreglo de 100 enteros mediante un ciclo for: 
+<pre><code data-trim style="font-size: 26px; padding: 20px;" class="cpp">
+int i, B[100];
+for (i=0; i &lt; 100; i++)
+    printf("%d\n", B[i]);
+</code></pre></li>
+<li>Ingreso de 20 enteros a un arreglo mediante un ciclo for: 
+<pre><code data-trim style="font-size: 26px; padding: 20px;" class="cpp">
+int i, C[20];
+for (i=0; i &lt; 20; i++)
+    /* scanf() requiere puntero: &amp; */
+    scanf("%d", &amp;C[i]);
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h2>Mas ejemplos de uso (II)</h2>
+<ul>
+<li>Función que recibe un arreglo de enteros como argumento y calcula el promedio: 
+<pre><code data-trim style="font-size: 26px; padding: 20px;" class="cpp">
+int promedioArray (int D[ ], int num_elementos) {
+    int prom = 0;
+    int i;
+    for (i=0; i &lt; num_elementos; i++)
+        prom = prom + D[i];
+        return (prom / num_elementos);
+    }
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h2>Pasaje de arrays a funciones (I)</h2>
+<ul>
+<br/>
+<li>Los array a una función se pasan por referencia (dirección), en vez de por valor como con las variables simples, esto es así, porque seria muy ineficiente copiar todos los valores de los componentes de un array para pasarlos por valor. </li>
+<br/>
+<li>El pasaje por referencia implica, que en vez de copiar el array, se pasa su dirección de comienzo. Esta dirección de comienzo, coincide con la dirección del nombre del array, o lo que es lo mismo, con la dirección del primer elemento. </li>
+</ul>
+</section>
+
+<section>
+<h2>Pasaje de arrays a funciones (II)</h2>
+<ul>
+<li>A partir de esa dirección inicial (nombre del array), se encuentran consecutivamente uno a continuación de otro, todos los elementos del array. </li>
+<br/>
+<li>Como todos los elementos del array son del mismo tipo (ocupan igual cantidad de bytes), los subsiguientes elementos se encuentran sumando un valor fijo a la dirección del elemento anterior, así hasta el último. </li>
+<br/>
+<li>A una función, además de pasarle la dirección de comienzo del array, hay que pasarle los límites del array, ya que el lenguaje C no comprueba estos limites. </li>
+</ul>
+</section>
+
+<section>
+<h2>Ejercicios de Arrays Unidimensionales</h2>
+<ul>
+<li>Realizar el estructograma y la codificación en C de:<ul>
+	<li>Un programa que solicita 5 números y luego los imprime en orden inverso</li>
+	<li>Un programa que pregunta los coeficientes de un polinomio de grado 5</li>
+	<br/>
+	<img src="files/clase05/12_Polinomio.png"/>
+	<br/><br/>
+	<li>Y finalmente evalúe el polinomio desde:<ul>
+		<li style="font-family: monospace; font-size: 85%;"><span style="color: #4FC7CF;">x = -10</span> a <span style="color: #4FC7CF;">x = 10</span></li>
+		</ul>
+	</ul>
+</li>
+</ul>
+</section>
+</section>
+
+<section>
+<section>
+<h1>Strings</h1>
+<h2>Solo un caso particular de arreglo unidimesional...</h2>
+</section>
+
+<section>
+<h2>Variables char y strings</h2>
+<br/>
+<ul>
+<li>Tipo de dato char: <ul>
+<br/>
+<li>En una variable de tipo char, lo que se almacena es valor del código ASCII correspondiente a un carácter. </li>
+<br/>
+<li>Puede verse al tipo char como un subtipo del tipo int (short int), que puede almacenar enteros de 0 a 255. </li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Variables char y ASCII</h2>
+<pre style="width: 1000px;"><code data-trim style="font-size: 26px; padding: 20px; width: 1000px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+void main(void) {
+	char c;
+	printf("Ingrese un caracter: ");
+	scanf("%c", &c);
+	printf("Usted ingreso el caracter: \'%c\' \
+		cuyo codigo ASCII es %d en decimal y %x hexa.\n", c, c, c);
+}
+</code></pre>
+<br/><p>Ver correr: <a href="files/clase05/codigo_ascii.c">codigo_ascii.c</a></p>
+</section>
+
+<section>
+<h3>Programa que imprime la tabla ASCII</h3>
+<pre style="width: 1120px; max-height: 500px;"><code data-trim style="font-size: 22px; padding: 20px; width: 1120px; max-height: 500px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+void main(void) {
+	int i, j;
+	int c;
+	printf("\nTabla ASCII\n");
+	printf("Sume el valor de la fila con el de la columna para obtener el codigo\n\n");
+	printf("     0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15\n\n");
+	for (i = 2; i &lt; 8; i++) {
+		printf("%4d", i*16);
+		for(j = 0; j &lt; 16; j++) {
+			c = 16*i + j;
+			printf("%2c ", c);
+		}
+		printf("\n\n");
+	}
+	printf("Nota: Solo imprimimos la parte baja (primeros 128 códigos) \n\
+	y evitamos los primeros 32 que no son imprimibles\n\n");
+}
+</code></pre>
+<br/><p>Ver correr: <a href="files/clase05/tabla_ascii.c">tabla_ascii.c</a></p>
+</section>
+
+<section>
+<h2>¿Qué es un string? (I)</h2>
+<p>En muchos lenguajes existe el tipo de dato string, <br/>pero C en un intento de simplificación (y refuerzo <br/>del concepto de punteros) no lo tiene.</li>
+<br/><br/><br/>
+<img src="files/clase05/23_String.png"/>
+</section>
+
+<section>
+<h2>¿Qué es un string? (II)</h2>
+<ul>
+<li>En lugar de un tipo especial de dato especial para el manejo de string se usa una agrupación de caracteres con un formato particular. </li>
+<li>Los strings serán un arreglo de caracteres, denominado también cadena de caracteres, que se usa para contener texto y finaliza con un delimitador de valor NULL ('\0') </li>
+<li>Los string sirven para hacer programas que manipulan texto. </li>
+</ul>
+</section>
+
+<section>
+<h2>Inicialización de un string</h2>
+<ul>
+<li>Formas de declarar strings:
+<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
+char s[5] = "Hola";
+char s[] = "Hola";
+char str[] = "El tamaño se autodetermina";
+char s[5] = {'H', 'o', 'l', 'a', '\0'};
+char s[5] = {'H', 'o', 'l', 'a', 0};
+char *pS = "Hola"; /* *pS[i] puede no ser escribible */
+</code></pre>
+</li>
+<br/>
+<li>Notas:<ul>
+<li>El fin de un string se marca con un carácter NULL (ASCII = 0)</li>
+<li>Al poner el texto entre comillas dobles el compilador crea el string</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplos de declaración y <br/>usos de strings (I)</h3>
+<br/>
+<ul>
+<li>Declaración del tamaño de un string a partir de una constante</li>
+<pre style="width: 750px;"><code data-trim style="font-size: 26px; padding: 20px; width: 750px;" class="cpp">
+define N 50
+char str[N];  /* se reserva lugar para un string */
+</code></pre>
+<br/>
+<li>Declaración e inicialización de un string </li>
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+char str[50] = "Este es el contenido inicial";
+</code></pre>
+<br/>
+<li>Definición implícita de tamaño</li>
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+char str[] = "El tamaño se autodetermina";</p>
+</code></pre>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplos de declaración y <br/>usos de strings (II)</h3>
+<ul>
+<br/>
+<li>Lectura mediante scanf de un string</li>
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+scanf("%s", &amp;str[0]);
+</code></pre>
+<br/>
+<li>Lectura de string (equivalente a la anterior)</li>
+<pre style="width: 800px;"><code data-trim style="font-size: 26px; padding: 20px; width: 800px;" class="cpp">
+scanf("%s", str);  /* En caso de vectores str==&amp;str */
+</code></pre>
+<br/>
+<li>Impresión de un string mediante printf()</li>
+<pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
+printf("%s\n", str);
+</code></pre>
+</ul>
+</section>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

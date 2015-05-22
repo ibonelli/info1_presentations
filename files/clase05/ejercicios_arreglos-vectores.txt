@@ -1,0 +1,78 @@
+-------------------------------------
+Promedio de notas
+-------------------------------------
+
+#include <stdio.h>
+
+#define MAX_NUM_ALUMNOS 100
+/* reservo mucho lugar */
+#define MAX_NOTA 7.0
+#define MIN_NOTA 1.0
+
+int main(){
+	int numAlumnos, i;
+	float nota[MAX_NUM_ALUMNOS], suma = 0.0,
+		max = MIN_NOTA, min = MAX_NOTA, prom;
+	printf("Ingrese el numero de alumnos del curso <100: ");
+	scanf("%d", &numAlumnos);
+	printf("Ingrese notas de los %d alumnos\n", numAlumnos);
+	for (i=0; i < numAlumnos; i++){
+		printf ("Ingrese la nota del alumno %d: \n", i+1);
+		scanf("%f", &nota[i]);
+		suma += nota[i];
+		/* idem suma = suma + nota[i]; */
+		if (nota[i] < min) min = nota[i];
+		if (nota[i] > max) max = nota[i];
+	}
+	prom = suma / numAlumnos;
+	printf("\tPromedio: %1.1f\n", prom);
+	printf("\tMinimo: %1.1f\n", min);
+	printf("\tMaximo: %1.1f\n", max);
+}
+
+-------------------------------------
+Cálculo de notas de un curso
+-------------------------------------
+
+Realizar el estructograma y la codificación en C:
+
+El programa calcula los puntajes finales de los alumnos de un curso, en base a las siguientes ponderaciones
+	NF = 0.7 * NP + 0.3 * Ex
+	NP = (I1 + I2 + T1 + T2)/4
+Donde:
+	NF: Nota Final, Ex: Examen
+	NP: Nota parcial, In: Interrogación
+	Tn: Trabajo
+
+Como se observa, cada alumno posee 6 notas
+Además se calculara el Promedio del curso y la nota mínima y máxima obtenida
+Primero debe preguntar el número de alumnos del curso
+
+¿Qué tipo de datos se debe usar?
+
+#define MAX_NUM_ALUMNOS 100
+
+int main() {
+	int NumAlumnos, i, j;
+	float notas [MAX_NUM_ALUMNOS] [6], np, suma = 0.0, min, max, prom;
+	printf("Ingrese el numero de alumnos en la seccion < 100: ");
+	scanf("%d", &NumAlumnos);
+	printf("Ingrese las notas de los %d alumnos: I1 I2 T1 T2 Ex\n“, NumAlumnos);
+	for (i=0; i < NumAlumnos; i++) {
+		printf("\tAlumno %d: ", i+1);
+		for (j=0; j < 5; j++) scanf("%f", &notas[i][j]);
+		np = (notas[i][0] + notas[i][1] + notas[i][2] + notas[i][3]) / 4;
+		notas[i][5] = (float)(0.7 * np + 0.3 * notas[i][4]);
+		suma += notas[i][5];
+		if (i == 0) max = min = notas [i][5];
+		if (notas[i][5] < min) min = notas[i][5];
+		if (notas[i][5] > max) max = notas[i][5];
+		}
+		printf("\nNotas Finales:\n");
+	for (i=0; i < NumAlumnos; i++)
+		printf("\tAlumno %d: %3.1f\n", i+1, notas[i][5]);
+	prom = suma / NumAlumnos;
+	printf("\nPromedio: %1.1f\n", prom);
+	printf("Minimo: %1.1f\n", min);
+	printf("Maximo: %1.1f\n", max);
+}
