@@ -64,6 +64,23 @@
 </section>
 
 <section>
+<h3>Gráfico1: Código</h3>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+int a=100;
+int b=100;
+
+int *p=&a;
+
+int *q=&a;
+/* O también:
+ *     int *q=p;
+ */
+
+int *r=&b;
+</code></pre>
+</section>
+
+<section>
 <h1>Punteros</h1>
 <ul class="col" style="width: 450px; display: inline-block; vertical-align: top;">
 <img src="files/clase05/01a_punteros.png"/>
@@ -71,6 +88,23 @@
 <ul class="col" style="width: 400px;">
 <img src="files/clase05/01b_punteros.png"/>
 </ul>
+</section>
+
+<section>
+<h3>Gráfico2: Código</h3>
+<pre style="width: 1050px;"><code data-trim style="font-size: 28px; padding: 15px; width: 1050px;" class="cpp">
+int x=4;
+
+int *px=&x;
+/* Donde:
+ * *px es - Es una variable puntero a un entero */
+/*  &x es - Direccion de x */
+
+int *ppx=&px;
+/* Donde:
+ * &px es - Direccion de px */
+/* **px es - Es una variable puntero a un puntero a un entero */
+</code></pre>
 </section>
 
 <section>
@@ -155,9 +189,9 @@ pint = &v2;
 <p style="text-align: left;">Ejemplo:</p>
 <pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
 int n = 10, m;
-int p;
+int *p;
 p = &n;
-m = p;
+m = *p;
 </code></pre>
 <br/>
 <p style="text-align: left;">En el ejemplo...</p>
@@ -187,7 +221,7 @@ m = p;
 <h2>Recibir un puntero como parámetro</h2>
 <br/>
 <pre><code data-trim style="font-size: 32px; padding: 15px;" class="cpp">
-void fn(char *s)
+void fn(char *s);
 </code></pre>
 <br/>
 <ul>
@@ -220,7 +254,7 @@ void fn(char *s)
 <br/>
 <p style="text-align: left;">Ejemplo:</p>
 <pre><code data-trim style="font-size: 26px; margin-top: 20px;" class="cpp">
-void mifunc(int a, int b) {
+int mifunc(int a, int b) {
 	a++;
 	b=b+2;
 	return a+b;
