@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Linux</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section data-background="#4d7e65">
+<section>
+<h1>Punteros (repaso)</h1>
+</section>
+
+<section>
+<h2>Punteros y arreglos</h2>
+<ul>
+<li>El nombre de una variable de tipo arreglo es un puntero a la primera posición del arreglo
+<pre style="width: 400px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 400px;" class="cpp">
+double a[20];
+         /* a == &amp;a[0]  */
+</code></pre>
+</li>
+<br/>
+<li>Podemos acceder al valor almacenado en un elemento de un arreglo de dos formas:<ul>
+<li>Usando el subíndice: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">a[3]</span></li>
+<li>Usando aritmética de punteros para <br/>la dirección de memoria <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">*(a+3)</span></li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Relación entre índices y punteros</h2>
+<br/>
+<img src="files/clase06/01_arreglo_alpha.png"/>
+<br/>
+<pre style="width: 400px;"><code data-trim style="font-size: 28px; margin-top: 20px; width: 400px;" class="cpp">
+a[0] ==   *a   == 3
+a[1] == *(a+1) == 4
+a[2] == *(a+2) == 7
+a[3] == *(a+3) == 2
+...
+a[9] == *(a+9) == 6
+</code></pre>
+</section>
+
+<section>
+<h2>Ejemplo: ¿Qué hacen estas sentencias?</h2>
+<br/>
+<pre style="width: 1100px;"><code data-trim style="font-size: 28px; margin-top: 20px; width: 1100px;" class="cpp">
+int i, *pA;
+
+int arreglo[10] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+
+pA = arreglo;
+
+printf("%d,%d\n", *pA, arreglo[0]);
+            /* Al contenido de *pA (arreglo[0]) le suma i */
+
+for(i=0; i &lt; 10; i++)
+      printf("%d, %d\n", arreglo[i], *pA+i);
+
+for(i=0; i &lt; 10; i++)
+      printf("%d, %d\n", arreglo[i], *(pA+i));
+                                      /* Equivalente a arreglo[i] */
+</code></pre>
+</section>
+
+<section>
+<h2>Puntero NULL</h2>
+<ul>
+<li><span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">p = NULL;</span><ul>
+<li>Puntero que no apunta a ninguna dirección</li>
+<li>Valor común para todos los tipos puntero definido en <stdlib.h></li>
+</ul>
+</li>
+<li>Asignación:
+<pre style="width: 400px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 400px;" class="cpp">
+pc = pv = NULL;
+</code></pre>
+</li>
+<li>No se puede desreferenciar, por que <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">*pc</span> no existe</li>
+</ul>
+<br/>
+<br/>
+<p style="font-style: italic;">Nota: En realidad la dirección de memoria <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">0x0</span> existe, <br/>pero siempre esta reservada para fines específicos <br/>de la arquitectura. Por esto el lenguaje C lo considera  <br/>como un puntero especial a nada.</p>
+</section>
+
+<section>
+<h1>Resumiendo...</h1>
+<ul>
+<li>Punteros<ul>
+<li>Variables que guardan direcciones de memoria de variables de un tipo base</li>
+<li>Apunta a una variable de tipo base</li>
+</ul>
+</li>
+<li>Permiten el paso por referencia en funciones<ul>
+<li>Permite devolver valores a través de parámetros</li>
+</ul>
+</li>
+<li>Aritmética de punteros:<ul>
+<li>Como moverse entre variables del mismo tipo...</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Conversiones de tipos (casting)</h2>
+<ul><li>Para los ejemplos:</li>
+<pre style="width: 400px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 400px;" class="cpp">
+float a;
+int b;
+</code></pre>
+<br/>
+<li>Conversiones automáticas<ul>
+	<li>De entero a flotante:
+<pre style="width: 600px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 600px;" class="cpp">
+a = 4 + 4.0 -&gt; 4.0 + 4.0 -&gt; 8.0
+</code></pre>
+	</li>
+	<li>De flotante a entero:
+<pre style="width: 600px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 600px;" class="cpp">
+b = 3.5 + 3 -&gt; 3.5 + 3.0 -&gt; 6.5 -&gt; 6
+</code></pre>
+	</li>
+</ul></li>
+<li>Conversiones manuales o explicitas (casting de tipos)
+<pre style="width: 400px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 400px;" class="cpp">
+(float) 1 -&gt; 1.0
+(int) 1.5 -&gt; 1
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Ruptura de reglas de tipado</h2>
+<ul class="col" style="width: 250px; display: inline-block; vertical-align: top;">
+<pre><code>int tabla[3];
+int *pi;
+char *pc;
+
+pi = tabla;
+*pi = 97;
+*(pi+1) = 98;
+
+pc = (char *) pi;
+
+*pc = 'x';
+*(pc+1) = 'y';
+</code></pre>
+</ul>
+<ul class="col" style="width: 600px;">
+<img src="files/clase06/02_punteros_algebra_alpha.png"/>
+</ul>
+</section>
+
+<section>
+<h2>Aritmética de punteros</h2>
+<ul>
+<li>A los punteros se les puede sumar y restar enteros<ul>
+<li>El incremento subyacente es multiplicado por el tamaño del tipo base</li>
+<li>Se entiende que el puntero puede apuntar a un array indefinido de elementos del tipo base, no se comprueban limites</li>
+</ul>
+</li>
+<li>Se pueden restar entre sí<ul>
+<li>Deben ser del mismo tipo y apuntar al mismo array, en ese caso nos da la distancia entre elementos del array</li>
+</ul>
+</li>
+<li>No se pueden sumar entre sí (ni otras operaciones), no esta definido (resultados impredecibles)</li>
+</ul>
+</section>
+
+<section>
+<h1>El operador sizeof</h1>
+</section>
+
+<section>
+<h2>sizeof</h2>
+<ul>
+<li>sizeof es un operador de C (como ! o ~) que retorna un "constant int" que nos dice el tamaño de cualquier dato.</li>
+<br/>
+<li>El elemento a examinar puede ser un dato, un porción de un dato o un tipo de dato.</li>
+<br/>
+<li>sizeof retorna el tamaño del elemento en chars (bytes)</li>
+<br/>
+<li>sizeof también puede averiguar el tamaño de un array:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+char cadena[] = "Mi string de prueba";
+printf("Mi \"cadena\" tiene %d caracteres\n",
+                 sizeof(cadena)/sizeof char);
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>sizeof</h2>
+<p style="text-align: left;">Como el sizeof lo hace el compilador el lo sabe por que también maneja la declaración. Pero la variable debe haber sido declarada explicitamente como un vector:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+char string[32] = "hello, world";
+char *ptr = string;
+</code></pre>
+</p>
+<br/>
+<ul>
+	<li>sizeof (string)
+		<ul><li>Devuelve: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">32</span></li></ul>
+	</li>
+	<li>sizeof (ptr)
+		<ul>
+			<li style="font-size: 70%; font-style: italic;">Si estamos en una máquina con punteros de 4 bytes...</li>
+			<li>Devuelve: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">4</span></li>
+		</ul>
+	</li>
+</ul>
+<br/><br/>
+<a href="http://www.gnu.org/software/libc/manual/html_node/String-Length.html" style="text-align: left; font-size: 70%;">http://www.gnu.org/software/libc/manual/html_node/String-Length.html</a>
+</section>
+
+<section>
+<h2>Arreglos multidimensionales (matrices)</h2>
+<ul>
+<li>Declaración:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+{tipo-base}  {identificador}[{NumElem1}][{NumElem2}];
+</code></pre></li>
+<li>Declaración y asignación:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+tipo-base identif[M][N] = {
+         {valor0_0, valor0_1, ..., valor0_N-1},
+         {valor1_0, valor1_1, ..., valor1_N-1},
+         {valor2_0, valor2_1, ..., valor2_N-1},
+         ...,
+         {valorM-1_0, valorM-1_1, ..., valorM-1_N-1}
+};
+</code></pre></li>
+<li>Asignación:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+matriz[indice1][indice2] = valor;
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplos de declaración y uso de Matrices (I)</h3>
+<ul>
+<br/><br/>
+<li>Declaración de una matriz de 50 filas de 20 enteros:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+int matriz[50][20]; 
+       /* 50 filas x 20 columnas */
+</code></pre></li>
+<br/>
+<li>Declaración e inicialización de una matriz de 2x3:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+int matriz[2][3] = {
+            { 2, 5, 8 },
+            { 9, 1, 2 }
+            };
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplos de declaración y uso de Matrices (II)</h3>
+<ul>
+<br/><br/>
+<li>Asignando un valor a la primera posición de la segunda fila de una matriz de enteros:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+    matriz[1][0] = 50;
+</code></pre></li>
+<br/>
+<li>Imprimiendo una matriz de 100 x 50 enteros mediante ciclos for:
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+int i, j;
+for (i=0; i &lt; 100; i++)
+    for (j=0; j &lt; 50; j++)
+        printf("%d\n", matriz[i][j]);</li>
+</code></pre></li>
+</ul>
+</section>
+
+<section>
+<h1>Funciones de manejo de strings</h1>
+</section>
+
+<section>
+<h2>Librerias</h2>
+<br/>
+<ul>
+	<li>STDIO.H<ul>
+		<li style="font-family: monospace;">char *gets(char *s);</li>
+		<li style="font-family: monospace;">int puts(const char *s);</li>
+	</ul></li>
+	<br/>
+	<li>STRING.H<ul>
+		<li>strcat(), strcpy(), strlen()</li>
+		<li>strchr(), strcmp(), strcmpi(), strncmp()</li>
+		<li>strtok()</li>
+	</ul></li>
+</ul>
+</section>
+
+<section>
+<h3>size_t strlen(const char *s);</h3>
+<br/>
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(void) {
+    char *string = "Curso Informatica 1";
+    printf("%d\n", strlen(string));
+    return 0;
+}
+</code></pre>
+<br/>
+<p style="font-size: 85%; font-style: italic;"><span style="color: #4FC7CF;">size_t:</span> Es un tipo que permite representar el tamaño de cualquier objeto en bytes. <br/>Es el tipo de dato que retorna el operador sizeof y es muy usado <br/>por la librería estándar para representar tamaños y cuentas.</p>
+</section>
+
+<section>
+<h3>char *strcpy(char *dest, const char *src);</h3>
+<br/>
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(void) {
+   char string[10];
+   char *str1 = "abcdefghi";
+
+   strcpy(string, str1);
+   printf("%s\n", string);
+   return 0;
+}
+</code></pre>
+<br/>
+<p style="font-size: 85%; font-style: italic;"><span style="color: #4FC7CF;">Nota:</span> Esta función siempre asume que en destino hay suficiente lugar para copiar todos los elementos de origen. Si este no fuera el caso el programa fallará!</p>
+</section>
+
+<section>
+<h3>char *strcat(char *dest, const char *src);</h3>
+<br/>
+<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(void) {
+   char destination[25];
+   char *espacio = " ", *s1 = "Curso", *s2 = "Informatica 1";
+
+   strcpy(destination, s1);
+   strcat(destination, espacio);
+   strcat(destination, s2);
+
+   printf("%s\n", destination);
+   return 0;
+}
+</code></pre>
+<br/>
+<p style="font-size: 85%; font-style: italic;"><span style="color: #4FC7CF;">Nota:</span> Esta función siempre asume que en string1 hay suficiente lugar para copiar todos los elementos de string2. Si este no fuera el caso el programa fallará!</p>
+</section>
+
+<section>
+<h3>int strcmp(const char *s1, const char *s2);</h3>
+<h3>int strcmpi(const char *s1, const char *s2);</h3>
+<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+void main(void) {
+   char *buf1 = "aaa", *buf2 = "bbb", *buf3 = "ccc";
+   int ptr;
+   ptr = strcmp(buf2, buf1);
+   if (ptr &gt; 0)
+      printf("buffer 2 es mayor que buffer 1\n");
+   else
+      printf("buffer 2 es menor que buffer 1\n");
+   ptr = strcmp(buf2, buf3);
+   if (ptr &gt; 0)
+      printf("buffer 2 es mayor que buffer 3\n");
+   else
+      printf("buffer 2 es menor que buffer 3\n");
+}
+</code></pre>
+</section>
+
+<section>
+<h2>Ejercicios</h2>
+<h3>Realizar el estructograma y la codificación en C</h3>
+<ol>
+<li>Extraer un substring
+<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+int substring(char st_salida[], char st_entrada[], int pos, int n)
+</code></pre></li>
+<li>Función que hace preguntas
+<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+char pregunta(char texto[], char opc1[], char opc2[])
+</code></pre></li>
+</ol>
+<br/><br/>
+<ul><li>Ejemplo:<ul>
+<li>Pregunta ("Quiere estudiar hoy? ", "si", "no")</li>
+<li>Imprime "Quiere estudiar hoy? (si/no):"</li>
+<li>y retorna 's' o 'n'</li>
+</ul></li></ul></p>
+</section>
+
+<section>
+<h2>Librerías y Funciones</h2>
+<br/>
+<ul>
+<li>STDIO.H<ul style="font-size: 85%;">
+<li>Int getchar(void) &amp; int putchar(int c)</li>
+</ul>
+</li>
+<br/>
+<li>CTYPE.H<ul style="font-size: 85%;">
+<li>isalnum().  isalpha(), isascii(), iscntrl(), isdigit()</li>
+<li>islower(), isupper(), isprint(), ispunct(), isspace()</li>
+<li>tolower(), toupper(), isxdigit(), more...</li>
+</ul>
+</li>
+<br/>
+<li>STDLIB.H<ul style="font-size: 85%;">
+<li>atof() atoi() &amp; atol()</li>
+<li>itoa() &amp; ltoa()</li>
+<li>srand() &amp; rand()</li>
+</ul>
+</li>
+</ul>
+<br/>
+<a href="http://www.gnu.org/software/libc/manual/" style="text-align: left; font-size: 70%;">http://www.gnu.org/software/libc/manual/</a>
+</section>
+</section>
+
+<section>
+<section>
+<h3>Código</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<ul>
+		<li>Códigos mostrados:
+			<ul>
+				<li><a href="files/clase06/strcat.c">strcat.c</a></li>
+				<li><a href="files/clase06/strcmp.c">strcmp.c</a></li>
+				<li><a href="files/clase06/strcpy.c">strcpy.c</a></li>
+				<li><a href="files/clase06/strlen.c">strlen.c</a></li>
+			</ul>
+		</li>
+	</ul>
+	<br/>
+	<ul>
+		<li>Códigos no mostrados:
+			<ul>
+				<li><a href="files/clase06/getchar.c">getchar.c</a></li>
+				<li><a href="files/clase06/putchar.c">putchar.c</a></li>
+			</ul>
+		</li>
+	</ul>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<ul>
+		<br/><br/>
+		<li>Códigos de ejemplo usando Ncurses:
+			<ul>
+				<li><a href="files/clase06/ncurses_examples/ncurses1_helloworld.c">ncurses1_helloworld.c</a></li>
+				<li><a href="files/clase06/ncurses_examples/ncurses2_printw.c">ncurses2_printw.c</a></li>
+				<li><a href="files/clase06/ncurses_examples/ncurses3_scanw.c">ncurses3_scanw.c</a></li>
+			</ul>
+		</li>
+	</ul>
+</ul>
+</section>
+
+<section>
+<h3>Conio.h & ncurses</h3>
+<ul>
+	<li>CONIO.H (BC-DOS)
+<pre style="width: 600px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 600px;" class="cpp">
+/* Con y sin eco */
+int getch(void) & int getche(void)
+
+/* Solo implementado en CONIO.H */
+int putch(int ch)
+</code></pre>
+	</li>
+	<br/>
+	<li>CURSES.H (Linux)
+		<ul>
+			<li>Instalando y copilando:
+<pre style="width: 800px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 800px;" class="bash">
+$ sudo apt-get install libncurses5-dev
+$ gcc -o ncurses -lncurses ncurses1_helloworld.c
+</code></pre>
+			</li>
+			<li><a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/">NCURSES Programming HOWTO</a></li>
+		</ul>
+	</li>
+</ul>
+</section>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
