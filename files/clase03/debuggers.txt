@@ -1,0 +1,34 @@
+Miré varios de:
+	https://sourceware.org/gdb/wiki/GDB%20Front%20Ends
+No miré:
+	http://www.kdbg.org/
+	https://projects.gnome.org/nemiver/
+
+------------------
+Ni siquiera me gusto
+------------------
+
+ddd
+	http://www.gnu.org/software/ddd/
+
+------------------
+Solo safan...
+------------------
+
+gcc -ogetline getline.c -g -ggdb -Wall
+
+gdb -tui getline
+	gdbtui
+	https://sourceware.org/gdb/onlinedocs/gdb/TUI.html
+
+cgdb getline
+
+------------------
+QT Creator
+------------------
+Problemas si commandline... Solo funciona bien con QT y GUI
+
+------------------
+Eclipse CDT
+------------------
+Ganador por lejos!!

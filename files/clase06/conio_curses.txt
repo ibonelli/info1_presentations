@@ -1,0 +1,22 @@
+<Dropbox>/Info1/Material_Referencia/NCURSES.html
+
+------------------------
+
+http://stackoverflow.com/questions/8792317/why-cant-i-find-conio-h-on-linux
+
+conio.h is a C header file used in old MS-DOS compilers to create text user interfaces. Compilers that targeted non-DOS operating systems, such as Linux, Win32 and OS/2, provided different implementations of these functions.
+
+The #include <curses.h> will give you almost all the functionalities that was provided in conio.h
+
+For getch() class of functions, you can try this:
+	http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/scanw.html#GETCHCLASS
+
+------------------------
+
+The original conio.h was implemented by Borland, so its not a part of the C Standard Library nor is defined by POSIX.
+
+But here is an implementation for Linux that uses ncurses to do the job:
+	http://sourceforge.net/projects/linux-conioh/
+
+A popular Linux library which has similar functionality would be ncurses:
+	http://en.wikipedia.org/wiki/Ncurses

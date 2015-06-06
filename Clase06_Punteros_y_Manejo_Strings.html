@@ -574,9 +574,70 @@ $ gcc -o ncurses ncurses1_helloworld.c -lncurses
 </code></pre>
 			</li>
 			<li><a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/">NCURSES Programming HOWTO</a></li>
+			<li><a href="files/clase06/conio_curses.txt">Notas sobre conio.h y NCURSES</a></li>
 		</ul>
 	</li>
 </ul>
+</section>
+</section>
+
+<section>
+<section>
+	<h2>Clase practica</h2>
+</section>
+<section>
+	<h2>Ejercicios:</h2>
+	<ul>
+		<li><b>Extraer un substring:</b> De la clase anterior...</li>
+		<li><b>Organizar vector:</b> Leer un conjunto de 100 valores a razon de uno por vez. Formar el vector PAR con los valores pares del conjunto y el vector POS con los valores positivos. Imprimir ambos vectores. Si alguno de ellos o ambos no contienen ningun elemento, informar con una leyenda.</li>
+	</ul>
+</section>
+<section>
+<h2>Scanf() y el buffer stdin:</h2>
+<ul>
+	<li>scanf("%c"); scanf("%s");</li>
+	<li>¿Como evitamos el buffer?</li>
+	<ul>
+		<li>fflush(stdin); /* no suele andar */</li>
+		<li>scanf(" %c"); /* mejor para Linux */</li>
+		<li>scanf("%3.2f"); scanf("%.2f);</li>
+		<br/>
+		<li>O usamos funciones especificas para string y chars de stdio.h:</li>
+		<ul>
+			<li>int getchar(void);</li>
+			<li>char *gets(char *s);</li>
+			<li>int putchar(int c);</li>
+			<li>int puts(const char *s);</li>
+		</ul>
+	</ul>
+</ul>
+</section>
+<section>
+<h2>Ejercicio 4.27</h2>
+<ul>
+	<li>IP: 4 numeros de 0 a 255 separados por puntos.</li>
+	<ul>
+		<li>Primer llamado: strtok(str,'.');</li>
+		<li>Siguientes llamados: strtok(NULL,'.');</li>
+	</ul>
+	<li>Email: 2 string de caracteres separado por '@'</li>
+	<ul>
+		<li>Los strings pueden tener numeros y caracteres, usar isalphanum()</li>
+		<li>Ambos string pueden tener '.' , '_' o '-'</li>
+	</ul>
+	<li>CC: Ver <a href="http://es.wikipedia.org/wiki/Algoritmo_de_Luhn">algoritmo de Luhn</a></li>
+</ul>
+</section>
+<section>
+<h2>Mas sobre ncurses (y kbhit):</h2>
+<ul>
+	<li>Implementando getch & getche con termios.h: <a href="files/clase06/getch_kbhit/getch_termios.c">getch_termios.c</a></li>
+	<li>Usando kbhit() en BC DOS o Windows: <a href="files/clase06/getch_kbhit/kbhit_win.c">kbhit_win.c</a></li>
+	<li>Implementando kbhit() de conio.h usando ncurses.h: <a href="files/clase06/getch_kbhit/kbhit_ncurses.c">kbhit_ncurses.c</a></li>
+	<li>Implementando kbhit() usando termios.h: <a href="files/clase06/getch_kbhit/kbhit_termios.c">kbhit_termios.c</a></li>
+</ul>
+<br/><br/>
+<a href="files/clase06/getch_kbhit/ncurses.html" style="text-align: left; font-size: 70%;">Mas ejemplos y informacion sobre como usar ncurses.</a>
 </section>
 </section>
 
