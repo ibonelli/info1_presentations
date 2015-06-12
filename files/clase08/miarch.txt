@@ -1,0 +1,14 @@
+rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,
+proc /proc proc rw,nosuid,nodev,noexec,r
+udev /dev devtmpfs rw,relatime,size=1024
+devpts /dev/pts devpts rw,nosuid,noexec,
+tmpfs /run tmpfs rw,nosuid,noexec,relati
+/dev/disk/by-uuid/a3080070-345e-4354-ba6
+tmpfs /run/lock tmpfs rw,nosuid,nodev,no
+tmpfs /run/shm tmpfs rw,nosuid,nodev,noe
+fusectl /sys/fs/fuse/connections fusectl
+/dev/sda6 /home ext4 rw,relatime,user_xa
+rpc_pipefs /run/rpc_pipefs rpc_pipefs rw
+binfmt_misc /proc/sys/fs/binfmt_misc bin
+gvfs-fuse-daemon /home/ignacio/.gvfs fus

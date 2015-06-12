@@ -1,0 +1,14 @@
+rootfs / rootfs 
+sysfs /sys sysfs
+proc /proc proc 
+udev /dev devtmp
+devpts /dev/pts 
+tmpfs /run tmpfs
+/dev/disk/by-uui
+tmpfs /run/lock 
+tmpfs /run/shm t
+fusectl /sys/fs/
+/dev/sda6 /home 
+rpc_pipefs /run/
+binfmt_misc /pro
+gvfs-fuse-daemon

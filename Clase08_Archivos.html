@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Linux</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+<h1>UT11: Manejo de archivos en C</h1>
+</section>
+
+<section>
+<h2>Medios de Almacenamiento</h2>
+<h3>Tarjetas perforadas, Cintas</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/><br/><br/>
+	<img src="files/clase08/10_Tarjetas.jpg"/>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<img src="files/clase08/11_Cintas.jpg"/>
+</ul>
+</section>
+
+<section>
+<h2>Medios de Almacenamiento</h2>
+<h3>Discos Magneticos (Flexibles/Rigidos)</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<img src="files/clase08/21_FDD.jpg"/>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<img src="files/clase08/22_HDD.jpg"/>
+</ul>
+</section>
+
+<section>
+<h2>Medios de Almacenamiento</h2>
+<h3>Discos Opticos (CD/DVD/BlueRay), <br/>y arreglos de discos</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/>
+	<img style="display: block; margin-left: auto; margin-right: auto;" src="files/clase08/25_CD-DVD.jpg"/>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<img src="files/clase08/26_Storage.jpg"/>
+</ul>
+</section>
+
+<section>
+<h2>Medios de Almacenamiento</h2>
+<h3>Memorias Flash (Pendrives, SDcard, MicroSD, etc...)</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<img src="files/clase08/31_Pendrive.png"/>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<img src="files/clase08/32_microSD.jpg"/>
+</ul>
+</section>
+
+<section>
+<h2>Formato Físico</h2>
+	<img src="files/clase08/41_FDD_format.jpg"/>
+</section>
+
+<section>
+<h2>Sistema de Archivos</h2>
+<a href="files/clase08/42_SistemaArchivo.png">
+	<img src="files/clase08/42_SistemaArchivo_small.png"/>
+</a>
+</section>
+
+<section>
+<h1>Archivos</h1>
+<ul>
+<li>Persistencia: Guardar datos mientras la máquina está apagada. La memoria solo mantiene los datos con energía.</li>
+<li>Estructura de disco, directorios y entradas de archivos:<ul>
+<li>Particiones</li>
+<li>Sistemas de archivos (FAT, FAT32, NTFS, ext2, ext4, etc...)</li>
+</ul>
+</li>
+<li>Nodos:<ul>
+<li>Directorios</li>
+<li>Links Simbólicos (ln)</li>
+<li>Archivos</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Archivos / Serializacion (I)</h2>
+<ul>
+<li>A guardar archivos en disco también se le dice serializar los datos.</li>
+<li>Se le dice así por que tomaremos una estructura de datos en memoria con una forma particular y deberemos transformarla en datos que podemos guardar en "serie".</li>
+<li>Para poder guardarlos vamos a tener que poner un byte "atrás" del otro para  guardarlos en "linea". También podemos verlo como una conversión paralelo a serie. Los datos se encuentran en "paralelo" en memoria y los "serializaremos" en disco.</li>
+</ul>
+</section><section>
+<h2>Archivos / Serializacion (II)</h2>
+<ul>
+<li>Esto también aplica a cuando enviemos los datos por una comunicación de datos. Esta comunicación podrá por ejemplo ser dentro de una red local, internet u otro tipo de red.</li>
+<li>Lo importante de este proceso de "serialización" es respetar el orden en que se guardan los datos. Si de un entero de dos bytes guardamos primero el byte mas significativo y luego el menos significativo deberemos restaurarlos en el mismo orden.</li>
+</ul>
+</section>
+
+<section>
+<h2>Flujos / Streams</h2>
+<br/>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top; font-size: 80%;">
+	<li>Concepto de flujo de datos:<ul>
+		<li>Serialización de datos</li>
+		</ul>
+	</li>
+	<br/>
+	<li>Tipos de stream conocidos:<ul>
+		<li><b>stdin</b>: Entrada estándar<ul>
+			<li>teclado</li></ul>
+		<li><b>stdout</b>: Salida estándar<ul>
+			<li>monitor</li></ul>
+		<li><b>stderr</b>: Error estándar<ul>
+			<li>impresora</li></ul>
+		</ul>
+	</li>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/><br/>
+	<img src="files/clase08/51_Flujos.jpg"/>
+</ul>
+</section>
+
+<section>
+<h2>Funciones de archivos (I)</h2>
+<ul>
+<li>Versiones Unix<ul>
+<li>Funciones: <b style="color: lightblue;">open, read, write, lseek y fcntl</b></li>
+</ul>
+</li>
+<li>Documentación con: man 2 {función}<ul>
+<li>Desventajas:<ul>
+<li>No usan buffer y esto hace mas lenta a las funciones de lectura y escritura.</li>
+<li>Las funciones no son tan buenas manejando el fin de reglón (esto puede complicar su uso en plataformas no Unix).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Funciones de archivos (II)</h2>
+<ul>
+<li>Documentación con: man 2 {función}<ul>
+<li>Desventajas (sigue):<ul>
+<li>No se puede usar las funciones con formato:<ul>
+	<li style="margin-left: 100px;">fprintf() & fscanf()</li></ul>
+</li>
+<li>Las funciones no son ANSI C</li>
+</ul>
+</li>
+<li>Ventajas:<ul>
+<li>No usan buffer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Librería ANSI C stdio.h<ul>
+<li>Mejor soportada, implementada, recomendada. Usa buffers lo que además la hace mas rápida.</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Librería stdio.h</h2>
+<ul>
+<li>La estructura FILE<ul>
+<li>Es una estructura que contiene información que necesita C para poder manejar los archivos.</li>
+<li>Las funciones de archivos usan este "descriptor de archivo" para poder hacer referencia a flujos/streams.</li>
+</ul>
+</li>
+<br/>
+<li>Buffers<ul>
+<li>Normalmente todo acceso a disco se hace usando buffers de memoria. Esto hace el acceso al disco mucho mas rápido.</li>
+<li>La librería estándar incluye implementaciones usando buffers para la entrada y la salida.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Funciones de la librería stdio.h</h2>
+<ul>
+<li>Apertura / creación, y cierre de streams buffereados:<ul>
+	<li style="margin-left: 100px;">fopen() y fclose()</li></ul></li>
+<li>Entrada salida binaria:<ul>
+	<li style="margin-left: 100px;">fread() y fwrite()</li></ul></li>
+<li>Funciones de entrada/salida de a un carácter o de a una línea:<ul>
+	<li style="margin-left: 100px;">fgetc(), fgets(), fputc() y fputs()</li></ul></li>
+<li>Entrada y salida formateada:<ul>
+	<li style="margin-left: 100px;">fprintf() y fscanf()</li></ul></li>
+<li>Posicionamiento en un stream:<ul>
+	<li style="margin-left: 100px;">feof(), ftell(), rewind(), fseek(), fgetpos() y fsetpos()</li></ul></li>
+</ul>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">FILE *fopen(const char *filename, const char *mode);</h2>
+<br/>
+<ul>
+<li>Abriendo Archivos<ul>
+<li>Antes de leer o escribir debemos abrir los archivos y conseguir el descriptor del archivo a usar.</li>
+</ul>
+</li>
+<li>Retorna:<ul>
+<li>Si exitoso el puntero al descriptor del nuevo archivo.</li>
+<li>Si hay error un puntero nulo</li>
+</ul>
+</li>
+<li>Modos de apertura:<ul>
+<li><b style="color: lightblue;">r</b>: Solo lectura</li>
+<li><b style="color: lightblue;">w</b>: Solo escritura</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">FILE *fopen(const char *filename, const char *mode);</h2>
+<br/>
+<ul>
+<li><b style="color: lightblue;">a</b>: Escritura al final del archivo o creado para escritura si no existia</li>
+<li><b style="color: lightblue;">r+</b>: Abre un archivo para ser actualizado (lectura y escritura)</li>
+<li><b style="color: lightblue;">w+</b>: Abre un archivo para lectura y escritura, pero si existia el archivo lo "pisa" (borra)</li>
+<li><b style="color: lightblue;">a+</b>: Similar al modo "a", pero desplaza el puntero hasta el final del archivo</li>
+</ul>
+</li>
+<br/><br/>
+<ul style="font-size: 90%;"><b>Modo Binario o Texto</b>:
+<li>Si se agrega una "b" al final (p/ej rb) C los interpreta como binarios.</li>
+<li>Esto solo tiene sentido si la aplicación debe manejar archivos de windows y unix que tienen diferencias de formato en modo texto que C manejará por defecto e ignorará si usamos el modificador b.</li>
+</ul>
+</ul>
+</section>
+
+<section>
+<h2>int fclose(FILE *stream);</h2>
+<h2>int feof(FILE *stream);</h2>
+<ul>
+<li>fclose() - Cerrando un archivo<ul>
+<li>Si es exitoso retorna 0, si no EOF.</li>
+<li>Al cierre se liberan los buffer y escribe todo en disco.</li>
+</ul>
+</li>
+<li>feof() - ¿Estamos en el fin del archivo?<ul>
+<li>Retorna algo distinto de 0 (verdadero) si el puntero dentro del archivo llegó al final.</li>
+<li>Retorna 0 si el archivo todavía tiene datos.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>size_t fread(void <em>ptr, size_t size, size_t n, FILE </em>stream);</h2>
+<h2>size_t fwrite(const void <em>ptr, size_t size, size_t n, FILE </em>stream);</h2>
+<ul>
+<li>Los argumentos:<ul>
+<li>ptr: Puntero al bloque de datos a leer o escribir (¿void *? =&gt; ¡Casting!)</li>
+<li>size: Tamaño de cada elemento a leer o escribir en bytes</li>
+<li>n: Cantidad de elementos a leer</li>
+<li>stream: Descriptor del archivo a leer o escribir</li>
+<li>size_t: En este caso es la cantidad de elementos</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>size_t fread(void <em>ptr, size_t size, size_t n, FILE </em>stream);</h2>
+<h2>size_t fwrite(const void <em>ptr, size_t size, size_t n, FILE</em>stream);</h2>
+<ul>
+<li>fread(): Leyendo datos de un archivo<ul>
+<li>Retorna:<ul>
+<li>Si es exitoso: La cantidad de elementos leídos</li>
+<li>Si hay error EOF o 0 (elementos leídos)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fwrite(): Escribiendo datos a un archivo<ul>
+<li>Retorna:<ul>
+<li>Si es exitoso: La cantidad de elementos que pudo escribir</li>
+<li>En error retorna un número mas bajo del solicitado o cero.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>int fgetc(FILE *stream);</h2>
+<h2>int fputc(int c, FILE *stream);</h2>
+<h2>char <em>fgets(char </em>s, int size, FILE *stream);</h2>
+<h2>int fputs(const char <em>s, FILE </em>stream);</h2>
+<ul>
+<li>fgetc()/fputc():<ul>
+<li>Si exitoso retorna el carácter leído o escrito convertido (casteado) a un entero.</li>
+<li>Si falla o llega al final del archivo retornará EOF</li>
+</ul>
+</li>
+<li>fgets():<ul>
+<li>Exitoso: El puntero al string s</li>
+<li>Error o fin del archivo: NULL</li>
+</ul>
+</li>
+<li>fputs():<ul>
+<li>Si fue exitoso retorna un número positivo</li>
+<li>Si falla retornará EOF</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>int fscanf (FILE <em>stream, const char </em>format [, address, ...]);</h2>
+<h2>int fprintf (FILE <em>stream, const char </em>format [, argument, ...]);</h2>
+<ul>
+<li>Descripción:<ul>
+<li>Son las funciones de entrada y salida formateada, pero se pueden aplicar directamente a archivos</li>
+</ul>
+</li>
+<li>fscanf() retorna:<ul>
+<li>Si exitoso el numero de campos de entrada que pudo tomar, convertir y guardar.</li>
+<li>Si retorna 0 es por que ningún campo pudo ser guardado</li>
+<li>Si se llegó al final del archivo retornará EOF</li>
+</ul>
+</li>
+<li>fprintf() retorna:<ul>
+<li>Si exitoso en numero de bytes que pudo mostrar</li>
+<li>Si hay error retornará EOF</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>long ftell(FILE *stream);</h2>
+<h2>void rewind(FILE *stream);</h2>
+<ul>
+<li>ftell():<ul>
+<li>Retorna la posición actual en el archivo</li>
+<li>Si el archivo es binario se calcula el desplazamiento en bytes desde el principio del archivo</li>
+<li>El valor retornado por ftell() puede ser usado luego en llamados a fseek().</li>
+<li>Retorna:</li>
+</ul>
+</li>
+<li>Si exitoso la posición dentro del archivo</li>
+<li>Si hubo un error retorna un -1L (valor negativo)</li>
+</ul>
+</section><section>
+<h2>long ftell(FILE *stream);</h2>
+<h2>void rewind(FILE *stream);</h2>
+<ul>
+<li>rewind():<ul>
+<li>Al terminar rewind() el archivo comenzará a leer o escribir al principio del archivo.</li>
+<li>Es el equivalente de fseek(stream, 0L, SEEK_SET), pero también limpia los flag de EOF y error. fseek() solo limpia el flag de EOF.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>int fseek(FILE *stream, long offset, int whence);</h2>
+<ul>
+<li>Mueve la posición dentro del archivo (modificando el descriptor de archivo).</li>
+<li>Argumentos<ul>
+<li>stream: Descriptor del archivo al cual le queremos modificar la posición de lectura/escritura.</li>
+<li>offset: Desplazamiento. Diferencia en bytes hacia la nueva posición. Si queremos saber donde ir podemos averiguarlo usando ftell() y movernos desde SEEK_SET.</li>
+<li>whence: Uno de las tres posiciones (SEEK_xxx) desde donde desplazarnos definidas (0, 1, or 2)</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>int fseek(FILE *stream, long offset, int whence);</h2>
+<ul>
+<li>Retorna:<ul>
+<li>0 si el movimiento se pudo hacer</li>
+<li>Un valor distinto de 0</li>
+</ul>
+</li>
+<li>SEEK_xxx (define donde se comienza a moverse)<ul>
+<li>SEEK_SET (0) comienza al principio del archivo</li>
+<li>SEEK_CUR (1) comienza a moverse desde la posición actual</li>
+<li>SEEK_END (2) comienza el movimiento desde el final del archivo</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>int fgetpos(FILE <em>stream, fpos_t </em>pos);</h2>
+<h2>int fsetpos(FILE <em>stream, fpos_t </em>pos);</h2>
+<ul>
+<li>Las funciones fgetpos() y fsetpos() trabajan en conjunto y permiten moverse por el archivo.</li>
+<li>Son alternativas al uso de ftell() y fseek() (cuando usamos "whence" como SEEK_SET).</li>
+<li>
+<p>Uso:</p>
+<ul>
+<li>Con fgetpos() obtendremos la posición actual</li>
+<li>Con fsetpos() la modificaremos</li>
+</ul>
+<p>fpos_t: Tipo de dato dependiente de la implementación del compilador
+<em> typedef unsigned long fpos_t;       // DJGPP
+</em> typedef long fpos_t;                // Borland &amp; Dev-C++
+Como tampoco está definido de manera cierta en Unix lo mejor es solo usar fpos_t entre ambas funciones ya que no se puede asegurar la portabilidad del dato.</p>
+</li>
+</ul>
+</section><section>
+<h1>Argumentos del main (I)</h1>
+<ul>
+<li>La función main:<ul>
+<li>Sin parámetros:
+void main(void)</li>
+<li>Usando argumentos:
+void main(int argc, char *argv[])</li>
+<li>Usando argumentos y las variables de entorno:
+void main(int argc, char <em>argv[], char </em>envp[])</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1>Argumentos del main (II)</h1>
+<ul>
+<li>Argumentos:<ul>
+<li>argc: Cantidad de argumentos pasados incluyendo el nombre del ejecutable</li>
+<li>argv: Puntero a un arreglo de punteros con un strings en cada posición. Por cada espacio encontrado se genera un string.</li>
+<li>envp: Variables del sistema operativo también divididas en strings.</li>
+</ul>
+</li>
+</ul>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
