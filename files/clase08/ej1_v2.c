@@ -14,6 +14,7 @@ int main()
 			//fputc(x,file2);
 			fprintf(file2,"%x ",(char) x);
 		}
+
 	fclose( file );
 	fclose( file2 );
 }

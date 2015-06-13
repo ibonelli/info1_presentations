@@ -11,5 +11,6 @@ int main()
 	while (( x = fgetc(file)) != EOF ) {
 			printf( "%c", x );
 		}
+
 	fclose( file );
 }

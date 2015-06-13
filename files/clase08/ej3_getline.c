@@ -117,12 +117,12 @@ int main(int argc, char **argv)
       fgets(str,1023,fp);
       if(!feof(fp)) {
         if(ini==i)
-	  printf("%s",str);
+          printf("%s",str);
         else
-    	  if(range!=0 && range!=-1)
+          if(range!=0 && range!=-1)
             if( (i>ini) && (i<=range) )
-        	printf("%s",str);
-	}
+              printf("%s",str);
+        }
       i++;
       }
     fclose(fp);

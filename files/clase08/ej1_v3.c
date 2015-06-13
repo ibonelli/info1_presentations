@@ -19,6 +19,7 @@ int main()
 			fprintf(file2,"%x ",c);
 		}
 	}
+
 	fclose( file );
 	fclose( file2 );
 }

@@ -48,6 +48,7 @@
 			<div class="slides">
 
 <section>
+<section>
 <h1>UT11: Manejo de archivos en C</h1>
 </section>
 
@@ -222,7 +223,9 @@
 </ul>
 </li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Funciones de la librería stdio.h</h2>
 <ul>
 <li>Apertura / creación, y cierre de streams buffereados:<ul>
@@ -240,6 +243,7 @@
 
 <section>
 <h2 style="font-family: monospace; font-size: 90%;">FILE *fopen(const char *filename, const char *mode);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
 <br/>
 <ul>
 <li>Abriendo Archivos<ul>
@@ -261,6 +265,7 @@
 
 <section>
 <h2 style="font-family: monospace; font-size: 90%;">FILE *fopen(const char *filename, const char *mode);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(II)</h3>
 <br/>
 <ul>
 <li><b style="color: lightblue;">a</b>: Escritura al final del archivo o creado para escritura si no existia</li>
@@ -278,26 +283,164 @@
 </section>
 
 <section>
-<h2>int fclose(FILE *stream);</h2>
-<h2>int feof(FILE *stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">int fclose(FILE *stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">int feof(FILE *stream);</h2>
+<br/>
 <ul>
 <li>fclose() - Cerrando un archivo<ul>
 <li>Si es exitoso retorna 0, si no EOF.</li>
 <li>Al cierre se liberan los buffer y escribe todo en disco.</li>
 </ul>
 </li>
+<br/>
 <li>feof() - ¿Estamos en el fin del archivo?<ul>
 <li>Retorna algo distinto de 0 (verdadero) si el puntero dentro del archivo llegó al final.</li>
 <li>Retorna 0 si el archivo todavía tiene datos.</li>
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>size_t fread(void <em>ptr, size_t size, size_t n, FILE </em>stream);</h2>
-<h2>size_t fwrite(const void <em>ptr, size_t size, size_t n, FILE </em>stream);</h2>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">int fgetc(FILE *stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">int fputc(int c, FILE *stream);</h2>
+<br/>
+<ul>
+<li>fgetc()/fputc():<ul>
+<li>Si exitoso retorna el carácter leído o escrito convertido (casteado) a un entero.</li>
+<li>Si falla o llega al final del archivo retornará EOF</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Ejemplo: <a href="files/clase08/ej1_v1.c">ej1_v1.c</a></h2>
+<br/>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *file = fopen("miarch.txt", "r");
+
+    int x;
+    /* Lee un caracter en cada pasada desde el archivo terminando  */
+    /* cuando encuentra EOF.                                       */
+    while (( x = fgetc(file)) != EOF ) {
+            printf( "%c", x );
+        }
+
+    fclose( file );
+}
+</code></pre>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">int fscanf (FILE *stream, <br/>const char *format [, address, ...]);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">int fprintf (FILE *stream, <br/>const char *format [, argument, ...]);</h2>
+<ul>
+<li>Descripción:<ul>
+<li>Son las funciones de entrada y salida formateada, pero se pueden aplicar directamente a archivos</li>
+</ul>
+</li>
+<li><b>fscanf()</b> retorna:<ul>
+<li>Si exitoso el numero de campos de entrada que pudo tomar, convertir y guardar.</li>
+<li>Si retorna 0 es por que ningún campo pudo ser guardado</li>
+<li>Si se llegó al final del archivo retornará EOF</li>
+</ul>
+</li>
+<li><b>fprintf()</b> retorna:<ul>
+<li>Si exitoso en numero de bytes que pudo mostrar</li>
+<li>Si hay error retornará EOF</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Ejemplo: <a href="files/clase08/ej1_v2.c">ej1_v2.c</a></h2>
+<br/>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *file = fopen("miarch.txt", "r");
+    FILE *file2 = fopen("miarchout.txt", "w");
+
+    int x;
+    while (( x = fgetc(file)) != EOF ) {
+        //printf( "%c", x );
+        //fputc(x,file2);
+        fprintf(file2,"%x ",(char) x);
+        }
+
+    fclose( file );
+    fclose( file2 );
+}
+</code></pre>
+</section>
+
+<section>
+<h2>Otro ejemplo que <br/>imprime en hexa: <a href="files/clase08/ej1_v3.c">ej1_v3.c</a></h2>
+<br/>
+<ul>
+<li>Archivo para los primeros dos ejercicios: <a href="files/clase08/miarch.txt">miarch.txt</a></li>
+<li>Archivo para este ultimo ejercicio: <a href="files/clase08/miarch2.txt">miarch2.txt</a></li>
+</ul>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">char *fgets(char *s, int size, FILE *stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">int fputs(const char *s, FILE *stream);</h2>
+<br/>
+<ul>
+<li>fgets():<ul>
+<li>Exitoso: El puntero al string s</li>
+<li>Error o fin del archivo: NULL</li>
+</ul>
+</li>
+<br/>
+<li>fputs():<ul>
+<li>Si fue exitoso retorna un número positivo</li>
+<li>Si falla retornará EOF</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Ejemplo: <a href="files/clase08/ej1_v2.c">ej1_v2.c</a></h2>
+<br/>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+   FILE *fp;
+   char str[60];
+   fp = fopen("file.txt" , "r");
+   if(fp == NULL) {
+      perror("Error opening file");
+      return(-1);
+   }
+   if( fgets (str, 60, fp)!=NULL ) {
+      puts(str);
+   }
+   fclose(fp);
+   return(0);
+}
+</code></pre>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">size_t fread(void *ptr, size_t size, size_t n, <br/>FILE *stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">size_t fwrite(const void *ptr, size_t size, <br/>size_t n, FILE *stream);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
 <ul>
 <li>Los argumentos:<ul>
-<li>ptr: Puntero al bloque de datos a leer o escribir (¿void *? =&gt; ¡Casting!)</li>
+<li>ptr: Puntero al bloque de datos a leer o escribir <br/><span style="font-size:80%; margin-left:100px;">(Recordar que "void *" es... ¡Casting!)</span></li>
 <li>size: Tamaño de cada elemento a leer o escribir en bytes</li>
 <li>n: Cantidad de elementos a leer</li>
 <li>stream: Descriptor del archivo a leer o escribir</li>
@@ -306,8 +449,10 @@
 </li>
 </ul>
 </section><section>
-<h2>size_t fread(void <em>ptr, size_t size, size_t n, FILE </em>stream);</h2>
-<h2>size_t fwrite(const void <em>ptr, size_t size, size_t n, FILE</em>stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">size_t fread(void *ptr, size_t size, size_t n, <br/>FILE *stream);</h2>
+<h2 style="font-family: monospace; font-size: 90%;">size_t fwrite(const void *ptr, size_t size, <br/>size_t n, FILE *stream);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(II)</h3>
+<br/>
 <ul>
 <li>fread(): Leyendo datos de un archivo<ul>
 <li>Retorna:<ul>
@@ -317,6 +462,7 @@
 </li>
 </ul>
 </li>
+<br/>
 <li>fwrite(): Escribiendo datos a un archivo<ul>
 <li>Retorna:<ul>
 <li>Si es exitoso: La cantidad de elementos que pudo escribir</li>
@@ -326,51 +472,11 @@
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>int fgetc(FILE *stream);</h2>
-<h2>int fputc(int c, FILE *stream);</h2>
-<h2>char <em>fgets(char </em>s, int size, FILE *stream);</h2>
-<h2>int fputs(const char <em>s, FILE </em>stream);</h2>
-<ul>
-<li>fgetc()/fputc():<ul>
-<li>Si exitoso retorna el carácter leído o escrito convertido (casteado) a un entero.</li>
-<li>Si falla o llega al final del archivo retornará EOF</li>
-</ul>
-</li>
-<li>fgets():<ul>
-<li>Exitoso: El puntero al string s</li>
-<li>Error o fin del archivo: NULL</li>
-</ul>
-</li>
-<li>fputs():<ul>
-<li>Si fue exitoso retorna un número positivo</li>
-<li>Si falla retornará EOF</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2>int fscanf (FILE <em>stream, const char </em>format [, address, ...]);</h2>
-<h2>int fprintf (FILE <em>stream, const char </em>format [, argument, ...]);</h2>
-<ul>
-<li>Descripción:<ul>
-<li>Son las funciones de entrada y salida formateada, pero se pueden aplicar directamente a archivos</li>
-</ul>
-</li>
-<li>fscanf() retorna:<ul>
-<li>Si exitoso el numero de campos de entrada que pudo tomar, convertir y guardar.</li>
-<li>Si retorna 0 es por que ningún campo pudo ser guardado</li>
-<li>Si se llegó al final del archivo retornará EOF</li>
-</ul>
-</li>
-<li>fprintf() retorna:<ul>
-<li>Si exitoso en numero de bytes que pudo mostrar</li>
-<li>Si hay error retornará EOF</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2>long ftell(FILE *stream);</h2>
-<h2>void rewind(FILE *stream);</h2>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">long ftell(FILE *stream);</h2>
+<br/>
 <ul>
 <li>ftell():<ul>
 <li>Retorna la posición actual en el archivo</li>
@@ -382,9 +488,11 @@
 <li>Si exitoso la posición dentro del archivo</li>
 <li>Si hubo un error retorna un -1L (valor negativo)</li>
 </ul>
-</section><section>
-<h2>long ftell(FILE *stream);</h2>
-<h2>void rewind(FILE *stream);</h2>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">void rewind(FILE *stream);</h2>
+<br/>
 <ul>
 <li>rewind():<ul>
 <li>Al terminar rewind() el archivo comenzará a leer o escribir al principio del archivo.</li>
@@ -392,8 +500,12 @@
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>int fseek(FILE *stream, long offset, int whence);</h2>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">int fseek(FILE *stream, long offset, int whence);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
+<br/>
 <ul>
 <li>Mueve la posición dentro del archivo (modificando el descriptor de archivo).</li>
 <li>Argumentos<ul>
@@ -403,8 +515,12 @@
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>int fseek(FILE *stream, long offset, int whence);</h2>
+</section>
+
+<section>
+<h2 style="font-family: monospace; font-size: 90%;">int fseek(FILE *stream, long offset, int whence);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(II)</h3>
+<br/>
 <ul>
 <li>Retorna:<ul>
 <li>0 si el movimiento se pudo hacer</li>
@@ -418,47 +534,79 @@
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>int fgetpos(FILE <em>stream, fpos_t </em>pos);</h2>
-<h2>int fsetpos(FILE <em>stream, fpos_t </em>pos);</h2>
+</section>
+
+<section>
+<h2 style="font-family:monospace; font-size:90%;">int fgetpos(FILE *stream, fpos_t *pos);</h2>
+<h2 style="font-family:monospace; font-size:90%;">int fsetpos(FILE *stream, fpos_t *pos);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
+<br/>
 <ul>
-<li>Las funciones fgetpos() y fsetpos() trabajan en conjunto y permiten moverse por el archivo.</li>
-<li>Son alternativas al uso de ftell() y fseek() (cuando usamos "whence" como SEEK_SET).</li>
-<li>
-<p>Uso:</p>
-<ul>
-<li>Con fgetpos() obtendremos la posición actual</li>
-<li>Con fsetpos() la modificaremos</li>
+	<li>Las funciones fgetpos() y fsetpos() trabajan en conjunto y permiten moverse por el archivo.</li>
+	<li>Son alternativas al uso de ftell() y fseek() (cuando usamos "whence" como SEEK_SET).</li>
+	<li>
+		<p>Uso:</p>
+		<ul>
+			<li>Con fgetpos() obtendremos la posición actual</li>
+			<li>Con fsetpos() la modificaremos</li>
+		</ul>
+	</li>
 </ul>
-<p>fpos_t: Tipo de dato dependiente de la implementación del compilador
-<em> typedef unsigned long fpos_t;       // DJGPP
-</em> typedef long fpos_t;                // Borland &amp; Dev-C++
-Como tampoco está definido de manera cierta en Unix lo mejor es solo usar fpos_t entre ambas funciones ya que no se puede asegurar la portabilidad del dato.</p>
-</li>
+</section>
+
+<section>
+<h2 style="font-family:monospace; font-size:90%;">int fgetpos(FILE *stream, fpos_t *pos);</h2>
+<h2 style="font-family:monospace; font-size:90%;">int fsetpos(FILE *stream, fpos_t *pos);</h2>
+<h3 style="font-family: monospace; font-size: 90%;">(II)</h3>
+<br/>
+<ul><b>fpos_t:</b> Tipo de dato dependiente de la implementación del compilador
+<li style="margin-left:100px;"><span style="font-style: italic; font-size:80%;">DJGPP</span>: <span style="font-family:monospace; font-size:90%;">typedef unsigned long fpos_t;</span></li>
+<li style="margin-left:100px;"><span style="font-style: italic; font-size:80%;">Borland &amp; Dev-C++</span>: <span style="font-family:monospace; font-size:90%;">typedef long fpos_t;</span></li>
+<li style="margin-left:100px;">No está definido de manera cierta en Unix</li>
 </ul>
-</section><section>
-<h1>Argumentos del main (I)</h1>
+<br/><br/>
+<p style="font-size: 90%;">Lo mejor es solo usar fpos_t entre ambas funciones, ya que no se puede asegurar la portabilidad del dato.</p>
+</section>
+</section>
+
+<section data-background="#007777">
+<section>
+<h1>Argumentos del main</h1>
+</section>
+
+<section>
+<h2>Argumentos del main (I)</h2>
+<br/>
 <ul>
 <li>La función main:<ul>
 <li>Sin parámetros:
 void main(void)</li>
 <li>Usando argumentos:
 void main(int argc, char *argv[])</li>
-<li>Usando argumentos y las variables de entorno:
-void main(int argc, char <em>argv[], char </em>envp[])</li>
+<li>Usando argumentos y las variables de entorno:<br/><span style="margin-left:100px; font-family:monospace; font-size:90%;">void main(int argc, char *argv[], char *envp[])</span></li>
 </ul>
 </li>
 </ul>
 </section><section>
-<h1>Argumentos del main (II)</h1>
+<h2>Argumentos del main (II)</h2>
+<br/>
 <ul>
 <li>Argumentos:<ul>
-<li>argc: Cantidad de argumentos pasados incluyendo el nombre del ejecutable</li>
-<li>argv: Puntero a un arreglo de punteros con un strings en cada posición. Por cada espacio encontrado se genera un string.</li>
-<li>envp: Variables del sistema operativo también divididas en strings.</li>
+<li><b>argc</b>: Cantidad de argumentos pasados incluyendo el nombre del ejecutable</li>
+<li><b>argv</b>: Puntero a un arreglo de punteros con un strings en cada posición. Por cada espacio encontrado se genera un string.</li>
+<li><b>envp</b>: Variables del sistema operativo también divididas en strings.</li>
 </ul>
 </li>
 </ul>
+</section>
+
+<section>
+<h2>Ejemplos:</h2>
+<li><a href="files/clase08/ej2_5.c">ej2_5.c</a></li>
+<li><a href="files/clase08/ej3_getline.c">ej3_getline.c</a></li>
+<li><a href="files/clase08/ej4_copyfile.c">ej4_copyfile.c</a></li>
+</section>
+
 </section>
 
 			</div>
@@ -477,6 +625,9 @@ void main(int argc, char <em>argv[], char </em>envp[])</li>
 				progress: true,
 				history: true,
 				center: true,
+
+				// Cambio el tamaño del slide
+				width: '80%',
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
