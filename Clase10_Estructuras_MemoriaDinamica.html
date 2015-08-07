@@ -48,14 +48,17 @@
 			<div class="slides">
 
 <section>
+
 <section>
 <h1>Estructuras</h1>
-</section><section>
+</section>
+
+<section>
 <h2>Datos compuestos</h2>
 <ul>
 <li>Ya vimos como agrupamos datos del mismo tipo. Tenemos arreglos (vectores y matrices) o strings (cadenas de caracteres).</li>
 <li>¿Como agrupamos datos de distinto tipo?<ul>
-<li>Palabras clave: struct y union</li>
+<li>Palabras clave: <span style="color: #4FC7CF;">struct</span> y <span style="color: #4FC7CF;">union</span></li>
 </ul>
 </li>
 <li>¿Por que podemos querer hacerlo?<ul>
@@ -64,120 +67,204 @@
 </ul>
 </li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>El tipo "struct"</h2>
 <ul>
 <li>La estructura ("struct") es un conjunto de una o mas variables, agrupadas u organizadas bajo un único nombre, cuyos miembros pueden ser de tipos diferentes</li>
 <li>La estructura la define el programador y es un nuevo tipo de dato</li>
 <li>Declaración:</li>
 </ul>
-<p>struct identificador-nombre {
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct identificador-nombre {
     tipo1 componente1;
     tipo2 componente2;
     ...
     tipoN componenteN;
-} lista_variables;</p>
-</section><section>
+} lista_variables;
+</code></pre>
+</section>
+
+<section>
 <h2>Ejemplo: estructura para puntos en la pantalla</h2>
-<p>struct point {
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct point {
     int x;
     int y;
-};</p>
-<p>struct point punto;</p>
-<p>/<em> var tipo point </em>/
-struct point puntoMax = {640, 480};</p>
-<p>punto.x = 300;      /<em> acceso al elemento con </em>/
-punto.y = 200;      /<em> sintaxis operador punto </em>/</p>
-</section><section>
+};
+
+struct point punto;
+
+/* var tipo point */
+struct point puntoMax = {640, 480};
+
+punto.x = 300;      /* acceso al elemento con */
+punto.y = 200;      /* sintaxis operador punto */
+</code></pre>
+</section>
+
+<section>
 <h2>Estructura: Acceso a campos</h2>
 <ul>
-<li>Accediendo como variable:<ul>
-<li>Uso el punto (.)</li>
-</ul>
+<li>Accediendo como variable:
+	<ul>
+		<li>Uso el punto ( . )</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+punto.x = 300;
+</code></pre>
+	</ul>
 </li>
-<li>
-<p>punto.x = 300;</p>
+<br/>
+<li>Accediendo como puntero:
+	<ul>
+		<li>Uso la flecha ( -&gt; )</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct point *pA,*pB;
+PA = &A;
+pB -&gt; x = pA -&gt; x;
+</code></pre>
+	</ul>
 </li>
-<li>
-<p>Accediendo como puntero:</p>
-<ul>
-<li>Uso la flecha (-&gt;)</li>
 </ul>
-</li>
-<li>struct point <em>pA,</em>pB;</li>
-<li>PA = &A;</li>
-<li>pB -&gt; x = pA -&gt; x;</li>
-</ul>
-</section><section>
+</section>
+
+<section>
 <h2>Ejemplo: estructura para puntos en la pantalla</h2>
 <ul>
-<li>Función que trabaja con estructuras (prototipo)</li>
+<li>Prototipo de función que trabaja con estructuras:</li>
 </ul>
-<p>struct point sumaPuntos (struct point p1,
-                         struct point p2);</p>
-<p>struct point sumaPuntos (struct point p1,
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct point sumaPuntos (struct point p1,
+                         struct point p2);
+</code></pre>
+<br/>
+<ul>
+<li>Función implementada:</li>
+</ul>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct point sumaPuntos (struct point p1,
                          struct point p2) {
     p1.x += p2.x;
     p1.y += p2.y;
     return p1;
-}</p>
-</section><section>
-<h2>Formas de operar con struct</h2>
+}
+</code></pre>
+</section>
+
+<section>
+<h2>Formas de operar con struct (1)</h2>
 <ul>
 <li>Uso de un campo
-estructura.componente
-a2.nota1 = 7.5;</li>
-<li>Asignación de una estructura a otra (depende del compilador, sino copiar campo x campo)
-a2 = a1;</li>
-<li>Declaración y asignación
+	<ul>
+		<li><span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">estructura.componente</span></li>
+	</ul>
+</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+a2.nota1 = 7.5;
+</code></pre>
+<br/>
+<li>Asignación de una estructura a otra:</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+a2 = a1;
+</code></pre>
+<p style="font-style: italic;"><span style="color: orange;">Importante</span>: depende del compilador, sino copiar campo x campo.</p>
+</ul>
+</section>
+
+<section>
+<h2>Formas de operar con struct (2)</h2>
+<ul>
+<li>Declaración y asignación</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 struct Alumnos a = {"Celeste Carballo",
                                 "7654321",
-                                6.0, 5.5, 5.0, 5.5};</li>
-<li>Función que retorna una estructura
-struct Alumnos nuevoAlumno(char nombre[ ]) { ...</li>
-<li>Función que recibe como argumento una estructura
-void calculaNota(struct Alumnos a1) { ...</li>
+                                6.0, 5.5, 5.0, 5.5};
+</code></pre>
+<br/>
+<li>Función que retorna una estructura</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct Alumnos nuevoAlumno(char nombre[ ]) { ...
+</code></pre>
+<br/>
+<li>Función que recibe como argumento una estructura</li>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+void calculaNota(struct Alumnos a1) { ...
+</code></pre>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Estructuras anidadas</h2>
-<p>struct fecha {
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct fecha {
     int dia, mes, anio;
-};</p>
-<p>struct persona {
+};
+
+struct persona {
     char nombre[20];
     char apellido[20];
     struct fecha nacimiento;
     unsigned long telefono;
 };
-struct persona amigo[30];   /<em> array </em>/
-amigo[15].nacimiento.anio = 1982;</p>
-</section><section>
+
+struct persona amigo[30];   /* array */
+
+amigo[15].nacimiento.anio = 1982;
+</code></pre>
+</section>
+
+<section>
 <h2>typedef</h2>
 <ul>
 <li>Es una palabra clave que permite definir nuevos tipo de datos:</li>
 </ul>
-<p>struct point {
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct point {
     int x;
     int y;
-};</p>
-<p>typedef struct point punto;
+};
+
+typedef struct point punto;
+
 punto A,B;
-A.x =1;</p>
-</section><section>
+
+A.x =1;
+</code></pre>
+</section>
+
+<section>
 <h2>Union</h2>
 <ul>
-<li>Las uniones son agrupaciones de datos cuyos miembros comparten la misma memoria (es decir, se solapan)</li>
-<li>El tamaño total ocupado es el del miembro mas grande
+<li>Las uniones son agrupaciones de datos cuyos miembros comparten la misma memoria (es decir, se solapan).</li>
+<li>El tamaño total ocupado es el del miembro mas grande.</li>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 union equivalencia {
     int i;
     char c;
-};</li>
+};
+
+union equivalencia x;
+
+x.i = 5;
+x.c = 'A';
+</code></pre>
 </ul>
-<p>union equivalencia x;</p>
-<p>x.i = 5;
-x.c = 'A';</p>
-<p>Nota: Ambos están en la misma posición de memoria. Por lo tanto la 'A' sobre escribe al 5.</p>
-</section><section>
+<ul class="col" style="width: 400px;">
+<br/>
+<img src="files/clase10/01_Union.png"/>
+</ul>
+<br/>
+<br/>
+<ul align="left" style="font-style: italic;">Nota:
+	<li>Ambos están en la misma posición de memoria.</li>
+	<li>Por lo tanto la 'A' sobre escribe al 5.</li>
+</ul> 
+</section>
+
+<section>
 <h2>Campos de bits</h2>
 <ul>
 <li>Son estructuras (struct) pero de tamaño menor a 1 byte (char).</li>
@@ -185,36 +272,49 @@ x.c = 'A';</p>
 <li>Esto le permite a C un acceso a datos a nivel de bit agregandole flexibilidad y elegancia.</li>
 <li>Las otras técnicas de acceso son mucho menos claras (mascaras y operadores a nivel de bit).</li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Campos de bits</h2>
-<p>struct alfa {
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct alfa {
    unsigned char c:1;
    unsigned char a:2;
    unsigned char b:3;
-};</p>
-<p>struct beta {
+};
+
+struct beta {
    unsigned int d:5;
    unsigned int e:9;
    unsigned int f:2;
-};</p>
-</section><section>
+};
+</code></pre>
+</section>
+
+<section>
 <h2>Campo de Bits y Uniones</h2>
 <ul>
-<li>
-<p>Uniones - Código</p>
-<ul>
-<li>campos-de-bit.c : Ejemplo trivial de uniones y campos de Bits</li>
+	<li>Uniones - Código
+		<ul>
+			<li><a href="files/clase10/Uniones-y-CamposBits/campos-de-bit.c">campos-de-bit.c</a> : Ejemplo trivial de uniones y campos de Bits (necesita el archivo <a href="files/clase10/Uniones-y-CamposBits/getch.h">getch.h</a>)</li>
+		</ul>
+	</li>
+	<li>Uniones - Ejercicio
+		<ul>
+			<li>Realizar un programa que devuelva el primer carácter (inicial) de un string/nombre usando uniones.</li>
+			<li>Realizar un programa que tome un número en punto flotante y devuelva sus partes usando uniones y campos de bit.</li>
+		</ul>
+	</li>
+	<li>Ejemplos acceso a bits:
+		<ul>
+			<li>Acceder a los bits de un byte utilizando una mascara (operaciones bit a bit): <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_1p-mascara.c">bits-de-un-byte_1p-mascara.c</a></li>
+			<li>Acceder a los bits de un byte utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_2p-campobit.c">bits-de-un-byte_2p-campobit.c</a></li>
+		</ul>
+	</li>
 </ul>
-</li>
-<li>
-<p>Uniones - Ejercicio</p>
-<ul>
-<li>Realizar un programa que devuelva el primer carácter (inicial) de un string/nombre usando uniones.</li>
-<li>Realizar un programa que tome un número en punto flotante y devuelva sus partes usando uniones y campos de bit.</li>
-</ul>
-</li>
-</ul>
-</section><section>
+</section>
+
+<section>
 <h2>Enumeraciones</h2>
 <ul>
 <li>Un tipo de datos enumerado es una manera de asociar nombres a números, y por consiguiente de ofrecer más significado a alguien que lea el código.</li>
@@ -226,7 +326,9 @@ x.c = 'A';</p>
 <li>Se pueden declarar variables enum (que se representan siempre como valores enteros).</li>
 <li>La declaración de un enum se parece a la declaración de un struct, tiene la misma sintaxis.</li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Enumeraciones</h2>
 <ul>
 <li>
@@ -236,24 +338,30 @@ x.c = 'A';</p>
 <li>typedef enum {lista_de_identificadores} nombre_enumeracion;</li>
 </ul>
 </li>
-<li>
-<p>typedef enum {FALSE = 0, TRUE = 1} boolean;</p>
+<br/>
+<li>Ejemplo creando un tipo boolean:
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+typedef enum {FALSE = 0, TRUE = 1} boolean;
+</code></pre>
 </li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Enumeraciones</h2>
 <ul>
 <li>Enumeraciones - Ejemplos<ul>
-<li>enum1.c y enum2.c : Ejemplos sencillos</li>
+<li>Ejemplo1: <a href="files/clase10/Enumeraciones/enum1.c">enum1.c</a></li>
+<li>Ejemplo2, enum2.c: <a href="files/clase10/Enumeraciones/enum2a.c">enum2_v1.c</a>, <a href="files/clase10/Enumeraciones/enum2b.c">enum2_v2.c</a> y <a href="files/clase10/Enumeraciones/enum2c.c">enum2_v3.c</a>.</li>
 </ul>
 </li>
-<li>Enumeraciones - Ejercicios<ul>
+<br/>
+<li>Enumeraciones - Ejercicios<ul> <!-- enum3_ejemplo.c !-->
 <li>Construir un programa que dados los colores de una resistencia nos de su valor en ohm.</li>
 <li>Construir un programa que muestre un menú y e indique la opción seleccionada, empleando una enumeración y una lista de cadenas.</li>
 </ul>
 </li>
 </ul>
-<p>enum3_ejemplo.c</p>
 </section>
 
 <section>
