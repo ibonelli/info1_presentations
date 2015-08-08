@@ -119,14 +119,15 @@ punto.x = 300;
 <li>Accediendo como puntero:
 	<ul>
 		<li>Uso la flecha ( -&gt; )</li>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-struct point *pA,*pB;
-PA = &A;
-pB -&gt; x = pA -&gt; x;
-</code></pre>
 	</ul>
 </li>
 </ul>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct point A = {640, 480};
+struct point *pA,*pB;
+pA = &A;
+pB -&gt; x = pA -&gt; x;
+</code></pre>
 </section>
 
 <section>
@@ -234,6 +235,23 @@ A.x =1;
 </section>
 
 <section>
+<h2>typedef</h2>
+<p>Uso de typedef para independizarse del compilador</p>
+<p>Dependiendo del compilador elijo que definicion usar</p>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+/* Si tengo el tipo de dato bit disponible */
+typedef bit bool;
+
+/* Si no lo tengo disponible */
+typedef char bool;
+
+/* Si mi compilador soporta C99 */
+typedef _BOOL bool;
+</code></pre>
+</section>
+
+<section>
 <h2>Union</h2>
 <ul>
 <li>Las uniones son agrupaciones de datos cuyos miembros comparten la misma memoria (es decir, se solapan).</li>
@@ -243,13 +261,14 @@ A.x =1;
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 union equivalencia {
     int i;
-    char c;
+    char b[2];
 };
 
 union equivalencia x;
 
-x.i = 5;
-x.c = 'A';
+x.i = 0x4892;
+printf("%x",x.b[0]);
+printf("%x",x.b[1]);
 </code></pre>
 </ul>
 <ul class="col" style="width: 400px;">
@@ -277,24 +296,36 @@ x.c = 'A';
 <section>
 <h2>Campos de bits</h2>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-struct alfa {
-   unsigned char c:1;
-   unsigned char a:2;
-   unsigned char b:3;
+typedef unsigned char uchar;
+
+struct hexa {
+	uchar nh:4;
+	uchar nl:4;
 };
 
-struct beta {
-   unsigned int d:5;
-   unsigned int e:9;
-   unsigned int f:2;
+union byte {
+   uchar b;
+   struct hexa h;
 };
+
+union byte A;
+char str[3];
+
+A.b=0x48;
+printf("%d",A.h.nh); /* Muestra 4 */
+printf("%d",A.h.nl); /* Muestra 8 */
+
+/* Convirtiendo en string */
+str[0] = '0' + A.h.nh;
+str[1] = '0' + A.h.nl;
+str[2] = NULL;
 </code></pre>
 </section>
 
 <section>
 <h2>Campo de Bits y Uniones</h2>
 <ul>
-	<li>Uniones - Código
+	<li>Uniones: Código ejemplo
 		<ul>
 			<li><a href="files/clase10/Uniones-y-CamposBits/campos-de-bit.c">campos-de-bit.c</a> : Ejemplo trivial de uniones y campos de Bits (necesita el archivo <a href="files/clase10/Uniones-y-CamposBits/getch.h">getch.h</a>)</li>
 		</ul>
@@ -442,7 +473,7 @@ struct vendedor {
 } *vec;
 
 /* Creo un vector de 10 posiciones dinamicamente */
-vec = malloc( syzeof( struct vendedor ) * 10);
+vec = (struct vendedor *) malloc( sizeof( struct vendedor ) * 10);
 </code></pre>
 </section>
 
