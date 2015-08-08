@@ -50,7 +50,7 @@
 <section>
 
 <section>
-<h1>Estructuras</h1>
+<h1>Estructuras de datos</h1>
 </section>
 
 <section>
@@ -364,10 +364,152 @@ typedef enum {FALSE = 0, TRUE = 1} boolean;
 </ul>
 </section>
 
+</section><section data-background="#4d7e65">
+
 <section>
-##Otros temas##
-* Memoria dinámica
-* Intro listas
+<h2>Memoria dinámica</h2>
+<ul>
+	<li>Que hacemos: Tomamos areas de memoria.</li>
+	<li>Como la usamos: Con punteros podemos accederlas similar a como hacemos con variables.</li>
+	<li>Por que: Nos va a dar una mayor flexibilidad para manejar grandes cantidades de datos.</li>
+	<li>Desventajas: Los algoritmos de manejo son mas complicados.</li>
+</ul>
+<br/><br/><br/>
+<ul>
+	<li>Libreria: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">stdlib.h</span></li>
+	<li>Funciones mas usadas:</li>
+	<ul>
+		<li>void *malloc(size_t size);</li>
+		<li>void *calloc(size_t cant, size_t size);</li>
+		<li>void free(void *ptr);</li>
+	</ul>
+</ul>
+</section>
+
+<section>
+<h2>Memoria dinámica</h2>
+<br/><br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdlib.h&gt;
+
+int *p;
+
+p = (int *) malloc( sizeof(int) );
+</code></pre>
+<br/><br/>
+<ul>
+	<li>Si se puede alojar la memoria malloc() retorna el puntero a la memoria reservada.</li>
+	<li>Si no se puede alojar la memoria malloc() retornara un puntero a NULL.</li>
+</ul>
+</section>
+
+<section>
+<h2>Estructuras dinámicas de datos</h2>
+<br/><br/>
+<p>Por ejemplo, puedo crear un vector en forma dinámica:</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+void main(void) {
+	char *str, tam;
+	printf("Ingrese el tamaño de cadena deseado: ");
+	scanf("%d",&tam);
+	str = (char *) malloc ( sizeof(char) * tam );
+	printf("Ingrese su cadena: ");
+	scanf("%s",str);
+	printf("\nSu cadena es: %s",str);
+}
+</code></pre>
+</section>
+<section>
+<h2>Estructuras dinámicas de datos</h2>
+<br/>
+<p>Pero no solo de chars...</p>
+<p>De cualquier tipo de dato puedo pedir...</p>
+<p>¡Incluso de structuras!</p>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+struct vendedor {
+	char nom[40];
+	float com,acum;
+	int vent;
+} *vec;
+
+/* Creo un vector de 10 posiciones dinamicamente */
+vec = malloc( syzeof( struct vendedor ) * 10);
+</code></pre>
+</section>
+
+<section>
+<h2>Introducción a listas</h2>
+<br/>
+<ul>
+	<li>Como debemos asignar un vector: Todo de un bloque. Las posiciones de memoria deben ser contiguas.</li>
+	<br/>
+	<li>Entonces...
+		<ul>
+			<li>¿Como puedo hacer para pedir memoria a medida que la necesito?</li>
+			<li>Respuesta: Usaremos listas de datos</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Introducción a listas</h2>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+<img src="files/clase10/11_Vector.jpg"/>
+</ul>
+<ul class="col" style="width: 400px;">
+<img src="files/clase10/12_Lista.jpg"/>
+</ul>
+</section>
+
+<section>
+<h2>Introducción a listas</h2>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+void *p = NULL;
+
+struct vendedor *q, *r;
+
+q = (struct vendedor *) malloc ( sizeof(struct vendedor) );
+
+r = (struct vendedor *) malloc ( sizeof(struct vendedor) * 10 );
+
+struct vendedor **vp[100];
+
+struct nodo {
+	struct vendedor dato;
+	struct nodo *sig;
+	};
+
+struct nodo *p1;
+</code></pre>
+</section>
+
+<section>
+<h2>Ejercicio</h2>
+<p align="left" style="font-size: 28px;">Realizar un programa que maneje el ingreso de vendedores.</p>
+<p align="left" style="font-size: 28px;">Debe poder agregarse un vendedor y luego agregar ventas de ese vendedor.<p>
+<p align="left" style="font-size: 28px;">Se debera poder listar las ventas durante el mes, y al final del mes se debe generar un cierre del mes informando el monto total de las ventas y comisiones a pagar.<p>
+<p align="left" style="font-size: 28px;">Las comisiones son 10% del monto vendido por vendedor.<p>
+<ol style="font-size: 28px;">
+	<li>Comenzar generando una solución basada en un vector de vendedores de 20 posiciones.</li>
+	<li>Una vez resuelto el problema migrar a una solución que use una lista simplemente enlazada (agregando al final).</li>
+	<li>Realizar una funcion que permita ordenar la lista por nombre.</li>
+	<li>Al finalizar el programa los datos en memoria deberan guardarse en un archivo (binario).</li>
+	<li>Al comenzar el programa los datos deberan ser leidos del archivo guardado anteriormente.</li>
+	<li>Levantar los datos de un archivo de texto con un formato prefijado por usted (por ejemplo como delimitado).</li>
+</ol>
+<!--
+Resuelto en:
+	files/clase10/Listas/Vendedor_Listas_v1/*
+		Solo listas simples y dobles
+	files/clase10/Listas/Vendedor_Listas_v2/*
+		Tambien con vectores, falta depurar
+!-->
 </section>
 
 </section>
