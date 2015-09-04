@@ -1,0 +1,9 @@
+Se realizaron elecciones en un centro de estudiantes. El dia de la votación se tomaron los datos de los votantes consistentes en padrón (int) y nombre del partido votado (que no supera los 2000 caracteres).
+
+Estos datos se guardaron en un archivo de disco con el nombre "votos.dat".
+
+No se sabe ni cuantos, ni cuales son los partidos. Estos se crean a medida que son votados.
+
+El escrutinio se realiza de la siguiente manera: Si el partido votado no existe, se lo crea y el votante pasa a ser el primer integrante de su lista. Si ya existe, el votante pasa a integrar la lista del partido en el orden de ingreso. Desestimar sucesivos votos de un mismo elector.
+
+Realizar el escrutinio a partir del archivo e imprimir el nombre del partido ganador y la lista de sus integrantes. (Suponer un unico ganador).
