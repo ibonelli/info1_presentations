@@ -1,0 +1,52 @@
+Date: Sat, 15 Jun 2013 19:10:22 -0300
+From: Sergio Salanitri <sergiosalanitri@gmail.com>
+To: informatica1@electron.frba.utn.edu.ar
+Subject: [Informatica1] Proyecto INFO 1
+
+1- Sistema de mensajeria tipo twitter (con subscripciones, hastasg , mensaje entre usuarios etc).
+    Valor agregado: Manejo de base de datos (mysql, sql lite etc).
+2- Sistema de procesamientos de imagenes con Open CV
+3- Sistema de procesamiento de audios y agregado de efectos en tiempo real (reverb, eco etc).
+4- Sistema de transmisión de audio por UDP (steaming) + chat (un pseudo skype sin video).
+5- Sistema de monitoreo de video , con funcionalidad de detección de movimiento usando OpenCV.
+6- Juegos multi jugador y en red (truco por ej).
+
+-------------------
+
+Date: Sun, 16 Jun 2013 11:05:42 -0300
+From: Jeronimo Atencio <jerome5416@gmail.com>
+To: informatica1@electron.frba.utn.edu.ar
+Subject: Re: [Informatica1] Proyecto INFO 1
+
+Los proyectos que armaron estos dos años fueron:
+1. Sudoku. Le permitía al usuario jugar y generar tableros. Ademas escribió el algoritmo para que la maquina lo resuelva solo o que le de pistas al usuario.
+2. Generador de laberintos: Permitía al usuario crear laberintos en 2D y almacenarlos. Después el usuario podía intentar resolverlos o la maquina lo iba haciendo sola.
+3. Bomberman: Era en realidad un juego parecido a este, Con varios niveles y enemigos controlados por la maquina.
+4. Osciloscopio por placa de sonido.
+5. Skype de texto con SDL. 
+6. Biblioteca por IP. Armaron todo con listas en el servidor y después con un cliente se logueaban con usuario y password (encriptados de forma muy rustica) para realizar las consultas.
+7.Batalla naval con SDL. Permitía que jugaran dos personas en distintas maquinas, lo armaron con un servidor TCP. También se podía jugar contra la maquina.
+8. Ajedrez en red.
+
+-------------------
+
+--Q--
+From: JUAN PABLO <juanp_gonzalez_263@hotmail.com>
+To: informatica1@electron.frba.utn.edu.ar
+Date: Sat, 13 Jul 2013 07:47:59 -0300
+
+hay una alumna que vino con una propuesta de hacer un ahorcado en red.
+con timeout y le agregamos el uso de opencv.
+por lo que veo estaria dentro del nivel. 
+
+--R--
+Date: Sat, 13 Jul 2013 00:48:14 -0300
+From: Alejandro Furfaro <afurfaro@gmail.com>
+To: informatica1@electron.frba.utn.edu.ar
+
+Yo uso opencv para imágenes y /dev/dsp para audio
+Los proyectos deben ser cosas que abarquen la mayor cantidad de recursos de programación del 2º cuatrimestre,
+listas, y que sea factible para el alumno y seguible de tu parte
+
+-------------------
+

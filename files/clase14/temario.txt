@@ -1,0 +1,25 @@
+Entrada salida buffereada de la librería estándar vs. E/S de bajo nivel mediante las llamadas al kernel de linux.
+Similitudes, ventajas y desventajas de cada una.
+
+Criterios para seleccionar cual de ellas es mas adecuada en términos de rendimiento del programa según la aplicación.
+
+Funciones del kernel: File I/O No buffereada. Creación, apertura y cierre de archivos: funciones creat, open, close.
+
+Concepto y significado de File Descriptor. Funciones para lectura y escritura de bajo nivel: read , y write.
+
+Funciones fcntl e ioctl. Concepto “everything is a file” del Universo UNIX. Su implementación en Linux.
+
+Relación con los conceptos de File system vistos en la Unidad Temática 4.
+
+Ejemplos de acceso al dispositivo de audio de una PC. Dispositivos de streams avanzados para intercomunicar procesos.
+
+Intercomunicaciones de procesos dentro de un mismo computador: pipes, y FIFO's con nombre. Comando de creación mkfifo y mknode.
+
+Llamadas al sistema para crearlos desde un programa mkfifo() y mknode(). Acceso mediante las mismas funciones de archivos.
+
+Ejemplos. Intercomunicaciones de procesos residentes en computadores diferentes a través de una red de datos:
+	sockets. Creación y configuración mediante una librería de alto nivel diseñada en la cátedra,
+	y acceso de lectura escritura mediante read () write (). Ejemplos.
+
+Espera de múltiples dispositivos de streams bloqueantes: Función select (). Ejemplos integradores.
+Relación entre ambas interfaces. Función fileno(). Ejemplos
