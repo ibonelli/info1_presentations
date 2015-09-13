@@ -55,6 +55,65 @@
 </section>
 
 <section>
+<h2>Resumen TCP/IP</h2>
+<br/>
+<p style="text-align: left;">Direcciones IP:</p>
+<ul>
+	<li>IPv4 = 2<sup>32</sup></li>
+	<li>IPv6 = 2<sup>128</sup></li>
+</ul>
+<br/><br/>
+<p style="text-align: left;">Puertos:</p>
+<ul>
+	<li>TCP = 2<sup>16</sup></li>
+	<li>UDP = 2<sup>16</sup></li>
+</ul>
+<br/><br/>
+<p>Cada uno, espacios de puertos por protocolo.</p>
+</section>
+
+<section>
+<h2>Ejemplos de IPs</h2>
+<ul>
+<li>Ejemplo red IP:<ul>
+<li>Red: 192.168.0.0</li>
+<li>Mascara v1: 255.255.255.0</li>
+<li>Mascara v2: /24</li>
+<li>Router: 192.168.0.1</li>
+<li>Broadcast: 192.168.0.255</li>
+<li>Host1: 192.168.0.10</li>
+<li>Host2: 192.168.0.11</li>
+<li>Host3: 192.168.0.12</li>
+<li>Dir loopback: 127.0.0.1</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Ejemplo de puertos</h2>
+<ul>
+<li>2001</li>
+<li>4004</li>
+<li>4161</li>
+</ul>
+<p>Siempre arriba de 1024</p>
+<br/><br/>
+<h2>ifconfig</h2>
+<ul>
+<li>eth0: Cable</li>
+<li>wlan0: WiFi</li>
+<li>lo: loopback</li>
+</ul>
+</section>
+
+<section>
+<h3>Herramienta: NetCat</h2>
+<br/>
+<img style="width: 500px;" src="files/clase14/netcat.jpg"/>
+</section>
+
+<section>
 <h2>Herramientas</h2>
 <br/>
 <p>NetCat:</p>
@@ -71,17 +130,20 @@ nc -n -vv -l -p 4161
 	<li>Cliente que se conecta a ese server</li>
 <pre style="width: 500px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
 nc 127.0.0.1 4161
+cat test.txt | nc 127.0.0.1 4161
 </code></pre>
 </section>
  
 <section>
 <h2>TCPdump</h2>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo apt-get install tcpdump
 sudo tcpdump -i lo
 </code></pre>
 <br/>
 <h2>WireShark</h2>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo apt-get install wireshark
 kdesu wireshark -i lo
 </code></pre>
 <br/><br/>
@@ -124,9 +186,11 @@ kdesu wireshark -i lo
 
 <section>
 <h2>Codigo de ejemplo:</h2>
-	files/clase14/codigo_ej-udp.zip
-	files/clase14/sockets_1server.c
-	files/clase14/sockets_2client.c
+<ul>
+	<li><a href="files/clase14/codigo_ej-udp.zip">Ejemplo UDP (zip)</a></li>
+	<li><a href="files/clase14/sockets_1server.c">Ejemplo TCP Server</a></li>
+	<li><a href="files/clase14/sockets_2client.c">Ejemplo TCP Client</a></li>
+</ul>
 </section>
 <!-- SLIDES HERE -->
 

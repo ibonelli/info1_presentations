@@ -351,7 +351,7 @@ $ sudo apt-get install kdesvn
 					<p>Usaremos los apuntes del Ing. Jerónimo F. Atencio:</p>
 					<p><a href="./files/clase11/doxygen_atencio_v1.2.2_IBmod.odp">doxygen_atencio_v1.2.2_IBmod.odp</a></p>
 					<br/>
-					<p>Para instalarlo:</p>
+					<p style="text-align: left;">Para instalarlo:</p>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ sudo apt-get install doxygen doxygen-gui
 					</code></pre>
@@ -361,6 +361,20 @@ $ sudo apt-get install doxygen doxygen-gui
 					<p>Doxygen para C: <a href="./files/clase11/doxygen_QuickReferenceLenguajeC.pdf">doxygen_QuickReferenceLenguajeC.pdf</a></p>
 				</section>
 
+				<section data-background="#5C3F66">
+					<h2>Debuggers</h2>
+					<br/>
+					<p style="text-align: left;">Instalando:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install kdbg
+					</code></pre>
+					<br/>
+					<p style="text-align: left;">Necesario en Ubuntu 14.04 LTS (trusty):</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo rm /usr/share/kde4/apps/kdbg/icons/hicolor/22x22/actions/pulse.mng
+					</code></pre>
+					<p>El archivo "pulse.mng" es un Multiple-image Network Graphics que segun parece está corrupto.</p>
+				</section>
 			</div>
 
 		</div>
