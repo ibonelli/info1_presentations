@@ -59,14 +59,14 @@
 <br/>
 <p style="text-align: left;">Direcciones IP:</p>
 <ul>
-	<li>IPv4 = 2<sup>32</sup></li>
-	<li>IPv6 = 2<sup>128</sup></li>
+	<li>IPv4: 2<sup>32</sup></li>
+	<li>IPv6: 2<sup>128</sup></li>
 </ul>
 <br/><br/>
 <p style="text-align: left;">Puertos:</p>
 <ul>
-	<li>TCP = 2<sup>16</sup></li>
-	<li>UDP = 2<sup>16</sup></li>
+	<li>TCP: 2<sup>16</sup></li>
+	<li>UDP: 2<sup>16</sup></li>
 </ul>
 <br/><br/>
 <p>Cada uno, espacios de puertos por protocolo.</p>
@@ -77,8 +77,8 @@
 <ul>
 <li>Ejemplo red IP:<ul>
 <li>Red: 192.168.0.0</li>
-<li>Mascara v1: 255.255.255.0</li>
-<li>Mascara v2: /24</li>
+<li>Mascara v<sub>1</sub>: 255.255.255.0</li>
+<li>Mascara v<sub>2</sub>: /24</li>
 <li>Router: 192.168.0.1</li>
 <li>Broadcast: 192.168.0.255</li>
 <li>Host1: 192.168.0.10</li>
@@ -108,13 +108,13 @@
 </section>
 
 <section>
-<h3>Herramienta: NetCat</h2>
+<h3>Herramienta1: NetCat</h2>
 <br/>
 <img style="width: 500px;" src="files/clase14/netcat.jpg"/>
 </section>
 
 <section>
-<h2>Herramientas</h2>
+<h2>Herramienta1</h2>
 <br/>
 <p>NetCat:</p>
 <ul>
@@ -134,33 +134,6 @@ cat test.txt | nc 127.0.0.1 4161
 </code></pre>
 </section>
  
-<section>
-<h2>TCPdump</h2>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
-sudo apt-get install tcpdump
-sudo tcpdump -i lo
-</code></pre>
-<br/>
-<h2>WireShark</h2>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
-sudo apt-get install wireshark
-kdesu wireshark -i lo
-</code></pre>
-<br/><br/>
-<p>Nota: Ambos programas hay que correrlos como root para poder capturar (por eso el uso de sudo).</p>
-</section>
-
-<section>
-<h2>Ejemplo sencillo:</h2>
-<p>Mensajes (<a href="http://beej.us/guide/bgipc/">de Beej</a>)</p>
-<ul>
-	<li><a href="files/clase14/beej_kirk.c">kirk.c</a></li>
-	<li><a href="files/clase14/beej_spock.c">spock.c</a></li>
-</ul>
-<br/><br/>
-<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
-</section>
-
 <section>
 <h2>Uso sockets</h2>
 <div style="text-align: left;">
@@ -191,6 +164,36 @@ kdesu wireshark -i lo
 	<li><a href="files/clase14/sockets_1server.c">Ejemplo TCP Server</a></li>
 	<li><a href="files/clase14/sockets_2client.c">Ejemplo TCP Client</a></li>
 </ul>
+</section>
+
+<section>
+<h2>Herramientas 2</h2>
+<br/>
+<h3>TCPdump</h3>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo apt-get install tcpdump
+sudo tcpdump -i lo
+</code></pre>
+<br/>
+<h3>WireShark</h3>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo apt-get install wireshark
+kdesu wireshark -i lo
+</code></pre>
+<br/>
+<p>Nota: Ambos programas hay que correrlos como root para poder capturar (por eso el uso de sudo).</p>
+</section>
+
+<section>
+<h2>Otro tema...</h2>
+<p>Ejemplo sencillo IPC: Mensajes</p>
+<p>(<a href="http://beej.us/guide/bgipc/">de Beej</a>)</p>
+<ul>
+	<li><a href="files/clase14/beej_kirk.c">kirk.c</a></li>
+	<li><a href="files/clase14/beej_spock.c">spock.c</a></li>
+</ul>
+<br/><br/>
+<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
 </section>
 <!-- SLIDES HERE -->
 
