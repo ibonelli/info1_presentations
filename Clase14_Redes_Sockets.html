@@ -133,7 +133,7 @@ nc 127.0.0.1 4161
 cat test.txt | nc 127.0.0.1 4161
 </code></pre>
 </section>
- 
+
 <section>
 <h2>Uso sockets</h2>
 <div style="text-align: left;">
@@ -155,6 +155,21 @@ cat test.txt | nc 127.0.0.1 4161
 </div>
 <br/>
 <p>Luego lo usamos mediante el file descriptor (ambos)</p>
+</section>
+
+<section>
+<h2>Uso UDP</h2>
+<div style="text-align: left;">
+<ul>
+	<li>No nos conectamos:
+		<ol>
+			<li>sendto()</li>
+			<li>recvfrom()</li>
+		</ol>
+	</li>
+</ul>
+<br/><br/>
+<p>Como la comunicación es inconexa no es necesario conectarse al socket, solo usarlo. Igual es como si hubiera un servidor/cliente. Siempre uno tiene que quedarse escuchando, el que recibe.</p>
 </section>
 
 <section>
