@@ -1,0 +1,91 @@
+<body>
+<meta charset="UTF-8"> 
+
+<h1>Resumen</h1>
+<p>Esto es una parte de un curso de juegos 2D: <a href="http://fixbyproximity.com/2d-game-development-course/">http://fixbyproximity.com/2d-game-development-course/</a></p>
+<p>Algunas aclaraciones importantes sobre el material original:</p>
+<ul>
+	<li>Esta en inglés</li>
+	<li>Fue realizado para Visual C++. Los ejemplos que acá vemos/resumí los he modificado para que compilen en Linux con GCC. Los originales usan algunas cosas de C99 y Cpp/OjectiveC.</li>
+	<li>Varios de los capitulos originales son acompañados con un video explicativo (en inglés).</li>
+</ul>
+
+<h1>Introducción</h1>
+
+<h2>Why 2D game development?</h2>
+<p>With so much emphasis on 3D games on most modern platforms, it can feel like the art of good 2D games is backsliding. I will admit that I myself am guilty of immediately thinking of Mario or Tetris whenever someone mentions 2D gaming. I have to take a moment to remember the vast array of recent successful 2D games. Off the top of my head: Angry Birds, Braid, Limbo, Marvel vs. Capcom series, Kirby’s Epic Yarn, and about a quadrillion (it’s a real word, I looked it up – may be an exaggeration) Nintendo DS, Flash, and Facebook games. Taking a moment to think of it, we can see that there are some really great games still being made as 2D. Good thing for us too, since 2D gaming is much easier to start with than 3D. For starters, the math in 2D development is much simpler than 3D and a lot of it is based on concepts learned in early Algebra. When you are new to game development and programming in general, the math can get a little overwhelming. It is good to keep it as simple as possible to start. Along the lines of simplicity, many of the general concepts you will learn in game development (collision detection, rendering, and coordinate systems just to name a few) are much easier to learn when you are only dealing with two dimensions. If your passion is 3D (and only 3D) development, don’t be put off by this series either. Many of the development and game concepts you will learn in 2D in this series are easily transferred to 3D. For instance, while the rendering and game logic can change, the general structure and order of a game loop remains the same. It is pretty easy to see that all around, 2D is the best place to start your game development journey.</p>
+
+<h2>The Allegro Game Library</h2>
+<p>In this series, we will be using something called the Allegro Game Library. In olden times, when you wanted to represent something graphically on a computer screen (like, say, a video game) you had to program all of the low level functionality yourself. This meant working directly with the operating system and video / audio / input drivers to make your game work correctly. A bunch of time was spent figuring out the operating system specific function calls and getting everything to work correctly. Porting from one OS to another was a complete nightmare. All in all, things were very difficult to maintain.</p>
+<p>Description from <a href="http://liballeg.org/">http://liballeg.org/</a>: <quote>"Allegro 4 and Allegro 5 are cross-platform, open source, game programming libraries, primarily for C and C++ developers. Read more details on the introductory page. This is the official web site."</quote></p>
+
+<h1>Vemos un juego básico</h1>
+<p>Convertido de: <a href="http://fixbyproximity.com/2011/08/30/2d-game-dev-part-5-0-our-first-game/">http://fixbyproximity.com/2011/08/30/2d-game-dev-part-5-0-our-first-game/</a></p>
+<p><a href="./1_SideShooter.zip">ZIP</a></p>
+
+<h1>Sprites</h1>
+<p>Este es el capitulo especifico de sprites: <a href="http://fixbyproximity.com/2011/09/19/2d-game-dev-part-7-0-sprites/">http://fixbyproximity.com/2011/09/19/2d-game-dev-part-7-0-sprites/</a></p>
+<p><a href="./2_Sprites.zip">ZIP</a></p>
+
+<h2>Sprites, not the drink</h2>
+<p>Sprites refer to any graphical screen element that moves or changes (for the most part). Therefore, our Space Ship from part 5 could be considered a sprite, while the background (if there was one) would not be. In reality, what being a “sprite” means is having the complex framework that allows our game image to do something meaningful. A little bit we started this framework. In our Space Ship struct we had the ships position, bounding box, speed, and a few other attributes. That is already a good start for sprite support. A couple things that our ship didn’t have that we are going to look at adding in this section is a self contained image and animation.</p>
+
+<h2>Classy Structs</h2>
+<p>Like I mentioned above, the key to utilizing the power of sprites is to have well thought out code supporting your game actions. It is important for a sprite object to know where is it, what animation frame it is on, if it is collide-able, and what image represents itself on the screen. Normally that means that I would program a Sprite class and build all of the foundational functionality into it. As you will recall, however, I have vowed to do this whole series with as little “advanced” coding as possible. What this means is that we will be doing all of our work with structs. What structs lose in power, they gain in simplicity. Remember that if you would to tackle larger scale projects, it is a good idea to learn classes and OOP (object oriented programming), but for now, using structs will suffice.</p>
+
+<h2>Transparency</h2>
+<p>We will be looking at two different ways to achieve transparency in our loaded bitmaps. We have the option to either load an image that already has a transparent background, like a PNG, or use the function al_convert_mask_to_alpha.</p>
+<p>Archivos: ./Sprites/1_Transparency1.c y ./Sprites/1_Transparency2.c</p>
+
+<h2>Basic Animation</h2>
+<p>It is time to add basic animation to our programs. If we cycle still images in order we can trick the eye into believing the object we are seeing on the screen is really moving. Pay attention to the variables used and how the cycling control works.</p>
+<p>Archivo: ./Sprites/2_BasicAnimation.c</p>
+
+<h2>Create an Sprite Sheet from single BMPs</h2>
+<p>Before we can look at animation using sprite sheets, we first need to actually have sprite sheets. Allegro can use single bitmaps to create our own sheets of sprites.</p>
+<p>Archivo: ./Sprites/3_CreateSpriteSheet.c</p>
+
+<p>También podemos bajarnos sprites ya hechos:</p>
+<ul>
+	<li><a href="http://spritedatabase.net/news">http://spritedatabase.net/news</a></li>
+	<li><a href="http://www.spriters-resource.com/">http://www.spriters-resource.com/</a></li>
+</ul>
+
+<h2>Animation using sprites</h2>
+<p>Now that we have our sprite sheets made, all that’s left is to alter our animation demo to utilize them. This video will conclude part 7 and pave the way for our Sprite struct which we will introduce in Part 8...</p>
+<p>Archivo: ./Sprites/4_SpriteSheetAnimation.c</p>
+
+<h1>Arreglos/mapas de Sprites</h1>
+<p>De <a href="http://fixbyproximity.com/2011/09/29/2d-game-dev-part-8-0-structured-sprites/">http://fixbyproximity.com/2011/09/29/2d-game-dev-part-8-0-structured-sprites/</a></p>
+<p><a href="./3_SpriteStruct.zip">ZIP</a></p>
+
+<h2>Structure</h2>
+<p>So far we have been using independent variables to control a single entity on the screen. The next logical step is to allow for multiple entities to appear on the screen at the same time. With the way we have been doing things, that is easier said than done. If you will recall, so far we have been using basic x and y variables to keep track of our entity’s location. Similarly, we have been using generic variables for velocity, animation, and dimensions. If we wanted more entities, we could create variables like x2 and y2, or we could add a structure for self contained variables.</p>
+
+<h2>The Code</h2>
+<p>Not a whole lot is going to be different in this part. As you will see, we will be adding the Sprite Struct (normally it is a Sprite Class, but we are keeping it simple) and adding a few helper functions. After that I have a few neat examples for you. You will see that having an “object” allows for a great deal of code reuse as we begin to treat our entities generically. In the next part, we will be taking what we have learned and using it to super charge our shooter game from Part 5. <strong>
+
+<h2>Our Sprite Struct</h2>
+<p>Code involved in created a struct for maintaining our sprites. Normally this would be done with a class, but to keep things simple I have written the code to utilize structs instead.</p>
+<p>Archivo: ./SpriteStruct/1_SpriteStruct.c</p>
+
+<h2>Sprite Struct Demo</h2>
+<p>Having created our Sprite Struct in the previous video, this video pushes the code even further. By the end, you will see how we can utilize a simple array and the code we have already looked at to animate 15,000 independent sprites on the screen at the same time.</p>
+<p>Archivo: ./SpriteStruct/2_SpriteStructDemo.c</p>
+
+<h2>Sprite Struct Gravity Demo</h2>
+<p>In this last video of Part 8, we are going to look at taking our Sprite Demo’s a step further. We will program an application that moves sprites around the screen while simulating a gravitation pull. What I mean by that is that each object will be attracted to every other object. The result will be sprites that all move relative to each other. It is pretty neat!</p>
+<p>Archivo: ./SpriteStruct/3_Gravity.c</p>
+
+<h1>Version2 del juego ahora con sprites!</h1>
+<p>De: <a href="http://fixbyproximity.com/2011/10/18/2d-game-dev-part-9-3-revisiting-our-game-the-explosions/">http://fixbyproximity.com/2011/10/18/2d-game-dev-part-9-3-revisiting-our-game-the-explosions/</a></p>
+<p><a href="./4_SideShooter_v2.zip">ZIP</a></p>
+
+<h1>Otros Capitulos relacionados con temas de juegos</h1>
+<ul>
+	<li><a href="http://fixbyproximity.com/2011/07/21/2d-game-dev-2d-graphic-basics/">2D Graphic Basics</a></li>
+	<li><a href="http://fixbyproximity.com/2011/08/27/2d-game-dev-part-4-1-timing-our-game-loop/">Timing Our Game Loop</a></li>
+	<li>And much more: Parallax Backgrounds, Collision Detection, Game States, and a full game.</li>
+</ul>
+
+</body>

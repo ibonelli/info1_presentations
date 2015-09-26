@@ -46,10 +46,334 @@
 
 <!-- SLIDES HERE -->
 <section>
-Tutorials: https://wiki.allegro.cc/index.php?title=Allegro_5_API_Tutorials
-Presentación Leandro
-TXT mio
-Código bajado
+<h1>Allegro</h1>
+<h2>Libreria para desarrollo de juegos multiplataforma.</h2>
+<br/>
+<ul>
+	<li>Es opensource y funciona con GCC (además de otros compiladores)</li>
+	<li>Nos provee una capa que logra abstraer el hardware logrando que las aplicaciones sean portables.</li>
+	<li>El por que del nombre: <b style="color:cyan;">A</b>llegro <b style="color:cyan;">L</b>ow <b style="color:cyan;">LE</b>vel <b style="color:cyan;">G</b>ame <b style="color:cyan;">RO</b>utines.</li>
+</ul>
+</section>
+
+<section>
+<h2>Instalando Allegro</h2>
+<h3>(en Ubuntu trusty 14.04LTS)</h3>
+<br/>
+<p>version 4</p>
+<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+apt-get install liballegro4.4 liballegro4-dev allegro4-doc
+</code></pre>
+<br/>
+<p>version 5 (recomiendo esta)</p>
+<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+apt-get install liballegro5.0 liballegro5-dev allegro5-doc
+</code></pre>
+<br/>
+<p>No recomendado, pero posible:</p>
+<p><a href="https://wiki.allegro.cc/index.php?title=Getting_Started#Linux_2">Instalando desde el código fuente (en inglés)</a></p>
+</section>
+
+<section>
+<h2>Instalando Allegro</h2>
+<h3>(otros Ubuntu y Debian)</h3>
+<br/>
+<p>Versiones de Allegro disponibles:</p>
+<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+apt-cache search allegro | grep library
+</code></pre>
+<br/>
+<p>Paquetes ya instalados:</p>
+<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+dpkg --get-selections | grep allegro
+</code></pre>
+<br/>
+</section>
+
+<section>
+<h2>Instalando Allegro</h2>
+<h3>Paquetes y Distribuciones:</h3>
+<br/>
+<ul>
+	<li>Debian:
+		<ul>
+			<li>Paquete liballegro4-dev en wheezy y jessie</li>
+			<li>Paquete liballegro5-dev solo en jessie</li>
+		</ul>
+	</li>
+	<br/>
+	<li>Ubuntu:
+		<ul>
+			<li>Paquete liballegro5.0 en trusty (14.04LTS)</li>
+			<li>Paquete liballegro4.2-dev en precise (12.04LTS)</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Documentación y ejemplos</h2>
+<h3>(que vienen con la instalación)</h3>
+<br/>
+<ul>
+	<li><a href="file:///usr/share/doc/allegro5-doc/refman/getting_started.html">Getting started guide</a></li>
+	<li><a href="file:///usr/share/doc/allegro5-doc/refman/index_all.html">Guia de referencia (API completa)</a></li>
+	<li><a href="file:///usr/share/doc/allegro5-doc/examples/">Ejemplos de código instalados</a></li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<br/>
+<ul>
+	<li>Archivos  de  configuración (<a href="./files/clase15/example.ini">ejemplo</a>)</li>
+	<li>Inicialización</li>
+	<li>Ventana del juego (Display): FULLSCREEN o WINDOWED</li>
+	<ul>
+		<li>Si es del tipo Window puede ser: FRAMELESS  o  RESIZABLE</li>
+	</ul>
+	<li>Eventos</li>
+	<li>Temporizadores</li>
+	<li>Bitmaps</li>
+	<li>Teclado</li>
+</ul>
+<br/><br/><br/>
+<p><a href="https://wiki.allegro.cc/index.php?title=Allegro_5_API_Tutorials">Lista de ejemplos básicos del wiki</a></p>
+<p><a href="./files/clase15/0_allegro_wiki_samples.zip">ZIP con todos listos para compilar</a></p>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Display</h3>
+<br/>
+<ul>
+	<li>Por defecto, se cuenta con 2 buffers para dibujar sobre la pantalla:
+		<ul>
+			<li>Se escribe en el buffer de pantalla el contenido a mostrar</li>
+			<li>al_flip_display() cambia entre ellas</li>
+		</ul>
+	</li>
+	<li>Ejemplos de manejo de display:
+		<ul>
+			<li>Como crear un display: <a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Displays">al01_display.c</a></li>
+			<li>Trabajando en fullscreen: <a href="https://wiki.allegro.cc/index.php?title=Creating_a_fullscreen_display_with_maximum/minimum_resolution">al02_screenres.c</a> <span style="font-size:50%;">(problemas yo...)</span></li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Eventos1</h3>
+<br/>
+<ul>
+	<li>En Allegro trabajamos con eventos:
+		<ul>
+			<li>Se almacenaran en una cola (FIFO) de Eventos</li>
+			<li>Los eventos pueden ser de teclado, mouse, ventanas, temporizadores o incluso eventos creados por el usuario</li>
+			<li>Como hay distintas fuentes que producen eventos, debemos poder detectar el tipo.</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Eventos2</h3>
+<br/>
+<ul>
+	<li>Allegro provee constantes para la detección de eventos:
+		<ul>
+			<li style="font-size:70%;">ALLEGRO_EVENT_DISPLAY_CLOSE</li>
+			<li style="font-size:70%;">ALLEGRO_EVENT_TIMER</li>
+			<li style="font-size:70%;">ALLEGRO_KEY_ENTER</li>
+			<li style="font-size:70%;">ALLEGRO_EVENT_KEY_DOWN</li>
+			<li style="font-size:70%;">Muchos mas...</li>
+		</ul>
+	</li>
+	<li>Ejemplo <span style="font-size:70%;">(MUY SENCILLO)</span> de manejo de eventos, solo para ver la estructura: <a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Events">al03_events.c</a></li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Timers</h3>
+<br/>
+<ul>
+	<li>Marcan el tiempo de la aplicación:
+		<ul>
+			<li style="font-size:90%;">Pueden regular el refresco de la pantalla</li>
+			<li style="font-size:90%;">La demora entre una recorrida por la pantalla</li>
+			<li style="font-size:90%;">La demora en explotar una bomba</li>
+			<li style="font-size:90%;">Para realizar acciones en un determinado tiempo</li>
+			<li style="font-size:90%;">Etc...</li>
+		</ul>
+	</li>
+	<li>Son programables y pueden existir varias corriendo al mismo tiempo</li>
+	<li>Permiten manejar el concepto de FPS (Frames Per Second)</li>
+	<li>Ejemplo <span style="font-size:70%;">(MUY SENCILLO)</span> de uso de timers: <a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Timers">al04_timers.c</a></li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Formas</h3>
+<br/>
+<ul>
+	<li>Es posible dibujar formas geométricas:
+		<ul>
+			<li>al_draw_triangle</li>
+			<li>al_draw_rounded_rectangle</li>
+			<li>al_draw_rectangle</li>
+			<li>al_draw_circle</li>
+			<li>al_draw_ellipse</li>
+			<li>al_draw_arc</li>
+			<li>al_draw_line</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Bitmaps</h3>
+<br/>
+<ul>
+	<li>Se puede dibujar un bitmap directamente en pantalla: <a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Bitmaps">al05_bitmaps.c</a></li>
+	<li>Es posible cargar una imagen desde archivo: <a href="https://wiki.allegro.cc/index.php?title=Basic_tutorial_on_loading_and_showing_images">al06_bitmapload.c</a></li>
+	<li>Los bitmaps pueden ser dibujados en una posición especifica de la pantalla</li>
+	<li>También se le pueden aplicar efectos y ﬁltros (como transparencias).</li>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Mouse y teclado</h3>
+<br/>
+<ul>
+	<li>El teclado y el mouse son fuentes de eventos.</li>
+	<li>Es posible detectar los botones del mouse y las coordenadas X e Y para saber donde se produjo el click.</li>
+	<li>Es posible detectar cuando se presiona una tecla y también cuando se suelta.</li>
+	<li>Por supuesto también podremos distinguir que tecla fue presionada</li>
+</ul>
+<ul>Ejemplos:
+	<li>Uso del mouse: <a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Input">al07_mouse.c</a></li>
+	<li>Uso del teclado: <a href="https://wiki.allegro.cc/index.php?title=Basic_Keyboard_Example">al08_keyboard.c</a></li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Sprites</h3>
+<br/>
+<p><a href="./files/clase15/2_Sprites.zip">Bajar un archivo con todos los ejemplos</a></p>
+<ul>
+	<li>Para sprites vamos a necesitar transparencias: 1_Transparency1.c y 1_Transparency2.c</li>
+	<li>Animación básica sin sprites: 2_BasicAnimation.c</li>
+	<li>Creando un "Sprite Sheet" desde BMPs: 3_CreateSpriteSheet.c</li>
+	<li>Animación usando la "Sprite Sheet": 4_SpriteSheetAnimation.c</li>
+	<li>También podemos bajarnos sprites ya hechos:
+		<ul>
+			<li><a href="http://spritedatabase.net/news">http://spritedatabase.net/news</a></li>
+			<li><a href="http://www.spriters-resource.com/">http://www.spriters-resource.com/</a></li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Gameloop</h3>
+<br/>
+<ul>
+	<li>El while(1) que uno nunca usaria...</li>
+	<li>Es una máquina de estados!!</li>
+	<li>Fundamental el manejo de eventos y timers</li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Gameloop</h3>
+<br/>
+<p>Ejemplo de juego "sencillo" (38+363 lineas): <a href="./files/clase15/1_SideShooter.zip">Bajar el zip</a></p>
+<p>Adaptado de <a href="http://fixbyproximity.com/2011/08/30/2d-game-dev-part-5-0-our-first-game/">fixbyproximity.com</a></p>
+<p style="font-size:70%;"><a href="./files/clase15/1_allegro_examples.html">Resumen y material adicional de fixbyproximity.com</a></p>
+<br/>
+<p style="text-align:left;">Algunas aclaraciones importantes sobre el material original:</p>
+<ul style="font-size:70%;">
+	<li>Esta en inglés</li>
+	<li>Fue realizado para Visual C++. Los ejemplos que acá vemos/resumí los he modificado para que compilen en Linux con GCC. Los originales usan algunas cosas de C99 y Cpp/OjectiveC.</li>
+	<li>Varios de los capitulos originales son acompañados con un video explicativo (en inglés).</li>
+</ul>
+</section>
+
+<section>
+<h2>Programando en Allegro</h2>
+<h3>Conceptos básicos: Addons</h3>
+<br/>
+<p>Permiten extender Allegro. Los mas comunes:</p>
+<ul>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Addons/Fonts">Fuentes de texto</a></li>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Addons/Audio">Reproduciendo audio</a></li>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Showing_a_basic_native_GUI_message_box">Cuadro de dialogo</a></li>
+</ul>
+</section>
+
+<section>
+<h2>Programando juegos</h2>
+<br/>
+<p>Algunos de los conceptos generales de juegos son:</p>
+<ul>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Game_Programming#Collision_detection_methods">Deteccion de colisiones</a></li>
+	<li>Render de objetos o imagenes</li>
+	<li><a href="http://fixbyproximity.com/2011/11/2d-game-dev-part-11-0-backgrounds/">Manejo de fondos (y su movimiento)</a></li>
+	<li>Sistemas de coordenadas</li>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Game_Programming#Vector_math">Matematica de vectores</a></li>
+	<li><a href="https://wiki.allegro.cc/index.php?title=How_to_implement_a_camera">Implementando camaras</a></li>
+</ul>
+<br/><br/>
+<p>Estos conceptos son mucho mas sencillos de aplicar en 2D, pero también se pueden extender al desarrollo 3D.</p>
+</section>
+
+<section>
+<h2>Material de referencia</h2>
+<br/>
+<ul>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Allegro_5_API_Tutorials">Allegro 5 API Tutorials (fuente de muchos de los ejemplos)</a></li>
+	<li><a href="http://fixbyproximity.com/2d-game-development-course/">Curso de programación de juegos 2D con Allegro</a></li>
+	<li><a href="https://wiki.allegro.cc/index.php?title=Game_Programming">Progamación de Juegos por la gente de Allegro</a></li>
+	<li><a href="http://es.tldp.org/Allegro-es/web/online/allegro.html">Manual de Allegro 4 en castellano (mucho ha cambiado)</a></li>
+</ul>
+</section>
+
+<section>
+<h2>Librerias para manejo de log</h2>
+<br/>
+<ul>
+	<li><a href="./files/clase15/logging.html">Ejemplos sencillos de logging y syslog</a></li>
+	<li><a href="https://github.com/kala13x/slog">Slog</a> : Is <b style="color:cyan;">simple</b> logging library for C/C++</li>
+	<li>Algunos ejemplos encontrados <a href="http://stackoverflow.com/questions/17741163/is-there-any-log-library-for-c-like-log4j-for-c">online en stackoverflow</a>:
+		<ul>
+			<li><a href="http://log4c.sourceforge.net/">log4c</a> : Hay paquete en Ubuntu</li>
+			<li><a href="https://github.com/christianhujer/sclog4c">sclog4c</a> : <b style="color:cyan;">Simple</b> configurable logging for C.</li>
+			<li><a href="https://github.com/HardySimpson/zlog">zlog</a> : A reliable, high-performance, thread safe, flexible, clear-model, pure C logging library.</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h1>Otras librerias</h1>
+<br/>
+<ul>
+	<li><a href="https://code.google.com/p/guichan/">Small, efficient C++ GUI library designed for games</a></li>
+	<li><a href="https://github.com/fffaraz/awesome-cpp">A comprehensive list of C/C++ libraries</a></li>
+</ul>
+<br/><br/><br/>
+<h3>Installing guichan (for Allegro)</h3>
+<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+sudo apt-get install libguichan-allegro-0.8.1-1
+</code></pre>
 </section>
 <!-- SLIDES HERE -->
 

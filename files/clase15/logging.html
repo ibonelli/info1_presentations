@@ -1,0 +1,78 @@
+<body>
+<h1>Libreria muy sencilla para logging</h1>
+<p>de <a href="http://stackoverflow.com/questions/6508461/logging-library-for-c">http://stackoverflow.com/questions/6508461/logging-library-for-c</a></p>
+<h2>Archivo log.h</h2>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+#ifndef LOG_H
+#define LOG_H
+
+void log(const char* tag, const char* message);
+
+#endif /* LOG_H */
+</code></pre>
+<br/>
+<h2>Archivo log.c</h2>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+#include "log.h"
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+void log(const char* tag, const char* message) {
+   time_t now;
+   time(&now);
+   printf("%s [%s]: %s\n", ctime(&now), tag, message);
+}
+</code></pre>
+
+<h1>Syslog</h1>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+man syslog
+	#include &lt;syslog.h&gt;
+	void openlog(const char *ident, int option, int facility);
+	void syslog(int priority, const char *format, ...);
+	void closelog(void);
+</code></pre>
+<p>Ejemplo sencillo de uso: hello_syslog.c</p>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;syslog.h&gt;
+
+int main(void) {
+
+ openlog("slog", LOG_PID|LOG_CONS, LOG_USER);
+ syslog(LOG_INFO, "A different kind of Hello world ... ");
+ closelog();
+
+ return 0;
+}
+</code></pre>
+<h1>Syslog, pero en otro archivo:</h1>
+<p>To log into a different file you'll need to specify the file in the syslog configuration.</p>
+<p>De <a href="http://stackoverflow.com/questions/10952515/c-c-syslog-to-custom-file-not-var-log-syslog-but-var-log-mylog-ubuntu-12">http://stackoverflow.com/questions/10952515/c-c-syslog-to-custom-file-not-var-log-syslog-but-var-log-mylog-ubuntu-12</a></p>
+<p>In my folder /etc/rsyslog.d there are two files:</p>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+20-ufw.conf and 50-default.conf
+</code></pre>
+<p>I added a file:</p>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+sudo nano /etc/rsyslog.d/30-mycustomname.conf
+</code></pre>
+<h2>Archivo:</h2>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+# Log QSD Centro generated log messages to file
+if $programname == 'centro' then /var/log/centro.log
+# Uncomment the following to stop logging anything that matches the last rule.
+& ~
+</code></pre>
+<p>Then I check that the file /var/log/centro.log does not exist</p>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+sudo rm -f /var/log/centro.log
+</code></pre>
+<p>Then I restart the service</p>
+<pre><code data-trim style="font-family: monospace; background-color: #eee; display: block;">
+sudo service rsyslog restart
+</code></pre>
+
+</body>
