@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Libreria OpenCV</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Ignacio Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+
+<!-- SLIDES HERE -->
+<section>
+<h1>OpenCV</h1>
+<ul>
+<li>Biblioteca open source para C/C++ para procesamiento de imagenes y vision computarizada, desarrollada inicialmente por Intel.</li>
+<li>Disponible en Linux, Mac, y Windows</li>
+<li>Tiene estructuras básicas de datos para operaciones con matrices y procesamiento de imagenes.</li>
+<li>Permite visualizar datos muy sencillamente y extraer informacion de imagenes y videos.</li>
+<li>Tiene funciones de captura y presentacion de imagenes.</li>
+</ul>
+</section>
+
+<section>
+<h2>Opencv se compone de 4 Modulos</h2>
+<ul>
+<li><b style="color:cyan;">cv</b>: Contiene las Funciones principales de la biblioteca</li>
+<li><b style="color:cyan;">cvaux</b>: Contiene las Funciones Auxiliares (experimental)</li>
+<li><b style="color:cyan;">cxcore</b>: Contiene las Estructuras de Datos y Funciones de soporte para Algebra lineal</li>
+<li><b style="color:cyan;">highgui</b>: Funciones para manejo de la GUI</li>
+</ul>
+</section>
+
+<section>
+<h2>Instalación Debian y compilación</h2>
+<ul>
+<li>apt-get install<ul>
+<li>libopencv-dev libopencv-core2.3</li>
+<li>libopencv-core-dev libopencv-highgui2.3</li>
+<li>libopencv-highgui-dev opencv-doc</li>
+</ul>
+</li>
+<li>
+<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+pkg-config --cflags --libs opencv
+</code></pre>
+<ul>
+<li><span style="font-family:monospace;">pkg-config -list-all</span>    (man pkg-config)<ul>
+<li>| grep allegro</li>
+<li>| grep opencv</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="width:800px;">Compilando:
+<pre><code data-trim style="font-size:25px; margin-top:20px; width:800px;" class="bash">
+gcc -oej1 ej1-jpg.c `pkg-config --cflags --libs opencv`
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Nombres de funciones y datos</h2>
+<ul style="font-size:80%;">
+<li>Convenciones para los nombres de las Funciones
+<ul style="font-size:80%;">
+<li><b style="color:cyan;">cvActionTargetMod (...)</b><ul>
+<li><b style="color:cyan;">Action</b>: Funcion core. Ej: set, create.</li>
+<li><b style="color:cyan;">Target</b>: Elemento destino de la Accion. Ej: Contorno, polígono.</li>
+<li><b style="color:cyan;">Mod</b>: Modificadores opcionales. Ej: Tipo de argumento.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Matrix data types
+<ul style="font-size:80%;">
+<li>CV &lt;bit depth&gt;(S|U|F)C&lt;número de canales&gt;</li>
+<li><b style="color:cyan;">S</b>: Entero Signado, <b style="color:cyan;">U</b>: Entero no Signado, <b style="color:cyan;">F</b>: Float<ul>
+<li><b>Ej:</b> <b style="color:cyan;">CV 8UC1</b> : matriz de un canal de 8 bits no signados,<br/>
+<b style="color:cyan;">CV 32FC2</b>: matriz de dos canales de 32 bits punto flotante.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tipos de datos de imagenes
+<ul style="font-size:80%;">
+<li>IPL DEPTH &lt;bit depth&gt;(S|U|F)<ul>
+<li><b>Ej:</b> <b style="color:cyan;">IPL DEPTH 8U</b> : imagen de 8 bits no signados.<br/>
+<b style="color:cyan;">IPL DEPTH 32F</b>: imagen de 32 bits punto flotante.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Documentación</h2>
+<ul>
+<li><a href="http://docs.opencv.org/">http://docs.opencv.org/</a></li>
+<li>/usr/share/doc/opencv-doc</li>
+<li>/usr/share/doc/opencv-doc/examples</li>
+<li>opencv2refman.pdf<ul>
+<li>/usr/share/doc/opencv-doc/opencv2refman.pdf.gz</li>
+<li>http://docs.opencv.org/opencv2refman.pdf</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Ejercicio1: ej1-jpg.c</h2>
+<p>gcc -oej1 ej1-jpg.c <code>pkg-config --cflags --libs opencv</code></p>
+</section><section>
+<h2>Funciones Básicas</h2>
+<ul>
+<li>Carga de una imagen<ul>
+<li>IplImage *image = cvLoadImage("lenna.jpeg");</li>
+</ul>
+</li>
+<li>Crear y Ubicar una ventana<ul>
+<li>cvNamedWindow ("ejemplo1", CV_WINDOW_AUTOSIZE);</li>
+<li>cvMoveWindow ("ejemplo1", 100, 100);</li>
+<li>// desde borde superior izquierdo</li>
+</ul>
+</li>
+<li>Mostrar la imagen en la ventana creada<ul>
+<li>cvShowImage("ejemplo1", image);</li>
+</ul>
+</li>
+<li>Liberar recursos<ul>
+<li>cvReleaseImage(&amp;image);</li>
+</ul>
+</li>
+<li>Recordar convención de nombres: prefijoAcciónDestino</li>
+</ul>
+</section><section>
+<h2>La estructura IplImage</h2>
+<p>typedef struct _IplImage {
+    int nSize;
+    int ID;
+    int nChannels;
+    int alphaChannel;
+    int depth;
+    char colorModel[4];
+    char channelSeq[4];
+    int dataOrder;
+    int origin;
+    int align;
+    int width;
+    int height;
+    struct _IplROI <em>roi;
+    struct _IplImage </em>maskROI;
+    void <em>imageId;
+    struct _IplTileInfo </em>tileInfo;
+    int imageSize;
+    char <em>imageData;
+    int widthStep;
+    int BorderMode[4];
+    int BorderConst[4];
+    char </em>imageDataOrigin;
+    } IplImage;</p>
+</section><section>
+<h2>La estructura IplImage</h2>
+<ul>
+<li>char *imageData;<ul>
+<li>La imagen en memoria</li>
+<li>Cada elemento un pixel</li>
+<li>Un byte o 4 dependiendo si color o no</li>
+</ul>
+</li>
+<li>int nChannels;<ul>
+<li>1 si matiz de grises</li>
+<li>RGB: 3 canales mas un 4to para canal alpha<ul>
+<li>(o transparencias como en PNG o GIF)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>int width; int height;<ul>
+<li>Lo que uno se imagina ;)</li>
+</ul>
+</li>
+<li>int widthStep;<ul>
+<li>Cuanto avanzar para pasar a la siguiente linea.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2>Invirtiendo una image</h2>
+<p>ej3-invert.c</p>
+</section><section>
+<h2>La estructura IplImage</h2>
+<ul>
+<li>Cualquier imagen va a parar a una estructura de este tipo.</li>
+<li>OpenCV permite visualizar videos desde dos fuentes de informacion:<ul>
+<li>Camara web conectada a la PC</li>
+<li>Archivo avi.</li>
+</ul>
+</li>
+<li>La imagen de video se compone de cuadros de n*m pixeles</li>
+<li>Cada cuadro se carga en una estructura IplImage</li>
+</ul>
+</section><section>
+<h2>Usando la camara de video</h2>
+<p>ej2-webcam.c</p>
+</body>
+</html>
+</section>
+<!-- SLIDES HERE -->
+
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
