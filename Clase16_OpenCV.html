@@ -69,24 +69,26 @@
 <section>
 <h2>Instalación Debian y compilación</h2>
 <ul>
-<li>apt-get install<ul>
-<li>libopencv-dev libopencv-core2.3</li>
-<li>libopencv-core-dev libopencv-highgui2.3</li>
-<li>libopencv-highgui-dev opencv-doc</li>
-</ul>
+<li style="width:850px;">Instalando:
+<pre><code data-trim style="font-size:25px; margin-top:20px; width:850px;" class="bash">
+apt-get install libopencv-dev opencv-doc
+apt-get install libopencv-core2.4 libopencv-core-dev
+apt-get install libopencv-highgui2.4 libopencv-highgui-dev
+</code></pre>
 </li>
-<li>
-<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+<li>Como compilar:
+<pre><code data-trim style="font-size:25px; margin-top:20px;" class="bash">
 pkg-config --cflags --libs opencv
 </code></pre>
-<ul>
-<li><span style="font-family:monospace;">pkg-config -list-all</span>    (man pkg-config)<ul>
+<ul style="font-size:80%; font-family:monospace;">
+<li>pkg-config -list-all<ul>
 <li>| grep allegro</li>
 <li>| grep opencv</li>
 </ul>
 </li>
 </ul>
 </li>
+<br/>
 <li style="width:800px;">Compilando:
 <pre><code data-trim style="font-size:25px; margin-top:20px; width:800px;" class="bash">
 gcc -oej1 ej1-jpg.c `pkg-config --cflags --libs opencv`
@@ -128,47 +130,65 @@ gcc -oej1 ej1-jpg.c `pkg-config --cflags --libs opencv`
 </ul>
 </li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Documentación</h2>
+<br/>
 <ul>
 <li><a href="http://docs.opencv.org/">http://docs.opencv.org/</a></li>
-<li>/usr/share/doc/opencv-doc</li>
-<li>/usr/share/doc/opencv-doc/examples</li>
-<li>opencv2refman.pdf<ul>
-<li>/usr/share/doc/opencv-doc/opencv2refman.pdf.gz</li>
-<li>http://docs.opencv.org/opencv2refman.pdf</li>
+<li><a href="/usr/share/doc/opencv-doc/">/usr/share/doc/opencv-doc/</a></li>
+<li><a href="http://docs.opencv.org/opencv2refman.pdf">http://docs.opencv.org/opencv2refman.pdf</a></li>
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>Ejercicio1: ej1-jpg.c</h2>
-<p>gcc -oej1 ej1-jpg.c <code>pkg-config --cflags --libs opencv</code></p>
-</section><section>
+</section>
+
+<section>
+<h2>Ejercicio1</h2>
+<h3>ej1b-bmp.c y ej1a-jpg.c</h3>
+<br/>
+<p>Estos ejemplos abren un archivo BMP uno (sin compresion)<br/> y JPG el otro (comprimido)</p>
+<br/>
+<div style="width:900px;">
+<pre><code data-trim style="font-size:25px; margin-top:20px; width:900px;" class="bash">
+gcc -oej1a ej1a-bmp.c `pkg-config --cflags --libs opencv`
+gcc -oej1b ej1a-jpg.c `pkg-config --cflags --libs opencv`
+</code></pre>
+</div>
+<br/>
+<p><a href="./files/clase16/OpenCV_Codigo.zip">Bajar el archivo con los códigos de ejemplo que veremos.</a></p>
+</section>
+
+<section>
 <h2>Funciones Básicas</h2>
-<ul>
-<li>Carga de una imagen<ul>
-<li>IplImage *image = cvLoadImage("lenna.jpeg");</li>
-</ul>
-</li>
-<li>Crear y Ubicar una ventana<ul>
-<li>cvNamedWindow ("ejemplo1", CV_WINDOW_AUTOSIZE);</li>
-<li>cvMoveWindow ("ejemplo1", 100, 100);</li>
-<li>// desde borde superior izquierdo</li>
-</ul>
-</li>
-<li>Mostrar la imagen en la ventana creada<ul>
-<li>cvShowImage("ejemplo1", image);</li>
-</ul>
-</li>
-<li>Liberar recursos<ul>
-<li>cvReleaseImage(&amp;image);</li>
-</ul>
-</li>
-<li>Recordar convención de nombres: prefijoAcciónDestino</li>
-</ul>
-</section><section>
+<p>Carga de una imagen</p>
+<pre style="width:650px;"><code data-trim style="font-size:25px; margin-top:20px; width:650px;" class="cpp">
+IplImage *image = cvLoadImage("lenna.jpeg");
+</code></pre>
+<p>Crear y Ubicar una ventana</p>
+<pre style="width:700px;"><code data-trim style="font-size:25px; margin-top:20px; width:700px;" class="cpp">
+cvNamedWindow ("ejemplo1", CV_WINDOW_AUTOSIZE);
+// Desde borde superior izquierdo
+cvMoveWindow ("ejemplo1", 100, 100);
+</code></pre>
+<p>Mostrar la imagen en la ventana creada</p>
+<pre style="width:450px;"><code data-trim style="font-size:25px; margin-top:20px; width:450px;" class="cpp">
+cvShowImage("ejemplo1", image);
+</code></pre>
+<p>Liberar recursos</p>
+<pre style="width:350px;"><code data-trim style="font-size:25px; margin-top:20px; width:350px;" class="cpp">
+cvReleaseImage(&amp;image);
+</code></pre>
+<br/>
+<p>Recordar convención de nombres: <span style="font-size:80%; font-family:monospace;">prefijo<span style="color:cyan;">Acción</span>Destino</span></p>
+</section>
+
+<section>
 <h2>La estructura IplImage</h2>
-<p>typedef struct _IplImage {
+<ul class="col" style="width:380px; display:inline-block; vertical-align:top;">
+<pre style="width:380px;"><code data-trim style="font-size:25px; margin-top:20px; width:380px;" class="cpp">
+typedef struct _IplImage {
     int nSize;
     int ID;
     int nChannels;
@@ -181,63 +201,112 @@ gcc -oej1 ej1-jpg.c `pkg-config --cflags --libs opencv`
     int align;
     int width;
     int height;
-    struct _IplROI <em>roi;
-    struct _IplImage </em>maskROI;
-    void <em>imageId;
-    struct _IplTileInfo </em>tileInfo;
+    // sigue...
+</code></pre>
+</ul>
+<ul class="col" style="width:490px; display:inline-block; vertical-align:top;">
+<br/><br/><br/><br/><br/>
+<pre style="width:490px;"><code style="font-size:25px; margin-top:20px; width:490px;" class="cpp">
+    struct _IplROI *roi;
+    struct _IplImage *maskROI;
+    void *imageId;
+    struct _IplTileInfo *tileInfo;
     int imageSize;
-    char <em>imageData;
+    char *imageData;
     int widthStep;
     int BorderMode[4];
     int BorderConst[4];
-    char </em>imageDataOrigin;
-    } IplImage;</p>
-</section><section>
+    char *imageDataOrigin;
+    } IplImage;
+</code></pre>
+</ul>
+</section>
+
+<section>
 <h2>La estructura IplImage</h2>
 <ul>
-<li>char *imageData;<ul>
+<li><span style="font-family:monospace;">char *imageData;</span><ul>
 <li>La imagen en memoria</li>
 <li>Cada elemento un pixel</li>
-<li>Un byte o 4 dependiendo si color o no</li>
+<li>Un byte o 4 dependiendo si usamos color o no</li>
 </ul>
 </li>
-<li>int nChannels;<ul>
-<li>1 si matiz de grises</li>
+<li><span style="font-family:monospace;">int nChannels;</span><ul>
+<li>1 si es matiz de grises</li>
 <li>RGB: 3 canales mas un 4to para canal alpha<ul>
 <li>(o transparencias como en PNG o GIF)</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>int width; int height;<ul>
+<li><span style="font-family:monospace;">int width; int height;</span><ul>
 <li>Lo que uno se imagina ;)</li>
 </ul>
 </li>
-<li>int widthStep;<ul>
+<li><span style="font-family:monospace;">int widthStep;</span><ul>
 <li>Cuanto avanzar para pasar a la siguiente linea.</li>
 </ul>
 </li>
 </ul>
-</section><section>
-<h2>Invirtiendo una image</h2>
-<p>ej3-invert.c</p>
-</section><section>
+</section>
+
+<section>
+<h2>Manejando grises o color</h2>
+<br/>
+<ul>
+<li>8 bit depth: Escala de grises</li>
+<li>Color 32bits:
+	<ul>
+		<li>R: Rojo (8bits)</li>
+		<li>G: Verde (8bits)</li>
+		<li>B: Azul (8bits)</li>
+		<li>Transparente (8bits)</li>
+	</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Invirtiendo una imagen</h2>
+<br/>
+<p>ej3a-invert.c : Invirtiendo imagen de un canal (matiz de grises)</p>
+<div style="width:900px;">
+<pre><code data-trim style="font-size:25px; margin-top:20px; width:900px;" class="bash">
+gcc -oej3a ej3a-invert.c `pkg-config --cflags --libs opencv`
+</code></pre>
+</div>
+<br/>
+<p>ej3b-invert.c : Invirtiendo una imagen color</p>
+<div style="width:900px;">
+<pre><code data-trim style="font-size:25px; margin-top:20px; width:900px;" class="bash">
+gcc -oej3b ej3b-invert.c `pkg-config --cflags --libs opencv`
+</code></pre>
+</div>
+</section>
+
+<section>
 <h2>La estructura IplImage</h2>
 <ul>
 <li>Cualquier imagen va a parar a una estructura de este tipo.</li>
 <li>OpenCV permite visualizar videos desde dos fuentes de informacion:<ul>
 <li>Camara web conectada a la PC</li>
-<li>Archivo avi.</li>
+<li>Archivo avi</li>
 </ul>
 </li>
 <li>La imagen de video se compone de cuadros de n*m pixeles</li>
 <li>Cada cuadro se carga en una estructura IplImage</li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Usando la camara de video</h2>
-<p>ej2-webcam.c</p>
-</body>
-</html>
+<br/>
+<p>ej3a-invert.c : Invirtiendo imagen de un canal (matiz de grises)</p>
+<div style="width:900px;">
+<pre><code data-trim style="font-size:25px; margin-top:20px; width:900px;" class="bash">
+gcc -oej2 ej2-webcam.c `pkg-config --cflags --libs opencv`
+</code></pre>
+</div>
 </section>
 <!-- SLIDES HERE -->
 
