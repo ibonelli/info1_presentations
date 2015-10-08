@@ -47,6 +47,10 @@
 <!-- SLIDES HERE -->
 <section>
 <h1>OpenCV</h1>
+</section>
+
+<section>
+<h2>OpenCV</h2>
 <ul>
 <li>Biblioteca open source para C/C++ para procesamiento de imagenes y vision computarizada, desarrollada inicialmente por Intel.</li>
 <li>Disponible en Linux, Mac, y Windows</li>
@@ -81,7 +85,7 @@ apt-get install libopencv-highgui2.4 libopencv-highgui-dev
 pkg-config --cflags --libs opencv
 </code></pre>
 <ul style="font-size:80%; font-family:monospace;">
-<li>pkg-config -list-all<ul>
+<li>pkg-config --list-all<ul>
 <li>| grep allegro</li>
 <li>| grep opencv</li>
 </ul>
@@ -285,6 +289,10 @@ gcc -oej3b ej3b-invert.c `pkg-config --cflags --libs opencv`
 </section>
 
 <section>
+<h1>Llegamos aca...</h1>
+</section>
+
+<section>
 <h2>La estructura IplImage</h2>
 <ul>
 <li>Cualquier imagen va a parar a una estructura de este tipo.</li>
@@ -307,6 +315,90 @@ gcc -oej3b ej3b-invert.c `pkg-config --cflags --libs opencv`
 gcc -oej2 ej2-webcam.c `pkg-config --cflags --libs opencv`
 </code></pre>
 </div>
+</section>
+
+</section>
+<section data-background="#007777">
+
+<section>
+<h1>Procesamiento de imagenes</h1>
+</section>
+
+<section>
+<h2>Algunos algoritmos</h2>
+<br/>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<ul>
+		<li>Resize</li>
+		<li>Blur<ul>
+			<li>Simple</li>
+			<li>Por radio</li>
+			</ul>
+		</li>
+		<li>Bordes<ul>
+			<li>Sencillo</li>
+			<li>Canny</li>
+			</ul>
+		</li>
+	</ul>
+</ul>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<p> </p>
+</ul>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<img src="files/clase16/OpenCV_img0.png"/>
+</ul>
+</section>
+
+<section>
+<h2>Ejemplos</h2>
+<br/>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<ul>
+		<li>Base de trabajo<ul>
+			<li>ej5-imgproc.h</li>
+			<li>ej5-imgproc.c</li>
+			</ul>
+		</li>
+	</ul>
+</ul>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<ul>
+		<li>Ejemplos<ol>
+			<li>ej5b-resize.c</li>
+			<li>ej5c-blur.c</li>
+			<li>ej5c-blur2.c</li>
+			<li>ej5a-bordes.c</li>
+			<li>ej4a-canny.c</li>
+			<li>ej4b-canny.c</li>
+			</ol>
+		</li>
+	</ul>
+</ul>
+<br/><br/>
+<p>Para cada ejemplo crearemos un archivo.c con el código de procesar_imagen()</p>
+</section>
+
+<section>
+<h2>Algoritmo Resize y Blur</h2>
+<br/>
+<ul>
+	<li>Resize<ul>
+		<li>Voy recorriendo y sacando el promedio de a 4 pixels</li>
+		<li>Pnuevo = (Pi + Px + Py + Pz ) / 4</li>
+		</ul>
+	</li>
+	<br/>
+	<li>Blur<ul>
+		<li>Voy recorriendo y sacando el promedio de los pixeles de alrededor.</li>
+		<li>Version sencilla 3x3. Version mejorada recorro el entorno con un radio de acción.</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<img src="files/clase16/OpenCV_img5b.jpg"/>
 </section>
 <!-- SLIDES HERE -->
 
