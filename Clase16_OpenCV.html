@@ -398,7 +398,59 @@ gcc -oej2 ej2-webcam.c `pkg-config --cflags --libs opencv`
 </section>
 
 <section>
+<h2>Algoritmo de bordes sencillo</h2>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<img src="files/clase16/limite.png"/>
+</ul>
+<ul class="col" style="display:inline-block; vertical-align:top;">
+	<img src="files/clase16/OpenCV_img0.png"/>
+</ul>
+<br><br>
+<p>Si llevamos esto a puntos: <strong>2*pi - px - py</strong></p>
+<p>Con esto logramos un algoritmo similar a <br>la definición de derivada en horizontal y vertical.</p>
+</section>
+
+<section>
 <img src="files/clase16/OpenCV_img5b.jpg"/>
+</section>
+
+<section>
+<h2>Algoritmo de bordes sencillo</h2>
+<br>
+<ul>Como resultado tendremos:
+	<ul>
+		<li>Si los valores de cada punto son similares:
+			<ul><li>La resta nos lleva al negro</li></ul></li>
+		<li>Si los valores de cada punto son distintos:
+			<ul><li>La resta nos lleva al blanco</li></ul></li>
+	</ul>
+</ul>
+</section>
+
+<section>
+<h2>Canny</h2>
+<br>
+<ul>Del <strong>opencv2refman.pdf</strong> (p135):
+<li>image: single-channel 8-bit input image.</li>
+<li>edges: output edge map; it has the same size and type as image.</li>
+<li>threshold1: first threshold for the hysteresis procedure.</li>
+<li>threshold2: second threshold for the hysteresis procedure.</li>
+<li>apertureSize: aperture size for the Sobel() operator.</li></ul>
+</section>
+
+<section>
+<h2>Histeresis</h2>
+<br>
+<img src="files/clase16/hysteresis.png"/>
+</section>
+
+<section>
+<h2>Canny / Detección bordes</h2>
+<br>
+<ul><li><a href="https://en.wikipedia.org/wiki/Canny_edge_detector#Double_Threshold">Explicación Canny</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Edge_detection#Approaches">Detección de bordes</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Hist%C3%A9resis">Histéresis</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Feature_detection_(computer_vision)">Visión artificial</a></li></ul>
 </section>
 <!-- SLIDES HERE -->
 
