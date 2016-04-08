@@ -1,0 +1,39 @@
+Por ejemplo, para comer panqueques debemos:
+* Organizar la cocina
+* Hacer los panqueques
+* Y finalmente servirlos
+
+Pero cada una de estas tareas se puede dividir en sub-tareas:
+
+Organizando la cocina
+	Limpiar las superficies
+	Conseguir un bol, un batidor, una cuchara, un tamizador o cedazo y una sarten
+	Debemos tener harina, sal, huevos, leche y manteca
+	Debemos ponernos un delantal
+Para hacer los panqueques
+	Primero tamizar la sal y la harina poniendolos en el bol
+	Romper los huevos y ponerlos dentro del bol
+	Batir hasta lograr una mezcla homogenea
+	Agregar el agua y la leche
+	Agregar la manteca (clarificada)
+	Batir nuevamente hasta lograr una mezcla homogenea 
+	Cocinar la mezcla resultante en una sarten
+Y finalmente servirlos
+	Buscar un plato
+	Colocar los panqueques a medida que los cocinamos
+	Llevar el plato a la mesa
+
+Por supuesto cada uno de estos pasos se puede subdividir aun mas.
+
+Por ejemplo el cocinarlos:
+	Poner la sarten al fuego
+	Esperar que tenga la temperatura correcta
+	Colocar una medida de la mezcla que hicimos
+	Cubrir toda la superficie de la sarten con la mezcla
+	Levantar el borde con una espatula y ver la parte de abajo del panqueque 
+	Cuando tome un color y consistencia de cocido darlo vuelta
+	Levantar el borde con una espatula y ver la parte de abajo del panqueque 
+	Cuando tome un color y consistencia de cocido sacarlo
+
+Y por supuesto podemos nuevamente subdividir las tareas con mayor detalle.
+ 

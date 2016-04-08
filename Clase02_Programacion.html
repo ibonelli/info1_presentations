@@ -148,8 +148,11 @@
 </ul>
 </br></br>
 <p>Mas en: <a href="http://en.wikipedia.org/wiki/Top-down_and_bottom-up_design">wikipedia.org/wiki/Top-down_and_bottom-up_design</a></p>
-</section><section>
+</section>
+
+<section>
 <h2>Diseño descendente (Top-down)</h2>
+<br>
 <ul>
 <li>Se descompone el sistema en partes para descubrir los sub-sistemas o módulos que lo componen. Inicialmente estos sub-sistemas serán cajas negras. </li>
 <li>Se trabaja primero en una visión global. Hasta que esta visión no es lograda no se analizan los sub-sistemas que la componen. </li>
@@ -157,21 +160,61 @@
 <li>Este proceso continua hasta que todos los sub-sistemas estén especificados (y dejen de ser "cajas negras"). </li>
 <li>Hasta que el proceso de descubrimiento no está terminado no se puede comenzar a programar o hacer pruebas. </li>
 </ul>
-</section><section>
-<h2>Diseño ascendente (Bottom-up)</h2>
-<ul>
-<li>Se juntan partes conocidas hasta llegar a tener un sistema "emergente" que solucione el problema. </li>
-<li>También es conocido como aproximación "orgánica". O sea el sistema se va construyendo o creciendo (como un organismo) hasta poder resolver el problema. </li>
-<li>Una de las ventajas es que permite hacer pruebas mucho antes que Top-Down. </li>
+</section>
+
+<section>
+<h2>Diseño descendente (Top-down)</h2>
+<br>
+<ul class="col" style="width: 400px;">
+	<p>Ejemplo: Haciendo un paqueque</p>
+	<br>
+	<ul>
+		<li>Organizar la cocina</li>
+		<li>Hacer los panqueques</li>
+		<li>Finalmente servirlos</li>
+	</ul>
 </ul>
-</section><section>
+<ul class="col" style="width: 400px;">
+	<img src="files/clase02/ejemplo_top-down_panqueques.jpg"/>
+</ul>
+<br><br><br>
+<p style="font-size: 75%;"><a href="./files/clase02/ejemplo_top-down.txt">Ejemplo completo...</a></p>
+</section>
+
+<section>
+<h2>Diseño ascendente (Bottom-up)</h2>
+<br>
+<ul>
+	<li>Se juntan partes conocidas hasta llegar a tener un sistema "emergente" que solucione el problema. </li>
+	<li>También es conocido como aproximación "orgánica". O sea el sistema se va construyendo o creciendo (como un organismo) hasta poder resolver el problema. </li>
+	<li>Una de las ventajas es que permite hacer pruebas mucho antes que Top-Down. </li>
+</ul>
+</section>
+
+<section>
+<h2>Diseño ascendente (Bottom-up)</h2>
+<ul class="col" style="width: 300px;">
+	<img src="files/clase02/ejemplo_bottom-up_Lego-Ciudad-Tampa.jpg"/>
+</ul>
+<ul class="col" style="width: 500px;">
+	<p>Un ejemplo de análisis bottom-up es la construcción de algo con bloques (rasti, mil ladrillos o lego)</p>
+	<br><br>
+</ul>
+<p>Las partes constitutivas fueron creadas primero, y luego se construye lo que buscamos con ellas.</p>
+<p>Pero cuando las partes son creadas no tienen un propósito especifico. Ellas existen como bloques a usar.</p>
+</section>
+
+<section>
 <h2>¿Visiones contrapuestas?</h2>
+<br>
 <ul>
 <li>A pesar de ser dos formas opuestas de resolver/analizar problemas generalmente se utilizan en forma conjunta. </li>
 <li>La experiencia demuestra que lo mas conveniente (y rápido) es tratar de reutilizar código y usar librerías. </li>
 <li>El resultado es hacer un diseño descendente pero buscando sub-sistemas ya conocidos e implementados en librerías o problemas previos. </li>
 </ul>
-</section><section>
+</section>
+
+<section>
 <h2>Ejemplo de 3 niveles</h2>
 <p style="color: #4FC7CF;">Nivel superior, funciones principales. Solución usando el lenguaje del problema y enfocado en su solución.</p></br>
 <p>Sub-sistemas o módulos. Buscan especificar las cajas negras del nivel superior. No tienen necesariamente el lenguaje del problema. Se buscan comportamientos comunes y generales. Los módulos resultantes pueden ser reutilizados para resolver otros problemas.</p></br>
@@ -288,14 +331,14 @@
 	<li>Existen dos tipos de forma de ejecución:
 		<ul>
 			<li>Interpretado:
-				<ul>
+				<ul style="font-size: 75%;">
 					<li>Para ejecutar el programa hace falta un entorno o programa de ejecución.</li>
 					<li>Este programa o interprete ejecuta el código directamente.</li>
 					<li>Ejemplos: Python, JavaScript, PHP, Perl...</li>
 				</ul>
 			</li>
 			<li>Compilado:
-				<ul>
+				<ul style="font-size: 75%;">
 					<li>El programa pasa por un proceso de traducción del lenguaje en que se encuentra escrito (p.ej. C) a código de máquina.</li>
 					<li>El resultado es un programa que se ejecuta solo (sin necesidad de un interprete)</li>
 					<li>Ejemplos: C, C++, Pascal, Java...</li>
