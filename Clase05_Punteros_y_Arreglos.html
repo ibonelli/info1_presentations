@@ -479,8 +479,8 @@ for (i=0; i &lt; 20; i++)
 <ul>
 <li>Función que recibe un arreglo de enteros como argumento y calcula el promedio: 
 <pre><code data-trim style="font-size: 26px; padding: 20px;" class="cpp">
-int promedioArray (int D[ ], int num_elementos) {
-    int prom = 0;
+float promedioArray (int D[ ], int num_elementos) {
+    long prom = 0;
     int i;
     for (i=0; i &lt; num_elementos; i++)
         prom = prom + D[i];
@@ -613,11 +613,11 @@ void main(void) {
 <li>Formas de declarar strings:
 <pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
 char s[5] = "Hola";
-char s[] = "Hola";
-char str[] = "El tamaño se autodetermina";
+char s[15] = "Hola";
 char s[5] = {'H', 'o', 'l', 'a', '\0'};
 char s[5] = {'H', 'o', 'l', 'a', 0};
-char *pS = "Hola"; /* *pS[i] puede no ser escribible */
+char *pS = "Hola";
+/* *pS[i] no se puede escribir mas tarde (const string) */
 </code></pre>
 </li>
 <br/>
@@ -634,9 +634,9 @@ char *pS = "Hola"; /* *pS[i] puede no ser escribible */
 <br/>
 <ul>
 <li>Declaración del tamaño de un string a partir de una constante</li>
-<pre style="width: 750px;"><code data-trim style="font-size: 26px; padding: 20px; width: 750px;" class="cpp">
+<pre><code data-trim style="font-size: 26px; padding: 20px; width: 750px;" class="cpp">
 define N 50
-char str[N];  /* se reserva lugar para un string */
+char str[N];
 </code></pre>
 <br/>
 <li>Declaración e inicialización de un string </li>
@@ -646,7 +646,7 @@ char str[50] = "Este es el contenido inicial";
 <br/>
 <li>Definición implícita de tamaño</li>
 <pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
-char str[] = "El tamaño se autodetermina";</p>
+char str[] = "El tamaño se autodetermina";
 </code></pre>
 </ul>
 </section>
