@@ -365,8 +365,8 @@ for(i=0,i&lt;2,i++)
 <br/>
 <ul>
 	<li>STDIO.H<ul>
-		<li style="font-family: monospace;">char *gets(char *s);</li>
-		<li style="font-family: monospace;">int puts(const char *s);</li>
+		<li style="font-family: monospace;">char *fgets(char *s, int size, <span style="color: #4FC7CF;">stdin</span>);</li>
+		<li style="font-family: monospace;">int fputs(const char *s, <span style="color: #4FC7CF;">stdout</span>);</li>
 	</ul></li>
 	<br/>
 	<li>STRING.H<ul>
@@ -375,6 +375,8 @@ for(i=0,i&lt;2,i++)
 		<li>strtok()</li>
 	</ul></li>
 </ul>
+<br/><br/>
+<p style="font-size: 90%;">Nota: El <span style="color: #4FC7CF;">stdin</span> es el teclado, y el <span style="color: #4FC7CF;">stdout</span> es la pantalla.</p>
 </section>
 
 <section>
