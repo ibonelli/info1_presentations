@@ -116,20 +116,21 @@ pid_t fork(void);
 						</br><p>El proceso hijo es un duplicado del padre, pero</br>tiene un PID distinto (valor retornado pid_t).</p> 
 					</section>
 					<section>
-						<h2>fork() retorna...</h2>
-						</br><ul>
+						</br><h3>fork() retorna...</h3>
+						<ul>
 						<li>0 : En el proceso nuevo (hijo)</li>
 						<li>-1 : Si hay un error</li>
 						<li>pid: El process ID del proceso hijo al padre</li>
 						</ul>
-					</section>
-					<section>
-						<h2>Ejemplo1:</h2>
+						</br></br></br>
+						<h3>Ejemplo1:</h3>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ gcc -o ej1 ej_fork.c
 						</code></pre>
-						</br><h2>Funciones</h2>
-						<ul>
+					</section>
+					<section>
+						<h2>Fork: Funciones</h2>
+						</br><ul>
 							<li>getpid() - Obtiene el PID del proceso actual.</li>
 							<li>getppid() - Obtiene el PID del proceso hijo.</li>
 							<li>wait() - Espera a que un proceso cambie de estado.</li>
