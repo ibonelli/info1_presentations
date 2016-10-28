@@ -135,15 +135,15 @@ $ gcc -o ej1 ej_fork.c
 							<li>getppid() - Obtiene el PID del proceso hijo.</li>
 							<li>wait() - Espera a que un proceso cambie de estado.</li>
 						</ul>
-					</section>
-					<section>
-						<p>man 2 wait</p>
+						</br></br><p>man 2 wait</p>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
 #include &lt;sys/types.h&gt;
 #include &lt;sys/wait.h&gt;
 pid_t wait(int *status);
 pid_t waitpid(pid_t pid, int *status, int options);
 						</code></pre>
+					</section>
+					<section>
 						</br><h2>Ejemplo2:</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 gcc -o ej2 ej_fork_kill.c
