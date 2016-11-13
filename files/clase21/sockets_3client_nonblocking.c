@@ -69,6 +69,12 @@ int main(int argc, char *argv[])
 
     memset((void *) buffer, '\0', 256);
 
+    /*
+     * Por un buffer de printf() debo hacer lo siguiente
+     * 		http://stackoverflow.com/questions/1716296/why-does-printf-not-flush-after-the-call-unless-a-newline-is-in-the-format-strin
+     */
+    setbuf(stdout, NULL);
+
     printf("wait...");
     do {
         /*
@@ -79,6 +85,7 @@ int main(int argc, char *argv[])
          */
         n = recv(sockfd,buffer,255,MSG_DONTWAIT);
         printf(".");
+        sleep(1);
     } while (n == -1);
 
     if (n < 0)
