@@ -14,15 +14,14 @@ int main(int argc, char *argv[])
 {
 	int sockfd, numbytes;  /* Contendra el numero de bytes recibidos
 				  despues de llamar a recv() */
-
-	/* Espera didactica */
-	int i;
-
 	char buf[MAXDATASIZE];  /* Buffer donde se reciben los datos */
 	struct hostent *he;     /* Se utiliza para convertir el nombre del
 				   host a su direccion IP */
 	struct sockaddr_in their_addr;  /* direccion del server donde se
 					conectara */
+	/* Espera didactica */
+	int i;
+
 /* Tratamiento de la linea de comandos. */
 	if (argc != 2)
 	{

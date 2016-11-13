@@ -5,35 +5,43 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <netinet/in.h>
+#include <netinet/tcp.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
 
 #define MYPORT 3490    /*Numero de puerto donde se conectaran los clientes*/
-#define BACKLOG 10     /* Tamanio de la cola de conexiones recibidas */
+#define BACKLOG 10     /* Tama¤o de la cola de conexiones recibidas */
 #define MAXDATASIZE 100 /* maxima cant. De bytes que se pueden enviar
 						   en una llamada a send */
 
 main()
 {
 	int sockfd;     /* El servidor escuchara por sockfd */
-	int newfd;      /* las transferencias de datos se realizar 
-					   mediante newfd */
+	int newfd;      /*  las transferencias de datos se realizar 
+						mediante newfd */
 	char buffer[MAXDATASIZE];  /* Buffer donde se reciben los datos */
-
-	/* Espera didactica */
-	int i;
-
 	struct sockaddr_in my_addr;     /* contendra la direccion IP y el 
 					numero de puerto local */
 	struct sockaddr_in their_addr;  /* Contendra la direccion IP y 
 					numero de puerto del cliente */
 	int sin_size;   /* Contendra el tamanio de la escructura sockaddr_in */
+
+	/* Espera didactica */
+	int i;
+	/*
+	 * Vamos a deshabilitar Nagle's algorithm para que envie paquetes de 1byte
+	 * 		https://en.wikipedia.org/wiki/Nagle%27s_algorithm
+	 * 		http://www.unixguide.net/network/socketfaq/2.16.shtml
+	 */
+	int flag = 1, result;
+
 	if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) /*Crea un socket
 					 y verifica si hubo algun error*/
 	{
 		perror("socket");
 		exit(1);
 	}
+
 
 /* Asignamos valores a la estructura my_addr para luego poder llamar a la 
 funcion bind() */
@@ -75,7 +83,14 @@ maximo */
 			strcpy(buffer,"Hello, world!\n");
 			if (send(newfd, buffer, strlen(buffer), 0) == -1)
 				perror("send");
-
+		/* Vamos a deshabilitar Nagle's algorithm */
+			result = setsockopt(newfd,            /* socket affected */
+				IPPROTO_TCP,     /* set option at TCP level */
+				TCP_NODELAY,     /* name of option */
+				(char *) &flag,  /* the cast is historical cruft */
+				sizeof(int));    /* length of option value */
+			if (result < 0)
+				perror("TCP_NODELAY");
 			for(i=0;i<10;i++) {
 				sleep(1);
 				strcpy(buffer,"SEND-WAIT-FRAME");
@@ -86,7 +101,6 @@ maximo */
 			strcpy(buffer,"SEND-EXIT-FRAME");
 			if (send(newfd, buffer, strlen(buffer), 0) == -1)
 				perror("send");
-
 			close(newfd);
 			exit(0);
 		}
