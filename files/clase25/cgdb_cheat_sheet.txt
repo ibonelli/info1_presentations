@@ -1,0 +1,30 @@
+---------------------
+CGDB : Curses GDB
+---------------------
+
+Modo consola, recomendado:
+	sudo apt-get install cgdb
+
+GDB por defecto:
+* ESC : pasa a modo source window (CGDB)
+* i : vuelve a modo GDB
+
+Modo Source window (CGDB):
+* Funcionan las flechas para moverse
+* Mas funcs: file:///home/ignacio/Desktop/Info1/0-Clase24/cgdb.html#CGDB-Mode
+
+Breakpoints (space bar):
+* You can set or delete breakpoints in CGDB from the source window.
+* Simply navigate to the line that you are interested in setting a breakpoint, and hit the space bar.
+* This will set a breakpoint on the line if one did not already exist.
+* The line number should turn red to indicate that a breakpoint has been set.
+* Hitting the space bar again will delete the breakpoint.
+* If you disable the breakpoint, the line number will turn yellow, to represent the disabled breakpoint.
+
+---------------------
+Eclipse CDT
+---------------------
+
+IDE recomendado:
+	sudo apt-get install eclipse-cdt
+
