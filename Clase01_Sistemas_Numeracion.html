@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Sistemas de numeración</title>
+
+		<meta name="description" content="Info1 - Sistemas de numeración">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+<section>
+	<h3>Bit y Byte</h3>
+	<p>bit, nibble, byte...</p>
+</section>
+
+<section>
+	<h3>Suma</h3>
+	<ul>
+		<li><a href="./files/clase01n/suma.c">suma.c</a></li>
+		<li><a href="./files/clase01n/suma.txt">suma.txt</a></li>
+	</ul>
+</section>
+
+<section>
+	<h3>Representación</h3>
+	<p>hexa, binario, ASCII</p>
+	<br/>
+	<pre>
+Hecho
+* El hecho sucedió en casa
+* He hecho esto miles de veces
+
+Visto
+* Lo he visto seguido a Juan
+* Visto y considerando los sucedido...
+
+Disfrutemos mientras podamos...(dos gráficos)
+	</pre>
+</section>
+</section>
+
+<section>
+<section>
+	<h3>Unidad 2: Sistemas de Numeración y Representación numérica. Aritmética Binaria</h3>
+	<ul>
+		<li>Introducción. Los sistemas de numeración y su evolución histórica.</li>
+		<li>Sistemas de numeración decimal, binario, octal y hexadecimal.</li>
+		<li>Pasajes entre sistemas de números enteros y positivos.</li>
+		<li>Representación de Números signados: Convenio de signo y magnitud.</li>
+		<li>Convenio de complemento a uno. Convenio de complemento a dos.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Unidad 2: Sistemas de Numeración y Representación numérica. Aritmética Binaria</h3>
+	<ul>
+		<li>Operaciones de adición y de sustracción utilizando el convenio de complemento a dos.</li>
+		<li>Representación de números fraccionales. Notación punto fijo y punto flotante. Precisión y truncado. Errores en notación de punto flotante.</li>
+		<li>Formato IEEE 754.</li>
+		<li>Representación de caracteres: Binario Codificado Decimal (BCD), ASCII, EBCDIC, Unicode.</li>
+	</ul>
+</section>
+</section>
+
+<section>
+<section>
+	<h1>Sistemas de Numeración</h1>
+</section>
+
+<section>
+	<h3>Sistemas de Numeración</h3>
+	<ul>
+		<li>Dos tipos:
+			<ul>
+				<li>No posicionales: p/ej numeración romana</li>
+				<li>Posicionales: Como nuestro sistema decimal</li>
+			</ul>
+		</li>
+		<br/><li>Bases:
+			<ul>
+				<li>Decimal: Base 10 (Mano)</li>
+				<li>Duodecimal: Base 12 (Meses año)</li>
+			</ul>
+		</li>
+		<br/><li>Computadora: Binaria!
+			<ul>
+				<li>Base 2 (binario)</li>
+				<li>Base 8 (octal)</li>
+				<li>Base 16 (hexadecimal)</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Bases binarias</h3>
+	<a href="./files/clase01n/Sistemas_Binarios.png">
+		<img src="files/clase01n/Sistemas_Binarios.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Bit mas y menos significativo</h3>
+	<a href="./files/clase01n/LSB-MSB.png">
+		<img src="files/clase01n/LSB-MSB.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Conversión Decimal a Binario</h3>
+	<img src="files/clase01n/Conversiones1.png"/>
+</section>
+
+<section>
+	<h3>Conversión Binario a Decimal</h3>
+	<img src="files/clase01n/Conversiones2.png"/>
+	</a>
+	<img src="files/clase01n/Conversiones3.png"/>
+</section>
+
+<section>
+	<h3>Imprimiendo en distintos formatos</h3>
+	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	int numero = 0;
+
+	printf("Ejemplo: Conversión a octal/hexadecimal/ascii \n");
+	printf("Ingrese el numero a convertir \n");
+	scanf("%d", &numero);
+
+	printf("Dec: %d - Oct: %o - Hex: %x - Ascii: %c \n", \
+		numero, numero, numero, numero);
+
+	return 0;
+}
+	</code></pre>
+	<p>Compilemos y corramos el programa</p>
+	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+$ gcc -o conv conversion.c
+$ ./conv
+	</code></pre>
+</section>
+</section>
+
+<section>
+<section>
+	<h1>Códigos</h1>
+</section>
+
+<section>
+	<h3>Binario codificado en decimal (BCD)</h3>
+	<a href="./files/clase01n/BCD.png">
+		<img src="files/clase01n/BCD.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Tabla ASCII</h3>
+	<p>(American Standard Code for Information Interchange)</p>
+	<a href="./files/clase01n/ASCII.png">
+		<img src="files/clase01n/ASCII.png"/>
+	</a>
+</section>
+</section>
+
+<section>
+<section>
+	<h1>Operaciones Binarias</h1>
+	<br/><p>Distintas formas de llamarlo, pero siempre se refieren a operaciones lógicas</p>
+</section>
+
+<section>
+	<h3>NOT o Negación</h3>
+	<ul>
+		<li>Verdadero (negado) = Falso        ( 1! = 0 )</li>
+		<li>Falso (negado) = Verdadero        ( 0! = 1 )</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Multiplicación Lógica (AND &)</h3>
+	<a href="./files/clase01n/AND.png">
+		<img src="files/clase01n/AND.png"/>
+	</a>
+	<br/><br/>
+	<h3>Suma Lógica (OR |)</h3>
+	<a href="./files/clase01n/OR.png">
+		<img src="files/clase01n/OR.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Suma Exclusiva (XOR ^)</h3>
+	<a href="./files/clase01n/XOR.png">
+		<img src="files/clase01n/XOR.png"/>
+	</a>
+	<br/><br/>
+	<div style="text-align: left; font-size: 75%;">
+		<p>Mas sobre el tema:</p>
+		<ul>
+			<li><a href="http://es.wikipedia.org/wiki/Logica_binaria">Lógica binaria</a></li>
+			<li><a href="http://es.wikipedia.org/wiki/Algebra_de_Boole">Algebra de Boole</a></li>
+			<li><a href="http://es.wikipedia.org/wiki/Tabla_de_verdad">Tabla de verdad</a></li>
+			<li><a href="http://es.wikipedia.org/wiki/Operador_a_nivel_de_bits">Operador a nivel de bits</a></li>
+		</ul>
+	</div>
+</section>
+</section>
+
+<section>
+<section>
+	<h1>Números negativos y fraccionales</h1>
+</section>
+
+<section>
+	<h3>Complemento a 2 (CA2)</h3>
+	<ul>
+		<li>Es una forma de representar números negativos</li>
+		<br/><li>Complemento a 1 (CA1):
+			<ul><li>Tiene una doble representación del cero</li></ul>
+		</li>
+		<br/><li>Complemento a 2 (CA2):
+			<ul><li>Mejor rango ( 0 = -0 )</li></ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Complemento a 2 (CA2)</h3>
+	<a href="./files/clase01n/CA2.png">
+		<img src="files/clase01n/CA2.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Números fraccionales en binario</h3>
+	<ul>
+		<br/><li>Representar números fraccionales en binario puede llevar a errores de conversión.</li>
+		<br/><li>No todos los números fraccionales son representables sin error en binario</li>
+		<br/><li>Todo número fraccional representado en binario será multiplo de 1/2<sup>x</sup></li>
+	</ul>
+</section>
+
+<section>
+	<h3>Números fraccionales en binario</h3>
+	<a href="./files/clase01n/Fraccionales1.png">
+		<img src="files/clase01n/Fraccionales1.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Números fraccionales en binario</h3>
+	<br/>
+	<ul class="col" style="width: 400px;">
+		<div style="text-align: left; font-size: 75%;">
+			<p>0,1 decimal a bin</p>
+			<ul>
+				<li>0,1 * 2 = 0,2 => 0</li>
+				<li>0,2 * 2 = 0,4 => 0</li>
+				<li>0,4 * 2 = 0,8 => 0</li>
+				<li>0,8 * 2 = 1,6 => 1</li>
+				<li>0,6 * 2 = 1,2 => 1</li>
+				<li>sigue...</li>
+				<br/><br/><br/><br/>
+			</ul>
+		</div>
+	</ul>
+	<ul class="col" style="width: 400px;">
+		<div style="text-align: left; font-size: 75%;">
+			<p>De acá en mas se repiten las cuatro cifras periódicamente...</p>
+			<ul>
+				<li>0,2 * 2 = 0,4 => 0</li>
+				<li>0,4 * 2 = 0,8 => 0</li>
+				<li>0,8 * 2 = 1,6 => 1</li>
+				<li>0,6 * 2 = 1,2 => 1</li>
+				<li>...</li>
+			</ul>
+			<br/><p>En orden:</p>
+			<ul>
+				<li>0 00110011</li>
+				<ul>
+					<li>bin: 0,0011 0011...</li>
+				</ul>
+			</ul>
+		</div>
+	</ul>
+</section>
+
+<section>
+	<h3>Números fraccionales en binario</h3>
+	<a href="./files/clase01n/Fraccionales2.png">
+		<img style="width: 675px;" src="files/clase01n/Fraccionales2.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Números fraccionales: <a href="./files/clase01n/Conversiones.ods">Calculadora</a></h3>
+</section>
+</section>
+
+<section>
+<section>
+	<h1>IEEE 754</h1>
+</section>
+
+<section>
+	<h3>Formato punto flotante (IEEE 754)</h3>
+	<ul>
+		<br/><li>El estándar de la IEEE para aritmética en coma flotante (IEEE 754) es el estándar más ampliamente usado para las computaciones en punto flotante, y es seguida por muchas de las implementaciones de CPU y FPU.</li>
+		<br/><li>El estándar define formatos para la representación de números en punto flotante (incluyendo el cero) y valores desnormalizados, así como valores especiales como infinito y NaNs conjuntamente con un conjunto de operaciones en punto flotante que opera sobre estos valores.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Formato punto flotante (IEEE 754)</h3>
+	<ul>
+		<li>Formatos mas usados:
+			<ul>
+				<li>Mas comunmente implementados (del estándar original IEEE 754-1985):
+					<ul>
+						<li>precisión simple o <a href="https://es.wikipedia.org/wiki/Formato_en_coma_flotante_de_simple_precisi%C3%B3n">binary32</a> (32 bits) - float</li>
+						<li>precisión doble o <a href="https://es.wikipedia.org/wiki/Formato_en_coma_flotante_de_doble_precisi%C3%B3n">binary64</a> (64 bits)  - double</li>
+					</ul>
+				</li>
+				<li>Otros formatos aparecidos luego (ultima versión IEEE 754-2008):
+					<ul>
+						<li>binary16, binary128, binary256, decimal32, decimal64 y decimal128.</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<br/><br/>
+	<div style="text-align: left; font-size: 75%;">
+		<p>Mas sobre el tema:</p>
+		<ul>
+			<li><a href="https://es.wikipedia.org/wiki/IEEE_coma_flotante">Articulo sobre IEEE754 en wikipedia</a></li>
+		</ul>
+	</div>
+</section>
+
+<section>
+	<h3>Formato punto flotante (IEEE 754)</h3>
+	<br/><p>precisión simple (32 bits)</p>
+	<pre>
+ 1     8               23              tamaño en bits
+ +-+--------+-----------------------+
+ |S|  Exp   |  Fracción             |
+ +-+--------+-----------------------+
+ 31 30    23 22                    0    índice del bit (0 a la derecha)
+    desplazado +127
+	</pre>
+	<br/><p>precisión doble (64 bits)</p>
+	<pre>
+ 1     11                                52
+ +-+-----------+----------------------------------------------------+
+ |S|  Exp      |  Fracción                                          |
+ +-+-----------+----------------------------------------------------+
+ 63 62       52 51                                                 0
+    desplazado +1023
+	</pre>
+</section>
+
+<section>
+	<h3>IEEE 754</h3>
+	<a href="./files/clase01n/IEEE754a.png">
+		<img src="files/clase01n/IEEE754a.png"/>
+	</a>
+	<br/><a href="./files/clase01n/IEEE754b.png">
+		<img src="files/clase01n/IEEE754b.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>IEEE 754</h3>
+	<a href="./files/clase01n/IEEE754c.png">
+		<img src="files/clase01n/IEEE754c.png"/>
+	</a>
+	<br/><a href="./files/clase01n/IEEE754d.png">
+		<img src="files/clase01n/IEEE754d.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>IEEE 754: Ejemplo</h3>
+	<p>Número decimal -118,625</p>
+	<ul>
+		<br/><li>Necesitamos obtener:
+			<ul>
+				<li>El signo</li>
+				<li>El exponente</li>
+				<li>La fracción</li>
+			</ul>
+		</li>
+		<br/><li>Dado que es un número negativo, el signo es "1"</li>
+		<br/><li>Escribimos el número (sin signo) en binario = 1110110,101</li>
+	</ul>
+</section>
+
+<section>
+	<h3>IEEE 754: Ejemplo</h3>
+	<p>Número decimal -118,625 - Fracción (normalizada)</p>
+	<ul>
+		<br/><li>Ahora, movamos el punto decimal a la izquierda, dejando solo un 1 a su izquierda:
+			<ul>
+				<li>1110110,101 = 1,110110101 x 2<sup>6</sup></li>
+				<li>Esto es un número en coma flotante normalizado</li>
+			</ul>
+		</li>
+		<br/><li>La fracción es la parte a la derecha del punto decimal, rellenada con ceros a la derecha hasta que obtengamos todos los 23 bits:
+			<ul>
+				<li>11011010100000000000000</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h3>IEEE 754: Ejemplo</h3>
+	<p>Número decimal -118,625 - El Exponente</p>
+	<ul>
+		<br/><li>El exponente es 6, pero necesitamos convertirlo a binario y desplazarlo:
+			<ul>
+				<li>Para el formato IEEE 754 de 32 bits, el desplazamiento es 127, así es que 6 + 127 = 133.</li>
+				<li>En binario, esto se escribe como 10000101.</li>
+			</ul>
+		</li>
+		<br/><li>Por lo tanto la cadena de unos y ceros resultante es:
+	<pre>
+ +-+--------+-----------------------+
+ |S|  Exp   |  Fracción             |
+ +-+--------+-----------------------+
+ |1|10000101|11011010100000000000000|
+ +-+--------+-----------------------+
+ 31 30    23 22                    0    índice del bit (0 a la derecha)
+	</pre>
+		</li>
+	</ul>
+</section>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

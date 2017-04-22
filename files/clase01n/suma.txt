@@ -1,0 +1,32 @@
+ignacio@ubuntu-sl410:~$ cd info1/2017/
+ignacio@ubuntu-sl410:~/info1/2017$ ls -l
+total 16
+-rwxrwxr-x 1 ignacio ignacio 8468 Apr  1 12:15 suma
+-rw-rw-r-- 1 ignacio ignacio   63 Apr  1 12:14 suma.c
+ignacio@ubuntu-sl410:~/info1/2017$ gcc -o suma suma.c
+ignacio@ubuntu-sl410:~/info1/2017$ cat suma.txt
+cat: suma.txt: No such file or directory
+ignacio@ubuntu-sl410:~/info1/2017$ cat suma.c  
+int main(void) {
+
+        int A=4,B=6;
+        int R;
+
+        R=A+B;
+
+        return R;
+}
+ignacio@ubuntu-sl410:~/info1/2017$ ls -l
+total 16
+-rwxrwxr-x 1 ignacio ignacio 8468 Apr  1 12:16 suma
+-rw-rw-r-- 1 ignacio ignacio   63 Apr  1 12:14 suma.c
+ignacio@ubuntu-sl410:~/info1/2017$ suma
+bash: suma: command not found
+ignacio@ubuntu-sl410:~/info1/2017$ ./suma
+ignacio@ubuntu-sl410:~/info1/2017$ echo $?
+10
+ignacio@ubuntu-sl410:~/info1/2017$ 
+
+-> v1 aca
+-> v2 guardada
+-> v3 scanf!
