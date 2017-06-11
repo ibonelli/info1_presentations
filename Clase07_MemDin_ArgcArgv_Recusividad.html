@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - Memoria dinámica, Argumentos del main y Recursividad</title>
+
+		<meta name="description" content="Info1 - Programación">
+		<meta name="author" content="Ignacio J. Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- For full screen images -->
+		<!--     from - https://github.com/regisb/reveal.js-fullscreen-img -->
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+<section>
+<h1>Argumentos del main</h1>
+</section>
+
+<section>
+<h2>Argumentos del main</h2>
+<h2>¿Por qué?</h2>
+<br/>
+<p>Como hacemos:</p>
+<pre style="width: 300px;"><code data-trim style="width: 300px; font-size: 24px; margin-top: 20px;" class="cpp">
+ls -l pepe*
+</code></pre>
+<p>Que es "ls" y que es "-l pepe*"</p>
+<pre style="width: 300px;"><code data-trim style="width: 300px; font-size: 24px; margin-top: 20px;" class="cpp">
+$ which ls
+      /bin/ls
+</code></pre>
+<p>O sea que "ls" es un programa</p>
+<p>y "-l pepe*"... ¡Argumentos!</p>
+</section>
+
+<section>
+<h2>Argumentos del main: Opciones</h2>
+<br/>
+<ul>
+<li>La función main:<ul>
+<li>Sin parámetros:
+<pre><code data-trim style="width: 700px; font-size: 24px; margin-top: 20px;" class="cpp">
+void main(void)
+</code></pre></li>
+<li>Usando argumentos:
+<pre><code data-trim style="width: 700px; font-size: 24px; margin-top: 20px;" class="cpp">
+void main(int argc, char *argv[])
+</code></pre></li>
+<li>Usando argumentos y las variables de entorno:
+<pre><code data-trim style="width: 700px; font-size: 24px; margin-top: 20px;" class="cpp">
+void main(int argc, char *argv[], char *envp[])
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Argumentos del main</h2>
+<br/>
+<ul>
+<li>Argumentos:<ul>
+<li><b style="color:#e0e173;">argc</b>: Cantidad de argumentos pasados incluyendo el nombre del ejecutable</li>
+<li><b style="color:#e0e173;">argv</b>: Puntero a un arreglo de punteros con un strings en cada posición. Por cada espacio encontrado se genera un string.</li>
+<li><b style="color:#e0e173;">envp</b>: Variables del sistema operativo también divididas en strings.</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplo</h3>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdlib.h&gt;
+
+void main(int argc,char *argv[]) {
+	char *str1="Hola ";
+	char *str2=", que queres hacer hoy?\n";
+
+	if(argc>1) {
+		printf("%s%s%s", str1, argv[1], str2);
+	}
+}
+</code></pre></li>
+</section>
+
+<section>
+<h3>Estructura envp</h3>
+<br/>
+<img src="files/clase07/envp_vect.jpg"/>
+</section>
+
+<section>
+<h2>Argumentos del main: Ejemplos</h2>
+<ul>
+	<li><a href="files/clase07/argmain1.c">argmain1.c</a></li>
+	<li><a href="files/clase07/argmain2.c">argmain2.c</a></li>
+	<li><a href="files/clase07/argmain3.c">argmain3.c</a></li>
+	<li><a href="files/clase07/envp_show.c">envp_show.c</a></li>
+	<li><a href="files/clase07/envp_user.c">envp_user.c</a></li>
+	<li><a href="files/clase07/envp_user2.c">envp_user2.c</a></li>
+</ul>
+</section>
+</section>
+
+<section data-background="#007777">
+<section>
+<h2>Memoria dinámica</h2>
+<br/>
+<ul>
+	<li><b style="color:#e0e173;">Que hacemos:</b> Tomamos areas de memoria.</li>
+	<br><li><b style="color:#e0e173;">Como la usamos:</b> Con punteros podemos accederlas <br/><div align="center">similar a como hacemos con variables.</div></li>
+	<br><li><b style="color:#e0e173;">Por que:</b> Nos va a dar una mayor flexibilidad para <br/><div align="center">manejar grandes cantidades de datos.</div></li>
+	<br><li><b style="color:#e0e173;">Desventajas:</b> Los algoritmos de manejo son mas <br/><div align="center">complicados.</div></li>
+</ul>
+</section>
+
+<section>
+<h2>Memoria dinámica</h2>
+<br/>
+<ul>
+	<li>Libreria: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">stdlib.h</span></li>
+	<li>Funciones mas usadas:</li>
+	<ul>
+		<li>void *malloc(size_t size);</li>
+		<li>void *calloc(size_t cant, size_t size);</li>
+		<li>void *realloc(void *ptr, size_t size);</li>
+		<li>void free(void *ptr);</li>
+	</ul>
+</ul>
+</section>
+
+<section>
+<h2>Memoria dinámica</h2>
+<br/><br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdlib.h&gt;
+
+int *p;
+
+p = (int *) malloc( sizeof(int) );
+</code></pre>
+<br/><br/>
+<ul>
+	<li>Si se puede alojar la memoria malloc() retorna el puntero a la memoria reservada.</li>
+	<li>Si no se puede alojar la memoria malloc() retornara un puntero a NULL.</li>
+</ul>
+</section>
+
+<section>
+<h2>Estructuras dinámicas de datos</h2>
+<br/><br/>
+<p>Por ejemplo, puedo crear un vector en forma dinámica:</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+void main(void) {
+	char *str, tam;
+	printf("Ingrese el tamaño de cadena deseado: ");
+	scanf("%d",&tam);
+	str = (char *) malloc ( sizeof(char) * tam );
+	printf("Ingrese su cadena: ");
+	scanf("%s",str);
+	printf("\nSu cadena es: %s",str);
+}
+</code></pre>
+</section>
+
+<section>
+<h3>void *calloc(size_t cant, size_t size);</h3>
+<br/><p>Idem a malloc pero toda la memoria es <br/>borrada (clear) "con ceros" antes de asignarnosla.</p>
+</section>
+
+<section>
+<h3>void *realloc(void *ptr, size_t size);</h3>
+<br/><p>Intenta redimensionar el area de memoria asignada <br/> y trabaja como malloc (no inicializa la memoria).</p>
+</section>
+
+<section>
+<h3>void free(void *ptr);</h3>
+<br/><p>Para liberar la memoria que pedimos <br/> (¡Seamos "ecológicos"!)</p>
+</section>
+</section>
+
+<section data-background="#8c4738">
+<section>
+<h1>Recursividad</h1>
+<br/><h3>(no mas parte del programa)</h3>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<ul>
+	<li>Se dice que algo es recursivo si se define en función de sí mismo o a sí mismo.</li>
+	<br/><li>También se dice que nunca se debe incluir la misma palabra en la definición de ésta.</li>
+	<br/><li>El caso es que las definiciones recursivas aparecen con frecuencia en matemáticas, e incluso en la vida real.</li>
+</ul>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<p style="text-align:left;">Ejemplo: basta con apuntar una cámara al monitor que muestra la imagen que muestra esa cámara. El efecto es verdaderamente curioso, en especial cuando se mueve la cámara alrededor del monitor.</p>
+<br/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<img src="files/clase07/Imagen_Recursiva.png"/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<img src="files/clase07/Llamados_Funciones.png"/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial</p>
+<br/>
+<img src="files/clase07/Factorial.png"/>
+</section>
+
+<section>
+<h3>Recursividad: Factorial Iterativo</h3>
+</section>
+
+<section>
+<h3>Recursividad: Factorial Recursivo</h3>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<img src="files/clase07/Factorial_llamados.png"/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
+<ul>
+	<li>Cada llamada recursiva almacena los parámetros que se pasaron al procedimiento, y otras variables necesarias para el correcto funcionamiento del programa.</li>
+	<li>Por tanto si se produce una llamada recursiva infinita (que no termina nunca) llega un momento en el que no quedará memoria para almacenar más datos</li>
+	<li>En ese momento se abortará la ejecución del programa.</li>
+	<ul><li>Para probar esto se puede intentar hacer esta llamada en el programa factorial definido anteriormente: factorial(-1);</li></ul>
+	<li>A pesar de ser un buen ejemplo del problema computacional, este es un ejemplo engañoso. El valor -1 esta fuera del dominio de definición de la función matemática y no fue tampoco comprendido en el algoritmo (factorial está definido solamente para números naturales).</li>
+</ul>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<ul>
+	<li>Puede definirse un programa en términos recursivos, como una serie de pasos básicos, o paso base (también conocido como condición de parada), y un paso recursivo, donde vuelve a llamarse al programa.</li>
+	<li>En un computador, esta serie de pasos recursivos debe ser finita, terminando con un paso base. Es decir, a cada paso recursivo se reduce el número de pasos que hay que dar para terminar, llegando un momento en el que no se verifica la condición de paso a la recursividad.</li>
+	<li>Por otra parte, la recursividad también puede ser indirecta, si tenemos un procedimiento P que llama a otro Q y éste a su vez llama a P. También en estos casos debe haber una condición de parada.</li>
+</ul>
+</section>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				// Cambio el tamaño del slide
+				width: '100%',
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					// For full screen images, from:
+					//		https://github.com/regisb/reveal.js-fullscreen-img
+					{ src: 'lib/js/fullscreen-img.js' }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

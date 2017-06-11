@@ -109,7 +109,9 @@
 	<img src="files/clase08/42_SistemaArchivo_small.png"/>
 </a>
 </section>
+</section>
 
+<section data-background="#007777">
 <section>
 <h1>Archivos</h1>
 <ul>
@@ -215,7 +217,9 @@
 	<li style="margin-left: 100px;">feof(), ftell(), rewind(), fseek(), fgetpos() y fsetpos()</li></ul></li>
 </ul>
 </section>
+</section>
 
+<section data-background="#4d7e65">
 <section>
 <h2 style="font-family: monospace; font-size: 90%;">FILE *fopen(const char *filename, const char *mode);</h2>
 <h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
@@ -410,6 +414,13 @@ int main()
 </section>
 
 <section>
+<h2>Mas ejemplos...</h2>
+<li><a href="files/clase08/ej2_5.c">ej2_5.c</a></li>
+<li><a href="files/clase08/ej3_getline.c">ej3_getline.c</a></li>
+<li><a href="files/clase08/ej4_copyfile.c">ej4_copyfile.c</a></li>
+</section>
+
+<section>
 <h2 style="font-family: monospace; font-size: 90%;">size_t fread(void *ptr, size_t size, size_t n, <br/>FILE *stream);</h2>
 <h2 style="font-family: monospace; font-size: 90%;">size_t fwrite(const void *ptr, size_t size, <br/>size_t n, FILE *stream);</h2>
 <h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
@@ -577,46 +588,6 @@ int main()
 <br/><br/>
 <p style="font-size: 90%;">Lo mejor es solo usar fpos_t entre ambas funciones, <br/>ya que no se puede asegurar la portabilidad del dato.</p>
 </section>
-</section>
-
-<section data-background="#007777">
-<section>
-<h1>Argumentos del main</h1>
-</section>
-
-<section>
-<h2>Argumentos del main (I)</h2>
-<br/>
-<ul>
-<li>La función main:<ul>
-<li>Sin parámetros:
-void main(void)</li>
-<li>Usando argumentos:
-void main(int argc, char *argv[])</li>
-<li>Usando argumentos y las variables de entorno:<br/><span style="margin-left:100px; font-family:monospace; font-size:90%;">void main(int argc, char *argv[], char *envp[])</span></li>
-</ul>
-</li>
-</ul>
-</section><section>
-<h2>Argumentos del main (II)</h2>
-<br/>
-<ul>
-<li>Argumentos:<ul>
-<li><b>argc</b>: Cantidad de argumentos pasados incluyendo el nombre del ejecutable</li>
-<li><b>argv</b>: Puntero a un arreglo de punteros con un strings en cada posición. Por cada espacio encontrado se genera un string.</li>
-<li><b>envp</b>: Variables del sistema operativo también divididas en strings.</li>
-</ul>
-</li>
-</ul>
-</section>
-
-<section>
-<h2>Ejemplos:</h2>
-<li><a href="files/clase08/ej2_5.c">ej2_5.c</a></li>
-<li><a href="files/clase08/ej3_getline.c">ej3_getline.c</a></li>
-<li><a href="files/clase08/ej4_copyfile.c">ej4_copyfile.c</a></li>
-</section>
-
 </section>
 
 			</div>

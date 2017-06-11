@@ -396,34 +396,18 @@ typedef enum {FALSE = 0, TRUE = 1} boolean;
 </section>
 
 </section><section data-background="#4d7e65">
-
 <section>
-<h2>Memoria dinámica</h2>
-<br/>
-<ul>
-	<li>Que hacemos: Tomamos areas de memoria.</li>
-	<li>Como la usamos: Con punteros podemos accederlas similar a como hacemos con variables.</li>
-	<li>Por que: Nos va a dar una mayor flexibilidad para manejar grandes cantidades de datos.</li>
-	<li>Desventajas: Los algoritmos de manejo son mas complicados.</li>
-</ul>
-</section>
-
-<section>
-<h2>Memoria dinámica</h2>
+<h2>Recordemos memoria dinámica</h2>
 <br/>
 <ul>
 	<li>Libreria: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">stdlib.h</span></li>
 	<li>Funciones mas usadas:</li>
 	<ul>
 		<li>void *malloc(size_t size);</li>
-		<li>void *calloc(size_t cant, size_t size);</li>
 		<li>void free(void *ptr);</li>
+		<li>...</li>
 	</ul>
 </ul>
-</section>
-
-<section>
-<h2>Memoria dinámica</h2>
 <br/><br/>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
@@ -432,11 +416,6 @@ int *p;
 
 p = (int *) malloc( sizeof(int) );
 </code></pre>
-<br/><br/>
-<ul>
-	<li>Si se puede alojar la memoria malloc() retorna el puntero a la memoria reservada.</li>
-	<li>Si no se puede alojar la memoria malloc() retornara un puntero a NULL.</li>
-</ul>
 </section>
 
 <section>
