@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Info1 - Herramientas de programación: Make, SVN y Doxygen</title>
+		<title>Info1 - Herramientas de programación: Make, GIT y Doxygen</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -57,7 +57,7 @@
 						<li>Compilar muchos archivos se complica...</li>
 							<ul><li>¡Necesitamos a make!</li></ul>
 						<li>¿Como llevamos un registro de que hicimos?</li>
-							<ul><li>Puedo usar un sistema de versionado como SVN...</li></ul>
+							<ul><li>Puedo usar un sistema de versionado como GIT...</li></ul>
 						<li>Por que lo programé así?!?</li>
 							<ul>
 								<li>Necesito escribir notas, documentar...</li>
@@ -299,10 +299,10 @@ clean:
 						<h2>GIT</h2>
 						<p>Como trabajamos con versiones:</p>
 						<a href="./files/clase11/svn_model_02_big.png">
-							<img src="./files/clase11/svn_model_02.png" alt="Como funciona SVN 1">
+							<img src="./files/clase11/svn_model_02.png" alt="Como funciona GIT 1">
 						</a>
 						<a href="./files/clase11/svn_model_03_big.png">
-							<img src="./files/clase11/svn_model_03_small.png" alt="Como funciona SVN 2">
+							<img src="./files/clase11/svn_model_03_small.png" alt="Como funciona GIT 2">
 						</a>
 					</section>
 					<section>
@@ -331,6 +331,10 @@ $ git status
 						<h2>GIT</h2>
 						<p>Subiendo cambios</p>
 						<ul>
+							<li>Traerse los cambios:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git pull
+								</code></pre>
 							<li>Agregar archivos / cambios:</li>
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ git add .
@@ -343,9 +347,27 @@ $ git commit -m "Descripción del cambios"
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ git push
 								</code></pre>
-							<li>Traerse los cambios:</li>
+						</ul>
+					</section>
+					<section>
+						<h2>GIT</h2>
+						<p>Usando branches</p>
+						<ul>
+							<li>Crear un branch:</li>
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-$ git pull
+$ git branch mi-new-branch
+								</code></pre>
+							<li>Enviar branch al repo remoto:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git push -u origin mi-new-branch
+								</code></pre>
+							<li>Volviendo al master</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git checkout master
+								</code></pre>
+							<li>Volviendo a mi branch:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git checkout mi-new-branch
 								</code></pre>
 						</ul>
 					</section>
