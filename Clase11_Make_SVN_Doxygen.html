@@ -43,7 +43,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Make, SVN y Doxygen</h1>
+					<h1>Make, GIT y Doxygen</h1>
 					<h3>Para programar hacen falta herramientas</h3>
 					<p>
 						<small>Ing. Ignacio Javier Bonelli</small>
@@ -277,8 +277,8 @@ clean:
 
 				<section data-background="#4d7e65">
 					<section>
-						<h2>SVN</h2>
-						<h4>Subversion: Uno de los sistemas de control de versiones.</h4>
+						<h2>GIT</h2>
+						<h4>Sistema de control de versiones</h4>
 						<p>El problema:</p>
 						<a href="./files/clase11/svn_model_01_big.png">
 							<img src="./files/clase11/svn_model_01.png" alt="Problema: Necesitamos control de versiones!">
@@ -286,7 +286,7 @@ clean:
 						<p>Si trabajamos en equipo y en un repositorio comun es muy fácil tener conflictos y "pisar" el trabajo de otros.</p>
 					</section>
 					<section>
-						<h2>SVN</h2>
+						<h2>GIT</h2>
 						<p>Hay varias razones para usar un sistema de control de versiones:</p>
 						<ul>
 							<li>Para trabajar en equipo sin pisar el trabajo de otros y delegar en el sistema la detección de conflictos.</li>
@@ -296,8 +296,8 @@ clean:
 						</ul>
 					</section>
 					<section>
-						<h2>SVN</h2>
-						<p>Como trabajamos con SVN:</p>
+						<h2>GIT</h2>
+						<p>Como trabajamos con versiones:</p>
 						<a href="./files/clase11/svn_model_02_big.png">
 							<img src="./files/clase11/svn_model_02.png" alt="Como funciona SVN 1">
 						</a>
@@ -306,59 +306,48 @@ clean:
 						</a>
 					</section>
 					<section>
-						<h2>SVN</h2>
-						<p>Veamos un poco los comandos (1)</p>
+						<h2>GIT</h2>
+						<p>Comandos para arrancar</p>
 						<ul>
 							<li>Install:</li>
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
-$ sudo apt-get install subversion
+$ sudo apt-get install git gitk
 								</code></pre>
 							<li>CheckOut:</li>
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
-$ svn co http://svn.electron.frba.utn.edu.ar/info1/r1021/public/
+$ git clone https://github.com/ibonelli/info1_presentations.git
 								</code></pre>
 							<li>Ver el historial:</li>
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
-$ svn log
+$ gitk
 								</code></pre>
-							<li>Ayuda del comando log:</li>
+							<li>Estado del repositorio / ver cambios:</li>
 								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 700px;">
-$ svn help log
+$ git status
 								</code></pre>
 						</ul>
 					</section>
 					<section>
-						<h2>SVN</h2>
-						<p>Veamos un poco los comandos (2)</p>
+						<h2>GIT</h2>
+						<p>Subiendo cambios</p>
 						<ul>
-							<li>Agregar archivos</li>
-								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
-$ svn add ./*
+							<li>Agregar archivos / cambios:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git add .
 								</code></pre>
-							<li>Ver cambios:</li>
-								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
-$ svn st
+							<li>Incorporar esos cambios al repositorio:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git commit -m "Descripción del cambios"
 								</code></pre>
-							<li>Commit:</li>
-								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
-$ svn ci -m "Descripción cambios"
+							<li>Enviar los cambios del repositorio local al remoto:</li>
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git push
 								</code></pre>
 							<li>Traerse los cambios:</li>
-								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px; width: 400px;">
-$ svn up
+								<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ git pull
 								</code></pre>
 						</ul>
-					</section>
-					<section>
-						<h2>KDESVN</h2>
-						<h3>¿Y si la hacemos mas fácil?</h3>
-						<p>Install:</p>
-						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-$ sudo apt-get install kdesvn
-						</code></pre>
-						<a href="./files/clase11/kdesvn.png">
-							<img src="./files/clase11/kdesvn_small.png" alt="KDESVN screenshot">
-						</a>
 					</section>
 				</section>
 
