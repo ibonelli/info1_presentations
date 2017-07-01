@@ -173,13 +173,13 @@ CC = gcc
 CFLAGS = -Wall
 DEPS = hellomake.h
 
-all: hellomake hellofunc
+all: hellomake.o hellofunc.o
 	$(CC) hellomake.o hellofunc.o -o app $(CFLAGS)
 
-hellomake: hellomake.c $(DEPS)
+hellomake.o: hellomake.c $(DEPS)
 	$(CC) -c -o hellomake.o hellomake.c $(CFLAGS)
 
-hellofunc: hellofunc.c $(DEPS)
+hellofunc.o: hellofunc.c $(DEPS)
 	$(CC) -c -o hellofunc.o hellofunc.c $(CFLAGS)
 						</code></pre>
 						<p>Tenemos mas targets, y mas dependencias:</p>
@@ -196,11 +196,11 @@ CC = gcc
 CFLAGS = -Wall
 DEPS = hellomake.h
 
-all: hellomake hellofunc
+all: hellomake.o hellofunc.o
 	$(CC) hellomake.o hellofunc.o -o app $(CFLAGS)
-hellomake: hellomake.c $(DEPS)
+hellomake.o: hellomake.c $(DEPS)
 	$(CC) -c -o hellomake.o hellomake.c $(CFLAGS)
-hellofunc: hellofunc.c $(DEPS)
+hellofunc.o: hellofunc.c $(DEPS)
 	$(CC) -c -o hellofunc.o hellofunc.c $(CFLAGS)
 clean:
 	rm -f *.o app
