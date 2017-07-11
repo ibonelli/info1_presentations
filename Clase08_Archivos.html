@@ -109,6 +109,22 @@
 	<img src="files/clase08/42_SistemaArchivo_small.png"/>
 </a>
 </section>
+
+<section>
+<h2>Analogía / Abstracción</h2>
+<ul class="col" style="width: 250px; display: inline-block; vertical-align: top;">
+	<img style="display: block; margin: auto;" src="files/clase08/61_hoja_cuadricula.jpg"/>
+	<p style="text-align: center; padding: 10px;">Archivo</p>
+</ul>
+<ul class="col" style="width: 250px; display: inline-block; vertical-align: top;">
+	<img style="display: block; margin: auto;" src="files/clase08/62_carpetas.jpg"/>
+	<p style="text-align: center; padding: 10px;">Carpetas</p>
+</ul>
+<ul class="col" style="width: 250px; display: inline-block; vertical-align: top;">
+	<img style="display: block; margin: auto;" src="files/clase08/63_gabinetes.jpg"/>
+	<p style="text-align: center; padding: 10px;">Sistema de Archivos</p>
+</ul>
+</section>
 </section>
 
 <section data-background="#007777">
@@ -267,8 +283,13 @@
 <br/>
 <ul>
 <li>fclose() - Cerrando un archivo<ul>
-<li>Si es exitoso retorna 0, si no EOF.</li>
+<li>Si es exitoso retorna 0, si no EOF (-1).</li>
 <li>Al cierre se liberan los buffer y escribe todo en disco.</li>
+<li>Uso:
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+if(EOF==fclose(fp)) printf("Error guardando!");
+</code></pre>
+</li>
 </ul>
 </li>
 <br/>
