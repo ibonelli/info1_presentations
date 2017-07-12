@@ -125,6 +125,24 @@
 	<p style="text-align: center; padding: 10px;">Sistema de Archivos</p>
 </ul>
 </section>
+
+<section>
+<h2>Espacio usado vs. espacio de los archivos</h2>
+<ul>
+	<li>¿Donde se guarda la estructura del disco? ... ¡EN EL DISCO!</li>
+	<li>¿Cuanto puedo direccionar dentro del disco? ... Depende del tamaño de cluster</li>
+	<li>¿De que depende el tamaño de cluster? ... De mi FS y el tamaño del disco</li>
+	<li>Ejemplo:
+		<ul>
+			<li>100 archivos * 20 bytes = 2000 bytes</li>
+			<li>Si tenemos un cluste de 1k (1024 bytes)</li>
+			<li>100 archivos * 1k = 100 kbytes</li>
+			<li>Espacio usado = 100 kbytes, espacio de archivos 2000 bytes!!</li>
+			<li>¿Alternativas? Zip files, particions mas chicas...</li>
+		</ul>
+	</li>
+</ul>
+</section>
 </section>
 
 <section data-background="#007777">
