@@ -42,6 +42,222 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+
+<section>
+<section>
+	<h1>Bibliotecas<br />o Librerías</h1>
+</section>
+
+<section>
+	<h2>Tres Tipos</h2>
+	<ul>
+		<li><span style="color: #4FC7CF;">Estaticas</span>: Simple colección de programas objeto. Una vez compilado el código es parte de nuestro binario. En Linux extensión .a</li>
+		<li><span style="color: #4FC7CF;">Compartidas (Shared)</span>: El código no formará parte de nuestro programa. Se cargan en memoria junto con nuestro programa cuando se lo invoca. En Linux extensión .so</li>
+		<li><span style="color: #4FC7CF;">De carga dinámica (DL - Dynamic Loaded)</span>: No forman parte de nuestro programa. Solo se cargan en memoria si son requeridas/invocadas (no con el programa).</li>
+	</ul>
+</section>
+</section>
+
+<section>
+<section>
+	<h2>Estáticas</h2>
+	<ul>
+		<li>Compilamos solo el archivo objeto, no el binario usando -c:
+			<pre><code>$ gcc -c holalib.c</code></pre>
+		</li>
+		<li>Luego creamos la libreria usando otro programa el ar:
+			<pre><code>$ ar rcs libhola.a holalib.o</code></pre>
+		</li>
+		<li>Del comando ar (de archive) usamos 3 modificadores:
+			<ul>
+				<li>r: Reemplazar archivo</li>
+				<li>c: Crear archivo</li>
+				<li>S: Actualizar el indice de la biblioteca</li>
+			</ul>
+		</li>
+		<li>También se puede usar el modificador "t" para listar lo que tiene la biblioteca:
+			<pre><code>$ ar t libhola.a</code></pre>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Estáticas: Enlazando...</h2>
+	<ul>
+		<li>Primero compilamos (sin enlazar) el programa que usará la libreria:
+			<pre><code>$ gcc -c -otest_holalib.o test_holalib.c</code></pre>
+		</li>
+		<li>Luego vamos a enlazar el programa binario con la libreria previamente creada:
+			<pre><code>$ gcc -odemo test_holalib.o -L. -lhola</code></pre>
+			<ul style="font-size:75%;">
+				<li>El <span style="color: #4FC7CF;">-l</span> indica que librería usar. Como siempre comienzan con "lib" y terminan con ".a" solo ponemos lo que va en el medio: "hola"</li>
+				<li>El <span style="color: #4FC7CF;">-L</span> ha explicito al linker donde buscar la librería, en nuestro caso "." por que esta en el dir actual.</li>
+				<li>Si no lo hacemos explicito toma el del sistema. Esto depende de la distribución. En debian se encuentra en /etc/ld.so.conf.d/libc.conf</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Estáticas</h2>
+	<a href="./files/clase24/Clase24_Librerias1_Estaticas.jpg">
+	  <img src="./files/clase24/Clase24_Librerias1_Estaticas.jpg" alt="Librerías Estáticas: Compilación">
+	</a>
+</section>
+</section>
+
+<section>
+<section>
+	<h2>Bibliotecas Compartidas</h2>
+	<ul>
+		<li style="font-size:90%;">No incorporan el codigo de sus funciones al programa que las invoca.</li>
+		<li style="font-size:90%;">Resuelven las referencias en el momento de arranque del programa que las usa.</li>
+		<li style="font-size:90%;">Son útiles para no repetir código si varios programas necesitan usar la misma librería.</li>
+		<li style="font-size:90%;">Las bibliotecas compartidas tienen un nombre al que se denomina "soname" que en general difiere del nombre del archivo, que la contiene:</li>
+		<pre><code>$ls -l /usr/lib/libopencv_highgui*
+$objdump -p /usr/lib/libopencv_highgui.so.2.3.1 | grep -i soname</code></pre>
+		<ul>
+			<li style="font-size:75%;">Este nombre se asigna mediante el parametro <span style="color: #4FC7CF;">-soname</span> que se pasa al linker <span style="color: #4FC7CF;">ld</span> en el momento de su construcción.</li>
+			<li style="font-size:75%;">Es mejor para el manejo de estas Bibliotecas tener separados soname y nombre de archivo.</li>
+		</ul>
+	</ul>
+</section>
+
+<section>
+	<h2>Bibliotecas Compartidas: Compilando...</h2>
+	<ul>
+		<li>Directorios comunes de librerias:
+			<pre><code>/lib , /usr/lib , /usr/local/lib</code></pre>
+		</li>
+		<li>Para compilar:
+			<pre><code>$ gcc -fPIC -g -c -Wall holalib.c</code></pre>
+			<ul style="font-size:75%;">
+				<li>La opcion <span style="color: #4FC7CF;">fPIC</span> indica al compilador que genere codigo independiente de la posicion que ocupe en memoria.</li>
+			</ul>
+		</li>
+		<li>Finalmente en lugar de archivarlo le pedimos al linker (a través de gcc) que cree el archivo de librería compartida:
+			<pre><code>$ gcc -shared -Wl,-soname,libhola.so.1 -o libhola.so.1.0.1 holalib.o -lc</code></pre>
+			<ul style="font-size:75%;">
+				<li>El modificador <span style="color: #4FC7CF;">-Wl</span> tiene argumentos que deberan ser enviados al linker uno a uno (cada parametro separado con una o mas comas)</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Bibliotecas Compartidas</h2>
+	<h3>Instalando... (1)</h3>
+	<ul>
+		<li>La instalación de una biblioteca compartida depende de la distribución usada.</li>
+		<li>Por ejemplo ambos Ubuntu y Debian usan la utilidad ldconfig, pero Ubuntu usa también $LD_LIBRARY_PATH.</li>
+		<li>Lo que anda en ambas es usar el archivo de configuración /etc/ld.so.conf y la utilidad: ldconfig</li>
+		<li>Para ser mas prolijos crearemos un directorio propio en /usr/local/lib
+			<pre><code class="bash">$ sudo mkdir /usr/local/lib/personal
+$ sudo mv ./libhola* /usr/local/lib/personal</code></pre>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Bibliotecas Compartidas</h2>
+	<h3>Instalando... (2)</h3>
+	<ul>
+		<li>Editar el archivo de configuración /etc/ld.so.conf y debería tener
+			<pre><code class="no-highlight">include /etc/ld.so.conf.d/*.conf</code></pre>
+
+$ sudo vim  /etc/ld.so.conf.d/personal.conf
+
+    # Personal libraries
+    /usr/local/lib/personal
+</code></pre>
+</li>
+<li>
+<p>Luego ejecutamos ldconfig para que deje nuestra libreria lista para su uso:</p>
+<pre><code>$ sudo ldconfig
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<p>Bibliotecas Compartidas: Usando...</p>
+<ul>
+<li>
+<p>Luego compilamos la aplicación que lo va a usar:</p>
+<pre><code>$ gcc -Wall -c -o test_holalib.o test_holalib.c
+</code></pre>
+</li>
+<li>
+<p>Luego necesitamos para el compilador/linker tener también:</p>
+<pre><code>$ cd /usr/local/lib/personal
+$ sudo ln -sf libhola.so.1 libhola.so
+</code></pre>
+</li>
+<li>
+<p>Y ahora podemos crear el binario</p>
+<pre><code>$ gcc -o demo test_holalib.o -L/usr/local/lib/personal/ -lhola
+</code></pre>
+</li>
+</ul>
+</section><section>
+<p>Compartidas</p>
+<p>files/clase24/Clase24_Librerias2_Compartidas.jpg</p>
+</section><section>
+<p>Bibliotecas de carga dinámica</p>
+<ul>
+<li>Estas no se cargan al comenzar el programa si no que deben ser cargadas/pedidas por el programa invocante.</li>
+<li>Su principal función es para crear modulos o plugins que solo se cargaran si son requeridos.</li>
+<li>Para invocarlas/cargarlas se debe usar una librería particular, pero para compilarlas/instalarlas usamos el mismo método que para compartidas.</li>
+<li>La libreria que nos permitirá manejar la carga dinámica es dlfcn.h</li>
+</ul>
+</section><section>
+<p>Bibliotecas de carga dinámica: Funciones</p>
+<ul>
+<li>dlopen()<ul>
+<li>Carga una librería y la prepara para su uso.</li>
+<li>Devuelve un identificador para esa librería que se utiliza en el resto del programa para las referencias posteriores.</li>
+</ul>
+</li>
+<li>dlerror()<ul>
+<li>Retorna un string que describe el error generado por las demás funciones de manejo de librerías dinámicas.</li>
+</ul>
+</li>
+<li>dlsym()<ul>
+<li>Busca el valor de un símbolo presente en una librería ya abierta con dlopen().</li>
+<li>Devuelve un puntero a la función o al elemento direccionado.</li>
+</ul>
+</li>
+<li>dlclose()<ul>
+<li>Cierra la librería abierta con dlopen() permitiendo liberar el descriptor o handle que se tenía hasta el momento para identificar a nuestra librería dinámica.</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<p>Bibliotecas de carga dinámica: Compilando...</p>
+<ul>
+<li>Se busca en el archivo de cache /etc/ld.so.cache (que crea ldconfig) para ver si contiene la librería invocada/pedida por dlopen().</li>
+<li>El archivo que ahora llama a la librería deberá ser entonces diferente por que debe tener todo el manejo dinámico de la librería: test_holalib_dl.c
+        $ gcc -Wall -o demo test_holalib_dl.c -ldl</li>
+</ul>
+</section><section>
+<p>Dinámicas Compilación</p>
+<p>files/clase24/Clase24_Librerias3_Dinamicas1.jpg</p>
+</section>
+
+<section>
+<p>Dinámicas Ejecución</p>
+<p>files/clase24/Clase24_Librerias3_Dinamicas2.jpg</p>
+</section>
+
+<section>
+<p>Ventajas &amp; Desventajas</p>
+</section>
+
+
+
+
+
+
 				<section>
 					<h1>Librerias</h1>
 					<p>
@@ -70,6 +286,8 @@ files/clase24/test_holalib.c
 files/clase24/test_holalib_dl.c
 
 				</section>
+</section>
+
 			</div>
 
 		</div>

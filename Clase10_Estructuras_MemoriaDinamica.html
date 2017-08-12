@@ -123,10 +123,11 @@ punto.x = 300;
 </li>
 </ul>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-struct point A = {640, 480};
+struct point A = {640, 480}, B;
 struct point *pA,*pB;
-pA = &A;
+pA = &A; pB = &B;
 pB -&gt; x = pA -&gt; x;
+pB -&gt; y = 200; // B = {640,200}
 </code></pre>
 </section>
 
@@ -421,7 +422,7 @@ p = (int *) malloc( sizeof(int) );
 <section>
 <h2>Estructuras dinámicas de datos</h2>
 <br/><br/>
-<p>Por ejemplo, puedo crear un vector en forma dinámica:</p>
+<p>Por ejemplo, puedo crear un string en forma dinámica:</p>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
@@ -442,10 +443,9 @@ void main(void) {
 <br/>
 <p>Pero no solo de chars...</p>
 <p>De cualquier tipo de dato puedo pedir...</p>
-<p>¡Incluso de structuras!</p>
+<p>¡Incluso estructuras!</p>
 <br/>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-struct vendedor {
+<pre><code class="cpp">struct vendedor {
 	char nom[40];
 	float com,acum;
 	int vent;
@@ -484,8 +484,7 @@ vec = (struct vendedor *) malloc( sizeof( struct vendedor ) * 10);
 <section>
 <h2>Introducción a listas</h2>
 <br/>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-void *p = NULL;
+<pre><code class="cpp">void *p = NULL;
 
 struct vendedor *q, *r;
 
