@@ -150,8 +150,8 @@ $objdump -p /usr/lib/libopencv_highgui.so.2.3.1 | grep -i soname</code></pre>
 	<ul>
 		<li>La instalación de una biblioteca compartida depende de la distribución usada.</li>
 		<li>Por ejemplo ambos Ubuntu y Debian usan la utilidad ldconfig, pero Ubuntu usa también $LD_LIBRARY_PATH.</li>
-		<li>Lo que anda en ambas es usar el archivo de configuración /etc/ld.so.conf y la utilidad: ldconfig</li>
-		<li>Para ser mas prolijos crearemos un directorio propio en /usr/local/lib
+		<li>Lo que anda en ambas es usar el archivo de configuración <span style="color: #4FC7CF;">/etc/ld.so.conf</span> y la utilidad: <span style="color: #4FC7CF;">ldconfig</span></li>
+		<li>Para ser mas prolijos crearemos un directorio propio en <span style="color: #4FC7CF;">/usr/local/lib</span>
 			<pre><code class="bash">$ sudo mkdir /usr/local/lib/personal
 $ sudo mv ./libhola* /usr/local/lib/personal</code></pre>
 		</li>
@@ -162,130 +162,121 @@ $ sudo mv ./libhola* /usr/local/lib/personal</code></pre>
 	<h2>Bibliotecas Compartidas</h2>
 	<h3>Instalando... (2)</h3>
 	<ul>
-		<li>Editar el archivo de configuración /etc/ld.so.conf y debería tener
-			<pre><code class="no-highlight">include /etc/ld.so.conf.d/*.conf</code></pre>
+		<li>Ahora confirmamos que el archivo de configuración <span style="color: #4FC7CF;">/etc/ld.so.conf</span> y tenga dentro:
+			<pre><code class="no-highlight">include /etc/ld.so.conf.d/*.conf</code></pre></li>
+		<li>Luego editamos el archivo <span style="color: #4FC7CF;">/etc/ld.so.conf.d/personal.conf</span>
+			<pre><code class="bash">$ sudo vim /etc/ld.so.conf.d/personal.conf</code></pre></li>
+		<li>Y agregamos lo siguiente:
+			<pre><code class="no-highlight"># Personal libraries
+/usr/local/lib/personal</code></pre></li>
+		<li>Luego ejecutamos ldconfig para que deje nuestra libreria lista para su uso:
+			<pre><code class="bash">$ sudo ldconfig</code></pre></li>
+	</ul>
+</section>
 
-$ sudo vim  /etc/ld.so.conf.d/personal.conf
+<section>
+	<h2>Bibliotecas Compartidas</h2>
+	<h3>Usando...</h3>
+	<ul>
+		<li>Luego compilamos la aplicación que lo va a usar:
+			<pre><code class="bash">$ gcc -Wall -c -o test_holalib.o test_holalib.c</code></pre></li>
+		<li>Luego necesitamos para el compilador/linker tener también:
+			<pre><code class="bash">$ cd /usr/local/lib/personal
+$ sudo ln -sf libhola.so.1 libhola.so</code></pre></li>
+		<li>Y ahora podemos crear el binario
+			<pre><code class="bash">$ gcc -o demo test_holalib.o -L/usr/local/lib/personal/ -lhola</code></pre></li>
+	</ul>
+</section>
 
-    # Personal libraries
-    /usr/local/lib/personal
-</code></pre>
-</li>
-<li>
-<p>Luego ejecutamos ldconfig para que deje nuestra libreria lista para su uso:</p>
-<pre><code>$ sudo ldconfig
-</code></pre>
-</li>
+<section>
+	<h2>Compartidas</h2>
+	<a href="./files/clase24/Clase24_Librerias2_Compartidas.jpg">
+	  <img src="./files/clase24/Clase24_Librerias2_Compartidas.jpg" alt="Bibliotecas Compartidas">
+	</a>
+<p></p>
+</section>
+</section>
+
+<section>
+<section>
+	<h2>Bibliotecas de carga dinámica</h2>
+	<ul>
+		<li>Estas no se cargan al comenzar el programa si no que deben ser cargadas/pedidas por el programa invocante.</li>
+		<li>Su principal función es para crear modulos o plugins que solo se cargaran si son requeridos.</li>
+		<li>Para invocarlas/cargarlas se debe usar una librería particular, pero para compilarlas/instalarlas usamos el mismo método que para compartidas.</li>
+		<li>La libreria que nos permitirá manejar la carga dinámica es dlfcn.h</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Bibliotecas de carga dinámica</h2>
+	<h3>Funciones (1)</h3>
+	<ul>
+		<li>dlopen()<ul>
+			<li>Carga una librería y la prepara para su uso.</li>
+			<li>Devuelve un identificador para esa librería que se utiliza en el resto del programa para las referencias posteriores.</li></ul>
+		</li><br />
+		<li>dlerror()<ul>
+			<li>Retorna un string que describe el error generado por las demás funciones de manejo de librerías dinámicas.</li></ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Bibliotecas de carga dinámica</h2>
+	<h3>Funciones (2)</h3>
+	<ul>
+		<li>dlsym()<ul>
+			<li>Busca el valor de un símbolo presente en una librería ya abierta con dlopen().</li>
+			<li>Devuelve un puntero a la función o al elemento direccionado.</li></ul>
+		</li><br />
+		<li>dlclose()<ul>
+			<li>Cierra la librería abierta con dlopen() permitiendo liberar el descriptor o handle que se tenía hasta el momento para identificar a nuestra librería dinámica.</li></ul>
+		</li>
+	</ul>
+</section>
+
+<section>
+	<h2>Bibliotecas de carga dinámica</h2>
+	<h3>Compilando...</h3>
+	<ul>
+		<li>Se busca en el archivo de cache <span style="color: #4FC7CF;">/etc/ld.so.cache</span> (que crea ldconfig) para ver si contiene la librería invocada/pedida por <span style="color: #4FC7CF;">dlopen()</span>.</li>
+		<li>El archivo que ahora llama a la librería deberá ser entonces diferente por que debe tener todo el manejo dinámico de la librería: <span style="color: #4FC7CF;">test_holalib_dl.c</span>
+			<pre><code class="bash">$ gcc -Wall -o demo test_holalib_dl.c -ldl</code></pre>
+		</li>
 </ul>
 </section>
 
 <section>
-<p>Bibliotecas Compartidas: Usando...</p>
-<ul>
-<li>
-<p>Luego compilamos la aplicación que lo va a usar:</p>
-<pre><code>$ gcc -Wall -c -o test_holalib.o test_holalib.c
-</code></pre>
-</li>
-<li>
-<p>Luego necesitamos para el compilador/linker tener también:</p>
-<pre><code>$ cd /usr/local/lib/personal
-$ sudo ln -sf libhola.so.1 libhola.so
-</code></pre>
-</li>
-<li>
-<p>Y ahora podemos crear el binario</p>
-<pre><code>$ gcc -o demo test_holalib.o -L/usr/local/lib/personal/ -lhola
-</code></pre>
-</li>
-</ul>
-</section><section>
-<p>Compartidas</p>
-<p>files/clase24/Clase24_Librerias2_Compartidas.jpg</p>
-</section><section>
-<p>Bibliotecas de carga dinámica</p>
-<ul>
-<li>Estas no se cargan al comenzar el programa si no que deben ser cargadas/pedidas por el programa invocante.</li>
-<li>Su principal función es para crear modulos o plugins que solo se cargaran si son requeridos.</li>
-<li>Para invocarlas/cargarlas se debe usar una librería particular, pero para compilarlas/instalarlas usamos el mismo método que para compartidas.</li>
-<li>La libreria que nos permitirá manejar la carga dinámica es dlfcn.h</li>
-</ul>
-</section><section>
-<p>Bibliotecas de carga dinámica: Funciones</p>
-<ul>
-<li>dlopen()<ul>
-<li>Carga una librería y la prepara para su uso.</li>
-<li>Devuelve un identificador para esa librería que se utiliza en el resto del programa para las referencias posteriores.</li>
-</ul>
-</li>
-<li>dlerror()<ul>
-<li>Retorna un string que describe el error generado por las demás funciones de manejo de librerías dinámicas.</li>
-</ul>
-</li>
-<li>dlsym()<ul>
-<li>Busca el valor de un símbolo presente en una librería ya abierta con dlopen().</li>
-<li>Devuelve un puntero a la función o al elemento direccionado.</li>
-</ul>
-</li>
-<li>dlclose()<ul>
-<li>Cierra la librería abierta con dlopen() permitiendo liberar el descriptor o handle que se tenía hasta el momento para identificar a nuestra librería dinámica.</li>
-</ul>
-</li>
-</ul>
-</section><section>
-<p>Bibliotecas de carga dinámica: Compilando...</p>
-<ul>
-<li>Se busca en el archivo de cache /etc/ld.so.cache (que crea ldconfig) para ver si contiene la librería invocada/pedida por dlopen().</li>
-<li>El archivo que ahora llama a la librería deberá ser entonces diferente por que debe tener todo el manejo dinámico de la librería: test_holalib_dl.c
-        $ gcc -Wall -o demo test_holalib_dl.c -ldl</li>
-</ul>
-</section><section>
-<p>Dinámicas Compilación</p>
-<p>files/clase24/Clase24_Librerias3_Dinamicas1.jpg</p>
+	<h2>Dinámicas Compilación</h2>
+	<a href="./files/clase24/Clase24_Librerias3_Dinamicas1.jpg">
+		<img style="height: 500px;" src="./files/clase24/Clase24_Librerias3_Dinamicas1.jpg" alt="Librerías Dinámicas Compilación">
+	</a>
 </section>
 
 <section>
-<p>Dinámicas Ejecución</p>
-<p>files/clase24/Clase24_Librerias3_Dinamicas2.jpg</p>
+	<h2>Dinámicas Ejecución</h2>
+	<a href="./files/clase24/Clase24_Librerias3_Dinamicas2.jpg">
+		<img style="height: 500px;" src="./files/clase24/Clase24_Librerias3_Dinamicas2.jpg" alt="Librerías Dinámicas Ejecución">
+	</a>
+<p></p>
+</section>
 </section>
 
 <section>
-<p>Ventajas &amp; Desventajas</p>
+<section>
+	<h1>Ventajas &amp; Desventajas</h1>
 </section>
 
-
-
-
-
-
-				<section>
-					<h1>Librerias</h1>
-					<p>
-						<small>Ing. Ignacio Javier Bonelli</small>
-					</p>
-				</section>
-				<section>
-
-Pasar el ODP en Dropbox... Como PDF ahora:
-	files/clase24/Clase24_Librerias.pdf
-
-				</section>
-				<section>
-
-files/clase24/Clase24_Librerias1_Estaticas.jpg
-files/clase24/Clase24_Librerias2_Compartidas.jpg
-files/clase24/Clase24_Librerias3_Dinamicas1.jpg
-files/clase24/Clase24_Librerias3_Dinamicas2.jpg
-
-				</section>
-				<section>
-
-files/clase24/holalib.c
-files/clase24/holalib.h
-files/clase24/test_holalib.c
-files/clase24/test_holalib_dl.c
-
-				</section>
+<section>
+	<h2>Archivos</h2>
+	<ul>
+		<li><a href="./files/clase24/holalib.c">holalib.c</a></li>
+		<li><a href="./files/clase24/holalib.h">holalib.h</a></li>
+		<li><a href="./files/clase24/test_holalib.c">test_holalib.c</a></li>
+		<li><a href="./files/clase24/test_holalib_dl.c">test_holalib_dl.c</a></li>
+	</ul>
+</section>
 </section>
 
 			</div>
