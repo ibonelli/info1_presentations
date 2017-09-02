@@ -58,7 +58,7 @@
 
 <section>
 <h2>Instalando Allegro</h2>
-<h3>(en Ubuntu trusty 14.04LTS)</h3>
+<h3>(en Ubuntu trusty 16.04LTS)</h3>
 <br/>
 <p>version 4</p>
 <pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
@@ -67,7 +67,7 @@ apt-get install liballegro4.4 liballegro4-dev allegro4-doc
 <br/>
 <p>version 5 (recomiendo esta)</p>
 <pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
-apt-get install liballegro5.0 liballegro5-dev allegro5-doc
+apt-get install liballegro5.0 liballegro-*5-dev liballegro5-dev allegro5-doc
 </code></pre>
 <br/>
 <p>No recomendado, pero posible:</p>
@@ -156,7 +156,11 @@ dpkg --get-selections | grep allegro
 	<li>Ejemplos de manejo de display:
 		<ul>
 			<li>Como crear un display: <a href="https://wiki.allegro.cc/index.php?title=Allegro_5_Tutorial/Displays">al01_display.c</a></li>
-			<li>Trabajando en fullscreen: <a href="https://wiki.allegro.cc/index.php?title=Creating_a_fullscreen_display_with_maximum/minimum_resolution">al02_screenres.c</a> <span style="font-size:50%;">(problemas yo...)</span></li>
+			<li>Trabajando en fullscreen: <a href="https://wiki.allegro.cc/index.php?title=Creating_a_fullscreen_display_with_maximum/minimum_resolution">al02_screenres.c</a></li>
+			<ul>
+				<li style="font-size:50%;">En mi máquina Thinkpad SL410 con Ubuntu 16.04 tiene problemas.</li>
+				<li style="font-size:50%;">Debo repetir: al_clear_to_color()+al_flip_display() 3 veces y se "arregla".</li>
+			</ul>
 		</ul>
 	</li>
 </ul>
