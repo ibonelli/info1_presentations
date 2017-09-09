@@ -50,8 +50,114 @@
 <br/>
 <ul>
 	<li><a href="files/clase14/temario.txt">Temario oficial de sockets</a></li>
-	<li><a href="files/clase14/redes_y_sockets.odp">Bajar presentación de redes y sockets</a></li>
 </ul>
+</section>
+
+<section>
+<h2>Introducción</h2>
+<ul>
+	<li>Todos usamos TCP/IP en internet</li>
+	<li>Protocolo IP: Mi dirección!</li>
+	<li>TCP: Transmission Control Protocol</li>
+		<ul><li>Comunicación con conexión</li></ul>
+	<li>UDP: User Datagram Protocol</li>
+		<ul><li>Comunicación sin conexión</li></ul>
+	<li>Cliente/Servidor: En una conexión TCP/IP siempre debe haber un servidor (que espera conexiones) y un cliente (que se conecta al servidor).</li>
+	<li>Socket: Abstracción de conexión entre un par cliente servidor que permite conectarnos/trabajar como si estuvieramos trabajando con archivos.</li>
+</ul>
+</section>
+
+<section>
+<h2>Modelo OSI y TCP/IP</h2>
+<br />
+<ul class="col" style="width: 350px;">
+	<a href="./files/clase14/modelo_osi.png"><img src="./files/clase14/modelo_osi.png"/></a>
+</ul>
+<ul class="col" style="width: 450px;">
+	<a href="./files/clase14/modelo_tcpip.png"><img src="./files/clase14/modelo_tcpip.png"/></a>
+</ul>
+<br /><br />
+<p>Modelo ISO de comunicación entre sistemas. Simplificado en la época de TCP/IP.</p>
+</section>
+
+<section>
+<h2>Modelo OSI y TCP/IP</h2>
+<br />
+<ul>
+	<li>Las capas de Aplicación, Presentación y Sesión se han fusionado actualmente en la capa de Aplicación.</li>
+	<li>Con TCP/IP la capa de trasporte corresponde a TCP o UDP</li>
+	<li>Con TCP/IP la capa de red es la dirección IP (IPv4 o IPv6)</li>
+	<li>La capa de enlace será Ethernet, WiFi u otras</li>
+	<li>El medio físico puede ser cable, fibra optica, el aire (WiFi), etc...</li>
+</ul>
+</section>
+
+<section>
+<h2>La dirección IP (v4)</h2>
+<br />
+<ul class="col" style="width: 400px;">
+	<p>Classful</p>
+	<a href="./files/clase14/ipv4_classful.jpg"><img src="./files/clase14/ipv4_classful.jpg"/></a>
+</ul>
+<ul class="col" style="width: 400px;">
+	<p>Classless</p>
+	<a href="./files/clase14/ipv4_classless.jpg"><img src="./files/clase14/ipv4_classless.jpg"/></a>
+</ul>
+<ul>
+	<li>En el esquema classful la dirección define que parte es de red y que parte es de host.</li>
+	<li>En el esquema classless necesitamos una mascara de 32bits o un entero que nos definen que parte es red y que parte es host.</li>
+</ul>
+</section>
+
+<section>
+<h2>Mi IP</h2>
+<br />
+<ul>
+	<li>¿Como la consigo? Dos opciones:
+		<ul>
+			<li>Fijo mi IP manualmente</li>
+			<li>Uso el protocolo DHCP</li>
+		</ul>
+	</li>
+	<li>Ejemplo red:
+		<ul>
+			<li>Red 192.168.0.0</li>
+			<li>Mascara v<sub>1</sub>: 255.255.255.0</li>
+			<li>Mascara v<sub>2</sub>: /24</li>
+			<li>Router 192.168.0.1</li>
+			<li>Broadcast 192.168.0.255</li>
+			<li>Host1 192.168.0.10</li>
+			<li>Host2 192.168.0.11</li>
+			<li>Host3 192.168.0.12</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Mi IP</h2>
+<br />
+<ul>
+	<li>Dirección de loopback: 127.0.0.1</li>
+	<li>Manejo dirección Linux:
+		<ul>
+			<li>archivo: /etc/network/interfaces</li>
+			<pre><code>
+iface eth0 inet static
+     address 192.168.1.10
+     network 192.168.1.0
+     netmask 255.255.255.0
+     broadcast 192.168.1.255
+     gateway 192.168.1.254
+			</code></pre>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Formato de IPv4 vs. IPv6</h2>
+<a href="./files/clase14/ipv4_ipv6.jpg"><img src="./files/clase14/ipv4_ipv6_vs.jpg"/></a>
 </section>
 
 <section>
@@ -59,8 +165,8 @@
 <br/>
 <p style="text-align: left;">Direcciones IP:</p>
 <ul>
-	<li>IPv4: 2<sup>32</sup></li>
-	<li>IPv6: 2<sup>128</sup></li>
+	<li>IPv4: 2<sup>32</sup> hosts</li>
+	<li>IPv6: 2<sup>128</sup> hosts</li>
 </ul>
 <br/><br/>
 <p style="text-align: left;">Puertos:</p>
@@ -70,24 +176,6 @@
 </ul>
 <br/><br/>
 <p>Cada uno, espacios de puertos por protocolo.</p>
-</section>
-
-<section>
-<h2>Ejemplos de IPs</h2>
-<ul>
-<li>Ejemplo red IP:<ul>
-<li>Red: 192.168.0.0</li>
-<li>Mascara v<sub>1</sub>: 255.255.255.0</li>
-<li>Mascara v<sub>2</sub>: /24</li>
-<li>Router: 192.168.0.1</li>
-<li>Broadcast: 192.168.0.255</li>
-<li>Host1: 192.168.0.10</li>
-<li>Host2: 192.168.0.11</li>
-<li>Host3: 192.168.0.12</li>
-<li>Dir loopback: 127.0.0.1</li>
-</ul>
-</li>
-</ul>
 </section>
 
 <section>
@@ -104,6 +192,21 @@
 <li>eth0: Cable</li>
 <li>wlan0: WiFi</li>
 <li>lo: loopback</li>
+</ul>
+</section>
+
+<section>
+<h2>Espacio de direcciones</h2>
+<br/>
+<a href="./files/clase14/ipv4_ipv6_address_space.jpg"><img src="./files/clase14/ipv4_ipv6_address_space_small.jpg"/></a>
+<p>Internet Topology Map, January 2009 (UC Regent)</p>
+</section>
+
+<section>
+<h1>Programación de Sockets</h1>
+<br/>
+<ul>
+	<li><a href="files/clase14/redes_y_sockets.odp">Bajar presentación de redes y sockets</a></li>
 </ul>
 </section>
 
