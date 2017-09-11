@@ -48,23 +48,7 @@
 <section>
 <h1>Redes de datos y Sockets</h1>
 <br/>
-<ul>
-	<li><a href="files/clase14/temario.txt">Temario oficial de sockets</a></li>
-</ul>
-</section>
-
-<section>
-<h2>Introducción</h2>
-<ul>
-	<li>Todos usamos TCP/IP en internet</li>
-	<li>Protocolo IP: Mi dirección!</li>
-	<li>TCP: Transmission Control Protocol</li>
-		<ul><li>Comunicación con conexión</li></ul>
-	<li>UDP: User Datagram Protocol</li>
-		<ul><li>Comunicación sin conexión</li></ul>
-	<li>Cliente/Servidor: En una conexión TCP/IP siempre debe haber un servidor (que espera conexiones) y un cliente (que se conecta al servidor).</li>
-	<li>Socket: Abstracción de conexión entre un par cliente servidor que permite conectarnos/trabajar como si estuvieramos trabajando con archivos.</li>
-</ul>
+<p><a href="files/clase14/temario.txt">Temario oficial de sockets</a></p>
 </section>
 
 <section>
@@ -89,6 +73,20 @@
 	<li>Con TCP/IP la capa de red es la dirección IP (IPv4 o IPv6)</li>
 	<li>La capa de enlace será Ethernet, WiFi u otras</li>
 	<li>El medio físico puede ser cable, fibra optica, el aire (WiFi), etc...</li>
+</ul>
+</section>
+
+<section>
+<h2>Introducción</h2>
+<ul>
+	<li>Todos usamos TCP/IP en internet</li>
+	<li>Protocolo IP: Mi dirección!</li>
+	<li>TCP: Transmission Control Protocol</li>
+		<ul><li>Comunicación con conexión</li></ul>
+	<li>UDP: User Datagram Protocol</li>
+		<ul><li>Comunicación sin conexión</li></ul>
+	<li>Cliente/Servidor: En una conexión TCP/IP siempre debe haber un servidor (que espera conexiones) y un cliente (que se conecta al servidor).</li>
+	<li>Socket: Abstracción de conexión entre un par cliente servidor que permite conectarnos/trabajar como si estuvieramos trabajando con archivos.</li>
 </ul>
 </section>
 
@@ -205,13 +203,100 @@ iface eth0 inet static
 <section>
 <h1>Programación de Sockets</h1>
 <br/>
+<p><a href="files/clase14/redes_y_sockets.odp">Bajar presentación de redes y sockets</a></p>
+</section>
+
+<section>
+<h2>Orden de bytes para el host y la red</h2>
+<br/>
 <ul>
-	<li><a href="files/clase14/redes_y_sockets.odp">Bajar presentación de redes y sockets</a></li>
+	<li>big-endian (TCP/IP, IBM RS6000, SUN, ...)
+		<ul>
+			<li>dirección N : byte más significativo</li>
+			<li>dirección N+1: byte menos significativo</li>
+		</ul>
+	</li>
+	<br/>
+	<li>Little-endian (Intel x86, DEC Alpha, ...)
+		<ul>
+			<li>dirección N : byte menos significativo</li>
+			<li>dirección N+1: byte más significativo</li>
+		</ul>
+	</li>
 </ul>
 </section>
 
 <section>
-<h3>Herramienta1: NetCat</h2>
+<h2>Orden de bytes para el host y la red</h2>
+<h2>Funciones</h2>
+<br/>
+<pre><code>unsigned long htonl (unsigned long hostlong)</code></pre>
+<p>Convierte un long del formato de la máquina al de la red.</p>
+<pre><code>unsigned short htons (unsigned short hostshort)</code></pre>
+<p>Convierte un short del formato de la máquina al de la red.</p>
+<pre><code>unsigned long ntohl (unsigned long netlong)</code></pre>
+<p>Convierte un long del formato de la red al de la máquina.</p>
+<pre><code>unsigned short ntohs (unsigned short netshort)</code></pre>
+<p>Convierte un short del formato de la red al de la máquina.</p>
+</section>
+
+<section>
+<h2>TCP (1)</h2>
+<br/>
+<ul>
+	<li>TCP usa el concepto de número de puerto para identificar a las aplicaciones emisoras y receptoras. Cada lado de la conexión TCP tiene asociado un número de puerto (de 16 bits sin signo, con lo que existen 65536 puertos posibles) asignado por la aplicación emisora o receptora.</li>
+	<li>Los puertos son clasificados en tres categorías:
+		<ul>
+			<li>Bien conocidos: 0 a 1023</li>
+			<li>Registrados, Dinámicos o privados: 1024 y superiores</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>TCP (2)</h2>
+<br/>
+<ul>
+	<li>Los puertos bien conocidos son asignados por la Internet Assigned Numbers Authority (IANA), van del 0 al 1023 y son usados normalmente por el sistema o por procesos con privilegios.
+		<ul>
+			<li>Las aplicaciones que usan este tipo de puertos son ejecutadas como servidores y se quedan a la escucha de conexiones.</li>
+			<li>Algunos ejemplos son: FTP (21), SSH (22), Telnet (23), SMTP (25) y HTTP (80).</li>
+		</ul>
+	</li>
+	<li>Los puertos registrados son normalmente usados por aplicaciones privadas (por ejemplo 8080). Los puertos dinámicos/privados también son usalmente usados por las aplicaciones de usuario.</li>
+</ul>
+</section>
+
+<section>
+<h2>TCP: Conexión</h2>
+<br />
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/tcp1.png"><img src="./files/clase14/tcp1.png"/></a>
+</ul>
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/tcp2.png"><img src="./files/clase14/tcp2.png"/></a>
+</ul>
+</section>
+
+<section>
+<h2>Sockets</h2>
+<br/>
+<pre><code>int socket(int domain, int type, int protocol);</code></pre>
+<ul>
+	<li>Domain: AF_UNIX, AF_INET, AF_INET6, mas...</li>
+	<li>Type: SOCK_STREAM, SOCK_DGRAM, mas...</li>
+	<li>Protocols: Con estas opciones puede ser 0</li>
+</ul>
+<br /><br />
+<ul style="font-size: 85%;">
+	<li>Los sockets son una abstracción que nos permite comunicarnos con otros programas usando descriptores de fichero estándar de Unix.</li>
+	<li>Hay distintos tipos, usaremos AF_INET (IPv4). Dentro de estos existen TCP (SOCK_STREAM) o UDP (SOCK_DGRAM). Para crearlos usaremos la función socket()</li>
+</ul>
+</section>
+
+<section>
+<h3>Herramienta1: NetCat</h3>
 <br/>
 <a href="files/clase14/netcat.jpg"><img style="width: 500px;" src="files/clase14/netcat.jpg"/></a>
 </section>
@@ -227,14 +312,16 @@ iface eth0 inet static
 <br/><br/>
 <ul>
 	<li>Para correr un server</li>
-<pre style="width: 500px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
 nc -n -vv -l -p 4161
 </code></pre>
 	<li>Cliente que se conecta a ese server</li>
-<pre style="width: 500px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
 nc 127.0.0.1 4161
+echo "Hola Mundo" | nc 127.0.0.1 4161
 cat test.txt | nc 127.0.0.1 4161
 </code></pre>
+	<li>Si misma red y problemas: "sudo iptables -F"</li>
 </section>
 
 <section>
