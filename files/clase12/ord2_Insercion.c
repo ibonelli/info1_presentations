@@ -1,18 +1,10 @@
 #include <stdio.h>
 #include "getch.h"
 
-void main(void) {
-  void insercion(char [],int);
-  char vec[10]={'G','B','E','A','L','Z','R','T','P','K'};
+void muestra(char vec[], int N) {
   int i;
-  clrscr();
-  printf("Vector desordenado\n");
-  for(i=0;i<10;i++)
-    printf("    %c",vec[i]);
   printf("\n\n");
-  insercion(vec,10);
-  printf("\n\n\nVector ordenado\n");
-  for(i=0;i<10;i++)
+  for(i=0;i<N;i++)
     printf("    %c",vec[i]);
   getch();
 }
@@ -32,10 +24,17 @@ void insercion(char vec[],int N) {
   }
 }
 
-void muestra(char vec[], int N) {
+void main(void) {
+  void insercion(char [],int);
+  char vec[10]={'G','B','E','A','L','Z','R','T','P','K'};
   int i;
+  printf("Vector desordenado\n");
+  for(i=0;i<10;i++)
+    printf("    %c",vec[i]);
   printf("\n\n");
-  for(i=0;i<N;i++)
+  insercion(vec,10);
+  printf("\n\n\nVector ordenado\n");
+  for(i=0;i<10;i++)
     printf("    %c",vec[i]);
   getch();
 }
