@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Info1 - Sockets avanzado</title>
+		<title>Info1 - IDEs</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Ignacio Bonelli">
@@ -42,67 +42,83 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>IDEs</h1>
-					<p>
-						<small>Ing. Ignacio Javier Bonelli</small>
-					</p>
-				</section>
-				<section>
 
-GDB:
-	cgdb.html
-	cgdb_cheat_sheet.txt
+<section>
+	<h1>IDEs</h1>
+	<p>
+		<small>Ing. Ignacio Javier Bonelli</small>
+	</p>
+</section>
 
-				</section>
-				<section>
+<section>
+<section>
+<h3>Herramientas</h3>
+<ul>
+	<li>Debugging: gdb, ddd, kdbg, etc...</li>
+	<li>Compiler/Linker: gcc</li>
+	<li>Editor: geany, kate, gedit, etc...</li>
+	<li>Proyecto: make</li>
+	<li>Control Versiones: git, svn, cvs, etc...</li>
+	<li>Documentación: doxygen</li>
+	<li>Logging: librerías vistas...</li>
+</ul>
+</section>
 
-Debugging: gdb, ddd, kdbg, etc...
-Compiler/Linker: gcc
-Editor: geany, kate, gedit, etc...
-Proyecto: make
-Control Versiones: git, svn, cvs, etc...
-Documentación: doxygen
-Logging: librerías vistas...
+<section>
+<h3>GDB</h3>
+<ul>
+	<li><a href="./files/clase25/cgdb.html">CGDB Manual</a></li>
+	<li><a href="./files/clase25/cgdb_cheat_sheet.txt">Notas sobre CGDB</a></li>
+</ul>
+</section>
 
-				</section>
-				<section>
+<section>
+<h3>Interface</h3>
+<p>CLI vs GUI</p>
+<br />
+<img src="files/clase25/IDEs_2016-11-19.jpg"/>
+</section>
 
-Interface: CLI vs GUI
+<section>
+<h3>INSTALL</h3>
+<br />
+<ul>
+	<li style="font-family:monospace; font-weight: bold;">apt-get install qtcreator</li>
+		<p>QTcreator es piola para crear entornos gráficos (usa las librerias QT de KDE).</p>
+	<li style="font-family:monospace; font-weight: bold;">apt-get install eclipse-cdt</li>
+		<p>Eclise es un framework para generar IDEs y se usó para crear el IDE del LPCxpresso</p>
+</ul>
+<br />
+<p>Otros:
+<ul>
+	<li>apt-get install kdevelop</li>
+	<li>apt-get install codeblocks</li>
+</ul>
+</p>
+</section>
 
-Foto Pizarron Comparativa: Geany, Eclipse & QTCreator
+<section>
+<h3>Ejemplos de uso</h3>
+<ul><li>Geany:
+		<ul>
+			<li>Uso simple: ejemplos/getline.c</li>
+			<li>Muchos Archivos: ejemplos/punto3D/main.cpp</li>
+		</ul>
+	</li>
+	<li>QTCreator: Armar un proyecto con QT y ver opciones</li>
+	<li>Eclipse CDT: Armar un proyecto y mostrar debugging factorial</li>
+</ul>
+</section>
 
-				</section>
-				<section>
+<section>
+<h3>Otros</h3>
+<ul>
+	<li>Agregar pantallas: snapshot*</li>
+	<li>Alt+Enter sobre el proyecto creado factorial: Clase25b_IDE_eclipse_allegr.png</li>
+</ul>
+</section>
+</section>
 
-INSTALL
-
-apt-get install qtcreator
-apt-get install eclipse-cdt
-
-Otros:
-	apt-get install kdevelop
-	apt-get install codeblocks
-
-				</section>
-				<section>
-
-Geany con:
-	* Simple: ejemplos/getline.c
-	* Muchos Archivos: ejemplos/punto3D/main.cpp
-
-QTCreator: Armar un proyecto con QT y ver opciones
-
-Eclipse CDT: Armar un proyecto y mostrar debugging factorial
-
-				</section>
-				<section>
-
-Agregar pantallas: snapshot*
-
-Alt+Enter sobre el proyecto creado factorial: Clase25b_IDE_eclipse_allegr.png
-
-				</section>
 			</div>
 
 		</div>

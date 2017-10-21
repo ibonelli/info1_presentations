@@ -20,11 +20,3 @@ Breakpoints (space bar):
 * The line number should turn red to indicate that a breakpoint has been set.
 * Hitting the space bar again will delete the breakpoint.
 * If you disable the breakpoint, the line number will turn yellow, to represent the disabled breakpoint.
-
----------------------
-Eclipse CDT
----------------------
-
-IDE recomendado:
-	sudo apt-get install eclipse-cdt
-
