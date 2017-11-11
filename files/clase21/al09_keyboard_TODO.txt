@@ -1,0 +1,7 @@
+Hacer algo con al09 v3 (root folder) que se asemeje a al09 v1.
+La idea es que se vea que envio...
+	Si posición pantalla
+	Movimiento de tecla
+		Dependiendo del timer
+		Un paso a la vez
+

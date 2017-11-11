@@ -110,15 +110,17 @@
 <section>
 	<h2>Bibliotecas Compartidas</h2>
 	<ul>
-		<li style="font-size:90%;">No incorporan el codigo de sus funciones al programa que las invoca.</li>
-		<li style="font-size:90%;">Resuelven las referencias en el momento de arranque del programa que las usa.</li>
-		<li style="font-size:90%;">Son útiles para no repetir código si varios programas necesitan usar la misma librería.</li>
-		<li style="font-size:90%;">Las bibliotecas compartidas tienen un nombre al que se denomina "soname" que en general difiere del nombre del archivo, que la contiene:</li>
-		<pre><code>$ls -l /usr/lib/libopencv_highgui*
-$objdump -p /usr/lib/libopencv_highgui.so.2.3.1 | grep -i soname</code></pre>
+		<li style="font-size:80%;">No incorporan el codigo de sus funciones al programa que las invoca.</li>
+		<li style="font-size:80%;">Resuelven las referencias en el momento de arranque del programa que las usa.</li>
+		<li style="font-size:80%;">Son útiles para no repetir código si varios programas necesitan usar la misma librería.</li>
+		<li style="font-size:80%;">Las bibliotecas compartidas tienen un nombre al que se denomina "soname" que en general difiere del nombre del archivo, que la contiene:</li>
+		<pre><code>$ ls -l /usr/lib/libopencv_highgui*</code></pre>
+
+		<pre><code>$ ls -l /usr/lib/x86_64-linux-gnu/libopencv_highgui*</code></pre>
+		<pre><code>$ objdump -p /usr/lib/libopencv_highgui.so.2.3.1 | grep -i soname</code></pre>
 		<ul>
-			<li style="font-size:75%;">Este nombre se asigna mediante el parametro <span style="color: #4FC7CF;">-soname</span> que se pasa al linker <span style="color: #4FC7CF;">ld</span> en el momento de su construcción.</li>
-			<li style="font-size:75%;">Es mejor para el manejo de estas Bibliotecas tener separados soname y nombre de archivo.</li>
+			<li style="font-size:60%;">Este nombre se asigna mediante el parametro <span style="color: #4FC7CF;">-soname</span> que se pasa al linker <span style="color: #4FC7CF;">ld</span> en el momento de su construcción.</li>
+			<li style="font-size:60%;">Es mejor para el manejo de estas Bibliotecas tener separados soname y nombre de archivo.</li>
 		</ul>
 	</ul>
 </section>
@@ -127,7 +129,7 @@ $objdump -p /usr/lib/libopencv_highgui.so.2.3.1 | grep -i soname</code></pre>
 	<h2>Bibliotecas Compartidas: Compilando...</h2>
 	<ul>
 		<li>Directorios comunes de librerias:
-			<pre><code>/lib , /usr/lib , /usr/local/lib</code></pre>
+			<pre><code>/lib , /usr/lib , /usr/local/lib, /usr/lib/x86_64-linux-gnu</code></pre>
 		</li>
 		<li>Para compilar:
 			<pre><code>$ gcc -fPIC -g -c -Wall holalib.c</code></pre>
