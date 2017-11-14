@@ -229,9 +229,20 @@ $ ./al08_keyboard_client 127.0.0.1
 						</ul>
 					</section>
 
-					<section>
-						<h2>Presentacion Pizarron</h2>
+                                        <section>
+                                                <h2>Presentacion Pizarron</h2>
 						<a href="files/clase21/Presentacion_Pizarron_Juego.jpg"><img style="width: 900px;" src="files/clase21/Presentacion_Pizarron_Juego.jpg"/></a>
+					</section>
+                                        <section>
+                                                <h2>Reciclando nuestro bind</h2>
+						<ol>
+							<li>Pedir un int que valga 1:
+<pre><code>const int uno=1;</code></pre>
+							</li>
+                                                        <li>Antes de armar el socket agregar:
+<pre><code>setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno, (socklen_t)(sizeof(uno)));</code></pre>
+</li>
+						</ol>
 					</section>
 				</section>
 
