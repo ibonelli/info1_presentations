@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Info1 - IPC & Threads</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Ignacio Bonelli">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+<section>
+	<h1>IPCs & Threads</h1>
+	<p>
+		<small>Ing. Ignacio Javier Bonelli</small>
+	</p>
+</section>
+
+<section>
+<section>
+<h2>IPCs</h2>
+<h3>Inter Process Communication</h3>
+<br />
+<p>O como comunicar programas o procesos dentro de una misma máquina</p>
+</section>
+
+<section>
+<h2>IPCs: Ejemplo</h2>
+<br/>
+<p>Ejemplo sencillo IPC:</p>
+<p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
+<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
+</section>
+
+<section>
+<h2>IPCs</h2>
+<ul>
+	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a></li>
+	<li>Semaphore: <a href="http://beej.us/guide/bgipc/output/html/multipage/semaphores.html">Beej</a> y <a href="https://en.wikipedia.org/wiki/Semaphore_%28programming%29">Wikipedia</a></li>
+	<li>Lock: <a href="http://beej.us/guide/bgipc/output/html/multipage/flocking.html">Beej</a> y <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Wikipedia</a></li>
+	<li>Monitor: <a href="https://en.wikipedia.org/wiki/Monitor_(synchronization)">Wikipedia</a></li>
+	<li>Colas de mensajes (en Beej): <a href="http://beej.us/guide/bgipc/output/html/multipage/pipes.html">Pipes</a>, <a href="http://beej.us/guide/bgipc/output/html/multipage/fifos.html">FIFOs</a> y <a href="http://beej.us/guide/bgipc/output/html/multipage/mq.html">Msg Queue</a></li>
+</ul>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Threads</h2>
+<br />
+<p>Corriendo procesos en paralelo que son mas livianos y flexibles que los creados por fork.</p>
+</section>
+
+<section>
+<h3>Fork</h3>
+<p>fork nos da un nuevo proceso que es una copia del actual. Tiene una "copia" de la memoria original. A medida que los nuevos procesos avanzan los valores de cada uno en memoria cambian, pero el ejecutable es el mismo. Los procesos/tareas no comparten memoria, la única forma de compartir algo es usar IPCs.</p>
+<br />
+<h3>Threads</h3>
+<p>Un proceso puede tener multiples threads, cada una ejecutandose en paralelo dentro del mismo contexto (memoria). Todos los recursos son compartidos, usan la misma memoria. Se deben usar mecanismos de lock y sincronización para evitar problemas.</p>
+</section>
+
+<section>
+<h2>Threads</h2>
+<br />
+<img src="files/clase26/threads.jpg"/>
+</section>
+
+<section>
+<h2>Threads</h2>
+<pre><code>
+#include &lt;pthread.h&gt;
+
+/* ¿Son tid1 y tid2 el mismo thread? */
+int pthread_equal(pthread_t tid1, pthread_t tid2);
+
+/* Retornar el pthread ID actual */
+pthread_t pthread_self(void);
+
+/* Creando un thread */
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
+                   void *(*start_routine) (void *), void *arg);
+</code></pre>
+<ul style="font-size: 75%;">pthread_create():
+	<li>En thread nos devolveran el ID del thread creado</li>
+	<li>Atributos que puede tener thread el (ya sea prioridad u otros). Puede ser NULL</li>
+	<li>Puntero a la función que debe ejecutar el thread</li>
+	<li>Parametros de la funcion que ejecutar el thread. Si toma void, puede ser NULL</li>
+</ul>
+</section>
+
+<section>
+<h2>Un ejemplo:</h2>
+<h3><a href="files/clase26/threads.c">threads.c</a></h3>
+<br />
+<p>Para leer mas...</p>
+<ul>
+	<li><a href="http://www2.electron.frba.utn.edu.ar/~mdoallo/presentaciones.save.2010/clase-20100916-threads">Threads en Linux</a> (por Ing. Marcelo Doallo)</li>
+	<li><a href="http://www.geekride.com/fork-forking-vs-threading-thread-linux-kernel/">fork vs thread</a></li>
+	<li>Linux Threads: <a href="http://www.thegeekstuff.com/2012/03/linux-threads-intro/">Intro</a>, <a href="http://www.thegeekstuff.com/2012/04/create-threads-in-linux/">creating</a>, <a href="http://www.thegeekstuff.com/2012/04/terminate-c-thread/">finishing them</a></li>
+</ul>
+
+
+</section>
+</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
