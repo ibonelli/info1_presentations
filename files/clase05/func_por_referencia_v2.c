@@ -6,8 +6,11 @@ int mifunc(int *pa, int *pb) {
 	a=*pa;
 	b=*pb;
 
-	printf("\nDireccion/puntero A: %p\n",pa);
-	printf("Direccion/puntero B: %p\n",pb);
+	printf("\n\n---- Entramos a la funcion...");
+	printf("\nDireccion contenida o puntero A o direccion de A: %p",pa);
+	printf("\nDireccion contenida o puntero B o direccion de B: %p",pb);
+	printf("\nDireccion del puntero A: %p",&pa);
+	printf("\nDireccion del puntero B: %p",&pb);
 
 	a++;
 	b=b+2;
@@ -17,6 +20,8 @@ int mifunc(int *pa, int *pb) {
 
 	*pa=a;
 	*pb=b;
+
+	printf("---- Salimos de la funcion...");
 
 	return a+b;
 }
@@ -36,8 +41,13 @@ void main(void) {
 	pa=&a;
 	pb=&b;
 
+	printf("\nDireccion contenida o puntero A o direccion de A: %p",pa);
+	printf("\nDireccion contenida o puntero B o direccion de B: %p",pb);
+	printf("\nDireccion del puntero A: %p",&pa);
+	printf("\nDireccion del puntero B: %p",&pb);
+
 	c=mifunc(pa,pb);
 
-	printf("\nValores de A, B y C luego de terminar la funcion\n");
+	printf("\n\nValores de A, B y C luego de terminar la funcion\n");
 	printf("A: %d | B: %d | C: %d\n",a,b,c);
 }

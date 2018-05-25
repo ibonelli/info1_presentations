@@ -80,17 +80,17 @@
 <ul class="col" style="width: 400px;">
 	<br><br>
 	<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-	int a=100;
-	int b=100;
+int a=100;
+int b=100;
 
-	int *p=&a;
+int *p=&a;
 
-	int *q=&a;
-	/* O también:
-	 *     int *q=p;
-	 */
+int *q=&a;
+/* O también:
+ *     int *q=p;
+ */
 
-	int *r=&b;
+int *r=&b;
 	</code></pre>
 </ul>
 </section>
@@ -105,7 +105,7 @@ int *px=&x;
  * *px es - Es una variable puntero a un entero */
 /*  &x es - Direccion de x */
 
-int *ppx=&px;
+int **ppx=&px;
 /* Donde:
  * &px es - Direccion de px */
 /* **px es - Es una variable puntero a un puntero a un entero */
@@ -143,13 +143,13 @@ tipo_de_variable_apuntada *nombre_del_puntero;</code></pre>
 <li>Ejemplos:<ul>
 	<li>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-int *p</code></pre></li>
+int *p;</code></pre></li>
 	<ul>
 		<li style="font-size: 28px;">Declara un puntero <span style="color: #4FC7CF;">p</span>, que se utilizará para apuntar a un <span style="color: #4FC7CF;">entero</span>, se dice que <span style="color: #4FC7CF;">p</span> es un <span style="color: #4FC7CF;">puntero a int</span></li>
 	</ul> 
 	<li>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-char *pc</code></pre></li>
+char *pc;</code></pre></li>
 	<ul>
 		<li style="font-size: 28px;">Declara el puntero <span style="color: #4FC7CF;">pc</span>, que se utilizará para apuntar a un <span style="color: #4FC7CF;">carácter</span>, se dice que <span style="color: #4FC7CF;">pc</span> es un <span style="color: #4FC7CF;">puntero a char</span></li>
 	</ul> 
@@ -216,7 +216,7 @@ m = *p;
 	<br/>
 	<li>El operador <span style="color: #4FC7CF;">*</span> tiene dos usos, en la definición/declaración indica que la variable es del tipo puntero.</li>
 	<br/>
-	<li>El operador <span style="color: #4FC7CF;">*</span> significa "<span style="color: #4FC7CF;">contenido de</span>" cuando se usa en el cuerpo del programa.</li>
+	<li>El operador <span style="color: #4FC7CF;">*</span> significa "<span style="color: #4FC7CF;">contenido de lo apuntado por</span>" cuando se usa en el cuerpo del programa.</li>
 	<br/>
 	<li>El operador <span style="color: #4FC7CF;">&amp;</span> significa "<span style="color: #4FC7CF;">dirección de</span>".</li>
 </ul>
