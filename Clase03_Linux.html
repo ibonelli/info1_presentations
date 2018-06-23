@@ -48,7 +48,6 @@
 			<div class="slides">
 
 <section>
-
 <section>
 <h3>El soporte del Sistema Operativo</h3>
 <h2>Unidad4</h2>
@@ -70,14 +69,6 @@
 <li>Normalmente presenta un login </li>
 <li>Una vez logueado se pueden utilizar aplicaciones y a través de éstas acceder a los recursos de hardware del sistema </li>
 <li>Provee una colección de funciones (o Aplication Programming Interface / API) que nos permite programar para ese SO </li>
-</ul>
-</section>
-<section>
-<h2>¿Linux de Microsoft?</h2>
-<p>Microsoft creó un núcleo configurado/modificado por ellos</p>
-<ul>Articulos:
-<li><a href="https://www.lanacion.com.ar/2126769-increible-microsoft-se-sube-a-linux">Microsoft se sube a Linux (La Nación)</a></li>
-<li><a href="http://www.telam.com.ar/notas/201804/272256-internet-cosas-microsoft-linux.html">Microsoft present&oacute; un sistema operativo basado en Linux para Internet de las cosas (T&eacute;lam)</a></li>
 </ul>
 </section>
 <section>
@@ -157,82 +148,6 @@
 <section>
 <h2>Ejemplos...</h2>
 <p>(LXDE, MATE/GNOME2 &amp; KDE)</p>
-</section>
-
-<section>
-<h3>Un poquito de historia (1)</h3>
-<h2>Primero fue Unix</h2>
-<ul>
-<li>En 1970 Ken Thompson y Dennis Ritchie lograron comenzar con Unix: Desarrollaron un sistema de archivos</li>
-<li>El sistema operativo era multitarea y multiusuario</li>
-<li>Tenía un intérprete de comandos</li>
-<li>En 1972 se tomó la decisión de escribir nuevamente UNIX en C.</li>
-<li>En 1975 Berkeley desarrolló y publicó su propio sucedáneo de UNIX: Berkeley Software Distribution (BSD)‏</li>
-</ul>
-</section>
-
-<section>
-<h3>Un poquito de historia (2)</h3>
-<h2>Primero fue Unix</h2>
-<ul>
-<li>Luego de esto sucede una gran proliferación de sistemas UNIX con distintas orientaciones. AT&amp;T decidé combinar varias versiones desarrolladas en distintas universidades y empresas, dando origen en 1983 al Unix System V (Incluía pipes, el editor Vi y la biblioteca curses)‏ </li>
-<li>En 1991 Linus Torvalds empezó a trabajar en un reemplazo no comercial para MINIX. Esto terminó en un núcleo (kernel) para computadoras con arquitectura de procesador Intel 80386 que mimetizaba muchas de las funcionalidades de UNIX y lo lanzó en forma de código abierto bajo el nombre de Linux. </li>
-</ul>
-</section>
-
-<section>
-<h3>Un poquito de historia (3)</h3>
-<h2>Primero fue Unix</h2>
-<a href="files/clase03/Linux_UnixHistory.jpg"><img src="files/clase03/Linux_UnixHistory.jpg"/></a>
-<br>
-<p style="font-size: 50%;">Fuente: <a href="http://spectrum.ieee.org/computing/software/linux-at-25-why-it-flourished-while-others-fizzled">Articulo del IEEE sobre 25 años de Linux</a></p>
-</section>
-
-<section>
-<h2>Free Software Foundation = GNU</h2>
-<ul>
-<li>GNU es un sistema operativo similar a Unix que es software libre y respeta su libertad. Puede instalar versiones de GNU basadas en Linux que son completamente software libre. </li>
-<li>El software que se publica debe ser software libre. Para que sea libre hay que publicarlo bajo una licencia de software libre. Generalmente utilizamos la Licencia Pública General de GNU (GPL de GNU) </li>
-<li>¿Otras licencias? Free-BSD
-	<ul>
-		<li>Mayormente servidores también Unix</li>
-		<li>Núcleo del sistema operativo MacOSX</li>
-	</ul>
-</li>
-</ul>
-</section>
-
-<section>
-<h2>Linux y GNU</h2>
-<ul>
-<li>GNU no es Linux, originalmente Free Software Foundation planeo hacer un sistema completo GNU.</li>
-<li>El proyecto GNU nace en 1984 y Linux se une y logra el primer sistema operativo (junto a las herramientas ya desarrolladas por el proyecto GNU como el GCC) sacar el primer sistema operativo 100% libre en 1992. </li>
-</ul>
-</br>
-</br>
-<p><a href="http://www.gnu.org/home.es.html">www.gnu.org</a>  &amp;  <a href="http://www.freebsd.org/">www.freebsd.org</a></p>
-</section>
-
-<section>
-<h2>Llega Linux</h2>
-<ul>
-<li>La historia del núcleo de Linux está fuertemente vinculada a la del proyecto GNU.</li>
-	<ul>
-		<li>El proyecto GNU, iniciado en 1983 por Richard Stallman, tiene como objetivo el desarrollo de un sistema operativo Unix completo compuesto enteramente de software libre.</li>
-		<li>Cuando la primera versión del núcleo de Linux fue liberada en 1991, el proyecto GNU ya había producido varios de los componentes del sistema operativo, incluyendo un intérprete de comandos, una biblioteca C y un compilador, pero aún no contaba con el núcleo que permitiera completar el sistema operativo.</li>
-	</ul>
-</ul>
-</section>
-
-<section>
-<h2>Llega Linux</h2>
-<ul>
-<li>Entonces, el núcleo creado por Linus Torvalds, quien se encontraba por entonces estudiando en la Universidad de Helsinki, llenó el "espacio" final que el sistema operativo de GNU necesitaba. </li>
-<li>En 1992, el núcleo Linux fue combinado con los programas desarrollados por el Proyecto GNU, dando como resultado el Sistema Operativo GNU/Linux. </li>
-<li>GNU/Linux fue desarrollado bajo licencia GPL. </li>
-</ul>
-</br></br></br>
-<p><a href="./files/clase03/Linux_Linea_Tiempo.html">Linea de tiempo año a año...</a></p>
 </section>
 
 <section>
@@ -328,7 +243,99 @@
 	<ul style="font-size: 85%; font-family: monospace;">
 		<li>apt-cache search gnome | grep shell | less -S</li>
 		<li>apt-cache search geany</li>
+		<li>(sudo) apt-get install geany</li>
 	</ul>
+</ul>
+</section>
+</section>
+
+<section>
+<section>
+<h1>Un poquito de historia...</h1>
+</section>
+
+<section>
+<h3>Un poquito de historia (1)</h3>
+<h2>Primero fue Unix</h2>
+<ul>
+<li>En 1970 Ken Thompson y Dennis Ritchie lograron comenzar con Unix: Desarrollaron un sistema de archivos</li>
+<li>El sistema operativo era multitarea y multiusuario</li>
+<li>Tenía un intérprete de comandos</li>
+<li>En 1972 se tomó la decisión de escribir nuevamente UNIX en C.</li>
+<li>En 1975 Berkeley desarrolló y publicó su propio sucedáneo de UNIX: Berkeley Software Distribution (BSD)‏</li>
+</ul>
+</section>
+
+<section>
+<h3>Un poquito de historia (2)</h3>
+<h2>Primero fue Unix</h2>
+<ul>
+<li>Luego de esto sucede una gran proliferación de sistemas UNIX con distintas orientaciones. AT&amp;T decidé combinar varias versiones desarrolladas en distintas universidades y empresas, dando origen en 1983 al Unix System V (Incluía pipes, el editor Vi y la biblioteca curses)‏ </li>
+<li>En 1991 Linus Torvalds empezó a trabajar en un reemplazo no comercial para MINIX. Esto terminó en un núcleo (kernel) para computadoras con arquitectura de procesador Intel 80386 que mimetizaba muchas de las funcionalidades de UNIX y lo lanzó en forma de código abierto bajo el nombre de Linux. </li>
+</ul>
+</section>
+
+<section>
+<h3>Un poquito de historia (3)</h3>
+<h2>Primero fue Unix</h2>
+<a href="files/clase03/Linux_UnixHistory.jpg"><img src="files/clase03/Linux_UnixHistory.jpg"/></a>
+<br>
+<p style="font-size: 50%;">Fuente: <a href="http://spectrum.ieee.org/computing/software/linux-at-25-why-it-flourished-while-others-fizzled">Articulo del IEEE sobre 25 años de Linux</a></p>
+</section>
+
+<section>
+<h2>Free Software Foundation = GNU</h2>
+<ul>
+<li>GNU es un sistema operativo similar a Unix que es software libre y respeta su libertad. Puede instalar versiones de GNU basadas en Linux que son completamente software libre. </li>
+<li>El software que se publica debe ser software libre. Para que sea libre hay que publicarlo bajo una licencia de software libre. Generalmente utilizamos la Licencia Pública General de GNU (GPL de GNU) </li>
+<li>¿Otras licencias? Free-BSD
+	<ul>
+		<li>Mayormente servidores también Unix</li>
+		<li>Núcleo del sistema operativo MacOSX</li>
+	</ul>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>Linux y GNU</h2>
+<ul>
+<li>GNU no es Linux, originalmente Free Software Foundation planeo hacer un sistema completo GNU.</li>
+<li>El proyecto GNU nace en 1984 y Linux se une y logra el primer sistema operativo (junto a las herramientas ya desarrolladas por el proyecto GNU como el GCC) sacar el primer sistema operativo 100% libre en 1992. </li>
+</ul>
+</br>
+</br>
+<p><a href="http://www.gnu.org/home.es.html">www.gnu.org</a>  &amp;  <a href="http://www.freebsd.org/">www.freebsd.org</a></p>
+</section>
+
+<section>
+<h2>Llega Linux</h2>
+<ul>
+<li>La historia del núcleo de Linux está fuertemente vinculada a la del proyecto GNU.</li>
+	<ul>
+		<li>El proyecto GNU, iniciado en 1983 por Richard Stallman, tiene como objetivo el desarrollo de un sistema operativo Unix completo compuesto enteramente de software libre.</li>
+		<li>Cuando la primera versión del núcleo de Linux fue liberada en 1991, el proyecto GNU ya había producido varios de los componentes del sistema operativo, incluyendo un intérprete de comandos, una biblioteca C y un compilador, pero aún no contaba con el núcleo que permitiera completar el sistema operativo.</li>
+	</ul>
+</ul>
+</section>
+
+<section>
+<h2>Llega Linux</h2>
+<ul>
+<li>Entonces, el núcleo creado por Linus Torvalds, quien se encontraba por entonces estudiando en la Universidad de Helsinki, llenó el "espacio" final que el sistema operativo de GNU necesitaba. </li>
+<li>En 1992, el núcleo Linux fue combinado con los programas desarrollados por el Proyecto GNU, dando como resultado el Sistema Operativo GNU/Linux. </li>
+<li>GNU/Linux fue desarrollado bajo licencia GPL. </li>
+</ul>
+</br></br></br>
+<p><a href="./files/clase03/Linux_Linea_Tiempo.html">Linea de tiempo año a año...</a></p>
+</section>
+
+<section>
+<h2>¿Linux de Microsoft?</h2>
+<p>Microsoft creó un núcleo configurado/modificado por ellos</p>
+<ul>Articulos:
+<li><a href="https://www.lanacion.com.ar/2126769-increible-microsoft-se-sube-a-linux">Microsoft se sube a Linux (La Nación)</a></li>
+<li><a href="http://www.telam.com.ar/notas/201804/272256-internet-cosas-microsoft-linux.html">Microsoft present&oacute; un sistema operativo basado en Linux para Internet de las cosas (T&eacute;lam)</a></li>
 </ul>
 </section>
 </section>
@@ -388,7 +395,7 @@
     <li>2.8% : ASM</li>
     <li>1.8% : C++</li>
     <li>0.4% : XML</li>
-    <li>1.8% : Make</li>
+    <li>0.3% : Make</li>
     <li>0.1% : Perl</li>
     <li>0.1% : Shell script</li>
   </ul>
@@ -636,9 +643,6 @@ run
 </section>
 
 <section>
-<section>
-<h2>Clase2</h2>
-</section>
 <section>
 <h1>Usando Linux</h1>
 </section>
