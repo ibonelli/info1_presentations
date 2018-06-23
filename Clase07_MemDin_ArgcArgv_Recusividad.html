@@ -108,7 +108,7 @@ void main(int argc, char *argv[], char *envp[])
 <h3>Ejemplo</h3>
 <br/>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
-#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
 
 void main(int argc,char *argv[]) {
 	char *str1="Hola ";
@@ -172,12 +172,17 @@ void main(int argc,char *argv[]) {
 <br/><br/>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
+#define MAX_STR 20
 
-int *p;
+int *pi;
+char *pc;
+char *str;
 
-p = (int *) malloc( sizeof(int) );
+pi = (int *) malloc( sizeof(int) );
+pc = (char *) malloc( sizeof(char) );
+str = (char *) malloc( sizeof(char) * MAX_STR );
 </code></pre>
-<br/><br/>
+<br/>
 <ul>
 	<li>Si se puede alojar la memoria malloc() retorna el puntero a la memoria reservada.</li>
 	<li>Si no se puede alojar la memoria malloc() retornara un puntero a NULL.</li>

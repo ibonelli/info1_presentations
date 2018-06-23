@@ -266,7 +266,9 @@ char *ptr = string;
 <br/><br/>
 <a href="http://www.gnu.org/software/libc/manual/html_node/String-Length.html" style="text-align: left; font-size: 70%;">http://www.gnu.org/software/libc/manual/html_node/String-Length.html</a>
 </section>
+</section>
 
+<section>
 <section>
 <h2>Arreglos multidimensionales (matrices)</h2>
 <ul>
@@ -357,7 +359,9 @@ for(i=0;i&lt;2;i++)
 <br/><br/><img src="files/clase06/03_vector_3D.png"/>
 </ul>
 </section>
+</section>
 
+<section>
 <section>
 <h1>Funciones de manejo de strings</h1>
 </section>
@@ -431,7 +435,7 @@ int main(void) {
    char *string;
    char *str1 = "abcdefghi";
 
-   string = (char *) malloc(strlen(str1+1));
+   string = (char *) malloc(strlen(str1)+1);
 
    strcpy(string, str1);
    printf("%s\n", string);
