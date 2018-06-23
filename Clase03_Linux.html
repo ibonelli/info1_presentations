@@ -275,8 +275,8 @@
 		<ul>
 			<li><a href="http://www.ubuntu.com">Ubuntu</a> (dos versiones por año y un LTS cada 2)
 				<ul>
-					<li>Ultimo LTS: <a href="http://www.ubuntu.com/download/desktop">14.04.4 LTS (Trusty Tahr)</a></li>
-					<li>Ultima versión: <a href="http://www.ubuntu.com/download/desktop">15.10 (Wily Werewolf)</a></li>
+					<li>Ultimo LTS: <a href="http://www.ubuntu.com/download/desktop">18.04 LTS (Bionic Beaver)</a></li>
+					<li>LTS: <a href="https://en.wikipedia.org/wiki/Long-term_support">Long Term Support = 5 años!</a></li>
 				</ul>
 			</li>
 			<li>Grupos que basandose en Ubuntu usan otros desktops: <a href="http://kubuntu.org/">Kubuntu</a> (KDE), <a href="http://kubuntu.org/">Lubuntu</a> (LXDE) y <a href="https://ubuntu-mate.org">Mate</a> (GNome2)</li>
@@ -291,13 +291,14 @@
 	<li>Este es el que recomendamos para Informática I</li>
 	<li>Puede ser basado en Ubuntu (generalmente) o en Debian (una versión)</li>
 	<li>Cuando Ubuntu cambió a Unity (cambiado también el desktop) Mint comenzó a tomar fuerza.</li>
+  <li>El desktop que inspira la distribución es Cinnamon que es un Shell para GNOME3 inspirado en Windows.</li>
+	<li>Descarga última versión: <a href="https://linuxmint.com/download.php">Linux Mint 18.3 Sylvia</a></li>
 	</br>
-	<li>Sus desktop o variedades:
+	<li>Sus desktop/variedades (32 y 64bits):
 		<ul>
-			<li><a href="https://www.linuxmint.com/download_all.php">Mint</a> (Versiones basadas en Ubuntu LTS o Debian stable)
 				<ul>
-					<li>Cinnamon: <a href="http://blog.linuxmint.com/?p=3181">Linux Mint 18.1 "Serena" Cinnamon</a></li>
-					<li>MATE: <a href="http://blog.linuxmint.com/?p=3182">Linux Mint 18.1 "Serena" MATE</a></li>
+					<li>Basadas en Ubuntu: Cinnamon, MATE, Xfce y KDE.</li>
+					<li>Basadas en Debian: Cinnamon y MATE.</li>
 				</ul>
 			</li>
 		</ul>
@@ -378,6 +379,38 @@
 </section>
 
 <section>
+<h2>El kernel: Estadisticas</h2>
+<br/>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+  <p>Linux Kernel 2.6.38-2</p>
+  <ul>
+    <li>95.2% : C</li>
+    <li>2.8% : ASM</li>
+    <li>1.8% : C++</li>
+    <li>0.4% : XML</li>
+    <li>1.8% : Make</li>
+    <li>0.1% : Perl</li>
+    <li>0.1% : Shell script</li>
+  </ul>
+</ul>
+<ul class="col" style="width: 400px;">
+  <p>Imágenes</p>
+  <ul>
+    <li>2.6.38 SLOCCount
+      <ul>
+        <li><a href="files/clase03/kernel_2-6-38_sloccount_1.png">by directory</a></li>
+        <li><a href="files/clase03/kernel_2-6-38_sloccount_2.png">totals</a></li>
+      </ul>
+    </li>
+    <li>2.6.38 ohcount <a href="files/clase03/kernel_2-6-38_ohcount.png">code & comments</a></li>
+    <li><a href="files/clase03/kernel_3x_distribution.jpg">Analysis Kernel 3.x</a></li>
+  </ul>
+</ul>
+<br/><br/>
+<a style="font-size: 75%;" href="https://larjona.wordpress.com/2011/06/15/numbers-about-the-linux-kernel-2-6-38-2/">Fuente del análisis del kernel 2.6.38</a>
+</section>
+
+<section>
 <h2>Subsistemas</h2>
 <img src="files/clase03/Linux_Kernel_Partes.png"/>
 </section>
@@ -398,9 +431,16 @@
 <section>
 <h2>El kernel:</h2>
 <h3>Bajando a un ejemplo desde C</h3>
+<p>Por ejemplo mis scanf()/printf() como van pasando por las capas de software hasta llegar al hardware?</p>
+<br/>
 <ul>
-	<li>Por ejemplo mis scanf()/printf() como van pasando por las capas de software hasta llegar al hardware?</li>
-	<li>Pasamos por: Mi aplicación, llamado al SO: Kernel, Drivers, finalmente accede el SO al hardware</li>
+  <li>Pasamos por:</li>
+  <ol style="font-size: 80%;">
+    <li>Mi aplicación</li>
+    <li>Llamado al SO: Kernel</li>
+    <li>Drivers</li>
+    <li>Finalmente accede el SO al hardware</li>
+  </ol>
 </ul>
 </section>
 
@@ -411,9 +451,9 @@
 	<li>Para reflejar cambios se introdujo una numeración de 4 digitos donde el tercero implica mejoras y el cuarto bug fixes. </li>
 	<li>Ultimas versiones
 		<ul>
-			<li>stable: 4.0.1</li>
-			<li>stable: 3.19.6</li>
-			<li>longterm: 3.18.12</li>
+			<li>stable: 4.17.2</li>
+			<li>longterm: 4.14.51</li>
+			<li>longterm: 3.16.57</li>
 		</ul>
 	</li>
 </ul>
