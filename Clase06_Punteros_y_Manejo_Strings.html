@@ -628,21 +628,22 @@ $ gcc -o ncurses ncurses1_helloworld.c -lncurses
 <section>
 <h2>Scanf() y el buffer stdin:</h2>
 <ul>
-	<li>scanf("%c"); scanf("%s");</li>
+	<li><span style="font-family: monospace;">scanf("%c"); scanf("%s");</span></li>
 	<li>¿Como evitamos el buffer?</li>
-	<ul>
+	<ul style="font-size: 80%;">
 		<li>fflush(stdin); /* no suele andar */</li>
+		<li>setbuf(stdin,NULL); /* Anda mejor */</li>
 		<li>scanf(" %c"); /* mejor para Linux */</li>
 		<li>scanf("%3.2f"); scanf("%.2f);</li>
-		<br/>
-		<li>O usamos funciones especificas para string y chars de stdio.h:</li>
-		<ul>
-			<li>int getchar(void);</li>
-			<li>char *gets(char *s);</li>
-			<li>int putchar(int c);</li>
-			<li>int puts(const char *s);</li>
-		</ul>
 	</ul>
+	<li>O usamos funciones especificas para string y chars de stdio.h:</li>
+	<ul style="font-size: 80%;">
+		<li>int getchar(void);</li>
+		<li>char *gets(char *s);</li>
+		<li>int putchar(int c);</li>
+		<li>int puts(const char *s);</li>
+	</ul>
+	<li><a href="files/clase06/fflush/fflush.c">Ver código de fflush()/setbuf()</a></li>
 </ul>
 </section>
 <section>
