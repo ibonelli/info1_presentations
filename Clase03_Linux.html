@@ -338,6 +338,32 @@
 <li><a href="http://www.telam.com.ar/notas/201804/272256-internet-cosas-microsoft-linux.html">Microsoft present&oacute; un sistema operativo basado en Linux para Internet de las cosas (T&eacute;lam)</a></li>
 </ul>
 </section>
+
+<section>
+<h2>¿Otros OS?</h2>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+  <p align="left">Herederos de Unix:</p>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs">Plan 9 (1992)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Inferno_(operating_system)">Inferno (1996)</a></li>
+  </ul>
+  <br/><p align="left" style="font-size: 80%;">Ambos fueron creados en Bell Labs (antes Lucent y ahora Nokia)</p>
+</ul>
+<ul class="col" style="width: 400px;">
+  <p align="left">Otros:</p>
+  <ul>
+    <li>Windows</li>
+    <li>OS X (Unix)</li>
+    <li>Android (Linux)</li>
+  </ul>
+  <br/>
+  <p align="left">RTOS:</p>
+  <ul>
+    <li><a href="https://www.osrtos.com/">Lista RTOS</a></li>
+    <li><a href="https://www.freertos.org/">FreeRTOS</a></li>
+  </ul>
+</ul>
+</section>
 </section>
 
 <section>
@@ -483,6 +509,9 @@
 <li><a href="http://www.uclinux.org">www.uclinux.org</a></li>
 </ul>
 </section>
+</section>
+
+<section>
 <section>
 <h2>¿Y nosotros para que lo vamos a usar?</h2>
 </section>
@@ -700,6 +729,20 @@ run
 <li><span style="color: #4FC7CF;">tail,head</span> - Muestra las últimas/primeras 10 filas de un archivo</li>
 </ul>
 </section>
+</section>
+
+<section>
+<section>
+<h2>El sistema de archivos</h2>
+<br/>
+<ul>
+<li>"Everything is a file" es una de los principales conceptos que hacen a Unix lo que es.</li>
+<li>Todos los recursos del sistema (archivos, pantalla, discos, teclado, comunicaciones, procesos, etc...) son simples flujos de bits expuestos a través del sistema de archivos​.</li>
+<li>Entre otras cosas hacerlo así permite utilizar el mismo conjunto de utilidades y APIs para recursos con naturalezas diferentes.</li>
+</ul>
+<br/><br/><br/>
+<p style="font-size: 75%;"><a href="https://es.wikipedia.org/wiki/Todo_es_un_archivo">Mas sobre este concepto</a></p>
+</section>
 
 <section>
 <h3>La estructura del sistema de archivos (I)</h3>
@@ -899,7 +942,7 @@ run
 </section>
 
 <section>
-<h3>La estructura del sistema de archivos (II)</h3>
+<h3>La estructura del sistema de archivos (III)</h3>
 <h4>Filesystem Hierarchy Standard (FHS)</h4>
 <div align="center" class="centered-object">
 <center>
@@ -961,7 +1004,12 @@ run
 <p style="font-size: 75%;"><a href="http://www.alcancelibre.org/staticpages/index.php/estandar-jerarquia-sistema-archivos">Mas sobre sobre FHS</a>, <a href="http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-rg-es-4/s1-filesystem-fhs.html">articulo MIT (esp)</a> y <a href="http://es.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">FHS en wikipedia</a></p>
 </div>
 </section>
+</section>
 
+<section>
+<section>
+<h1>Permisos en Linux</h1>
+</section>
 <section>
 <h2>Permisos en Linux</h2>
 <p>Linux, tanto como Unix, es un sistema multiusuario</p>
@@ -1033,16 +1081,19 @@ drwx------    2 root     root         4096 Jun 18 21:20 scripts
 		<li style="font-size: 100%; font-family: sans-serif;">Este ejemplo hace ejecutable por el usuario al directorio archivo.</li></ul>
 	</li>
 </section>
+</section>
 
 <section>
+<section>
 <h2>Ejemplos de código:</h2>
+<p>(a mover a otra sección)</p>
+<br/>
 <ul>
 	<li><a href="./files/clase03/sumar.c">sumar.c</a></li>
 	<li><a href="./files/clase03/maximo_de_3.c">maximo_de_3.c</a></li>
 	<li><a href="./files/clase03/factorial.c">factorial.c</a></li>
 </ul>
 </section>
-
 </section>
 
 			</div>
