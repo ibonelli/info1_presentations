@@ -171,6 +171,7 @@ a2.nota1 = 7.5;
 a2 = a1;
 </code></pre>
 <p style="font-style: italic;"><span style="color: orange;">Importante</span>: depende del compilador, sino copiar campo x campo.</p>
+<p style="font-size: 75%;">Si no puede copiar (cosa rara) también se puede usar memcpy(). Pero en ambos casos hay que tener en cuenta el problema de "shallow copy": <a href="http://blog.zhangliaoyuan.com/blog/2013/01/28/structure-assignment-and-its-pitfall-in-C-language/">Articulo (EN)</a>, <a href="http://courses.cs.vt.edu/~cs2505/fall2010/Notes/pdf/T30.CDeepCopy.pdf">presentacion (EN)</a>, y <a href="./files/clase10/DeepCopy.html">resumen (HTML)</a>.</p>
 </ul>
 </section>
 
@@ -277,6 +278,8 @@ printf("%x",x.b[1]);
 <ul class="col" style="width: 400px;">
 <br/>
 <img src="files/clase10/01_Union.png"/>
+<br/>
+<p style="font-size:75%;"><a href="./files/clase10/union_ej1.c">Bajar union_ej1.c para correrlo.</a></p>
 </ul>
 <br/>
 <br/>
@@ -302,13 +305,13 @@ printf("%x",x.b[1]);
 typedef unsigned char uchar;
 
 struct hexa {
-	uchar nh:4;
 	uchar nl:4;
+	uchar nh:4;
 };
 
 union byte {
-   uchar b;
-   struct hexa h;
+	uchar b;
+	struct hexa h;
 };
 
 union byte A;
@@ -323,6 +326,8 @@ str[0] = '0' + A.h.nh;
 str[1] = '0' + A.h.nl;
 str[2] = NULL;
 </code></pre>
+<br/>
+<p style="font-size:75%;"><a href="./files/clase10/union_ej2.c">Bajar union_ej2.c para correrlo.</a></p>
 </section>
 
 <section>
