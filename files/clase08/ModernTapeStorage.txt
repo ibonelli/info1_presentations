@@ -1,0 +1,24 @@
+https://spectrum.ieee.org/computing/hardware/why-the-future-of-data-storage-is-still-magnetic-tape 
+
+---------------
+
+Quantum Scalar i6
+	https://www.quantum.com/en/products/tape-storage/scalar-i6/
+
+The highest storage density in LTO automation, scaling up to 24 PB in a standard 19-inch rack, providing the lowest cost per GB within a single rack.
+
+Tapes:
+	LTO-8, LTO-7 & LTO-6 full-height tape drives
+
+
+LTO 8 specs
+
+<ul class="disc">
+	<li>High Storage Capacity of 12TB and up to 30 TB compressed capacity.</li>
+	<li>Supports transfer speeds of 360 MB/s (native), 900 MB/s (2.5:1) with Generation 8</li>
+	<li>Barium Ferrite (BaFe) technology</li>
+	<li>Support for tape drive hardware encryption</li>
+	<li>Compatible with Linear Tape File System (LTFS)</li>
+	<li>Simplified tape path to reduce wear and tear.</li>
+	<li>Limited Lifetime Warranty from Quantum</li>
+</ul>
