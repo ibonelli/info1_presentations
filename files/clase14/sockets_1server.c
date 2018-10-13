@@ -51,8 +51,7 @@ int main(int argc, char *argv[])
      listen(sockfd,5);
 
      clilen = sizeof(cli_addr);
-     
-     
+
      printf("Esperando conexiones...\n");
      // Llamado bloqueante a accept()
      newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);

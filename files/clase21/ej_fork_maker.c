@@ -4,11 +4,12 @@
 
 #define pLim 8
 #define cLim 5
-#define pSleep 0
-#define cSleep 0
+#define pSleep 1
+#define cSleep 1
 
 int main(int argc, char **argv)
 {
+	char op;
 	printf("--beginning of program\n");
 
 	int counter = 0;
@@ -32,8 +33,12 @@ int main(int argc, char **argv)
 		for (; j < pLim; ++j)
 		{
 			printf("Proceso padre: contador=%d\n", ++counter);
-			// En este caso el uso de sleep es didactico
-			sleep(pSleep);
+			printf("Para generar otro proceso presione \"C\", para terminar \"S\"");
+			op = (char) getchar();
+			if (toupper(op) == 'C') {
+			}
+			if (toupper(op) == 'S') {
+			}
 		}
 	}
 	else
