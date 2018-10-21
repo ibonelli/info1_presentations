@@ -1,0 +1,52 @@
+---------------------------
+How do you know (and) where to put the "wait()" statement to kill zombie processes?
+	https://stackoverflow.com/questions/28457525/how-do-you-kill-zombie-process-using-wait
+---------------------------
+
+If your parent spawns only a small, fixed number of children; does not care when or whether they stop, resume, or finish; and itself exits quickly, then you do not need to use wait() or waitpid() to clean up the child processes. The init process (pid 1) takes responsibility for orphaned child processes, and will clean them up when they finish.
+
+Under any other circumstances, however, you must wait() for child processes. Doing so frees up resources, ensures that the child has finished, and allows you to obtain the child's exit status. Via waitpid() you can also be notified when a child is stopped or resumed by a signal, if you so wish.
+
+As for where to perform the wait,
+
+    You must ensure that only the parent wait()s.
+    You should wait at or before the earliest point where you need the child to have finished (but not before forking), OR
+    if you don't care when or whether the child finishes, but you need to clean up resources, then you can periodically call waitpid(-1, NULL, WNOHANG) to collect a zombie child if there is one, without blocking if there isn't any.
+
+In particular, you must not wait() (unconditionally) immediately after fork()ing because parent and child run the same code. You must use the return value of fork() to determine whether you are in the child (return value == 0), or in the parent (any other return value). Furthermore, the parent must wait() only if forking was successful, in which case fork() returns the child's pid, which is always greater than zero. A return value less than zero indicates failure to fork.
+
+Your program doesn't really need to wait() because it spawns exactly four (not three) children, then exits. However, if you wanted the parent to have at most one live child at any time, then you could write it like this:
+
+int main() {
+    pid_t child;
+    int i;
+
+    printf("-----------------------------------\n");
+    about("Parent");
+
+    for (i = 0; i < 3; i++) {
+        printf("Now ..  Forking !!\n");
+        child = fork();
+
+        if (child < 0) {
+            perror ("Unable to fork");
+            break;
+        } else if (child == 0) {
+            printf ("In child #%d\n", (i+1));
+            about ("Child");
+            break;
+        } else {
+            /* in parent */
+            if (waitpid(child, NULL, 0) < 0) {
+                perror("Failed to collect child process");
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
+
+If the parent exits before one or more of its children, which can happen if it does not wait, then the child will thereafter see its parent process being pid 1.
+
+Others have already answered how to get a zombie process list via th ps command. You may also be able to see zombies via top. With your original code you are unlikely to catch a glimpse of zombies, however, because the parent process exits very quickly, and init will then clean up the zombies it leaves behind.

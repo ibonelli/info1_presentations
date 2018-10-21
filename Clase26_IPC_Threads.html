@@ -67,6 +67,58 @@
 </section>
 
 <section>
+	watch -n 1 "ps elf | grep tcp"
+	tcp/ip -> fork + wait hijos zombies
+		/home/ignacio/Downloads/000/fork_tcpip/
+	https://users.cs.cf.ac.uk/Dave.Marshall/C/
+		https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000
+		https://notes.shichao.io/apue/ch10/
+
+Macros are defined in <signal.h> header file for common signals.
+
+man 7 signal
+
+Signal     Value     Action   Comment
+----------------------------------------------------------------------
+SIGHUP        1       Term    Hangup detected on controlling terminal
+                              or death of controlling process
+SIGINT        2       Term    Interrupt from keyboard
+SIGQUIT       3       Core    Quit from keyboard
+SIGILL        4       Core    Illegal Instruction
+SIGABRT       6       Core    Abort signal from abort(3)
+SIGFPE        8       Core    Floating-point exception
+SIGKILL       9       Term    Kill signal
+...
+SIGALRM      14       Term    Timer signal from alarm(2)
+SIGTERM      15       Term    Termination signal
+SIGUSR1   30,10,16    Term    User-defined signal 1
+SIGUSR2   31,12,17    Term    User-defined signal 2
+SIGCHLD   20,17,18    Ign     Child stopped or terminated
+SIGCONT   19,18,25    Cont    Continue if stopped
+SIGSTOP   17,19,23    Stop    Stop process
+...
+
+SIGALRM 14 /* alarm clock */
+SIGCONT 19 /* continue a stopped process */
+SIGCHLD 20 /* to parent on child stop or exit */
+
+POSIX.1-1990, POSIX.1-2001, POSIX.1-2008, SVr4, 4.3BSD, ...
+
+Signals can be numbered from 0 to 31.
+
+#include <signal.h>
+#include <sys/types.h>
+
+sighandler_t signal(int signum, sighandler_t handler);
+
+int kill(pid_t pid, int sig);
+
+./files/clase26/sig_talk.c
+./files/clase26/signals.c
+
+</section>
+
+<section>
 <h2>IPCs</h2>
 <ul>
 	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a></li>
