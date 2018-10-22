@@ -4,17 +4,18 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <sys/socket.h>
-#include <sys/wait.h>
 
 #define MYPORT 3490    /*Numero de puerto donde se conectaran los clientes*/
 #define BACKLOG 10     /* Tama¤o de la cola de conexiones recibidas */
 #define MAXDATASIZE 100 /* maxima cant. De bytes que se pueden enviar
 						   en una llamada a send */
 
-main()
+void main(void)
 {
 	int sockfd;     /* El servidor escuchara por sockfd */
 	int newfd;      /*  las transferencias de datos se realizar 
@@ -27,7 +28,7 @@ main()
 	int sin_size;   /* Contendra el tamanio de la escructura sockaddr_in */
 
 	/* Espera didactica */
-	int i;
+	int i,status=1;
 	/*
 	 * Vamos a deshabilitar Nagle's algorithm para que envie paquetes de 1byte
 	 * 		https://en.wikipedia.org/wiki/Nagle%27s_algorithm
@@ -58,14 +59,14 @@ funcion bind() */
 	perror("bind");
 	exit(1);
 	}
-/* Habilitamos el socket para recibir conexiones, con una cola de 5 conexiones en espera como
-maximo */
+	/* Habilitamos el socket para recibir conexiones, con una cola de
+	 * BACKLOG conexiones en espera como maximo */
 	if (listen(sockfd, BACKLOG) == -1)
 	{
 		perror("listen");
 		exit(1);
 	}
-	while(1)	/* loop que llama a accept() */
+	while(status)	/* loop que llama a accept() */
 	{
 		sin_size = sizeof(struct sockaddr_in);
 		/* Se espera por conexiones */
@@ -73,17 +74,17 @@ maximo */
 				&sin_size)) == -1)
 		{
 			perror("accept");
-			continue;  /* Si se produce un error se finaliza 
-					el programa */
+			/* Si se produce un error se debe finalizar el programa */
+			status = 0;
 		}
 		printf  ("server:  conexion desde:  %s\n", 
 			inet_ntoa(their_addr.sin_addr));
-		if (!fork())
-		{/* Aca comienza el proceso hijo */
+		if (!fork() && status)
+		{	/* Aca comienza el proceso hijo */
 			strcpy(buffer,"Hello, world!\n");
 			if (send(newfd, buffer, strlen(buffer), 0) == -1)
 				perror("send");
-		/* Vamos a deshabilitar Nagle's algorithm */
+			/* Vamos a deshabilitar Nagle's algorithm */
 			result = setsockopt(newfd,            /* socket affected */
 				IPPROTO_TCP,     /* set option at TCP level */
 				TCP_NODELAY,     /* name of option */
@@ -104,9 +105,14 @@ maximo */
 			close(newfd);
 			exit(0);
 		}
-/* El proceso padre no necesita este descriptor, solo lo utiliza el proceso hijo, en la proxima
- * llamada a accept(), retornara con un nuevo descriptor de socket
- */
-	close(newfd);
+		/* El proceso padre no necesita este descriptor, solo lo utiliza el proceso hijo, en la proxima
+		 * llamada a accept(), retornara con un nuevo descriptor de socket
+		 */
+		//close(newfd);
 	}
+	// TODO - Manejar el cierre de los hijos si quedaron corriendo
+	// De ./files/clase26/zombies2.txt
+	//		* Opc1 - Using wait() system call
+	//		* Opc2 - Ignoring the SIGCHLD signal
+	//		* Opc3 - Using a signal handler (Mi opción preferida!)
 }

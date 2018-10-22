@@ -59,7 +59,25 @@
 </section>
 
 <section>
-<h2>IPCs: Ejemplo</h2>
+<h2>Tipos de IPCs</h2>
+<br />
+<ul>
+	<li>Signals</li>
+	<li>Semaphores</li>
+	<li>Shared Memory</li>
+	<li>Transmisión de datos:
+		<ul>
+			<li>Pipes</li>
+			<li>Message Queues</li>
+			<li>Sockets</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>IPCs</h2>
+<h3>Ejemplo de Message Queue</h3>
 <br/>
 <p>Ejemplo sencillo IPC:</p>
 <p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
@@ -121,11 +139,11 @@ int kill(pid_t pid, int sig);
 <section>
 <h2>IPCs</h2>
 <ul>
-	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a></li>
-	<li>Semaphore: <a href="http://beej.us/guide/bgipc/output/html/multipage/semaphores.html">Beej</a> y <a href="https://en.wikipedia.org/wiki/Semaphore_%28programming%29">Wikipedia</a></li>
-	<li>Lock: <a href="http://beej.us/guide/bgipc/output/html/multipage/flocking.html">Beej</a> y <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Wikipedia</a></li>
+	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/">Página de Dave Marshall</a></li>
+	<li>Semaphore: <a href="https://beej.us/guide/bgipc/html/multi/semaphores.html">Beej</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node26.html#SECTION002600000000000000000">DaveM</a> y <a href="https://en.wikipedia.org/wiki/Semaphore_%28programming%29">Wikipedia</a></li>
+	<li><a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000">Signals</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node23.html#SECTION002300000000000000000">Pipes</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node27.html#SECTION002700000000000000000">Shared Memory</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node25.html#SECTION002500000000000000000">Msg Queue</a></li>
+	<li>Lock: <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Wikipedia</a></li>
 	<li>Monitor: <a href="https://en.wikipedia.org/wiki/Monitor_(synchronization)">Wikipedia</a></li>
-	<li>Colas de mensajes (en Beej): <a href="http://beej.us/guide/bgipc/output/html/multipage/pipes.html">Pipes</a>, <a href="http://beej.us/guide/bgipc/output/html/multipage/fifos.html">FIFOs</a> y <a href="http://beej.us/guide/bgipc/output/html/multipage/mq.html">Msg Queue</a></li>
 </ul>
 </section>
 </section>
@@ -137,6 +155,11 @@ int kill(pid_t pid, int sig);
 <p>zombie, muere el hijo y el padre no se entera.</p>
 <p>Se resuelve con un wait for.</p>
 <p>Padre, hijo, huérfano...</p>
+
+Ver:
+	./files/clase26/zombies1.txt
+	./files/clase26/zombies2.txt
+
 </section>
 </section>
 
@@ -193,6 +216,7 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
 	<li><a href="http://www2.electron.frba.utn.edu.ar/~mdoallo/presentaciones.save.2010/clase-20100916-threads">Threads en Linux</a> (por Ing. Marcelo Doallo)</li>
 	<li><a href="http://www.geekride.com/fork-forking-vs-threading-thread-linux-kernel/">fork vs thread</a></li>
 	<li>Linux Threads: <a href="http://www.thegeekstuff.com/2012/03/linux-threads-intro/">Intro</a>, <a href="http://www.thegeekstuff.com/2012/04/create-threads-in-linux/">creating</a>, <a href="http://www.thegeekstuff.com/2012/04/terminate-c-thread/">finishing them</a></li>
+	<li>Threads: <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node29.html#SECTION002900000000000000000">Basics</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node30.html#SECTION003000000000000000000">Avanced</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node31.html#SECTION003100000000000000000">Synchronization</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node32.html#SECTION003200000000000000000">Ejemplos</a></li>
 </ul>
 
 

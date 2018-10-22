@@ -5,6 +5,8 @@
 #include <string.h>
 #include <netdb.h>
 #include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #define PORT 3490       /* El puerto donde se conectara, servidor */
@@ -87,7 +89,7 @@ int main(int argc, char *argv[])
 	}
 	printf("Termino!\n");
 
-/* Devolvemos recursos al sistema */
+	/* Devolvemos recursos al sistema */
 	close(sockfd);
 	return 0;
 }
