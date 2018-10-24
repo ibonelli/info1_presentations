@@ -823,6 +823,32 @@ $ ./hola_mundo
 </section>
 
 <section>
+<h3>Tamaño de las variables en Linux</h3>
+<br/>
+<p>Para saber la configuración del sistema: <b>getconf</b></p>
+<br/>
+<pre><code data-trim class="bash">
+$ man getconf
+
+$ getconf -a | grep INT_ 
+	INT_MAX                            2147483647
+	INT_MIN                            -2147483648
+	UINT_MAX                           4294967295
+
+$ getconf -a | grep CHAR_
+	CHAR_BIT                           8
+	CHAR_MAX                           127
+	CHAR_MIN                           -128
+	UCHAR_MAX                          255
+
+$ getconf -a | grep VERSION
+	_POSIX_VERSION                     200809
+	GNU_LIBC_VERSION                   glibc 2.27
+	GNU_LIBPTHREAD_VERSION             NPTL 2.27
+</code></pre>
+</section>
+
+<section>
 <h3>Control: Selección</h3>
 <ul class="col" style="width: 400px;">
 <pre><code data-trim class="cpp">
