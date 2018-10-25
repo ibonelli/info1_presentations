@@ -77,23 +77,22 @@
 
 <section>
 <h2>IPCs</h2>
-<h3>Ejemplo de Message Queue</h3>
-<br/>
-<p>Ejemplo sencillo IPC:</p>
-<p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
-<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
+<ul>
+	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/">Página de Dave Marshall</a></li>
+	<li>Semaphore: <a href="https://beej.us/guide/bgipc/html/multi/semaphores.html">Beej</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node26.html#SECTION002600000000000000000">DaveM</a> y <a href="https://en.wikipedia.org/wiki/Semaphore_%28programming%29">Wikipedia</a></li>
+	<li><a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000">Signals</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node23.html#SECTION002300000000000000000">Pipes</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node27.html#SECTION002700000000000000000">Shared Memory</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node25.html#SECTION002500000000000000000">Msg Queue</a></li>
+	<li>Lock: <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Wikipedia</a></li>
+	<li>Monitor: <a href="https://en.wikipedia.org/wiki/Monitor_(synchronization)">Wikipedia</a></li>
+</ul>
+</section>
 </section>
 
 <section>
-	watch -n 1 "ps elf | grep tcp"
-	tcp/ip -> fork + wait hijos zombies
-		/home/ignacio/Downloads/000/fork_tcpip/
-	https://users.cs.cf.ac.uk/Dave.Marshall/C/
-		https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000
-		https://notes.shichao.io/apue/ch10/
-
-Macros are defined in <signal.h> header file for common signals.
-
+<section>
+<h2>IPCs - Signals (I)</h2>
+<br/>
+<p>Macros definidas en el archivo header &lt;signal.h&gt; <br/>para las señales mas comunes:</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
 man 7 signal
 
 Signal     Value     Action   Comment
@@ -109,6 +108,13 @@ SIGKILL       9       Term    Kill signal
 ...
 SIGALRM      14       Term    Timer signal from alarm(2)
 SIGTERM      15       Term    Termination signal
+</code></pre>
+</section>
+
+<section>
+<h2>IPCs - Signals (II)</h2>
+<br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
 SIGUSR1   30,10,16    Term    User-defined signal 1
 SIGUSR2   31,12,17    Term    User-defined signal 2
 SIGCHLD   20,17,18    Ign     Child stopped or terminated
@@ -123,28 +129,38 @@ SIGCHLD 20 /* to parent on child stop or exit */
 POSIX.1-1990, POSIX.1-2001, POSIX.1-2008, SVr4, 4.3BSD, ...
 
 Signals can be numbered from 0 to 31.
+</code></pre>
+</section>
 
-#include <signal.h>
-#include <sys/types.h>
+<section>
+<h2>IPCs - Signals</h2>
+<h3>Ejemplo</h3>
+<br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;signal.h&gt;
+#include &lt;sys/types.h&gt;
 
 sighandler_t signal(int signum, sighandler_t handler);
 
 int kill(pid_t pid, int sig);
-
-./files/clase26/sig_talk.c
-./files/clase26/signals.c
-
+</code></pre>
+<br/>
+<p style="text-align: left; margin-left: 300px;">Código:</p>
+<ul>
+	<li><a href="./files/clase26/signals.c">signals.c</a></li>
+	<li><a href="./files/clase26/sig_talk.c">sig_talk.c</a></li>
+</ul>
+</section>
 </section>
 
 <section>
-<h2>IPCs</h2>
-<ul>
-	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/">Página de Dave Marshall</a></li>
-	<li>Semaphore: <a href="https://beej.us/guide/bgipc/html/multi/semaphores.html">Beej</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node26.html#SECTION002600000000000000000">DaveM</a> y <a href="https://en.wikipedia.org/wiki/Semaphore_%28programming%29">Wikipedia</a></li>
-	<li><a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000">Signals</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node23.html#SECTION002300000000000000000">Pipes</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node27.html#SECTION002700000000000000000">Shared Memory</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node25.html#SECTION002500000000000000000">Msg Queue</a></li>
-	<li>Lock: <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Wikipedia</a></li>
-	<li>Monitor: <a href="https://en.wikipedia.org/wiki/Monitor_(synchronization)">Wikipedia</a></li>
-</ul>
+<section>
+<h2>IPCs : Message Queue</h2>
+<h3>Ejemplo</h3>
+<br/>
+<p>Ejemplo sencillo IPC:</p>
+<p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
+<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
 </section>
 </section>
 
@@ -155,11 +171,34 @@ int kill(pid_t pid, int sig);
 <p>zombie, muere el hijo y el padre no se entera.</p>
 <p>Se resuelve con un wait for.</p>
 <p>Padre, hijo, huérfano...</p>
+<br/>
+<ul>Ver:
+<li>./files/clase26/zombies1.txt</li>
+<li>./files/clase26/zombies2.txt</li>
+</ul>
+</section>
+<section>
+<p>Ver ejemplo TCP/IP con fork : <a href="files/clase21/tcp-servidor.c">Servidor</a> y <a href="files/clase21/tcp-cliente.c">Cliente</a></p>
+<br/>
+<p>¿Que pasa si corremos 3 hijos y el padre <br/>cuando terminan los hijos?</p>
+<br/>
+<p>Ver con:</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+watch -n 1 "ps elf | grep tcp"
+</pre></code>
+<br/>
+<p>tcp/ip + fork (sin wait) => ¡hijos zombies!</p>
+</section>
 
-Ver:
-	./files/clase26/zombies1.txt
-	./files/clase26/zombies2.txt
+<section>
+<a href="files/clase26/terminator_zombies.png"><img src="files/clase26/terminator_zombies.png"/></a>
+</section>
 
+<section>
+		/home/ignacio/Downloads/000/fork_tcpip/
+	https://users.cs.cf.ac.uk/Dave.Marshall/C/
+		https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000
+		https://notes.shichao.io/apue/ch10/
 </section>
 </section>
 
