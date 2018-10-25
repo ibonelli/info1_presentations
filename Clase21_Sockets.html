@@ -201,20 +201,9 @@ $ ./ej4-udp-clt 127.0.0.1 Hola
 $ ./ej4-udp-clt 127.0.0.1 Mundo
 						</code></pre>
 					</section>
-					<section>
-						<h2>Ejemplo Allegro/TCP pooling</h2>
-						<p></p>
-						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-$ gcc -o al08_keyboard_client al08_keyboard_client.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
-$ gcc -o al08_keyboard_server al08_keyboard_server.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
-						</code></pre>
-						</br>
-						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-$ ./al08_keyboard_server
-$ ./al08_keyboard_client 127.0.0.1
-						</code></pre>
-					</section>
+				</section>
 
+				<section>
 					<section>
 						<h2>Ejemplos vistos</h2>
 						<ul>
@@ -231,20 +220,35 @@ $ ./al08_keyboard_client 127.0.0.1
 							<li><a href="files/clase21/udp-servidor.c">udp-servidor.c</a></li>
 						</ul>
 					</section>
+				</section>
 
-                                        <section>
-                                                <h2>Presentacion Pizarron</h2>
+				<section>
+					<section>
+						<h2>Ejemplo Allegro/TCP pooling</h2>
+						<p></p>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o al08_keyboard_client al08_keyboard_client.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
+$ gcc -o al08_keyboard_server al08_keyboard_server.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
+						</code></pre>
+						</br>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ ./al08_keyboard_server
+$ ./al08_keyboard_client 127.0.0.1
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Presentacion Pizarron</h2>
 						<a href="files/clase21/Presentacion_Pizarron_Juego.jpg"><img style="width: 900px;" src="files/clase21/Presentacion_Pizarron_Juego.jpg"/></a>
 					</section>
-                                        <section>
-                                                <h2>Reciclando nuestro bind</h2>
+
+					<section>
+					<h2>Reciclando nuestro bind</h2>
 						<ol>
 							<li>Pedir un int que valga 1:
-<pre><code>const int uno=1;</code></pre>
-							</li>
-                                                        <li>Antes de armar el socket agregar:
-<pre><code>setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno, (socklen_t)(sizeof(uno)));</code></pre>
-</li>
+<pre><code>const int uno=1;</code></pre></li>
+							<li>Antes de armar el socket agregar:
+<pre><code>setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno, (socklen_t)(sizeof(uno)));</code></pre></li>
 						</ol>
 					</section>
 				</section>
