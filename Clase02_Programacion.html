@@ -823,7 +823,7 @@ $ ./hola_mundo
 </section>
 
 <section>
-<h3>Tamaño de las variables en Linux</h3>
+<h3>Tamaño de las variables en Linux (I)</h3>
 <br/>
 <p>Para saber la configuración del sistema: <b>getconf</b></p>
 <br/>
@@ -845,6 +845,30 @@ $ getconf -a | grep VERSION
 	_POSIX_VERSION                     200809
 	GNU_LIBC_VERSION                   glibc 2.27
 	GNU_LIBPTHREAD_VERSION             NPTL 2.27
+</code></pre>
+</section>
+
+<section>
+<h3>Tamaño de las variables en Linux (II)</h3>
+<br/>
+<p>Usando C...</p>
+<br/>
+<pre><code data-trim class="cpp">
+#include &lt;stdio.h&gt;
+
+int main() {
+  printf( "    short int: %zd\n" , sizeof(short int) ) ;
+  printf( "          int: %zd\n" , sizeof(int) ) ;
+  printf( "     long int: %zd\n", sizeof(long int) ) ;
+  printf( "long long int: %zd\n", sizeof(long long int) ) ;
+  printf( "         char: %zd\n" , sizeof(char) ) ;
+  printf( "        float: %zd\n" , sizeof(float) ) ;
+  printf( "       double: %zd\n" , sizeof(double) ) ;
+  printf( "       size_t: %zd\n", sizeof(size_t) ) ;
+  printf( "        void*: %zd\n\n", sizeof(void *) ) ;
+
+  return 0;
+}
 </code></pre>
 </section>
 
