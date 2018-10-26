@@ -44,7 +44,7 @@
 			<div class="slides">
 
 <section>
-	<h1>IPCs & Threads</h1>
+	<h1>IPCs, Procesos Zombies y Threads</h1>
 	<p>
 		<small>Ing. Ignacio Javier Bonelli</small>
 	</p>
@@ -73,6 +73,18 @@
 		</ul>
 	</li>
 </ul>
+</section>
+
+<section>
+<h2>Versiones y estándards</h2>
+<br />
+<ul>
+	<li><b>POSIX</b> (Portable Operating System Interface junto con la X que viene de UNIX) : Identifica a la API y es una norma escrita por la IEEE. Define una interfaz estándar del sistema operativo y el entorno.</li>
+	<li><b>BSD</b> (Berkeley Software Distribution) : Esta linea de Unix con código abierto ha generado muchos decendientes como FreeBSD, OpenBSD, NetBSD y DragonFly BSD.</li>
+	<li><b>UNIX System V</b> : Fue la versión más popular de Unix comercial inicialmente desarrollada por AT&amp;T</li>
+</ul>
+<br/><br/>
+<a style="font-size: 75%;" href="files/clase26/Unix_history-simple.svg">Gráfico con la historia de Unix y sus versiones</a>
 </section>
 
 <section>
@@ -166,17 +178,25 @@ int kill(pid_t pid, int sig);
 
 <section>
 <section>
-<h2>Zombies</h2>
+<h2>Shared Memory</h2>
 <br />
-<p>zombie, muere el hijo y el padre no se entera.</p>
-<p>Se resuelve con un wait for.</p>
-<p>Padre, hijo, huérfano...</p>
-<br/>
-<ul>Ver:
-<li>./files/clase26/zombies1.txt</li>
-<li>./files/clase26/zombies2.txt</li>
+<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
+<ul>
+	<li>La forma clásica (System V):
+		<ul>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
+		</ul>
+	</li>
+	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
+	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
+	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
 </ul>
 </section>
+</section>
+
 <section>
 <p>Ver ejemplo TCP/IP con fork : <a href="files/clase21/tcp-servidor.c">Servidor</a> y <a href="files/clase21/tcp-cliente.c">Cliente</a></p>
 <br/>
@@ -184,7 +204,7 @@ int kill(pid_t pid, int sig);
 <br/>
 <p>Ver con:</p>
 <pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
-watch -n 1 "ps elf | grep tcp"
+watch -n 1 "ps elf | grep tcp | grep -v grep"
 </pre></code>
 <br/>
 <p>tcp/ip + fork (sin wait) => ¡hijos zombies!</p>
@@ -195,10 +215,20 @@ watch -n 1 "ps elf | grep tcp"
 </section>
 
 <section>
-		/home/ignacio/Downloads/000/fork_tcpip/
-	https://users.cs.cf.ac.uk/Dave.Marshall/C/
-		https://users.cs.cf.ac.uk/Dave.Marshall/C/node24.html#SECTION002400000000000000000
-		https://notes.shichao.io/apue/ch10/
+<h2>Zombies</h2>
+<br />
+<p>Proceso Zombie : Muere el hijo y el padre no se entera.</p>
+<a href="files/clase26/zombie1.c">zombie1.c</a>
+<br /><br />
+<p style="text-align: left;">Formas de evitarlo:</p>
+<ol>
+	<li>Usando la función de wait() en el padre.</li>
+	<a style="margin-left: 100px;" href="files/clase26/zombie2.c">zombie2.c</a>
+	<li>Ignorando la señal SIGCHLD en el padre.</li>
+	<a style="margin-left: 100px;" href="files/clase26/zombie3.c">zombie3.c</a>
+	<li>Usamos un signal handler.</li>
+	<a style="margin-left: 100px;" href="files/clase26/zombie4.c">zombie4.c</a>
+</ol>
 </section>
 </section>
 
