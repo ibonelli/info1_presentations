@@ -198,6 +198,7 @@ int kill(pid_t pid, int sig);
 </section>
 
 <section>
+<section>
 <p>Ver ejemplo TCP/IP con fork : <a href="files/clase21/tcp-servidor.c">Servidor</a> y <a href="files/clase21/tcp-cliente.c">Cliente</a></p>
 <br/>
 <p>¿Que pasa si corremos 3 hijos y el padre <br/>cuando terminan los hijos?</p>
@@ -217,9 +218,26 @@ watch -n 1 "ps elf | grep tcp | grep -v grep"
 <section>
 <h2>Zombies</h2>
 <br />
-<p>Proceso Zombie : Muere el hijo y el padre no se entera.</p>
-<a href="files/clase26/zombie1.c">zombie1.c</a>
-<br /><br />
+<p>Proceso Zombie : Muere el hijo y el padre no se entera</p>
+<br />
+<ul>
+	<li>fopen() / fclose()</li>
+	<li>malloc() / free()</li>
+	<li>fork() -> Opciones:
+		<ul>
+			<li>Usando la función de wait() en el padre.</li>
+			<li>Ignorando la señal SIGCHLD en el padre.</li>
+			<li>Usamos un signal handler.</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Zombies</h2>
+<br />
+<p>No nos ocupamos y nos queda un proceso Zombie: <a href="files/clase26/zombie1.c">zombie1.c</a></p>
+<br />
 <p style="text-align: left;">Formas de evitarlo:</p>
 <ol>
 	<li>Usando la función de wait() en el padre.</li>
@@ -229,6 +247,8 @@ watch -n 1 "ps elf | grep tcp | grep -v grep"
 	<li>Usamos un signal handler.</li>
 	<a style="margin-left: 100px;" href="files/clase26/zombie4.c">zombie4.c</a>
 </ol>
+<br /><br />
+<p>Bonus: Usamos un signal handler, y hacemos algo: <a href="files/clase26/zombie5.c">zombie5.c</a></p>
 </section>
 </section>
 
