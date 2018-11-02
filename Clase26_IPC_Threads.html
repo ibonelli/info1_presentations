@@ -261,10 +261,10 @@ watch -n 1 "ps elf | grep tcp | grep -v grep"
 
 <section>
 <h3>Fork</h3>
-<p>fork nos da un nuevo proceso que es una copia del actual. Tiene una "copia" de la memoria original. A medida que los nuevos procesos avanzan los valores de cada uno en memoria cambian, pero el ejecutable es el mismo. Los procesos/tareas no comparten memoria, la única forma de compartir algo es usar IPCs.</p>
+<p style="font-size: 90%;">Nos da un nuevo proceso que es una copia del actual. Tiene una "copia" de la memoria original. A medida que los nuevos procesos avanzan los valores de cada uno en memoria cambian, pero el ejecutable es el mismo. Los procesos/tareas no comparten memoria, la única forma de compartir algo es usar IPCs.</p>
 <br />
 <h3>Threads</h3>
-<p>Un proceso puede tener multiples threads, cada una ejecutandose en paralelo dentro del mismo contexto (memoria). Todos los recursos son compartidos, usan la misma memoria. Se deben usar mecanismos de lock y sincronización para evitar problemas.</p>
+<p style="font-size: 90%;">Un proceso puede tener multiples threads, cada una ejecutandose en paralelo dentro del mismo contexto (memoria). Todos los recursos son compartidos, usan la misma memoria. Se deben usar mecanismos de lock y sincronización para evitar problemas.</p>
 </section>
 
 <section>
@@ -307,8 +307,33 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
 	<li>Linux Threads: <a href="http://www.thegeekstuff.com/2012/03/linux-threads-intro/">Intro</a>, <a href="http://www.thegeekstuff.com/2012/04/create-threads-in-linux/">creating</a>, <a href="http://www.thegeekstuff.com/2012/04/terminate-c-thread/">finishing them</a></li>
 	<li>Threads: <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node29.html#SECTION002900000000000000000">Basics</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node30.html#SECTION003000000000000000000">Avanced</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node31.html#SECTION003100000000000000000">Synchronization</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node32.html#SECTION003200000000000000000">Ejemplos</a></li>
 </ul>
+</section>
+</section>
 
+<section>
+<section>
+<h2>Semáforos</h2>
+<br />
+<ul>
+	<li>sem_init()</li>
+	<li>sem_post()</li>
+	<li>sem_wait()</li>
+	<li>sem_destroy()</li>
+</ul>
+<br /><br />
+<p>Ejemplo usando semaforos y threads: <a href="files/clase26/sem_thread.c">sem_thread.c</a></p>
+</section>
 
+<section>
+<h2>Semáforos</h2>
+<img style="width: 700px;" src="files/clase26/logger_system.png"/>
+<br />
+<ul>
+	<li>log server: <a href="files/clase26/logger_server.c">logger_server.c</a></li>
+	<li>log client (N): <a href="files/clase26/logger_client.c">logger_client.c</a></li>
+</ul>
+<br /><br />
+<p style="font-size: 50%;">From <a href="https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux">https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux</a></p>
 </section>
 </section>
 

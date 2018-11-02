@@ -7,21 +7,17 @@
 pthread_t tid[2];
 int ret1,ret2;
 
-void* doSomeThing(void *arg)
-{
+void *doSomeThing(void *arg) {
     unsigned long i = 0;
     pthread_t id = pthread_self();
 
     for(i=0; i<(0xFFFFFFFF);i++);
 
-    if(pthread_equal(id,tid[0]))
-    {
+    if(pthread_equal(id,tid[0])) {
         printf("\n First thread processing done\n");
         ret1  = 100;
         pthread_exit(&ret1);
-    }
-    else
-    {
+    } else {
         printf("\n Second thread processing done\n");
         ret2  = 200;
         pthread_exit(&ret2);
@@ -36,8 +32,7 @@ int main(void)
     int err;
     int *ptr[2];
 
-    while(i < 2)
-    {
+    while(i < 2) {
         err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);
         if (err != 0)
             printf("\ncan't create thread :[%s]", strerror(err));
