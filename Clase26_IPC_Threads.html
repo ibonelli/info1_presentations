@@ -67,9 +67,9 @@
 	<li>Shared Memory</li>
 	<li>Transmisión de datos:
 		<ul>
-			<li>Pipes</li>
-			<li>Message Queues</li>
 			<li>Sockets</li>
+			<li>Message Queues</li>
+			<li>Pipes</li>
 		</ul>
 	</li>
 </ul>
@@ -172,38 +172,8 @@ int kill(pid_t pid, int sig);
 
 <section>
 <section>
-<h2>IPCs : Message Queue</h2>
-<h3>Ejemplo</h3>
+<h2>Zombies</h2>
 <br/>
-<p>Ejemplo sencillo IPC:</p>
-<p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
-<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
-</section>
-</section>
-
-<section>
-<section>
-<h2>Shared Memory</h2>
-<br />
-<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
-<ul>
-	<li>La forma clásica (System V):
-		<ul>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
-		</ul>
-	</li>
-	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
-	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
-	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
-</ul>
-</section>
-</section>
-
-<section>
-<section>
 <p>Ver ejemplo TCP/IP con fork : <a href="files/clase21/tcp-servidor.c">Servidor</a> y <a href="files/clase21/tcp-cliente.c">Cliente</a></p>
 <br/>
 <p>¿Que pasa si corremos 3 hijos y el padre <br/>cuando terminan los hijos?</p>
@@ -386,6 +356,12 @@ Job 2 finished
 </section>
 
 <section>
+<a href="files/clase26/Thread_mutex.jpg"><img style="height: 450px;" src="files/clase26/Thread_mutex.jpg"/></a>
+<p>Se "serializan" los procesos en la etapa Mutex.</p>
+<p>Solo uno ejecuta el bloque mutex al mismo tiempo.</p>
+</section>
+
+<section>
 <h2>Threads Mutex</h2>
 <p>(evitando problemas...)</h2>
 <h3><a href="files/clase26/threads_mutex_v2.c">threads_mutex_v2.c</a></h3>
@@ -441,11 +417,35 @@ int sem_destroy(sem_t *sem);
 </section>
 
 <section>
+<a href="files/clase26/threads_compared.png"><img style="width: 700px;" src="files/clase26/Producer_Consumer.jpg"/></a>
+<p>Semáforos: Productor / Consumidor</p>
+</section>
+
+<section>
 <h2>Semáforos</h2>
 <br /><br />
 <p>Ejemplo usando semaforos y threads: <a href="files/clase26/sem_thread.c">sem_thread.c</a></p>
-<br /><br />
-<p>TODO - Agregar capturas del pizarron</p>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Shared Memory</h2>
+<br />
+<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
+<ul>
+	<li>La forma clásica (System V):
+		<ul>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
+		</ul>
+	</li>
+	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
+	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
+	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
+</ul>
 </section>
 
 <section>
@@ -458,6 +458,17 @@ int sem_destroy(sem_t *sem);
 </ul>
 <br /><br />
 <p style="font-size: 50%;">From <a href="https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux">https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux</a></p>
+</section>
+</section>
+
+<section>
+<section>
+<h2>IPCs : Message Queue</h2>
+<h3>Ejemplo</h3>
+<br/>
+<p>Ejemplo sencillo IPC:</p>
+<p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
+<p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
 </section>
 </section>
 
