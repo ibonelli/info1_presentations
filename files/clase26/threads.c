@@ -1,3 +1,8 @@
+/*
+ * threads.c - compile with:
+ *           gcc -o threads threads.c -lpthread
+ */
+
 #include<stdio.h>
 #include<string.h>
 #include<pthread.h>

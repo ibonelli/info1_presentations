@@ -1,3 +1,8 @@
+/*
+ * threads_mutex_v2.c - compile with:
+ *           gcc -o threads_m2 threads_mutex_v2.c -lpthread
+ */
+
 #include<stdio.h>
 #include<string.h>
 #include<pthread.h>

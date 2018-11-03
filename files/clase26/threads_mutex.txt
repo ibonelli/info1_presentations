@@ -17,9 +17,9 @@ Linux Threads Series:
 = Thread Synchronization Problems =
 
 Lets take an example code to study synchronization problems:
-  <./>/threads_mutex_v1.c
+  ./threads_mutex_v1.c
 
-The above code is a simple one in which two threads(jobs) are created and in the start function of these threads, a counter is maintained through which user gets the logs about job number which is started and when it is completed. The code and the flow looks fine but when we see the output :
+The above code is a simple one in which two threads(jobs) are created and in the start function of these threads, a counter is maintained through which user gets the logs about job number which is started and when it is completed. The code and the flow looks fine but when we see the output:
 
 ```
 $ ./tgsthreads
@@ -75,7 +75,7 @@ The first function above releases the lock and the second function destroys the 
 == A Practical Example ==
 
 Lets see a piece of code where mutexes are used for thread synchronization
-  <./>/threads_mutex_v2.c
+  ./threads_mutex_v2.c
 
 In the code above :
  * A mutex is initialized in the beginning of the main function.

@@ -275,33 +275,131 @@ watch -n 1 "ps elf | grep tcp | grep -v grep"
 
 <section>
 <h2>Threads</h2>
-<pre><code>
-#include &lt;pthread.h&gt;
-
-/* ¿Son tid1 y tid2 el mismo thread? */
-int pthread_equal(pthread_t tid1, pthread_t tid2);
-
-/* Retornar el pthread ID actual */
-pthread_t pthread_self(void);
-
-/* Creando un thread */
-int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
-                   void *(*start_routine) (void *), void *arg);
-</code></pre>
-<ul style="font-size: 75%;">pthread_create():
-	<li>En thread nos devolveran el ID del thread creado</li>
-	<li>Atributos que puede tener thread el (ya sea prioridad u otros). Puede ser NULL</li>
-	<li>Puntero a la función que debe ejecutar el thread</li>
-	<li>Parametros de la funcion que ejecutar el thread. Si toma void, puede ser NULL</li>
+<h3>Diferencias</h3>
+<br />
+<ul>
+	<li>Los procesos no comparten memoria, los threads si.</li>
+	<li>Los procesos corren independientemente unos de otros y la sincronización la hace el kernel. Pero con los threads la sincronización la tenemos que hacer nosotros.</li>
+	<li>La conmutación entre threads es mas rápida que entre procesos.</li>
+	<li>Para comunicar procesos necesitamos IPCs, pero los threads se pueden comunicar mediante la memoria compartida. Igual esto puede producir problemas para lo que es necesario coordinar el acceso a los recursos.</li>
 </ul>
 </section>
 
 <section>
-<h2>Un ejemplo:</h2>
-<h3><a href="files/clase26/threads.c">threads.c</a></h3>
+<h2>Threads</h2>
+<h3>Prototipos &lt;pthread.h&gt;</h3>
 <br />
-<p>Para leer mas...</p>
+<pre><code>/* Retornar el pthread ID actual */
+pthread_t pthread_self(void);
+
+/* ¿Son tid1 y tid2 el mismo thread? */
+int pthread_equal(pthread_t tid1, pthread_t tid2);
+
+/* Salir del thread/función en el que estamos */
+void pthread_exit(void *retval);
+
+/* Creando un thread */
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
+                   void *(*start_routine) (void *), void *arg);
+
+/* Volviendo a unirse */
+int pthread_join(pthread_t thread, void **retval);
+</code></pre>
+</section>
+
+<section>
+<h2>Threads</h2>
 <ul>
+	<li>pthread_t : Estructura que describe a un Thread</li>
+	<li>
+		<p style="text-align: left;">pthread_create():</p>
+		<ul style="font-size: 90%;">
+			<li>En thread nos devolveran el ID del thread creado</li>
+			<li>Atributos que puede tener thread el (ya sea prioridad u otros). Puede ser NULL</li>
+			<li>Puntero a la función que debe ejecutar el thread</li>
+			<li>Parametros de la funcion que ejecutar el thread. Si toma void, puede ser NULL</li>
+		</ul>
+	</li>
+	<li>pthread_attr_init() : Nos permite crear los atributos de un thread.</li>
+	<li>pthread_join() : Es bloqueante como el wait() del fork().</li>
+</ul>
+</section>
+
+<section>
+<h2>Threads</h2>
+<p>(ejemplo sencillo)</p>
+<h3><a href="files/clase26/threads.c">threads.c</a></h3>
+<br /><br />
+<p style="text-align: left;">Formas de sincronizar threads:</p>
+<ul style="font-size: 90%;">
+	<li>Mutual Exclusion (Mutex) Locks</li>
+	<li>Condition Variables (muy similar a semáforos, pero sin IPCs)</li>
+	<li>Semáforos</li>
+</ul>
+</section>
+
+<section>
+<h2>Threads Mutex</h2>
+<br />
+<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un moment solo un thread se estará ejecutando. En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
+</section>
+
+<section>
+<h2>Threads Mutex</h2>
+<p>(primer ejemplo)</h2>
+<h3><a href="files/clase26/threads_mutex_v1.c">threads_mutex_v1.c</a></h3>
+<br />
+<p>Salida:</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+Job 1 started
+Job 2 started
+Job 2 finished
+Job 2 finished
+</code></pre>
+<br />
+<p>"Job 2 finished" se repite dos veces... ¿Que pasó con count?</p>
+</section>
+
+<section>
+<a href="files/clase26/threads_compared.png"><img src="files/clase26/threads_compared.png"/></a>
+</section>
+
+<section>
+<h2>Threads Mutex</h2>
+<h3>Prototipos &lt;pthread.h&gt;</h3>
+<br />
+<pre><code>pthread_mutex_t : Puntero a extructura mutex
+
+/* Inicia y destruye un registro de mutex */
+int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *restrict attr);
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+
+/* Bloquea y desbloquea un/los threads */
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+int pthread_mutex_unlock(pthread_mutex_t *mutex); 
+</code></pre>
+</section>
+
+<section>
+<h2>Threads Mutex</h2>
+<p>(evitando problemas...)</h2>
+<h3><a href="files/clase26/threads_mutex_v2.c">threads_mutex_v2.c</a></h3>
+<br />
+<p>Salida:</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+Job 1 started
+Job 1 finished
+Job 2 started
+Job 2 finished
+</code></pre>
+<br />
+<p>Ahora si funciona sin que se sobre-escriban variables.</p>
+</section>
+
+<section>
+<br /><br /><br />
+<p style="text-align: left;">Para leer mas...</p>
+<ul style="font-size: 80%;">
 	<li><a href="http://www2.electron.frba.utn.edu.ar/~mdoallo/presentaciones.save.2010/clase-20100916-threads">Threads en Linux</a> (por Ing. Marcelo Doallo)</li>
 	<li><a href="http://www.geekride.com/fork-forking-vs-threading-thread-linux-kernel/">fork vs thread</a></li>
 	<li>Linux Threads: <a href="http://www.thegeekstuff.com/2012/03/linux-threads-intro/">Intro</a>, <a href="http://www.thegeekstuff.com/2012/04/create-threads-in-linux/">creating</a>, <a href="http://www.thegeekstuff.com/2012/04/terminate-c-thread/">finishing them</a></li>
