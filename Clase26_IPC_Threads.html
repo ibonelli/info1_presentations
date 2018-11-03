@@ -333,7 +333,7 @@ int pthread_join(pthread_t thread, void **retval);
 <section>
 <h2>Threads</h2>
 <p>(ejemplo sencillo)</p>
-<h3><a href="files/clase26/threads.c">threads.c</a></h3>
+<h3><a href="files/clase26/threads_v1.c">threads.c</a> (<a href="files/clase26/threads_v2.c">v2</a>)</h3>
 <br /><br />
 <p style="text-align: left;">Formas de sincronizar threads:</p>
 <ul style="font-size: 90%;">
@@ -346,7 +346,23 @@ int pthread_join(pthread_t thread, void **retval);
 <section>
 <h2>Threads Mutex</h2>
 <br />
-<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un moment solo un thread se estará ejecutando. En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
+<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando. En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
+</section>
+
+<section>
+<h2>Threads Mutex</h2>
+<h3>Prototipos &lt;pthread.h&gt;</h3>
+<br />
+<pre><code>pthread_mutex_t : Puntero a extructura mutex
+
+/* Inicia y destruye un registro de mutex */
+int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *restrict attr);
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+
+/* Bloquea y desbloquea un/los threads */
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+int pthread_mutex_unlock(pthread_mutex_t *mutex); 
+</code></pre>
 </section>
 
 <section>
@@ -371,22 +387,6 @@ Job 2 finished
 
 <section>
 <h2>Threads Mutex</h2>
-<h3>Prototipos &lt;pthread.h&gt;</h3>
-<br />
-<pre><code>pthread_mutex_t : Puntero a extructura mutex
-
-/* Inicia y destruye un registro de mutex */
-int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *restrict attr);
-int pthread_mutex_destroy(pthread_mutex_t *mutex);
-
-/* Bloquea y desbloquea un/los threads */
-int pthread_mutex_lock(pthread_mutex_t *mutex);
-int pthread_mutex_unlock(pthread_mutex_t *mutex); 
-</code></pre>
-</section>
-
-<section>
-<h2>Threads Mutex</h2>
 <p>(evitando problemas...)</h2>
 <h3><a href="files/clase26/threads_mutex_v2.c">threads_mutex_v2.c</a></h3>
 <br />
@@ -399,6 +399,11 @@ Job 2 finished
 </code></pre>
 <br />
 <p>Ahora si funciona sin que se sobre-escriban variables.</p>
+</section>
+
+<section>
+<h2>Threads Mutex</h2>
+<p>Ver threads_mutex_v3.c (pizarron tb), no hay sincronización plena => semaforos!</p>
 </section>
 
 <section>
@@ -439,10 +444,12 @@ int sem_destroy(sem_t *sem);
 <h2>Semáforos</h2>
 <br /><br />
 <p>Ejemplo usando semaforos y threads: <a href="files/clase26/sem_thread.c">sem_thread.c</a></p>
+<br /><br />
+<p>TODO - Agregar capturas del pizarron</p>
 </section>
 
 <section>
-<h2>Semáforos</h2>
+<h2>Semáforos y Memoria compartida</h2>
 <img style="width: 700px;" src="files/clase26/logger_system.png"/>
 <br />
 <ul>
