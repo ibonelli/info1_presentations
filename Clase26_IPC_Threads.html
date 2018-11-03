@@ -89,6 +89,11 @@
 
 <section>
 <h2>IPCs</h2>
+<br />
+<p style="text-align: left;">Missing man package?</p>
+<p style="font-size: 90%; margin-left: 30px; font-family: monospace;">apt-get install glibc-doc</p>
+<br /><br />
+<p style="text-align: left;">¿Mas info?</p>
 <ul>
 	<li><a href="http://beej.us/guide/bgipc/">Manual Beej</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/">Página de Dave Marshall</a></li>
 	<li>Semaphore: <a href="https://beej.us/guide/bgipc/html/multi/semaphores.html">Beej</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node26.html#SECTION002600000000000000000">DaveM</a> y <a href="https://en.wikipedia.org/wiki/Semaphore_%28programming%29">Wikipedia</a></li>
@@ -411,13 +416,27 @@ Job 2 finished
 <section>
 <section>
 <h2>Semáforos</h2>
+<h3>Prototipos &lt;semaphore.h&gt;</h3>
 <br />
-<ul>
-	<li>sem_init()</li>
-	<li>sem_post()</li>
-	<li>sem_wait()</li>
-	<li>sem_destroy()</li>
-</ul>
+<pre><code>sem_t : Estructura del tipo semaforo
+
+/* Inicializa un semaforo */
+int sem_init(sem_t *sem, int pshared, unsigned int value);
+
+/* Bloquea un semaforo */
+int sem_wait(sem_t *sem);
+int sem_timedwait(sem_t *sem, const struct timespec *abs_timeout);
+
+/* Desbloquea un semaforo */
+int sem_post(sem_t *sem);
+
+/* Destruye/libera un semaforo */
+int sem_destroy(sem_t *sem);
+</code></pre>
+</section>
+
+<section>
+<h2>Semáforos</h2>
 <br /><br />
 <p>Ejemplo usando semaforos y threads: <a href="files/clase26/sem_thread.c">sem_thread.c</a></p>
 </section>
