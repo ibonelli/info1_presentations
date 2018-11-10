@@ -49,12 +49,50 @@
 </section>
 
 <section>
+	<ul class="col" style="width: 400px;">
+		<h2>Compilando...</h2>
+		<h3>¿Como compilabamos?</h3>
+		<br />
+		<p>Primero compilamos:</p>
+		<pre><code>$ gcc -c holalib.c</code></pre>
+		<p>Y luego llamamos al linker:</p>
+		<pre><code>gcc -o hola hola.o</code></pre>
+	</ul>
+	<ul class="col" style="width: 400px;">
+		<a href="./files/clase03/Compiladores.png">
+			<img src="./files/clase03/Compiladores.png" alt="Compilación">
+		</a>
+		<a href="./files/clase03/Linker.png">
+			<img src="./files/clase03/Linker.png" alt="Linkeado">
+		</a>
+	</ul>
+</section>
+
+<section>
+	<h2>Por que usamos librerias</h2>
+	<br />
+	<ul>
+		<li>Usamos C y tiene poca funcionalidad por si solo</li>
+		<li>Tenemos código que podemos usar para otras aplicaciones</li>
+		<li>Queremos hacer más flexible la carga de ciera parte del código de la aplicación</li>
+	</ul>
+</section>
+
+<section>
 	<h2>Tres Tipos</h2>
 	<ul>
 		<li><span style="color: #4FC7CF;">Estaticas</span>: Simple colección de programas objeto. Una vez compilado el código es parte de nuestro binario. En Linux extensión .a</li>
 		<li><span style="color: #4FC7CF;">Compartidas (Shared)</span>: El código no formará parte de nuestro programa. Se cargan en memoria junto con nuestro programa cuando se lo invoca. En Linux extensión .so</li>
 		<li><span style="color: #4FC7CF;">De carga dinámica (DL - Dynamic Loaded)</span>: No forman parte de nuestro programa. Solo se cargan en memoria si son requeridas/invocadas (no con el programa).</li>
 	</ul>
+</section>
+
+<section>
+	<h2>Compartidas</h2>
+	<br />
+	<p>Como el código de la librería es compartido pueden leerlo varios programas al mismo tiempo. Es como si tuvieramos un libro compartido sobre la mesa y todos lo leemos al mismo tiempo.</p>
+	<br />
+	<p>Siguiendo con esta analogía, cada uno de los que leemos el código tenemos nuestra área de memoria y nuestra procesamiento separado. O sea que compartamos código con otras aplicaciones no implica que compartamos datos.</p>
 </section>
 </section>
 
@@ -101,7 +139,7 @@
 <section>
 	<h2>Estáticas</h2>
 	<a href="./files/clase24/Clase24_Librerias1_Estaticas.jpg">
-	  <img src="./files/clase24/Clase24_Librerias1_Estaticas.jpg" alt="Librerías Estáticas: Compilación">
+		<img src="./files/clase24/Clase24_Librerias1_Estaticas.jpg" alt="Librerías Estáticas: Compilación">
 	</a>
 </section>
 </section>
