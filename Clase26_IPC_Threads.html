@@ -383,6 +383,17 @@ Job 2 finished
 </section>
 
 <section>
+<h2>Threads Join</h2>
+<h3>No bloqueantes</h3>
+<br />
+<p>int pthread_tryjoin_np(pthread_t thread, void **retval);</p>
+<br />
+<p>int pthread_timedjoin_np(pthread_t thread, void **retval, <br />const struct timespec *abstime);</p>
+<br />
+<p>NOTA - These functions are nonstandard GNU extensions; hence the suffix "_np" (nonportable) in the names.</p>
+</section>
+
+<section>
 <br /><br /><br />
 <p style="text-align: left;">Para leer mas...</p>
 <ul style="font-size: 80%;">
