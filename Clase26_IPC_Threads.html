@@ -394,6 +394,17 @@ Job 2 finished
 </section>
 
 <section>
+<h2>Threads Detach</h2>
+<h3>¡No hace falta join!</h3>
+<br />
+<p>int pthread_detach(pthread_t thread);</p>
+<br />
+<p>int pthread_attr_setdetachstate(pthread_attr_t *attr, int detachstate);</p>
+<br />
+<p>NOTA: Estas funciones también nos permiten utilizar threads y que se cierren adecuandamente sin el uso del join() que es bloqueante.</p>
+</section>
+
+<section>
 <br /><br /><br />
 <p style="text-align: left;">Para leer mas...</p>
 <ul style="font-size: 80%;">
