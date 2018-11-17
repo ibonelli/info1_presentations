@@ -1,0 +1,28 @@
+Según stackoverflow por defecto toma shared...
+
+-------------------
+From https://stackoverflow.com/questions/17662253/how-to-choose-between-shared-and-static-library
+-------------------
+
+To link your program against the static versions of the libraries, you would do the following:
+	g++ test.o -o sfml-app libsfml-graphics-s.a libsfml-window-s.a libsfml-system-s.a
+
+-------------------
+https://stackoverflow.com/questions/26103966/how-can-i-statically-link-standard-library-to-my-c-program
+-------------------
+
+g++ -o main main.o -static
+
+-------------------
+https://stackoverflow.com/questions/2812079/compile-a-shared-library-statically
+-------------------
+
+Step 1 (Create object file):
+	gcc -c your.c -o your.o
+
+Step 2 (Create static library):
+	ar rcs libyour.a your.o
+
+Step 3 (Link against static library):
+	gcc -static main.c -L. -lyour -o statically_linked
+
