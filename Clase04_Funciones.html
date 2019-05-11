@@ -344,6 +344,21 @@ gcc -o supcirc miprog.c milib.c
 
 <section>
 <section>
+<h2>Ejercicio:</h2>
+<p>Hacer un programa que invocando una función permita ingresar un valor en fareheit, calcule su equivalente en Celcius.</p>
+<br/>
+<p>Pasaje:</p>
+<ul>
+	<li>F = 9/5 * C + 32</li>
+	<li>C = (F - 32) * 5/9</li>
+</ul>
+<br/><br/><br/>
+<p>Nota: Realizar el programa y las funciones en archivos separados.</p>
+</section>
+</section>
+
+<section>
+<section>
 <h2>Variables: Alcance</h2>
 <ul>
 <li>Reglas de alcance: <ul>
@@ -352,7 +367,24 @@ gcc -o supcirc miprog.c milib.c
 </ul>
 </li>
 </ul>
-</section><section>
+</section>
+
+<section>
+<h2>¿Variables locales o globales?</h2>
+<ul>
+<li>Las variables locales: <ul>
+<li>Mejoran la portabilidad de las funciones </li>
+<li>Dan mas independencia a la función y refuerzan el concepto de programación estructurada. </li>
+</ul>
+</li>
+<li>¡En informática 1 siempre usaremos variables locales!<ul>
+<li>¿Excepciones en otras materias? ¡Si, sistemas embebidos!</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section>
 <h2>Variables: Tipo de almacenamiento (I)</h2>
 <ul>
 <li>Clases de Almacenamiento:<ul>
@@ -388,24 +420,11 @@ gcc -o supcirc miprog.c milib.c
 </section>
 
 <section>
-<h2>Reglas de alcance y visibilidad (I)</h2>
+<h2>Reglas de alcance y visibilidad</h2>
 <ul>
 <li>Las variables sólo son conocidas dentro del bloque en que han sido declarados y en los bloques anidados internos a estos (objetos o variables locales) </li>
 <li>Las declaraciones van al principio de cualquier bloque (sentencias encerradas entre <span style="color: #4FC7CF;">{</span> y <span style="color: #4FC7CF;">}</span>) </li>
 <li>Las variables declaradas fuera de todo bloque o función son globales (y valen dentro del módulo) </li>
-</ul>
-</section><section>
-<h2>Reglas de alcance y visibilidad (II)</h2>
-<ul>
-<li>Las variables locales: <ul>
-<li>Mejoran la portabilidad de las funciones </li>
-<li>Dan mas independencia a la función y refuerzan el concepto de programación estructurada. </li>
-</ul>
-</li>
-<li>¡En informática 1 siempre usaremos variables locales!<ul>
-<li>¿Excepciones en otras materias? ¡Si, sistemas embebidos!</li>
-</ul>
-</li>
 </ul>
 </section>
 </section>
@@ -413,22 +432,30 @@ gcc -o supcirc miprog.c milib.c
 <section>
 <section>
 <h2>Ejemplos de código:</h2>
+</br></br>
 <ul>
 	<li><a href="./files/clase04/ej_superficie_circulo.c">ej_superficie_circulo.c</a></li>
 	<li><a href="./files/clase04/ej_3-3_func_dado.zip">ej_3-3_func_dado.zip</a></li>
 </ul>
-</br></br></br>
+</section>
+
+<section>
+<h2>Ejercicio:</h2>
 <ul>
-	<li>Realizar el ejercicio 3.5 de la práctica:</li>
+	<li>Realizar un programa que implemente una calculadora:</li>
 	<ul>
-		<li>Realizar funciones que puedan hacer las cuatro operaciones básicas en binario, hexadecimal y octal.</li>
-		<li>Recordar que para printf/scanf:</li>
-		<ul>
-			<li>%o es octal</li>
-			<li>%x es hexadecimal</li>
-			<li>binario lo dejamos para después...</li>
-		</ul>
+		<li>Realizar funciones que puedan hacer las cuatro operaciones básicas: +, -, * y /</li>
+		<li>Debe poder trabajar en decimal, hexadecimal y octal.</li>
+		<li>Prmero preguntar la base a usar, luego los 2 números y finalmente el cálculo a realizar.</li>
+		<li>El resultado se va a mostrar en la misma base en que se ingresaron.</li>
 	</ul>
+</ul>
+<br/><br/>
+<p align="left">Recordar que para printf/scanf:</p>
+<ul>
+	<li>%o es octal</li>
+	<li>%x es hexadecimal</li>
+	<li>binario lo dejamos para después...</li>
 </ul>
 </section>
 </section>
