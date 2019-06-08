@@ -6,7 +6,9 @@
 <h2>Short answer</h2>
 <p>As <code>itoa()</code> is indeed non-standard, as mentioned by several helpful commenters, it is best to use <code>sprintf(target_string,"%d",source_int)</code> or (better yet, because it's safe from buffer overflows) <code>snprintf(target_string, size_of_target_string_in_bytes, "%d", source_int)</code>.  I know it's not quite as concise or cool as <code>itoa()</code>, but at least you can Write Once, Run Everywhere (tm) ;-)</p>
 
-
+<h2>ITOA implementado con scanf</h2>
+<p>sprintf(target_string,"%d",source_int)</p>
+<p>snprintf(target_string, size_of_target_string_in_bytes, "%d", source_int)</p>
 
 <h2>Long answer</h2>
 <p>You are correct in stating that the default <code>gcc libc</code> does not include <code>itoa()</code>, like several other platforms, due to it not technically being a part of the standard.  See <a href="http://www.cplusplus.com/reference/clibrary/cstdlib/itoa.html">here</a> for a little more info.  Note that you have to </p>

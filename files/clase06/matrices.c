@@ -34,6 +34,6 @@ for(i=0;i<X2;i++)
 for(i=0;i<X2;i++)
 	for(j=0;j<Y2;j++)
 		for(k=0;k<Z2;k++)
-			printf("[%p]: %d\n",&(m[i][j][k]),m[i][j][k]);
+			printf("[%d][%d][%d] - [%p] : %d\n",i,j,k,&(m[i][j][k]),m[i][j][k]);
 
 }

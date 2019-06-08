@@ -226,6 +226,38 @@ void main(void) {
 </section>
 </section>
 
+<section>
+<section>
+<h2>Y ahora volvemos a strings...</h2>
+<br/>
+<h3>¿Como evitamos el problema del espacio en origen?</h3>
+<h3>¡Usamos memoria dinámica!</h3>
+</section>
+<section>
+<h3>Strings dinámicos</h3>
+<br/>
+<pre style="width: 700px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 700px;" class="cpp">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main(void) {
+   char *string;
+   char *str1 = "abcdefghi";
+
+   string = (char *) malloc(strlen(str1)+1);
+
+   strcpy(string, str1);
+   printf("%s\n", string);
+
+   free(string);
+
+   return 0;
+}
+</code></pre>
+</section>
+</section>
+
 <section data-background="#8c4738">
 <section>
 <h1>Recursividad</h1>
