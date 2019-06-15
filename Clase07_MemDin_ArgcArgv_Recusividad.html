@@ -130,13 +130,92 @@ void main(int argc,char *argv[]) {
 <section>
 <h2>Argumentos del main: Ejemplos</h2>
 <ul>
-	<li><a href="files/clase07/argmain1.c">argmain1.c</a></li>
-	<li><a href="files/clase07/argmain2.c">argmain2.c</a></li>
-	<li><a href="files/clase07/argmain3.c">argmain3.c</a></li>
-	<li><a href="files/clase07/envp_show.c">envp_show.c</a></li>
-	<li><a href="files/clase07/envp_user.c">envp_user.c (v1)</a></li>
-	<li><a href="files/clase07/envp_user2.c">envp_user.c (v2)</a></li>
-	<li><a href="files/clase07/envp_user3.c">envp_user.c (v3)</a></li>
+	<li><a href="files/clase07/argmain2.c">Mostrando los argumentos</a></li>
+	<li><a href="files/clase07/envp_show.c">Mostrando el ambiente</a></li>
+	<li><a href="files/clase07/argmain3.c">Juntando todo...</a></li>
+	<li><a href="files/clase07/envp_user.c">Capturando la variable de entorno usuario</a></li>
+	<li><a href="files/clase07/envp_user2.c">Separando el nombre de la variable de entorno</a></li>
+	<li><a href="files/clase07/envp_user3.c">¡Y ahora si le puedo decir hola al usuario!</a></li>
+</ul>
+</section>
+</section>
+
+<section data-background="#8c4738">
+<section>
+<h1>Recursividad</h1>
+<br/><h3>(no mas parte del programa)</h3>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<ul>
+	<li>Se dice que algo es recursivo si se define en función de sí mismo o a sí mismo.</li>
+	<br/><li>También se dice que nunca se debe incluir la misma palabra en la definición de ésta.</li>
+	<br/><li>El caso es que las definiciones recursivas aparecen con frecuencia en matemáticas, e incluso en la vida real.</li>
+</ul>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<p style="text-align:left;">Ejemplo: basta con apuntar una cámara al monitor que muestra la imagen que muestra esa cámara. El efecto es verdaderamente curioso, en especial cuando se mueve la cámara alrededor del monitor.</p>
+<br/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<img src="files/clase07/Imagen_Recursiva.png"/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<img src="files/clase07/Llamados_Funciones.png"/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial</p>
+<br/>
+<img src="files/clase07/Factorial.png"/>
+</section>
+
+<section>
+<h3>Recursividad: Factorial Iterativo</h3>
+</section>
+
+<section>
+<h3>Recursividad: Factorial Recursivo</h3>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<img src="files/clase07/Factorial_llamados.png"/>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
+<ul>
+	<li>Cada llamada recursiva almacena los parámetros que se pasaron al procedimiento, y otras variables necesarias para el correcto funcionamiento del programa.</li>
+	<li>Por tanto si se produce una llamada recursiva infinita (que no termina nunca) llega un momento en el que no quedará memoria para almacenar más datos</li>
+	<li>En ese momento se abortará la ejecución del programa.</li>
+	<ul><li>Para probar esto se puede intentar hacer esta llamada en el programa factorial definido anteriormente: factorial(-1);</li></ul>
+	<li>A pesar de ser un buen ejemplo del problema computacional, este es un ejemplo engañoso. El valor -1 esta fuera del dominio de definición de la función matemática y no fue tampoco comprendido en el algoritmo (factorial está definido solamente para números naturales).</li>
+</ul>
+</section>
+
+<section>
+<h3>Recursividad</h3>
+<br/>
+<ul>
+	<li>Puede definirse un programa en términos recursivos, como una serie de pasos básicos, o paso base (también conocido como condición de parada), y un paso recursivo, donde vuelve a llamarse al programa.</li>
+	<li>En un computador, esta serie de pasos recursivos debe ser finita, terminando con un paso base. Es decir, a cada paso recursivo se reduce el número de pasos que hay que dar para terminar, llegando un momento en el que no se verifica la condición de paso a la recursividad.</li>
+	<li>Por otra parte, la recursividad también puede ser indirecta, si tenemos un procedimiento P que llama a otro Q y éste a su vez llama a P. También en estos casos debe haber una condición de parada.</li>
 </ul>
 </section>
 </section>
@@ -255,86 +334,6 @@ int main(void) {
    return 0;
 }
 </code></pre>
-</section>
-</section>
-
-<section data-background="#8c4738">
-<section>
-<h1>Recursividad</h1>
-<br/><h3>(no mas parte del programa)</h3>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<ul>
-	<li>Se dice que algo es recursivo si se define en función de sí mismo o a sí mismo.</li>
-	<br/><li>También se dice que nunca se debe incluir la misma palabra en la definición de ésta.</li>
-	<br/><li>El caso es que las definiciones recursivas aparecen con frecuencia en matemáticas, e incluso en la vida real.</li>
-</ul>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<p style="text-align:left;">Ejemplo: basta con apuntar una cámara al monitor que muestra la imagen que muestra esa cámara. El efecto es verdaderamente curioso, en especial cuando se mueve la cámara alrededor del monitor.</p>
-<br/>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<img src="files/clase07/Imagen_Recursiva.png"/>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<img src="files/clase07/Llamados_Funciones.png"/>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial</p>
-<br/>
-<img src="files/clase07/Factorial.png"/>
-</section>
-
-<section>
-<h3>Recursividad: Factorial Iterativo</h3>
-</section>
-
-<section>
-<h3>Recursividad: Factorial Recursivo</h3>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<img src="files/clase07/Factorial_llamados.png"/>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
-<ul>
-	<li>Cada llamada recursiva almacena los parámetros que se pasaron al procedimiento, y otras variables necesarias para el correcto funcionamiento del programa.</li>
-	<li>Por tanto si se produce una llamada recursiva infinita (que no termina nunca) llega un momento en el que no quedará memoria para almacenar más datos</li>
-	<li>En ese momento se abortará la ejecución del programa.</li>
-	<ul><li>Para probar esto se puede intentar hacer esta llamada en el programa factorial definido anteriormente: factorial(-1);</li></ul>
-	<li>A pesar de ser un buen ejemplo del problema computacional, este es un ejemplo engañoso. El valor -1 esta fuera del dominio de definición de la función matemática y no fue tampoco comprendido en el algoritmo (factorial está definido solamente para números naturales).</li>
-</ul>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<ul>
-	<li>Puede definirse un programa en términos recursivos, como una serie de pasos básicos, o paso base (también conocido como condición de parada), y un paso recursivo, donde vuelve a llamarse al programa.</li>
-	<li>En un computador, esta serie de pasos recursivos debe ser finita, terminando con un paso base. Es decir, a cada paso recursivo se reduce el número de pasos que hay que dar para terminar, llegando un momento en el que no se verifica la condición de paso a la recursividad.</li>
-	<li>Por otra parte, la recursividad también puede ser indirecta, si tenemos un procedimiento P que llama a otro Q y éste a su vez llama a P. También en estos casos debe haber una condición de parada.</li>
-</ul>
 </section>
 </section>
 

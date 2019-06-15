@@ -20,9 +20,5 @@ int main(int cantarg,char *param[],char *ento[])
 		for(desp=0;ento[desp]!='\0';desp++)
 			printf("El string Nro. %d es: %s\t%p\n",desp,ento[desp],\
 			ento[desp]);
-        strcpy(ento[4],"MY_SESSION_ID=1652765498");
-		for(desp=0;ento[desp]!='\0';desp++)
-			printf("El string Nro. %d es: %s\t%p\n",desp,ento[desp],\
-				ento[desp]);
     return 0;
 	}
