@@ -164,6 +164,12 @@ iface eth0 inet static
 <br />
 <a href="./files/clase14/ipv4_ipv6.jpg"><img src="./files/clase14/ipv4_ipv6.jpg"/></a>
 </section>
+
+<section>
+<h2>Ejemplo de red</h2>
+<br />
+<a href="./files/clase14/ejemplo_red.jpg"><img style="width: 400px;" src="./files/clase14/ejemplo_red.jpg"/></a>
+</section>
 </section>
 
 <section>
@@ -186,6 +192,24 @@ iface eth0 inet static
 </section>
 
 <section>
+<h2>Puertos (<a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers">IANA</a>)</h2>
+<ul>
+	<li>SSH -> 22</li>
+	<li>WEB -> 80</li>
+	<li>DNS -> 53</li>
+	<li>FTP:
+		<ul>
+			<li>20 (datos)</li>
+			<li>21 (control)</li>
+		</ul>
+	</li>
+</ul>
+<br/><br/><br/>
+<h3>Ejemplo</h3>
+<p>www.nachodigital.com.ar:80</p>
+</section>
+
+<section>
 <h2>Ejemplo de puertos</h2>
 <ul>
 <li>2001</li>
@@ -193,12 +217,19 @@ iface eth0 inet static
 <li>4161</li>
 </ul>
 <p>Siempre arriba de 1024</p>
-<br/><br/>
-<h2>ip a</h2>
+</section>
+
+<section>
+<h2>Mi Configuracion</h2>
+<br/>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+$ ip a
+</code></pre>
+<br/>
 <ul>
 <li>lo: loopback</li>
-<li>eth0: Cable</li>
-<li>wlan0: WiFi</li>
+<li>eth0 / e* : Cable</li>
+<li>wlan0 / w* : WiFi</li>
 </ul>
 </section>
 
@@ -207,6 +238,11 @@ iface eth0 inet static
 <p>Internet Topology Map, January 2009 (UC Regent)</p>
 <img src="./files/clase14/ipv4_ipv6_address_space_small.jpg"/>
 <p>Imagenes detalladas del <a href="./files/clase14/ipv4_ipv6_address_space.jpg">2009</a> y del <a href="./files/clase14/ipv4_ipv6_address_space_2014.jpg">2014</a></p>
+</section>
+
+<section>
+<h2>DNS</h2>
+<p>www.nachodigital.com.ar -> 66.228.47.221</p>
 </section>
 </section>
 
@@ -235,6 +271,12 @@ iface eth0 inet static
 		</ul>
 	</li>
 </ul>
+</section>
+
+<section>
+<h2>Orden de bytes para el host y la red</h2>
+<br/>
+<a href="./files/clase14/little-big_endian.jpg"><img src="./files/clase14/little-big_endian.jpg"/></a>
 </section>
 
 <section>
@@ -322,7 +364,10 @@ iface eth0 inet static
 	<li><a href="http://stackoverflow.com/questions/8309648/netcat-streaming-using-udp">Usando NetCat para UDP</a></li>
 	<li><a href="http://www.g-loaded.eu/2006/11/06/netcat-a-couple-of-useful-examples/">NetCat: Ejemplos de uso</a></li>
 </ul>
-<br/><br/>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo apt install netcat
+</code></pre>
+<br/>
 <ul>
 	<li>Para correr un server</li>
 <pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
@@ -334,7 +379,22 @@ nc 127.0.0.1 4161
 echo "Hola Mundo" | nc 127.0.0.1 4161
 cat test.txt | nc 127.0.0.1 4161
 </code></pre>
-	<li>Si misma red y problemas: "sudo iptables -F"</li>
+</section>
+
+<section>
+<h2>¿Problemas de red?</h2>
+<br/>
+<p>Si misma red y problemas:</p>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo iptables -F
+</code></pre>
+<br/>
+<p>iptables es un firewall que viene con linux.<br/>Esto limpia las reglas que trae.</p>
+<br/>
+<p>Para saber que hay configurado:</p>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo iptables -L
+</code></pre>
 </section>
 
 <section>
