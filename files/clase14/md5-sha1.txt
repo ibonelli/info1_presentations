@@ -2,22 +2,87 @@ f3 f1 f0 65 80 af 0e 8b 76 c1 83 1a ee 71 8c 14
 	md5 16 bytes
 	sha1 20 bytes
 
+=============================================
+Batches calculation
+=============================================
+
+sudo apt install libssl-dev
+
+Web
+	https://www.openssl.org/source/
+	https://github.com/openssl/openssl
+
+Compiling
+	gcc -o md5 md5.c -lssl -lcrypto
+
+ToRun
+	./md5 < md5-sha1.txt
+
+----------------------------
+Example (slightly modified) from
+	https://www.unix.com/programming/134079-computing-md5sum-c.html
+----------------------------
+
+#include <openssl/md5.h>
+#include <unistd.h>
+#include <stdio.h>
+
+#define MD5_HASH_SIZE 16
+
+int main()
+{
+        int n;
+        MD5_CTX c;
+        char buf[512];
+        ssize_t bytes;
+        unsigned char out[MD5_HASH_SIZE];
+
+        MD5_Init(&c);
+        bytes=read(STDIN_FILENO, buf, 512);
+        while(bytes > 0)
+        {
+                MD5_Update(&c, buf, bytes);
+                bytes=read(STDIN_FILENO, buf, 512);
+        }
+
+        MD5_Final(out, &c);
+
+        for(n=0; n<MD5_DIGEST_LENGTH; n++)
+                printf("%02x", out[n]);
+
+        return(0);        
+}
+
+=============================================
+Using in memory calculation
+=============================================
+
 sudo apt install libgcrypt20 libgcrypt20-dev libgcrypt20-doc
 
 Docs
 	/usr/share/doc/libgcrypt20-doc/html/index.html
 
+Web
+	https://www.gnupg.org/software/libgcrypt/index.html
+	https://github.com/gpg/libgcrypt
+
 GCRY_MD_MD5
 	gcc -o foo foo.c `libgcrypt-config --cflags --libs`
 
+ToRun
+	./md5 "Mi mensaje del que voy a sacar un MD5"
+
 ----------------------------
-Example from
+Example (slightly modified) from
 	https://stackoverflow.com/questions/14334305/one-way-hash-function-in-c
 ----------------------------
 
 #include <gcrypt.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+// Either GCRY_MD_MD5 or GCRY_MD_SHA1
+#define HASHV GCRY_MD_MD5
 
 int main(int argc, char **argv){
 
@@ -32,7 +97,7 @@ int main(int argc, char **argv){
 
   /* Length of resulting sha1 hash - gcry_md_get_algo_dlen
    * returns digest lenght for an algo */
-  int hash_len = gcry_md_get_algo_dlen( GCRY_MD_SHA1 );
+  int hash_len = gcry_md_get_algo_dlen( HASHV );
 
   /* output sha1 hash - this will be binary data */
   unsigned char hash[ hash_len ];
@@ -44,7 +109,7 @@ int main(int argc, char **argv){
 
   /* calculate the SHA1 digest. This is a bit of a shortcut function
    * most gcrypt operations require the creation of a handle, etc. */
-  gcry_md_hash_buffer( GCRY_MD_SHA1, hash, argv[1], msg_len );
+  gcry_md_hash_buffer( HASHV, hash, argv[1], msg_len );
 
   /* Convert each byte to its 2 digit ascii
    * hex representation and place in out */
