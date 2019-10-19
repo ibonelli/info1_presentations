@@ -43,21 +43,118 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Sockets Avanzado</h1>
-					<h3>O como atender varios pedidos al mismo tiempo...</h3>
+					<h1>Procesos y Sockets</h1>
+					<br/>
+					<h3>¡Quiero hacer un servidor que atienda<br/>a varios clientes al mismo tiempo!</h3>
+					<h4>Y no morir en el intento...</h4>
+					<br/><br/>
 					<p>
 						<small>Ing. Ignacio Javier Bonelli</small>
 					</p>
 				</section>
+				<section>
+					<section>
+						<h1>Procesos</h1>
+						<h3>¿Así que Linux es multitarea?</h3>
+						<h3>¿Y como funciona eso?</h3>
+					</section>
+					<section>
+						<h2>Tipos de Procesos</h2>
+						<br/><br/>
+						<ul>
+							<li>En primer plano (de terminal o gráficos)</li>
+							<li>En segundo plano (sin conexión a una terminal)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>¿Como identificamos un proceso?</h2>
+						<br/><br/>
+						<ul>
+							<li>Todos los procesos tienen un<br/><span style="margin-left:100px">identificador único de proceso (PID)</span></li>
+							<li>Los procesos pueden ser:
+								<ul>
+									<li style="margin-left:100px">padres</li>
+									<li style="margin-left:100px">hijos</li>
+								</ul>
+							<li>Dentro de Linux el proceso padre ahora es <b>systemd</b><br/><span style="margin-left:600px">(antes era <a href="https://www.tecmint.com/systemd-replaces-init-in-linux/">init</a>).</span></li>
+							<li>Todos los otros procesos serán hijos de systemd<br/><span style="margin-left:200px">y podrán ser padres de otros procesos.</span></li>
+						</ul>
+					</section>
+					<section>
+						<h2>Árbol de procesos</h2>
+						<br/><br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+$ pstree -p
+systemd(1)─┬─ModemManager(535)─┬─{ModemManager}(557)
+           │                   └─{ModemManager}(593)
+           ├─NetworkManager(550)─┬─dhclient(9199)
+           │                     ├─{NetworkManager}(567)
+           │                     └─{NetworkManager}(592)
+           ├─agetty(711)
+           ├─alsactl(545)
+           ├─cron(541)
+           ├─dbus-daemon(23939)
+           ├─dbus-daemon(532)
+           ├─dbus-launch(23938)
+           ├─lightdm(716)─┬─Xorg(735)─┬─{Xorg}(739)
+           ...
+           ├─plasmashell(1362)─┬─chromium(8153)─┬─chrome-sandbox(8168)───chromium(8169)───chromium(8171)─┬─chromium(8817)─┬─{chromium}(8820)
+           ...
+           ├─dropbox(8446)─┬─{dropbox}(8467)
+           │               ├─{dropbox}(8468)
+           │               ├─{dropbox}(8469)
+           ...
+</code></pre>
+					</section>
+					<section>
+						<h2>Estado de los procesos (I)</h2>
+						<br/>
+						<a href="files/clase21/ProcessState.png"><img src="files/clase21/ProcessState.png"/></a>
+					</section>
+					<section>
+						<h2>Estado de los procesos (II)</h2>
+						<br/>
+						<ul>
+							<li><b>Running</b>: Cuando el proceso se esta ejecutando.</li>
+							<li><b>Waiting</b>: Cuando el proceso esta esperando que se cumpla algún otro evento.</li>
+							<li><b>Ready</b>: Cuando el proceso esta pronto para ejecutar, esperando por la CPU.</li>
+							<li><b>Terminated</b>: Cuando el proceso ha terminado.</li>
+							<li><b>Zombie</b>: Cuando termina (o muere) un hijo y el padre no se ha enterado (y por lo tanto tiene una entrada en la tabla de procesos).</li>
+						</ul>
+					</section>
+					<section>
+						<h2>htop</h2>
+						<p>Una mejor forma de ver que está corriendo.</p>
+						<br/>
+						<a href="files/clase21/htop.png"><img src="files/clase21/htop.png"/></a>
+					</section>
+					<section>
+						<h2>Dos formas de crear procesos...</h2>
+						<br />
+						<h3>Fork</h3>
+						<p style="font-size: 90%;">Nos da un nuevo proceso que es una copia del actual. Tiene una "copia" de la memoria original. A medida que los nuevos procesos avanzan los valores de cada uno en memoria cambian, pero el ejecutable es el mismo. Los procesos/tareas no comparten memoria, la única forma de compartir algo es usar IPCs.</p>
+						<br /><br />
+						<p><b style="font-size: 120%;">Threads:</b> De una forma muy sencilla un thread es un proceso más liviano. Vamos a ver más sobre ellos en el siguiente capítulo.</p>
+						<br /><br />
+						<p style="font-size: 60%;">Se puede leer más sobre procesos en <a href="https://www.tldp.org/LDP/tlk/kernel/processes.html">Linux Documentation Project</a>.</p>
+					</section>
+				</section>
 
 				<section>
-					<h3>Hay dos formas:</h3>
-					<ul>
-						<li>Una fácil de implementar, pero dificil de programar</li>
-							<ul><li>Usamos send()/recv() como NONBLOCKING</li></ul>
-						<li>Otra mas dificil de implementar, pero mucho mas elegante</li>
-							<ul><li>Creamos distintos procesos: fork()</li></ul>
-					</ul>
+					<section>
+						<h1>Sockets Avanzado</h1>
+						<h3>O como atender varios pedidos al mismo tiempo...</h3>
+					</section>
+
+					<section>
+						<h3>Hay dos formas:</h3>
+						<ul>
+							<li>Una fácil de implementar, pero dificil de programar</li>
+								<ul><li>Usamos send()/recv() como NONBLOCKING</li></ul>
+							<li>Otra mas dificil de implementar, pero mucho mas elegante</li>
+								<ul><li>Creamos distintos procesos: fork()</li></ul>
+						</ul>
+					</section>
 				</section>
 
 				<!-- Nested vertical slides: NONBLOCKING -->
