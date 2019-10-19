@@ -169,7 +169,7 @@ systemd(1)─┬─ModemManager(535)─┬─{ModemManager}(557)
         printf(".");
     } while (n == -1);
 						</code></pre>
-						</br>
+						<br />
 						<p>Trabajando en modo no bloqueante, retorna:</p>
 						<ul>
 							<li>-1 si no llegó nada.</li>
@@ -191,7 +191,7 @@ systemd(1)─┬─ModemManager(535)─┬─{ModemManager}(557)
 						<h2>¿Y en el servidor cambia algo?</h2>
 						<p>No en este ejemplo, pero se puede cambiar el server a una máquina de estados. De esa manera y como no bloqueante se pueden manejar multiples conexiones simultaneamente.</p>
 						<p>Pero para poder manejar distintos sockets es mejor usar fork()</p>
-						</br>
+						<br />
 						<p>Compilar los ejemplos de código:</p>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ gcc -o client sockets_3client_nonblocking.c
@@ -205,21 +205,33 @@ $ gcc -o server sockets_3server_nonblocking.c
 					<section>
 						<h2>Usando fork()</h2>
 						<p>Fork nos permite crear un proceso "hijo", copia del "padre".</p>
-						</br><p>man 2 fork</p>
+						<br /><p>man 2 fork</p>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
 #include &lt;unistd.h&gt;
 pid_t fork(void);
 						</code></pre>
-						</br><p>El proceso hijo es un duplicado del padre, pero</br>tiene un PID distinto (valor retornado pid_t).</p> 
+						<br /><p>El proceso hijo es un duplicado del padre, pero<br />tiene un PID distinto (valor retornado pid_t).</p> 
 					</section>
 					<section>
-						</br><h3>fork() retorna...</h3>
+						<h2>¿Como identificamos clones?</h2>
+						<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+							<br />
+							<img style="height: 400px;" src="files/clase21/movie_multiplicity.jpg"/>
+						</ul>
+						<ul class="col" style="width: 400px;">
+							<br /><br />
+							<h3>The 6th day (2000)</h3>
+							<br /><img src="files/clase21/movie_The6thDay.jpg"/>
+						</ul>
+					</section>
+					<section>
+						<br /><h3>fork() retorna...</h3>
 						<ul>
 						<li>0 : En el proceso nuevo (hijo)</li>
 						<li>-1 : Si hay un error</li>
 						<li>pid: El process ID del proceso hijo al padre</li>
 						</ul>
-						</br></br></br>
+						<br /><br /><br />
 						<h3>Ejemplo1:</h3>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ gcc -o ej1 ej_fork.c
@@ -227,12 +239,12 @@ $ gcc -o ej1 ej_fork.c
 					</section>
 					<section>
 						<h2>Fork: Funciones</h2>
-						</br><ul>
+						<br /><ul>
 							<li>getpid() - Obtiene el PID del proceso actual.</li>
 							<li>getppid() - Obtiene el PID del proceso padre.</li>
 							<li>wait() - Espera a que un proceso cambie de estado.</li>
 						</ul>
-						</br></br><p>man 2 wait</p>
+						<br /><br /><p>man 2 wait</p>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
 #include &lt;sys/types.h&gt;
 #include &lt;sys/wait.h&gt;
@@ -241,12 +253,12 @@ pid_t waitpid(pid_t pid, int *status, int options);
 						</code></pre>
 					</section>
 					<section>
-						</br><h2>Ejemplo2:</h2>
+						<br /><h2>Ejemplo2:</h2>
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 gcc -o ej2 ej_fork_kill.c
 						</code></pre>
 						</ul>
-						</br><p>Para el segundo ejemplo utilizaremos los comandos:</p>
+						<br /><p>Para el segundo ejemplo utilizaremos los comandos:</p>
 						<ul>
 							<li>kill - Dado un PID lo "mata".</li>
 							<li>ps - Lista los procesos corriendo en la máquina.</li>
@@ -263,11 +275,11 @@ gcc -o ej2 ej_fork_kill.c
 					</section>
 					<section>
 						<h2>Ejemplo3:</h2>
-						</br>
+						<br />
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 gcc -o ej3 ej_fork_count.c
 						</code></pre>
-						</br><p>En este ejemplo vemos padre e hijo trabajando en paralelo.</p>
+						<br /><p>En este ejemplo vemos padre e hijo trabajando en paralelo.</p>
 					</section>
 				</section>
 
@@ -279,7 +291,7 @@ gcc -o ej3 ej_fork_count.c
 $ gcc -o ej3-tcp-clt tcp-cliente.c
 $ gcc -o ej3-tcp-svr tcp-servidor.c
 						</code></pre>
-						</br>
+						<br />
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ ./ej3-tcp-svr
 $ ./ej3-tcp-clt 127.0.0.1
@@ -295,7 +307,7 @@ $ ps ax | grep ej3
 $ gcc -o ej4-udp-clt udp-cliente.c
 $ gcc -o ej4-udp-svr udp-servidor.c
 						</code></pre>
-						</br>
+						<br />
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ ./ej4-udp-svr
 $ ./ej4-udp-clt 127.0.0.1 Hola
@@ -331,7 +343,7 @@ $ ./ej4-udp-clt 127.0.0.1 Mundo
 $ gcc -o al08_keyboard_client al08_keyboard_client.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
 $ gcc -o al08_keyboard_server al08_keyboard_server.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
 						</code></pre>
-						</br>
+						<br />
 						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ ./al08_keyboard_server
 $ ./al08_keyboard_client 127.0.0.1
