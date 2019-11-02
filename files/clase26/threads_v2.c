@@ -58,9 +58,9 @@ int main(void)
     }
 
     pthread_join(tid[0], (void**)&(ptr[0]));
-    pthread_join(tid[1], (void**)&(ptr[1]));
-
     printf("\n return value from first thread is [%d]\n", *ptr[0]);
+
+    pthread_join(tid[1], (void**)&(ptr[1]));
     printf("\n return value from second thread is [%d]\n", *ptr[1]);
 
     return 0;

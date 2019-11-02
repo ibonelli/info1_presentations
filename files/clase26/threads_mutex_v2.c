@@ -20,7 +20,9 @@ void *doSomeThing(void *arg) {
     counter += 1;
     printf("\n Job %d started\n", counter);
 
-    for(i=0; i<(0xFFFFFFFF);i++);
+    for(i=0; i<1000; i++) {
+        usleep(1000);
+    };
 
     printf("\n Job %d finished\n", counter);
 
@@ -30,7 +32,7 @@ void *doSomeThing(void *arg) {
 }
 
 int main(void) {
-    int i = 0;
+    int i = 0, counter = 0;
     int err;
 
     if (pthread_mutex_init(&lock, NULL) != 0) {

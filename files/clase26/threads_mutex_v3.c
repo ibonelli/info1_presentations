@@ -1,6 +1,6 @@
 /*
- * threads_mutex_v2.c - compile with:
- *           gcc -o threads_m2 threads_mutex_v2.c -lpthread
+ * threads_mutex_v3.c - compile with:
+ *           gcc -o threads_m3 threads_mutex_v3.c -lpthread
  */
 
 #include<stdio.h>
@@ -8,6 +8,8 @@
 #include<pthread.h>
 #include<stdlib.h>
 #include<unistd.h>
+
+#define LIMIT 1000
 
 pthread_t tid[2];
 int counter;
@@ -24,7 +26,9 @@ void *doSomeThing(void *arg) {
         printf("\n Second thread in parallel 1st block started pthread_t %ld\n", id);
     }
 
-    for(i=0; i<(0x0FFFFFFF);i++);
+    for(i=0; i<LIMIT; i++) {
+        usleep(1000);
+    };
 
     if(pthread_equal(id,tid[0])) {
         printf("\n First thread in parallel 1st block finished pthread_t %ld\n", id);
@@ -37,7 +41,9 @@ void *doSomeThing(void *arg) {
 
     printf("\n Job %d started\n", counter);
 
-    for(i=0; i<(0x0FFFFFFF);i++);
+    for(i=0; i<LIMIT; i++) {
+        usleep(1000);
+    };
 
     printf("\n Job %d finished\n", counter);
 
@@ -49,7 +55,9 @@ void *doSomeThing(void *arg) {
         printf("\n Second thread in parallel 2nd block started pthread_t %ld\n", id);
     }
 
-    for(i=0; i<(0x0FFFFFFF);i++);
+    for(i=0; i<LIMIT; i++) {
+        usleep(1000);
+    };
 
     if(pthread_equal(id,tid[0])) {
         printf("\n First thread in parallel 2nd block finished pthread_t %ld\n", id);
@@ -61,7 +69,7 @@ void *doSomeThing(void *arg) {
 }
 
 int main(void) {
-    int i = 0;
+    int i = 0, counter = 0;
     int err;
 
     if (pthread_mutex_init(&lock, NULL) != 0) {

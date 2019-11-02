@@ -17,7 +17,10 @@ void *doSomeThing(void *arg) {
     counter += 1;
     printf("\n Job %d started\n", counter);
 
-    for(i=0; i<(0xFFFFFFFF);i++);
+    for(i=0; i<1000; i++) {
+        usleep(1000);
+    };
+
     printf("\n Job %d finished\n", counter);
 
     return NULL;

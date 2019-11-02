@@ -216,6 +216,21 @@ watch -n 1 "ps elf | grep tcp | grep -v grep"
 </section>
 
 <section>
+<h2>Ignorando la señal SIGCHLD</h2>
+<br />
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+man 2 signal
+</pre></code>
+<br />
+<p style="text-align: left;">Que opciones tenemos:</p>
+<ul>
+	<li>handler pre-definido SIG_IGN que ignora la señal.</li>
+	<li>handler pre-definido SIG_DFL que le pasa la señal al manejador del sistema.</li>
+	<li>Definir un handler mio que la ignore (o mejor haga algo con ella).</li>
+</ul>
+</section>
+
+<section>
 <h2>Zombies</h2>
 <br />
 <p>No nos ocupamos y nos queda un proceso Zombie: <a href="files/clase26/zombie1.c">zombie1.c</a></p>
@@ -274,7 +289,8 @@ watch -n 1 "ps elf | grep tcp | grep -v grep"
 <pre><code>/* Retornar el pthread ID actual */
 pthread_t pthread_self(void);
 
-/* ¿Son tid1 y tid2 el mismo thread? */
+/* ¿Son tid1 y tid2 el mismo thread?                  */
+/* pthread_t no tiene forma portable de ser comparado */
 int pthread_equal(pthread_t tid1, pthread_t tid2);
 
 /* Salir del thread/función en el que estamos */
