@@ -402,7 +402,10 @@ Job 2 finished
 
 <section>
 <h2>Threads Mutex</h2>
-<p>Ver threads_mutex_v3.c (pizarron tb), no hay sincronización plena => semaforos!</p>
+<br/>
+<p>En threads_mutex_v3.c vemos que no hay sincronización plena...</p>
+<br/>
+<p>Para lograr una sincronización completa utilizaremos semaforos!</p>
 </section>
 
 <section>
@@ -461,7 +464,7 @@ int sem_destroy(sem_t *sem);
 </section>
 
 <section>
-<a href="files/clase26/threads_compared.png"><img style="width: 700px;" src="files/clase26/Producer_Consumer.jpg"/></a>
+<a href="files/clase26/Producer_Consumer.jpg"><img style="width: 700px;" src="files/clase26/Producer_Consumer.jpg"/></a>
 <p>Semáforos: Productor / Consumidor</p>
 </section>
 
@@ -506,6 +509,29 @@ int sem_destroy(sem_t *sem);
 </section>
 
 <section>
+<section>
+<h2>IPCs : Message Queue</h2>
+<br/>
+<p>Librerias a usar:</p>
+<p>&lt;sys/types.h&gt , &lt;sys/ipc.h&gt y &lt;sys/msg.h&gt</p>
+<br/>
+<pre style="width: 900px;"><code style="width: 900px;">/* Convierte un nombre/ruta a un ID manejable en System V */
+key_t ftok(const char *pathname, int proj_id);
+
+/* Obtiene el ID de una message queue System V */
+int msgget(key_t key, int msgflg);
+
+/* Envia un mensaje de una cola de mensajes identificada por key */
+int msgsnd(int msqid, const void *msgp, size_t msgsz, int msgflg);
+
+/* Obtiene un mensaje de una cola de mensajes identificada por key */
+ssize_t msgrcv(int msqid, void *msgp, size_t msgsz, long msgtyp, int msgflg);
+
+/* Permite controlar una cola de mensajes System V */
+int msgctl(int msqid, int cmd, struct msqid_ds *buf);
+</code></pre>
+</section>
+
 <section>
 <h2>IPCs : Message Queue</h2>
 <h3>Ejemplo</h3>
