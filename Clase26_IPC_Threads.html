@@ -268,6 +268,8 @@ man 2 signal
 <h2>Threads</h2>
 <br />
 <img src="files/clase26/threads.jpg"/>
+<br />
+<p>Conclusión: Se comparte la memoria de datos...<br />¡Pero no comparten la pila!</li>
 </section>
 
 <section>
@@ -428,6 +430,14 @@ Job 2 finished
 <p>int pthread_attr_setdetachstate(pthread_attr_t *attr, int detachstate);</p>
 <br />
 <p>NOTA: Estas funciones también nos permiten utilizar threads y que se cierren adecuandamente sin el uso del join() que es bloqueante.</p>
+</section>
+
+<section>
+<h2>Programación paralela</h2>
+<br />
+<p>Sumando y restando una matriz</p>
+<img src="files/clase26/parallel_example1.png"/>
+<p><a href="files/clase26/parallel_example1.c">parallel_example1.c</a></p>
 </section>
 
 <section>
