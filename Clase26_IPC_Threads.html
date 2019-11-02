@@ -341,7 +341,11 @@ int pthread_join(pthread_t thread, void **retval);
 <section>
 <h2>Threads Mutex</h2>
 <br />
-<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando. En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
+<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando.</p>
+<br />
+<p>En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
+<br />
+<p>Su función principal es evitar el acceso a recursos compartidos.</p>
 </section>
 
 <section>
@@ -405,9 +409,9 @@ Job 2 finished
 <section>
 <h2>Threads Mutex</h2>
 <br/>
-<p>En threads_mutex_v3.c vemos que no hay sincronización plena...</p>
+<p>En <a href="files/clase26/threads_mutex_v3.c">threads_mutex_v3.c</a> tenemos algo más que el mutex en el proceso. Hay cosas que si corren en paralelo.</p>
 <br/>
-<p>Para lograr una sincronización completa utilizaremos semaforos!</p>
+<p>Mutex se podría ver como un hermano menor de los semáforos.</p>
 </section>
 
 <section>

@@ -2,9 +2,10 @@ Maybe:
   https://linux.die.net/man/3/pthread_mutex_init
   https://stackoverflow.com/questions/14888027/mutex-lock-threads
 
-Nice:
-  How to Use C Mutex Lock Examples for Linux Thread Synchronization
+-----------------------------------------------------------------------------------------------
+How to Use C Mutex Lock Examples for Linux Thread Synchronization
   https://www.thegeekstuff.com/2012/05/c-mutex-examples/
+-----------------------------------------------------------------------------------------------
 
 In the Linux threads series, we discussed on the ways in which a thread can terminate and how the return status is passed on from the terminating thread to its parent thread. In this article we will throw some light on an important aspect known as thread synchronization.
 
