@@ -81,10 +81,16 @@
 <ul>
 	<li>Todos usamos TCP/IP en internet</li>
 	<li>Protocolo IP: Mi dirección!</li>
-	<li>TCP: Transmission Control Protocol</li>
-		<ul><li>Comunicación con conexión</li></ul>
-	<li>UDP: User Datagram Protocol</li>
-		<ul><li>Comunicación sin conexión</li></ul>
+	<li>Protocolos de transmisión:
+		<ul style="font-size: 85%;">
+			<li>TCP: Transmission Control Protocol</li>
+				<ul><li>Comunicación con conexión</li></ul>
+			<li>UDP: User Datagram Protocol</li>
+				<ul><li>Comunicación sin conexión</li></ul>
+			<li><a href="https://es.wikipedia.org/wiki/Stream_Control_Transmission_Protocol">SCTP</a>: Stream Control Transmission Protocol (IETF 2000)</li>
+				<ul><li>Comunicación con conexión pero fuera de orden</li></ul>
+		</ul>
+	</li>
 	<li>Cliente/Servidor: En una conexión TCP/IP siempre debe haber un servidor (que espera conexiones) y un cliente (que se conecta al servidor).</li>
 	<li>Socket: Abstracción de conexión entre un par cliente servidor que permite conectarnos/trabajar como si estuvieramos trabajando con archivos.</li>
 </ul>
@@ -243,6 +249,15 @@ $ ip a
 <section>
 <h2>DNS</h2>
 <p>www.nachodigital.com.ar -> 66.228.47.221</p>
+<br/>
+<pre><code>
+$ ping www.wikipedia.org
+	PING dyna.wikimedia.org (208.80.154.224): 56 data bytes
+	64 bytes from 208.80.154.224: icmp_seq=0 ttl=52 time=175.908 ms
+	64 bytes from 208.80.154.224: icmp_seq=1 ttl=52 time=174.921 ms
+</code></pre>
+<br/>
+<p>El DNS nos ha dicho que la IP de <br/><a href="http://www.wikipedia.org">www.wikipedia.org</a> es 208.80.154.224</p>
 </section>
 </section>
 
