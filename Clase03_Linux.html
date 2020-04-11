@@ -163,14 +163,12 @@
 <section>
 <h3>Distribuciones</h3>
 <ul>
-<li><a href="http://www.redhat.com">RedHat</a> (y sus herederos como <a href="http://www.fedoraproject.org">Fedora</a> y <a href="http://www.centos.org">CentOS</a>) usan <a href="http://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified">YUM</a>/RPM</li>
 <li><a href="http://www.debian.org">Debian</a> (y sus herederos como <a href="http://www.ubuntu.com">Ubuntu</a> y <a href="http://www.linuxmint.com">Mint</a>) usan deb/<a href="http://en.wikipedia.org/wiki/Dpkg">dpkg</a>/apt-get/synaptic</li>
-<li><a href="https://www.archlinux.org/">ArchLinux</a>: Apuntada a desarrolladores (usa pacman)</li>
-<li><a href="http://www.opensuse.org">OpenSuse</a> usa <a href="https://en.opensuse.org/Package_management">YaST</a> (SuSE Linux es de Novell desde el 2003)</li>
+<li><a href="http://www.redhat.com">RedHat</a> (y sus herederos como <a href="http://www.fedoraproject.org">Fedora</a> y <a href="http://www.centos.org">CentOS</a>) usan <a href="http://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified">YUM</a>/RPM</li>
 <li><a href="http://www.slackware.com">Slackware</a>: Una de las distribuciones originales</li>
-<li><a href="https://www.kali.org">Kali</a>: Distribución específica para hacer análisis de seguridad</li>
-<li>Otras (pequeñas): <a href="http://www.damnsmalllinux.org">Damn Small Linux</a> & <a href="http://puppylinux.org/">Puppy Linux</a></li>
-<li>De recuperacion: <a href="http://trinityhome.org/">Trinity Rescue Kit</a> & <a href="http://www.hirensbootcd.org/download/">Hiren's BootCD</a></li>
+<li><a href="http://www.opensuse.org">OpenSuse</a> usa <a href="https://en.opensuse.org/Package_management">YaST</a> (SuSE Linux es de Novell desde el 2003)</li>
+<li>Focos especificos: <span style="font-size: 80%;"><a href="https://www.kali.org">Kali</a> (seguridad), <a href="http://trinityhome.org/">Trinity Rescue Kit</a> (recuperación), <a href="http://www.hirensbootcd.org/download/">Hiren's BootCD</a> (recuperación), <a href="http://www.damnsmalllinux.org">Damn Small Linux</a> (pequeña) y <a href="http://puppylinux.org/">Puppy Linux</a> (pequeña).</span></li>
+<li>Para avanzados: <span style="font-size: 80%;"><a href="https://www.gentoo.org/get-started/">Gentoo</a> (built from source code), <a href="https://www.archlinux.org/">ArchLinux</a> (configurando por mí mismo) y <a href="https://www.yoctoproject.org/">Yocto</a> (para sistemas embebidos).</span></li>
 <li>Related Links:
 	<ul>
 		<li><a href="http://www.freebsd.org">FreeBSD</a>  &&  <a href="http://www.linuxiso.org">LinuxISO</a></li>
@@ -583,9 +581,10 @@
 	<li>GPL / Open Source
 		<ul>
 			<li>CodeBlocks (GCC + Entorno de desarrollo Win/Lin/Mac cross-platform usando librerías wxWidget) </li>
-			<li>wxDev-C++ (GCC + Entorno de desarrollo para Windows -solamente- usando librerías del proyecto wxWidgets) </li>
+			<li><a href="http://wxdsgn.sourceforge.net/">wxDev-C++</a> (GCC + Entorno de desarrollo para Windows -solamente- usando librerías del proyecto wxWidgets) </li>
 		</ul>
 	</li>
+	<li>MS Visual Studio Code: <a href="https://code.visualstudio.com/">code.visualstudio.com</a> (c/ <a href="https://code.visualstudio.com/docs/cpp/config-mingw#_prerequisites">MinGW</a>)</li>
 	<li>Propietarios/Pagos:
 		<ul>
 			<li>Microsoft Visual Studio (actualmente .NET)</li>
@@ -596,11 +595,9 @@
 </ul>
 </section><section>
 <h2>El GCC</h2>
+<br/>
 <ul>
-<li>GNU Compiler Collection (GCC) <ul>
-<li>http://gcc.gnu.org/ </li>
-</ul>
-</li>
+<li>GNU Compiler Collection (GCC): <a href="http://gcc.gnu.org/">gcc.gnu.org</a></li>
 <li>Lenguajes: <ul>
 <li>C, C++ &amp; Objective-C </li>
 <li>Fortran &amp; Java </li>
@@ -612,6 +609,8 @@
 </ul>
 </li>
 </ul>
+<br/><br/><br/>
+<p style="font-size: 75%;">Nota: Otros compiladores nuevos pero <br/>ni remotamente tan populares son <a href="https://llvm.org/">LLVM</a> y <a href="http://oldhome.schmorp.de/egcs.html">EGCS</a></p>
 </section>
 
 <section>
@@ -707,6 +706,9 @@ run
 <p style="font-family:monospace; color: #4FC7CF;">man -a intro</p>
 <p style="text-align: left;">Vemos todas las entradas de una sección:</p>
 <p style="font-family:monospace; color: #4FC7CF;">man -k . -s &lt;seccion&gt; | less -S</p>
+<br/>
+<p style="text-align: left; font-size: 70%;">Usando man online: <a href="https://linux.die.net/">linux.die.net</a> y un ejemplo de <a href="https://linux.die.net/man/3/printf">man 3 printf</a>.</p>
+<p style="text-align: left; font-size: 70%;">Script en bash para convertir el man a HTML: <a href="./files/clase03/man2html.sh">man2html.sh</a></p>
 </section>
 
 <section>
@@ -762,6 +764,16 @@ run
 <li><span style="color: #4FC7CF;">grep</span> - Busca texto en un archivo</li>
 <li><span style="color: #4FC7CF;">tail,head</span> - Muestra las últimas/primeras 10 filas de un archivo</li>
 </ul>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Manejo de usuarios</h2>
+<br/>
+<p>El usuario root...</p>
+<br/>
+<p>¿Por que usar Ubuntu nos facilita sudo?</p>
 </section>
 </section>
 

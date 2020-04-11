@@ -103,6 +103,21 @@
 </section>
 
 <section>
+	<h3>Tamaño de la memoria (en Bytes)</h3>
+	<br/><br/>
+	<ul>
+		<li>KiloByte = 1KB = 1024 bytes (10<sup>3</sup>)</li>
+		<li>MegaByte = 1MB = 1024 KB (10<sup>6</sup>)</li>
+		<li>GigaByte = 1GB = 1024 MB (10<sup>9</sup>)</li>
+		<li>TeraByte = 1TB = 1024 GB (10<sup>12</sup>)</li>
+		<li>PetaByte = 1PB = 1024 TB (10<sup>15</sup>)</li>
+		<li>y siguen <a href="https://en.wikipedia.org/wiki/Unit_prefix">Exa, Zetta y Yotta</a>.</li>
+	</ul>
+	<br/><br/><br/>
+	<p style="font-size: 70%;">Nota: Acá hablamos de Bytes, pero también estas unidades pueden ser en bits. Normalmente se usa la "B" mayúscula para bytes y la "b" minúscula para bits. Por ejemplo cuando se habla de velocidad de transmisión se suelen usar MegaBits.</p>
+</section>
+
+<section>
 	<h3>Representación / Interpretación</h3>
 	<p>hexa, binario, ASCII</p>
 	<br/>
@@ -276,6 +291,8 @@ $ ./conv
 	<br/><a href="./files/clase01n/Operadores_Binarios.png">
 		<img src="files/clase01n/Operadores_Binarios.png"/>
 	</a>
+	<br/><br/><br/>
+	<p style="font-size: 70%;">Nota: Al símbolo &tilde; se lo denomina <a href="https://es.wikipedia.org/wiki/Virgulilla#Inform%C3%A1tica">Virgulilla</a> o tilde (del ingles). Para el profe es y será un ñuflo.</p>
 </section>
 
 <section>
@@ -422,6 +439,35 @@ $ ./conv
 	<h1>IEEE 754</h1>
 	<br/>
 	<h3>(informativo)</h3>
+</section>
+
+<section>
+	<h2>Números con coma...</h2>
+	<br/>
+	<ul>
+		<li><a href="https://es.wikipedia.org/wiki/N%C3%BAmero_racional">Racionales</a>: <span style="text-align: left; font-size: 75%;">Números que pueden representarse como el cociente de dos números enteros (es decir una fracción común)</span><ul>
+			<li>3/4 = 0,75</li>
+			<li>8/5 = 1,6</li>
+		</ul></li>
+		<li><a href="https://es.wikipedia.org/wiki/N%C3%BAmero_decimal_peri%C3%B3dico">Periódicos</a>: <span style="text-align: left; font-size: 75%;">Es un número racional con parte fraccionaria caracterizado por tener un período (cifras que se repiten infinitamente) en su expansión decimal.</span><ul>
+			<li>2/3 = 0,6666666...</li>
+			<li>1/9 = 0,1111111...</li>
+		</ul></li>
+		<li><a href="https://es.wikipedia.org/wiki/N%C3%BAmero_irracional">Irracionales</a>: <span style="text-align: left; font-size: 75%;">Es un número que no puede ser expresado como una fracción.</span><ul>
+			<li>Pi = 3,14159...</li>
+			<li>e = 2,7182...</li>
+		</ul></li>
+	</ul>
+</section>
+
+<section>
+	<h2>Cáculos en los microcontroladores</h2>
+	<br/>
+	<ul>
+		<li>Enteros: Se realizan en la <a href="https://en.wikipedia.org/wiki/Intel_8086">unidad aritmético lógica (ej. 8086)</a> que permite sumar, restar, multiplicar, dividir, realizar operaciones binarias, etc... (el acrónimo ALU viene del inglés: <a href="https://es.wikipedia.org/wiki/Unidad_aritm%C3%A9tica_l%C3%B3gica">Aritmetic Logic Unit</a>).</li>
+		<br/>
+		<li>Fraccionarias: Se pueden realizar por software (lento) o utilizar una <a href="https://en.wikipedia.org/wiki/Intel_8087">unidad funto flotante (ej. 8087)</a> y permite realizar las cuentas matemáticas que hace una calculadora (también denominada FPU del inglés <a href="https://es.wikipedia.org/wiki/Unidad_de_coma_flotante">Floting Point Unit</a>).</li>
+	</ul>
 </section>
 
 <section>
