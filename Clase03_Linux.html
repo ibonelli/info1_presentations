@@ -563,11 +563,11 @@
 <li>GPL / Open Source<ul>
 <li>Geany (GCC, muy pequeño y liviano) </li>
 <li>Eclipse (Inicialmente JAVA. Muy grande y pensado como un Framework. Mucho otros IDE. Un ejemplo es el compilador de Code Red Tech usado en informática 2 con Kit ARM)</li>
-	<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+	<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 		<li>apt-get install eclipse-cdt</li>
 	</ul>
 <li>QT Creator (GCC + librerias QT, también usado en informática 2 para desarrollos en entornos gráficos) </li>
-	<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+	<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 		<li>apt-get install qtcreator</li>
 	</ul>
 </ul>
@@ -619,32 +619,32 @@
 	<li>Compilando
 		<ul>
 			<li>compilo directamente a binario:
-				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 					<li>gcc -o hola hola.c</li>
 				</ul>
 			</li>
 			<li>Compilador para mostrar errores:
-				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 					<li>gcc -Wall -o hola hola.c</li>
 				</ul>
 			</li>
 			<li>Para agregar información de debugging:
-				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 					<li>gcc -Wall -g -o hola hola.c</li>
 				</ul>
 			</li>
 			<li>Solo compilo (no linkeo):
-				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 					<li>gcc -c -o hola.o hola.c</li>
 				</ul>
 			</li>
 			<li>Compilo con información adicional:
-				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 					<li>gcc -c -g -o hola.o hola.c</li>
 				</ul>
 			</li>
 			<li>Para ver el código assembler:
-				<ul style="font-size: 85%; font-family: monospace; color: #4FC7CF;">
+				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
 					<li>gcc -S hola.c -o -</li>
 				</ul>
 			</li>
@@ -659,19 +659,19 @@
 <ul>
 	<li>Utilidades
 		<ul>
-			<li><span style="color: #4FC7CF;">file hola.o</span> - información sobre el programa objeto</li>
-			<li><span style="color: #4FC7CF;">objdump -htr hola.o</span> - información detallada</li>
+			<li><span style="color: #69C198;">file hola.o</span> - información sobre el programa objeto</li>
+			<li><span style="color: #69C198;">objdump -htr hola.o</span> - información detallada</li>
 		</ul>
 	</li>
 	<li>Enlace o linkeo
 		<ul>
-			<li><span style="color: #4FC7CF;">ld -o hola hola.o -lc</span> - enlace de un objeto (ERROR PROBAR!!)</li>
-			<li><span style="color: #4FC7CF;">gcc -g -o hola hola.o -v</span> - información adicional sobre las librerías usadas</li>
+			<li><span style="color: #69C198;">ld -o hola hola.o -lc</span> - enlace de un objeto (ERROR...)</li>
+			<li><span style="color: #69C198;">gcc -g -o hola hola.o -v</span> - información adicional sobre las librerías usadas</li>
 		</ul>
 	</li>
 	<li>Debugging
 		<ul>
-			<li><span style="color: #4FC7CF;">gdb -tui</span> - GNU debugger
+			<li><span style="color: #69C198;">gdb -tui</span> - GNU debugger
 				<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
 file hola
 break main
@@ -694,21 +694,22 @@ run
 <section>
 <h3>Comandos mas importante : man</h3>
 <br/>
-<p style="font-family:monospace; color: #4FC7CF; text-align: left;">man &lt;seccion&gt; intro</p>
-<ul>
+<p style="font-family:monospace; color: #69C198; text-align: left;">man &lt;seccion&gt; intro</p>
+<ul style="text-align: left; font-size: 75%;">
 	<li>1 - Introduction to user commands</li>
 	<li>2 - introduction to system calls</li>
-	<li>3 - introduction to library functions</li>
+	<li><b>3 - introduction to library functions</b></li>
 	<li>8 - introduction to administration and privileged commands</li>
 </ul>
-<br/><br/>
-<p style="text-align: left;">Listamos todos las intros:</p>
-<p style="font-family:monospace; color: #4FC7CF;">man -a intro</p>
+<br/>
+<p style="text-align: left;">Listamos todos las intros: <span style="font-family:monospace; color:#69C198; font-size:90%;">man -a intro</span></p>
 <p style="text-align: left;">Vemos todas las entradas de una sección:</p>
-<p style="font-family:monospace; color: #4FC7CF;">man -k . -s &lt;seccion&gt; | less -S</p>
+<p style="font-family:monospace; color: #69C198;">man -k . -s &lt;seccion&gt; | less -S</p>
 <br/>
 <p style="text-align: left; font-size: 70%;">Usando man online: <a href="https://linux.die.net/">linux.die.net</a> y un ejemplo de <a href="https://linux.die.net/man/3/printf">man 3 printf</a>.</p>
 <p style="text-align: left; font-size: 70%;">Script en bash para convertir el man a HTML: <a href="./files/clase03/man2html.sh">man2html.sh</a></p>
+<br/>
+<p style="text-align: left; font-size: 70%;">Nota: Los comandos como "cd" son parte del bash y su ayuda se invoca con: <span style="font-family:monospace; color:#69C198; font-size:90%;">help cd</span></p>
 </section>
 
 <section>
@@ -720,49 +721,49 @@ run
 <li>Scripting </li>
 </ul>
 </li>
-<li><span style="color: #4FC7CF;">man</span> - Manual de los distintos programas </li>
-<li><span style="color: #4FC7CF;">ls</span> (dir) - Nos lista los contenidos de los directorios. <ul>
+<li><span style="color: #69C198;">man</span> - Manual de los distintos programas </li>
+<li><span style="color: #69C198;">ls</span> (dir) - Nos lista los contenidos de los directorios. <ul>
 <li>Algunas opciones útiles: ls -l, ls -a y ls -la </li>
 </ul>
 </li>
-<li><span style="color: #4FC7CF;">cd</span> (cd) - Cambia de directorio. Ej: cd /home </li>
-<li><span style="color: #4FC7CF;">cp</span> (copy)  - Copia un archivo de un directorio a otro </li>
-<li><span style="color: #4FC7CF;">mkdir</span> (md) - crea un nuevo subdirectorio </li>
-<li><span style="color: #4FC7CF;">rm</span> (del) - Borra un archivo o directorio </li>
+<li><span style="color: #69C198;">cd</span> (cd) - Cambia de directorio. Ej: cd /home </li>
+<li><span style="color: #69C198;">cp</span> (copy)  - Copia un archivo de un directorio a otro </li>
+<li><span style="color: #69C198;">mkdir</span> (md) - crea un nuevo subdirectorio </li>
+<li><span style="color: #69C198;">rm</span> (del) - Borra un archivo o directorio </li>
 </ul>
 </section>
 
 <section>
 <h3>Comandos mas comunes (II)</h3>
 <ul>
-	<li><span style="color: #4FC7CF;">mv</span> (ren/move) - Con mv se pueden hacer dos cosas: Renombrar o mover un archivo. </li>
-	<li><span style="color: #4FC7CF;">rmdir</span> (deltree) - Remueve un directorio </li>
-	<li><span style="color: #4FC7CF;">pwd</span> - indica el directorio en el que estás parado </li>
-	<li><span style="color: #4FC7CF;">clear</span> (cls) - Borra la pantalla </li>
-	<li><span style="color: #4FC7CF;">find</span> - Busca un archivo de acuerdo a un patrón.<ul>
-		<li>Ej: <span style="color: #4FC7CF; font-size: 85%; font-family: monospace;">find / -name squid</span><ul>
+	<li><span style="color: #69C198;">mv</span> (ren/move) - Con mv se pueden hacer dos cosas: Renombrar o mover un archivo. </li>
+	<li><span style="color: #69C198;">rmdir</span> (deltree) - Remueve un directorio </li>
+	<li><span style="color: #69C198;">pwd</span> - indica el directorio en el que estás parado </li>
+	<li><span style="color: #69C198;">clear</span> (cls) - Borra la pantalla </li>
+	<li><span style="color: #69C198;">find</span> - Busca un archivo de acuerdo a un patrón.<ul>
+		<li>Ej: <span style="color: #69C198; font-size: 85%; font-family: monospace;">find / -name squid</span><ul>
 			<li>busca el archivo squid en todo el sistema</li></ul></li>
 		</ul>
 	</li>
-	<li><span style="color: #4FC7CF;">locate</span> - Parecido al find pero trabaja con una base<ul>
-		<li>Para actualizar esta base se utiliza <span style="color: #4FC7CF;">updatedb</span> (como root)</li>
+	<li><span style="color: #69C198;">locate</span> - Parecido al find pero trabaja con una base<ul>
+		<li>Para actualizar esta base se utiliza <span style="color: #69C198;">updatedb</span> (como root)</li>
 		</ul>
 	</li>
-	<li><span style="color: #4FC7CF;">date</span> - Muestra la hora y el día</li>
+	<li><span style="color: #69C198;">date</span> - Muestra la hora y el día</li>
 </ul>
 </section>
 
 <section>
 <h3>Comandos mas comunes (III)</h3>
 <ul>
-<li><span style="color: #4FC7CF;">df</span> - Muestra cuánto espacio ocupado y libre hay en las particiones</li>
-<li><span style="color: #4FC7CF;">du</span> - Muestra cuánto espacio ocupan los archivos de un determinado directorio</li>
-<li><span style="color: #4FC7CF;">free</span> - Muestra recursos libres de sistema</li>
-<li><span style="color: #4FC7CF;">ps</span> - process status: provee información acerca de los jobs/procesos que están corriendo</li>
-<li><span style="color: #4FC7CF;">cat, more</span> (type) - Vuelca el contenido de un archivo por consola</li>
-<li><span style="color: #4FC7CF;">less</span> (more) - Permite mostrar el contenido de un archivo y recorrerlo</li>
-<li><span style="color: #4FC7CF;">grep</span> - Busca texto en un archivo</li>
-<li><span style="color: #4FC7CF;">tail,head</span> - Muestra las últimas/primeras 10 filas de un archivo</li>
+<li><span style="color: #69C198;">df</span> - Muestra cuánto espacio ocupado y libre hay en las particiones</li>
+<li><span style="color: #69C198;">du</span> - Muestra cuánto espacio ocupan los archivos de un determinado directorio</li>
+<li><span style="color: #69C198;">free</span> - Muestra recursos libres de sistema</li>
+<li><span style="color: #69C198;">ps</span> - process status: provee información acerca de los jobs/procesos que están corriendo</li>
+<li><span style="color: #69C198;">cat, more</span> (type) - Vuelca el contenido de un archivo por consola</li>
+<li><span style="color: #69C198;">less</span> (more) - Permite mostrar el contenido de un archivo y recorrerlo</li>
+<li><span style="color: #69C198;">grep</span> - Busca texto en un archivo</li>
+<li><span style="color: #69C198;">tail,head</span> - Muestra las últimas/primeras 10 filas de un archivo</li>
 </ul>
 </section>
 </section>
