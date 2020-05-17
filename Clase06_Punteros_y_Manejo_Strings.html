@@ -122,9 +122,9 @@ pc = pv = NULL;
 </li>
 <li>No se puede desreferenciar, por que <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">*pc</span> no existe</li>
 </ul>
-<br/>
-<br/>
-<p style="font-style: italic;">Nota: En realidad la dirección de memoria <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">0x0</span> existe, <br/>pero siempre esta reservada para fines específicos <br/>de la arquitectura. Por esto el lenguaje C lo considera  <br/>como un puntero especial a nada.</p>
+<br/><br/><br/>
+<p style="font-style: italic; font-size: 85%;">Nota1: Es importante inicializar los punteros para evitar los "punteros descontrolados". <span style="color: red;">¡Las variables en C no se inicializan solas!</span></p>
+<p style="font-style: italic; font-size: 85%;">Nota2: En realidad la dirección de memoria <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">0x0</span> existe, pero siempre esta reservada para fines específicos de la arquitectura. Por esto el lenguaje C lo considera como un puntero especial a nada.</p>
 </section>
 
 <section>
@@ -148,6 +148,31 @@ pc = pv = NULL;
 </section>
 
 <section>
+<section>
+<h2>Imprimiendo punteros</h2>
+<br/>
+<pre><code data-trim class="cpp">
+#include &lt;stdio.h&gt;
+// Headers de C99 para enteros
+#include &lt;inttypes.h&gt;
+#include &lt;stdint.h&gt;
+
+void main(void) {
+	char c='a';
+	char *pc=&c;
+
+	// Forma normal (no imprime los ceros del principio)
+	printf("Address: %p\n",pc);
+	printf("Address: %#lx\n",pc);
+
+	// Usando tipos enteros de ancho fijo (C99)
+	printf("Address: 0x%016" PRIxPTR "\n", (uintptr_t)pc);
+}
+</code></pre>
+<br/>
+<p style="font-size: 75%;">Nota: En <a href="https://es.cppreference.com/w/c/types/integer">cppreference.com</a> se puede leer más sobre <br/>tipos de enteros de ancho fijo (C99)</p>
+</section>
+
 <section>
 <h2>Conversiones de tipos (casting)</h2>
 <ul><li>Para los ejemplos:</li>
@@ -216,17 +241,48 @@ pc = (char *) pi;
 </section>
 
 <section>
-<h1>El operador sizeof</h1>
+<h2>El operador sizeof</h2>
+<br/>
+<ul>
+<li>sizeof es un operador de C (como ! o ~) que retorna un "constant int" que nos dice el tamaño de cualquier dato.</li>
+<br/>
+<li>El elemento a examinar puede ser un dato, un porción de un dato o un tipo de dato.</li>
+<br/>
+<li>sizeof retorna el tamaño del elemento en chars (bytes/size_t)</li>
+</ul>
+</section>
+
+<section>
+<h2>Tamaño de las variables puntero</h2>
+<br/>
+<ul>
+<li>El tamaño de las variables puntero es siempre el mismo. No importa si apuntan a un char, un int, float, etc...</li>
+<li>Si estamos en una arquitectura de:
+	<ul>
+		<li>32 bits la variable puntero tendrá 4 bytes.</li>
+		<li>64 bits la variable puntero tendrá 8 bytes.</li>
+	</ul>
+</li>
+</ul>
+<br/><br/>
+<pre style="width: 800px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 800px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+void main(void) {
+char *pc=NULL;
+int *pi=NULL;
+printf("Mi puntero a char ocupa: %d bytes\n",
+                                (int)(sizeof(pc)));
+printf("Mi puntero a int ocupa: %d bytes\n",
+                                (int)(sizeof(pi)));
+}
+</code></pre>
 </section>
 
 <section>
 <h2>sizeof</h2>
-<ul>
-<li>sizeof es un operador de C (como ! o ~) que retorna un "constant int" que nos dice el tamaño de cualquier dato.</li>
-<li>El elemento a examinar puede ser un dato, un porción de un dato o un tipo de dato.</li>
-<li>sizeof retorna el tamaño del elemento en chars (bytes/size_t)</li>
-<li>sizeof también puede averiguar el tamaño de un array:
 <br/>
+<p>sizeof también puede averiguar el tamaño de un array:</p>
 <pre style="width: 800px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 800px;" class="cpp">
 #include &lt;stdio.h&gt;
 
@@ -239,8 +295,6 @@ printf("Mi \"vector\" tiene %d posiciones\n",
                  (int)(sizeof(vector)/sizeof(int)));
 }
 </code></pre>
-</li>
-</ul>
 </section>
 
 <section>
@@ -258,8 +312,8 @@ char *ptr = string;
 	</li>
 	<li>sizeof (ptr)
 		<ul>
-			<li style="font-size: 70%; font-style: italic;">Si estamos en una máquina con punteros de 4 bytes...</li>
-			<li>Devuelve: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">4</span></li>
+			<p style="font-size: 70%; font-style: italic;">Si estamos en una máquina de 64bits (con punteros de 8 bytes)</p>
+			<li>Devuelve: <span style="font-family: monospace; font-size: 85%; color: #4FC7CF;">8</span></li>
 		</ul>
 	</li>
 </ul>
