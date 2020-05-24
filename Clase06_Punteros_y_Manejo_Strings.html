@@ -565,6 +565,14 @@ void main(void) {
 
 <section>
 <section>
+	<h3>¿Unicode en C?</h3>
+	<br/>
+	<ul>
+		<li><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU Unicode (libunistring)</a></li>
+	</ul>
+</section>
+
+<section>
 <h3>Código</h3>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
 	<ul>
@@ -672,31 +680,6 @@ char *pregunta(char texto[], char opc1[], char opc2[])
 </section>
 
 <section>
-<section>
-	<h2>Apendice</h2>
-	<h2>Problemas con scanf()</h2>
-</section>
-<section>
-<h2>Scanf() y el buffer stdin:</h2>
-<ul>
-	<li><span style="font-family: monospace;">scanf("%c"); scanf("%s");</span></li>
-	<li>¿Como evitamos el buffer?</li>
-	<ul style="font-size: 80%;">
-		<li>fflush(stdin); /* no suele andar */</li>
-		<li>setbuf(stdin,NULL); /* Anda mejor */</li>
-		<li>scanf(" %c"); /* mejor para Linux */</li>
-		<li>scanf("%3.2f"); scanf("%.2f);</li>
-	</ul>
-	<li>O usamos funciones especificas para string y chars de stdio.h:</li>
-	<ul style="font-size: 80%;">
-		<li>int getchar(void);</li>
-		<li>char *gets(char *s);</li>
-		<li>int putchar(int c);</li>
-		<li>int puts(const char *s);</li>
-	</ul>
-	<li><a href="files/clase06/fflush/fflush.c">Ver código de fflush()/setbuf()</a></li>
-</ul>
-</section>
 <section>
 <h2>Mas sobre ncurses (y kbhit):</h2>
 <ul>

@@ -1,0 +1,22 @@
+gcc compila tanto C como C++. Por lo tanto, anda... Pero no es C.
+	De: https://en.cppreference.com/w/c/language/array_initialization
+	Y: https://stackoverflow.com/questions/201101/how-to-initialize-all-members-of-an-array-to-the-same-value
+
+No falla, solo restringe a cierta sintaxis:
+	gcc -ansi -std=c89 -o arreglo_init arreglo_init.c
+
+Falla con sintaxis de C++:
+	gcc -Wall -pedantic-errors arreglo_init.c
+
+Otros modificadores:
+
+-ansi
+	Modo ANSI/ISO C (no usa cosas especificas de GNU)
+-std=c89
+	Pueden configurarse los distintos estándar de C
+-pedantic
+	Todas las advertencias de ANSI/ISO C
+-pedantic-errors
+	Lo mismo pero toma las advertencias como errores
+-traditional
+	Apoyo de sintaxis de C de Kernighan & Ritchie 

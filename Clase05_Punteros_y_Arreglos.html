@@ -477,13 +477,33 @@ int A[100] = {25, 5, 100, 25, 5}
 <br/>
 <li>Declaración e inicialización de un arreglo de 10 caracteres: 
 <pre style="width: 1050px;"><code data-trim style="font-size: 28px; padding: 15px; width: 1050px;" class="cpp">
-char A[10] = {'a', 'z', 'E', 'e', 65, '\65', '@', 'U', '*', '\n'}
+char A[10] = {'a', 'z', 'E', 'e', 65, '\x41', '@', 'U', '*', '\n'}
 </code></pre></li>
 <br/>
 <li>Determinación del tamaño de un arreglo en forma implícita: 
 <pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
 int A[] = {5, 10, 2, 15, 20}
 </code></pre></li>
+</ul>
+</section>
+
+<section>
+<h2>Caracteres de escape en C</h2>
+<br/>
+<ul>
+	<li>La barra (\) es un <a href="https://en.wikipedia.org/wiki/Escape_sequences_in_C">caracter de escape en C</a>.
+		<ul>
+			<li>'\n' es un salto de linea</li>
+			<li>'\t' es una tabulación</li>
+		</ul>
+	</li>
+	<br/>
+	<li>También se puede hacer (<a href="files/clase05/char_escape.c">ver ejemplo</a>):
+		<ul>
+			<li>'\nnn' donde nnn es interpretado como el valor octal en la tabla ASCII</li>
+			<li>'\xhh' donde hh es interpretado como el valor hexadecimal en la tabla ASCII</li>
+		</ul>
+	</li>
 </ul>
 </section>
 
@@ -567,6 +587,34 @@ float promedioArray (int D[ ], int num_elementos) {
 		</ul>
 	</li>
 </ul>
+<br/><br/>
+<p>También pueden ver <a href="files/clase05/ejercicios_arreglos-vectores.txt">un ejemplo de arreglos/vectores</a> y notas.</p>
+</section>
+
+<section>
+	<h2>Inicialización en C++ de arrays</h2>
+	<pre><code data-trim style="font-size: 26px; padding: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main(void){
+	int vec[3]={};
+}
+	</code></pre>
+	<p>Este código es invalido en C, pero valido en C++.</p>
+	<p>En C++ inicializa el vector con ceros.</p>
+	<br/><br/>
+	<p>Dependiendo de los modificadores que le pasamos al compilador, vemos o no el error.</p>
+	<pre><code data-trim style="font-size: 26px; padding: 20px;" class="bash">
+$ gcc -pedantic -o prueba arreglo_con_llaves.c
+	</code></pre>
+</section>
+
+<section>
+	<h2>Finales Informática 1</h2>
+	<br/><br/>
+	<p>Código que compila en gcc pero es invalido en C, equivale a un aplazo en el final. Se lo considera un error de concepto.</p>
+	<br/><br/>
+	<p>Nota: En el archivo <a href="./files/clase05/modificadores_gcc.txt">modificadores_gcc.txt</a> se pueden ver modificadores de gcc para ver/evitar estos tipo de confusiones.</p>
 </section>
 </section>
 
@@ -607,6 +655,20 @@ void main(void) {
 </section>
 
 <section>
+	<p>Recordemos la diferencia entre representación e interpretación...</p>
+	<ul class="col" style="width: 350px;">
+		<a href="./files/clase01n/duck-rabbit.jpg">
+			<img src="files/clase01n/duck-rabbit.jpg"/>
+		</a>
+	</ul>
+	<ul class="col" style="width: 350px;">
+		<a href="./files/clase01n/duck-rabbit2.jpg">
+			<img src="files/clase01n/duck-rabbit2.jpg"/>
+		</a>
+	</ul>
+</section>
+
+<section>
 <h3>Programa que imprime la tabla ASCII</h3>
 <pre style="width: 1120px; max-height: 500px;"><code data-trim style="font-size: 22px; padding: 20px; width: 1120px; max-height: 500px;" class="cpp">
 #include &lt;stdio.h&gt;
@@ -633,14 +695,6 @@ void main(void) {
 </section>
 
 <section>
-	<h3>¿Unicode en C?</h3>
-	<br/>
-	<ul>
-		<li><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU Unicode (libunistring)</a></li>
-	</ul>
-</section>
-
-<section>
 <h2>¿Qué es un string? (I)</h2>
 <p>En muchos lenguajes existe el tipo de dato string, <br/>pero C en un intento de simplificación (y refuerzo <br/>del concepto de punteros) no lo tiene.</li>
 <br/><br/><br/>
@@ -657,25 +711,45 @@ void main(void) {
 </section>
 
 <section>
-<h2>Inicialización de un string</h2>
+<h2>Inicialización de un string (I)</h2>
 <ul>
-<li>Formas de declarar strings:
-<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
+	<li>Formas de declarar strings:
+		<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
 char s[5] = "Hola";
 char s[15] = "Hola";
-char s[5] = {'H', 'o', 'l', 'a', '\0'};
-char s[5] = {'H', 'o', 'l', 'a', 0};
-char *pS = "Hola";
-/* *pS[i] no se puede escribir mas tarde (const string) */
-</code></pre>
-</li>
+char s[5] = {'H', 'o', 'l', 'a', NULL};
+		</code></pre>
+	</li>
+	<br/>
+	<li style="font-size: 75%;">Notas:
+		<ul>
+			<li>El fin de un string se marca con NULL, que equivale 0 decimal/binario, o '\0' que es el ASCII cero.</li>
+			<li>Al poner el texto entre comillas dobles el compilador crea el string</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Inicialización de un string (II)</h2>
 <br/>
-<li>Notas:<ul>
-<li>El fin de un string se marca con un carácter NULL (ASCII = 0)</li>
-<li>Al poner el texto entre comillas dobles el compilador crea el string</li>
-</ul>
-</li>
-</ul>
+<p>Otra formas de declarar strings:</p>
+<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
+char *pS = "Hola";
+</code></pre>
+<p style="font-size: 75%;">Esto falla por que en pS[i] no se puede escribir mas tarde <br/>ya que *pS apunta a un: <span style="font-family: monospace;">const string</span></p>
+<br/>
+<pre style="width: 850px;"><code data-trim style="padding: 20px; width: 850px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	char *pS = "ABCD";
+	printf("Ingrese el string a grabar: ");
+	scanf("%s", pS);
+}
+</code></pre>
+<br/>
+<p>Resultado: <span style="font-family: monospace;">Segmentation fault</span></p>
 </section>
 
 <section>
@@ -720,6 +794,77 @@ printf("%s\n", str);
 </code></pre>
 </ul>
 </section>
+</section>
+
+<section>
+<section>
+	<h3>Mejor usar fgets() [I]</h3>
+	<p>scanf() para strings no tiene proteccion por tamaño...</p>
+<pre><code data-trim style="padding: 15px;" class="cpp">
+#define N 5
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	char str[N];
+	scanf("%s", &str[0]);
+		// Tambien pueden &str[0] hacerlo str
+	printf("%s\n", str);
+}
+</code></pre>
+</section>
+
+<section>
+	<h3>Mejor usar fgets() [II]</h3>
+	<p>El teclado es stdin, y la pantalla es stdout...</p>
+<pre><code data-trim style="padding: 15px;" class="cpp">
+#define N 5
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	char *pS = "ABCD";
+		// Protegido por tamaño del string
+	fgets(pS, N, stdin);
+	printf("%s\n", pS);
+}
+</code></pre>
+</section>
+
+<section>
+	<h3>Problemas con scanf() y los strings (I)</h3>
+	<h4>Scanf() y el buffer stdin:</h4>
+	<br/>
+	<ul>
+		<li><span style="font-family: monospace;">scanf("%c");</span></li>
+		<li><span style="font-family: monospace;">scanf("%s");</span></li>
+		<br/>
+		<li>¿Como evitamos el buffer?</li>
+		<ul style="font-size: 80%;">
+			<li>fflush(stdin); /* no suele andar */</li>
+			<li>setbuf(stdin,NULL); /* Anda mejor */</li>
+			<li>scanf(" %c"); /* mejor para Linux */</li>
+			<li>scanf("%3.2f"); scanf("%.2f);</li>
+		</ul>
+	</ul>
+</section>
+
+<section>
+	<h3>Problemas con scanf() y los strings (II)</h3>
+	<h4>Scanf() y el buffer stdin:</h4>
+	<br/>
+	<ul>
+		<li>También podemos usar funciones especificas para string y chars de stdio.h:</li>
+		<ul style="font-size: 80%;">
+			<li>int getchar(void);</li>
+			<li>char *gets(char *s);</li>
+			<li>int putchar(int c);</li>
+			<li>int puts(const char *s);</li>
+		</ul>
+	</ul>
+	<br/><br/><br/>
+	<p>Nota: <a href="files/clase06/fflush/fflush.c">Ver código de fflush()/setbuf()</a></p>
+</section>
+</section>
+
 </section>
 
 			</div>
