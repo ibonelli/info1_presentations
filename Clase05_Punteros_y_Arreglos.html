@@ -821,10 +821,10 @@ int main(void) {
 #include &lt;stdio.h&gt;
 
 int main(void) {
-	char *pS = "ABCD";
+	char str[N] = "ABCD";
 		// Protegido por tamaño del string
-	fgets(pS, N, stdin);
-	printf("%s\n", pS);
+	fgets(str, N, stdin);
+	printf("%s\n", str);
 }
 </code></pre>
 </section>
