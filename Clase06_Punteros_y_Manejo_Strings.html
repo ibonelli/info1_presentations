@@ -478,12 +478,13 @@ int main(void) {
 </code></pre>
 <br/>
 <p style="font-size: 85%; font-style: italic;"><span style="color: #4FC7CF;">Nota:</span> Esta función siempre asume que en destino hay suficiente lugar para copiar todos los elementos de origen. Si este no fuera el caso el programa fallará!</p>
+<p style="font-size: 75%; font-style: italic;">Bajarse <a href="files/clase06/str_copy_errors.c">ejemplo extendido que muestra el error de no usar strcpy()</a>.</p>
 </section>
 
 <section>
 <h3>char *strcat(char *dest, const char *src);</h3>
 <br/>
-<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+<pre><code data-trim style="font-size: 28px; margin-top: 20px;" class="cpp">
 #include &lt;string.h&gt;
 #include &lt;stdio.h&gt;
 
@@ -518,7 +519,7 @@ char *strncat(char *dest, const char *src, size_t n);
 <section>
 <h3>int strcmp(const char *s1, const char *s2);</h3>
 <h3>int strcmpi(const char *s1, const char *s2);</h3>
-<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;string.h&gt;
 #include &lt;stdio.h&gt;
 
@@ -537,11 +538,14 @@ void main(void) {
       printf("buffer 2 es menor que buffer 3\n");
 }
 </code></pre>
+<br/>
+<p style="font-size: 75%; font-style: italic;">Bajarse <a href="files/clase06/strcmp_extendido.c">ejemplo extendido que incluye una comparación buscando si son iguales</a>.</p>
 </section>
 
 <section>
 <h2>Librerías y Funciones</h2>
-<br/>
+<a href="http://www.gnu.org/software/libc/manual/" style="text-align: left; font-size: 70%;">http://www.gnu.org/software/libc/manual/</a>
+<br/><br/>
 <ul>
 <li>STDIO.H<ul style="font-size: 85%;">
 <li>Int getchar(void) &amp; int putchar(int c)</li>
@@ -551,19 +555,17 @@ void main(void) {
 <li>CTYPE.H<ul style="font-size: 85%;">
 <li>isalnum().  isalpha(), isascii(), iscntrl(), isdigit()</li>
 <li>islower(), isupper(), isprint(), ispunct(), isspace()</li>
-<li>tolower(), toupper(), isxdigit(), more...</li>
+<li>tolower(), toupper(), isxdigit()... (ver más <a style="font-size: 90%;" href="http://www.gnu.org/software/libc/manual/html_node/Classification-of-Characters.html">en el manual</a> y <a href="">ejemplo de código</a>)</li>
 </ul>
 </li>
 <br/>
 <li>STDLIB.H<ul style="font-size: 85%;">
-<li>atof() atoi() &amp; atol()</li>
-<li>itoa() &amp; ltoa() (no ANSI C, <a href="files/clase06/itoa_ltoa.html">implementado scanf()</a>)</li>
+<li>atof() atoi() &amp; atol() (<a style="font-size: 90%;" href="files/clase06/str_to_num.c">ejemplo de uso</a>)</li>
+<li>itoa() &amp; ltoa() (no ANSI C, <a style="font-size: 90%;" href="files/clase06/itoa_ltoa.html">implementado scanf()</a>)</li>
 <li>srand() &amp; rand()</li>
 </ul>
 </li>
 </ul>
-<br/>
-<a href="http://www.gnu.org/software/libc/manual/" style="text-align: left; font-size: 70%;">http://www.gnu.org/software/libc/manual/</a>
 </section>
 </section>
 
