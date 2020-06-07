@@ -571,17 +571,6 @@ void main(void) {
 
 <section>
 <section>
-	<h3>¿Unicode en C?</h3>
-	<br/>
-	<ul>
-		<li><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU Unicode (libunistring)</a></li>
-	</ul>
-	<br/>
-	<br/>
-	<p>Ejemplo de <a href="files/clase06/wide_chars_and_unicode.c">código unicode</a>.</p>
-</section>
-
-<section>
 <h3>Código</h3>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
 	<ul>
@@ -619,19 +608,45 @@ void main(void) {
 </section>
 
 <section>
-<h3>CURSES.H : Compilación</h3>
+<h3>NCURSES</h3>
 <br/>
 <p>Instalando y copilando:</p>
-<br/>
 <pre style="width: 800px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 800px;" class="bash">
 $ sudo apt-get install libncurses5-dev
 $ gcc -o ncurses ncurses1_helloworld.c -lncurses 
 </code></pre>
-<br/>
-<ul>
+<br/><br/>
+<p>Usando curses.h:</p>
+<pre style="width: 600px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 600px;" class="cpp">
+sudo apt-get install libncurses-dev
+gcc -lcurses -o ej1 mi_ejercicio.c
+</code></pre>
+<br/><br/>
+<ul style="font-size: 75%;">
+	<li><a href="files/clase06/conio_curses.txt">Notas sobre conio.h y NCURSES</a></li>
 	<li><a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/">NCURSES Programming HOWTO</a></li>
-	<li><a href="files/clase06/conio_curses.txt">Notas sobre NCURSES</a></li>
 </ul>
+</section>
+<section>
+<h2>Mas sobre ncurses (y kbhit):</h2>
+<ul>
+	<li>Implementando getch & getche con termios.h: <a href="files/clase06/getch_kbhit/getch_termios.c">getch_termios.c</a></li>
+	<li>Usando kbhit() en BC DOS o Windows: <a href="files/clase06/getch_kbhit/kbhit_win.c">kbhit_win.c</a></li>
+	<li>Implementando kbhit() de conio.h usando ncurses.h: <a href="files/clase06/getch_kbhit/kbhit_ncurses.c">kbhit_ncurses.c</a></li>
+	<li>Implementando kbhit() usando termios.h: <a href="files/clase06/getch_kbhit/kbhit_termios.c">kbhit_termios.c</a></li>
+</ul>
+<br/><br/>
+<a href="files/clase06/getch_kbhit/ncurses.html" style="text-align: left; font-size: 70%;">Mas ejemplos y informacion sobre como usar ncurses.</a>
+</section>
+<section>
+	<h3>¿Unicode en C?</h3>
+	<br/>
+	<ul>
+		<li><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU Unicode (libunistring)</a></li>
+	</ul>
+	<br/>
+	<br/>
+	<p>Ejemplo de <a href="files/clase06/wide_chars_and_unicode.c">código unicode</a>.</p>
 </section>
 </section>
 
@@ -644,7 +659,7 @@ $ gcc -o ncurses ncurses1_helloworld.c -lncurses
 <h3>Realizar el estructograma y la codificación en C</h3>
 <ol>
 <li>Extraer un substring
-<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
+<pre style="width: 900px;"><code data-trim style="font-size: 22px; margin-top: 20px; width: 900px;" class="cpp">
 int substring(char st_salida[], char st_entrada[], int pos, int n)
 </code></pre></li>
 <ul style="font-size: 80%;"><li>Ejemplo:<ul>
@@ -686,37 +701,6 @@ char *pregunta(char texto[], char opc1[], char opc2[])
 	<li>CC: Ver <a href="http://es.wikipedia.org/wiki/Algoritmo_de_Luhn">algoritmo de Luhn</a></li>
 </ul>
 </section>
-</section>
-
-<section>
-<section>
-<h2>Mas sobre ncurses (y kbhit):</h2>
-<ul>
-	<li>Implementando getch & getche con termios.h: <a href="files/clase06/getch_kbhit/getch_termios.c">getch_termios.c</a></li>
-	<li>Usando kbhit() en BC DOS o Windows: <a href="files/clase06/getch_kbhit/kbhit_win.c">kbhit_win.c</a></li>
-	<li>Implementando kbhit() de conio.h usando ncurses.h: <a href="files/clase06/getch_kbhit/kbhit_ncurses.c">kbhit_ncurses.c</a></li>
-	<li>Implementando kbhit() usando termios.h: <a href="files/clase06/getch_kbhit/kbhit_termios.c">kbhit_termios.c</a></li>
-</ul>
-<br/><br/>
-<a href="files/clase06/getch_kbhit/ncurses.html" style="text-align: left; font-size: 70%;">Mas ejemplos y informacion sobre como usar ncurses.</a>
-</section>
-<section>
-<h3>CONIO.H (BC-DOS)</h3>
-<br\><p>En BolarndC existia estas funciones</p><br\>
-<pre style="width: 600px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 600px;" class="cpp">
-/* Con y sin eco */
-int getch(void) & int getche(void)
-
-/* Solo implementado en CONIO.H */
-int putch(int ch)
-</code></pre>
-<h3> --- </h3>
-<h3>Usando NCURSES</h3>
-<pre style="width: 600px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 600px;" class="cpp">
-sudo apt-get install libncurses-dev
-gcc -lcurses -o ej1 mi_ejercicio.c
-</code></pre>
-<p><a href="files/clase06/conio_curses.txt">Notas sobre conio.h y NCURSES</a></p>
 </section>
 
 			</div>
