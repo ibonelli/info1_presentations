@@ -8,7 +8,7 @@
 // Casos no contemplados:
 //		isspace(), tolower() & toupper()
 
-char ctype_fv(int fn, char c) {
+char ctype_fv(int fn, unsigned char c) {
 	switch (fn) {
 		case 0:
 			if(isalnum(c)) return c;
@@ -106,7 +106,7 @@ void ctype_fn(int fn, char *str) {
 
 void show_table(int fn, int limit) {
 	int i, j;
-	int c, c2s;
+	unsigned char c, c2s;
 	char str[15];
 	ctype_fn(fn, str);
 	printf("\nTabla ASCII - %s\n", str);
@@ -131,7 +131,10 @@ int main(void) {
 		printf("Presione una tecla para continuar...");
 		getchar();
 	}
-	system("clear");
-	show_table(full, 16);
+	// La parte extendida no anda, hace falta usar unicode
+	//		man 3 mbstowcs
+	//		wchar_t es el tipo de dato usado para unicode char
+	//system("clear");
+	//show_table(full, 16);
 	return 0;
 } 
