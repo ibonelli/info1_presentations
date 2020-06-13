@@ -249,7 +249,6 @@ void main(int argc,char *argv[]) {
 
 <section>
 <h2>Memoria dinámica</h2>
-<br/><br/>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
 #define MAX_STR 20
@@ -267,13 +266,15 @@ str = (char *) malloc( sizeof(char) * MAX_STR );
 	<li>Si se puede alojar la memoria malloc() retorna el puntero a la memoria reservada.</li>
 	<li>Si no se puede alojar la memoria malloc() retornara un puntero a NULL.</li>
 </ul>
+<br/><br/>
+<p style="font-size: 75%;"><a href="files/clase07/malloc_ejemplo.c">Bajar el ejemplo para correr en consola</a>.</p>
 </section>
 
 <section>
 <h2>Estructuras dinámicas de datos</h2>
-<br/><br/>
+<br/>
 <p>Por ejemplo, puedo crear un vector en forma dinámica:</p>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+<pre><code data-trim style="font-size: 22px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 
@@ -281,12 +282,15 @@ void main(void) {
 	char *str, tam;
 	printf("Ingrese el tamaño de cadena deseado: ");
 	scanf("%d",&tam);
+	setbuf(stdin, NULL); // Limpio el buffer de teclado
 	str = (char *) malloc ( sizeof(char) * tam );
 	printf("Ingrese su cadena: ");
-	scanf("%s",str);
+	fgets(str, tam, stdin);
 	printf("\nSu cadena es: %s",str);
 }
 </code></pre>
+<br/><br/>
+<p style="font-size: 75%;"><a href="files/clase07/malloc_str_fgets.c">Bajar el ejemplo para correr en consola</a>.</p>
 </section>
 
 <section>
