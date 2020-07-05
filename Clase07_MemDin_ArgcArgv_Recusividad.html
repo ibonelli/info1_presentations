@@ -143,7 +143,9 @@ void main(int argc,char *argv[]) {
 <section data-background="#8c4738">
 <section>
 <h1>Recursividad</h1>
-<br/><h3>(no mas parte del programa)</h3>
+<br/><p>(¿no mas parte del programa?)</p>
+<br/>
+<p><a href="https://www.youtube.com/watch?v=-PX0BV9hGZY">Tail Call Optimization: The Musical</a></p>
 </section>
 
 <section>
@@ -164,13 +166,15 @@ void main(int argc,char *argv[]) {
 </section>
 
 <section>
-<h3>Recursividad</h3>
+<h3>Imagen recursiva</h3>
 <br/>
 <img src="files/clase07/Imagen_Recursiva.png"/>
+<br/>
+<p>Otros ejemplos de imagenes recursivas son los <a href="https://es.wikipedia.org/wiki/Fractal">fractales</a>.</p>
 </section>
 
 <section>
-<h3>Recursividad</h3>
+<h3>Llamados a funciones no recursivos</h3>
 <br/>
 <img src="files/clase07/Llamados_Funciones.png"/>
 </section>
@@ -178,29 +182,27 @@ void main(int argc,char *argv[]) {
 <section>
 <h3>Recursividad</h3>
 <br/>
-<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial</p>
-<br/>
-<img src="files/clase07/Factorial.png"/>
-</section>
-
-<section>
-<h3>Recursividad: Factorial Iterativo</h3>
-</section>
-
-<section>
-<h3>Recursividad: Factorial Recursivo</h3>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<img src="files/clase07/Factorial_llamados.png"/>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
+<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial:</p>
+<img style="width: 400px;" src="files/clase07/Factorial.png"/>
+<br/><br/>
 <ul>
+	<li><a href="files/clase07/RECUR2_Factorial_Recursivo.c">Recursivo</a> <span style="font-size: 60%;">(ver diagrama de llamados en el siguiente slide)</span></li>
+	<li><a href="files/clase07/RECUR1_Factorial_Iterativo.c">Iterativo</a></li>
+	<li><a href="files/clase07/RECUR3a_Factorial_RecursivoStack.c">Recursivo v2 (mostrando el stack)</a></li>
+	<li><a href="files/clase07/RECUR3b_Factorial_RecursivoStack-MasConsumo.c">Recursivo v3 (uso intensivo del stack)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplo factorial recursivo (llamados)</h3>
+<br/>
+<img style="width: 500px;" src="files/clase07/Factorial_llamados.png"/>
+</section>
+
+<section>
+<h3>Recursividad (condición de cierre)</h3>
+<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
+<ul style="font-size: 80%;">
 	<li>Cada llamada recursiva almacena los parámetros que se pasaron al procedimiento, y otras variables necesarias para el correcto funcionamiento del programa.</li>
 	<li>Por tanto si se produce una llamada recursiva infinita (que no termina nunca) llega un momento en el que no quedará memoria para almacenar más datos</li>
 	<li>En ese momento se abortará la ejecución del programa.</li>
