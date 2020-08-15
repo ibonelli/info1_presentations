@@ -616,42 +616,27 @@
 <section>
 <h2>Compilando con GCC (I)</h2>
 <ul>
-	<li>Compilando
-		<ul>
-			<li>compilo directamente a binario:
-				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
-					<li>gcc -o hola hola.c</li>
-				</ul>
-			</li>
-			<li>Compilador para mostrar errores:
-				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
-					<li>gcc -Wall -o hola hola.c</li>
-				</ul>
-			</li>
-			<li>Para agregar información de debugging:
-				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
-					<li>gcc -Wall -g -o hola hola.c</li>
-				</ul>
-			</li>
-			<li>Solo compilo (no linkeo):
-				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
-					<li>gcc -c -o hola.o hola.c</li>
-				</ul>
-			</li>
-			<li>Compilo con información adicional:
-				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
-					<li>gcc -c -g -o hola.o hola.c</li>
-				</ul>
-			</li>
-			<li>Para ver el código assembler:
-				<ul style="font-size: 85%; font-family: monospace; color: #69C198;">
-					<li>gcc -S hola.c -o -</li>
-				</ul>
-			</li>
-		</ul>
+	<li>compilo directamente a binario:<br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -o hola hola.c</span>
+	</li>
+	<li>Compilador para mostrar errores:<br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -Wall -o hola hola.c</span><br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -Wall -std=c89 -pedantic-errors -o hola hola.c</span>
+	</li>
+	<li>Para agregar información de debugging:<br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -Wall -g -o hola hola.c</span>
+	</li>
+	<li>Solo compilo (no linkeo):<br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -c -o hola.o hola.c</span>
+	</li>
+	<li>Compilo con información adicional:<br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -c -g -o hola.o hola.c</span>
+	</li>
+	<li>Para ver el código assembler:<br/>
+		<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -S hola.c -o -</span>
 	</li>
 </ul>
-</br></br><p align="left" style="font-size: 60%; font-family: monospace;">Archivo ejemplo: <a href="./files/clase03/hola.c">hola.c</a></p>
+</br><p align="left" style="padding-left: 650px; font-size: 60%; font-family: monospace;">Archivo ejemplo: <a href="./files/clase03/hola.c">hola.c</a></p>
 </section>
 
 <section>

@@ -66,7 +66,21 @@
 
 <section>
 <h2>Medios de Almacenamiento</h2>
+<h3>Discos Rígidos de primer generación</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/>
+	<img src="files/clase08/12_HDD_Pack.jpg"/>
+</ul>
+<ul class="col" style="width: 300px; display: inline-block; vertical-align: top;">
+	<a href="files/clase08/13_HDD_Machine.jpg"><img src="files/clase08/13_HDD_Machine.jpg"/></a>
+</ul>
+<a href="https://en.wikipedia.org/wiki/Disk_pack"><p style="font-size: 60%;">Discos rígidos removibles (Disk Pack).</p></a>
+</section>
+
+<section>
+<h2>Medios de Almacenamiento</h2>
 <h3>Discos Magneticos (Flexibles/Rigidos)</h3>
+<br/>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
 	<img src="files/clase08/21_FDD.jpg"/>
 </ul>
@@ -94,8 +108,10 @@
 	<img src="files/clase08/31_Pendrive.png"/>
 </ul>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/>
 	<img src="files/clase08/32_microSD.jpg"/>
 </ul>
+<a href="https://www.xataka.com/componentes/1956-gb-disco-duro-salia-a-9-2-millones-dolares-2019-precio-no-llega-a-dos-centavos"><p style="font-size: 60%;">En 1956 el GB de disco duro salía a 9,2 millones de dólares.</p></a>
 </section>
 
 <section>
@@ -105,6 +121,7 @@
 	<a href="files/clase08/27_tapes_2018.jpg"><img src="files/clase08/27_tapes_2018.jpg"/></a>
 </ul>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/><br/>
 	<a href="files/clase08/28_tapes_2018.jpg"><img src="files/clase08/28_tapes_2018.jpg"/></a>
 </ul>
 <a href="files/clase08/ModernTapeStorage.txt"><p style="font-size: 60%;">24 PB in a standard 19-inch rack. LTO8 tapes have 12TB and go up to 30 TB compressed capacity.</p></a>
@@ -139,7 +156,21 @@
 </section>
 
 <section>
-<h2>Espacio usado vs. espacio de los archivos</h2>
+<h2>Espacio usado vs. espacio de los archivos (I)</h2>
+<br/>
+<ul>
+	<li><span style="font-size: 90%;">Discos disponibles en el sistema:</span><span style="padding-left: 20px; font-family: monospace;">lsblk</span></li>
+	<li><span style="font-size: 90%;">Estructura de la partición:</span><span style="padding-left: 20px; font-family: monospace;">fdisk /dev/sda1</span></li>
+	<li><span style="font-size: 90%;">Detalles del sistema de archivos:</span><br/><span style="padding-left: 200px; font-family: monospace;">dumpe2fs /dev/sda1 | less</span></li>
+	<br/>
+	<li><span style="font-size: 90%;">Espacio libre:</span><span style="padding-left: 20px; font-family: monospace;">df -k</span></li>
+	<li><span style="font-size: 90%;">Espacio "ocupado":</span><span style="padding-left: 20px; font-family: monospace;">du -bh</span></li>
+	<li><span style="font-size: 90%;">Espacio usado realmente:</span><span style="padding-left: 20px; font-family: monospace;">du -h</span></li>
+</ul>
+</section>
+
+<section>
+<h2>Espacio usado vs. espacio de los archivos (II)</h2>
 <ul>
 	<li>¿Donde se guarda la estructura del disco? ... ¡EN EL DISCO!</li>
 	<li>¿Cuanto puedo direccionar dentro del disco? ... Depende del tamaño de cluster</li>
@@ -661,6 +692,19 @@ int main()
 <br/><br/>
 <p style="font-size: 90%;">Lo mejor es solo usar fpos_t entre ambas funciones, <br/>ya que no se puede asegurar la portabilidad del dato.</p>
 </section>
+
+<section>
+<h2>funciones similares</h2>
+<br/><br/>
+<p>fgetc(stdin);  === getc();</p>
+<p>fputc(stdout); === putc();</p>
+<p>fprintf(stdout, ...); === printf(...);</p>
+<p>fscanf(stdin, ...); === scanf(...);</p>
+<br/>
+<p>ftell() === fgetpos()</p>
+<p>fseek() === fsetpos()</p>
+</section>
+
 </section>
 
 			</div>

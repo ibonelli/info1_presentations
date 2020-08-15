@@ -309,6 +309,20 @@ void main(void) {
 <h3>void free(void *ptr);</h3>
 <br/><p>Para liberar la memoria que pedimos <br/> (¡Seamos "ecológicos"!)</p>
 </section>
+
+<section>
+<h3>Vectores dinámicos</h3>
+<br/>
+<pre style="max-width: 500px;"><code data-trim style="max-width: 500px; font-size: 25px; margin-top: 20px;" class="bash">
+void fun(int n) {
+	int arr[n];
+	// ......
+}
+</code></pre><br/>
+<p>Esto da error si compilamos con:</p>
+<p style="font-size: 70%; font-family: monospace; color: #18c976; background-color: #3F3F3F;">gcc -Wall -std=c89 -pedantic-errors -o prog mi_variable_array.c</p>
+<br/><br/><p style="font-size: 70%;"><a href="./files/clase05/modificadores_gcc.txt">Los arreglos de tamaño variable fueron introducidos en el C99.</a></p>
+</section>
 </section>
 
 <section>
