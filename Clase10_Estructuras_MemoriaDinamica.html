@@ -254,6 +254,16 @@ typedef _BOOL bool;
 </code></pre>
 </section>
 
+<section>
+<h2>sizeof struct</h2>
+<br/>
+<p>Es importante en estructuras (así como con tipos de datos simples) utilizar el operador sizeof para averiguar su tamaño.</p>
+<br/>
+<p>Esto es así por que queremos escribir programas portables, y para que sean portables debemos averiguar el tamaño de cada dato en tiempo de compilación.</p>
+<br/>
+<p style="font-size: 75%;">Un detalle de color en intel 64bits es que dependiendo del orden puede ocupar distinto tamaño los mismos datos, dependiendo del orden. El mínimo a reservar en un campo será 4bytes. La única excepción será si puede "empacarlos" (ver en el ejemplo "<a href="./files/clase10/estructuras.c">estructuras.c</a>" el tipo de datos_t4).</p>
+</section>
+
 </section><section>
 
 <section>
