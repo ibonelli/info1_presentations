@@ -1138,6 +1138,176 @@ drwx------    2 root     root         4096 Jun 18 21:20 scripts
 </section>
 
 <section>
+	<section>
+		<h1>Procesos</h1>
+		<h3>¿Así que Linux es multitarea?</h3>
+		<h3>¿Y como funciona eso?</h3>
+	</section>
+	<section>
+		<h2>Tipos de Procesos</h2>
+		<br/><br/>
+		<ul>
+			<li>En primer plano (de terminal o gráficos)</li>
+			<li>En segundo plano (sin conexión a una terminal)</li>
+		</ul>
+	</section>
+	<section>
+		<h2>¿Como identificamos un proceso?</h2>
+		<br/><br/>
+		<ul>
+			<li>Todos los procesos tienen un<br/><span style="margin-left:100px">identificador único de proceso (PID)</span></li>
+			<li>Los procesos pueden ser:
+				<ul>
+					<li style="margin-left:100px">padres</li>
+					<li style="margin-left:100px">hijos</li>
+				</ul>
+			<li>Dentro de Linux el proceso padre ahora es <b>systemd</b><br/><span style="margin-left:600px">(antes era <a href="https://www.tecmint.com/systemd-replaces-init-in-linux/">init</a>).</span></li>
+			<li>Todos los otros procesos serán hijos de systemd<br/><span style="margin-left:200px">y podrán ser padres de otros procesos.</span></li>
+		</ul>
+	</section>
+	<section>
+		<h2>Árbol de procesos</h2>
+		<br/><br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+$ pstree -p
+systemd(1)─┬─ModemManager(535)─┬─{ModemManager}(557)
+           │                   └─{ModemManager}(593)
+           ├─NetworkManager(550)─┬─dhclient(9199)
+           │                     ├─{NetworkManager}(567)
+           │                     └─{NetworkManager}(592)
+           ├─agetty(711)
+           ├─alsactl(545)
+           ├─cron(541)
+           ├─dbus-daemon(23939)
+           ├─dbus-daemon(532)
+           ├─dbus-launch(23938)
+           ├─lightdm(716)─┬─Xorg(735)─┬─{Xorg}(739)
+           ...
+           ├─plasmashell(1362)─┬─chromium(8153)─┬─chrome-sandbox(8168)───chromium(8169)───chromium(8171)─┬─chromium(8817)─┬─{chromium}(8820)
+           ...
+           ├─dropbox(8446)─┬─{dropbox}(8467)
+           │               ├─{dropbox}(8468)
+           │               ├─{dropbox}(8469)
+           ...
+</code></pre>
+	</section>
+	<section>
+		<h2>Estado de los procesos (I)</h2>
+		<br/>
+		<a href="files/clase21/ProcessState.png"><img src="files/clase21/ProcessState.png"/></a>
+	</section>
+	<section>
+		<h2>Estado de los procesos (II)</h2>
+		<br/>
+		<ul>
+			<li><b>Running</b>: Cuando el proceso se esta ejecutando.</li>
+			<li><b>Waiting</b>: Cuando el proceso esta esperando que se cumpla algún otro evento.</li>
+			<li><b>Ready</b>: Cuando el proceso esta pronto para ejecutar, esperando por la CPU.</li>
+			<li><b>Terminated</b>: Cuando el proceso ha terminado.</li>
+			<li><b>Zombie</b>: Cuando termina (o muere) un hijo y el padre no se ha enterado (y por lo tanto tiene una entrada en la tabla de procesos).</li>
+		</ul>
+	</section>
+	<section>
+		<h2>htop</h2>
+		<p>Una mejor forma de ver que está corriendo.</p>
+		<br/>
+		<a href="files/clase21/htop.png"><img src="files/clase21/htop.png"/></a>
+	</section>
+	<section>
+		<h2>Dos formas de crear procesos...</h2>
+		<br />
+		<h3>Fork</h3>
+		<p style="font-size: 90%;">Nos da un nuevo proceso que es una copia del actual. Tiene una "copia" de la memoria original. A medida que los nuevos procesos avanzan los valores de cada uno en memoria cambian, pero el ejecutable es el mismo. Los procesos/tareas no comparten memoria, la única forma de compartir algo es usar IPCs.</p>
+		<br /><br />
+		<p><b style="font-size: 120%;">Threads:</b> De una forma muy sencilla un thread es un proceso más liviano. Vamos a ver más sobre ellos en el siguiente capítulo.</p>
+		<br /><br />
+		<p style="font-size: 60%;">Se puede leer más sobre procesos en <a href="https://www.tldp.org/LDP/tlk/kernel/processes.html">Linux Documentation Project</a>.</p>
+	</section>
+</section>
+
+<section data-background="#4d7e65">
+	<section>
+		<h2>Usando fork()</h2>
+		<p>Fork nos permite crear un proceso "hijo", copia del "padre".</p>
+		<br /><p>man 2 fork</p>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;unistd.h&gt;
+pid_t fork(void);
+		</code></pre>
+		<br /><p>El proceso hijo es un duplicado del padre, pero<br />tiene un PID distinto (valor retornado pid_t).</p> 
+	</section>
+	<section>
+		<h2>¿Como identificamos clones?</h2>
+		<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+			<br />
+			<img style="height: 400px;" src="files/clase21/movie_multiplicity.jpg"/>
+		</ul>
+		<ul class="col" style="width: 400px;">
+			<br /><br />
+			<h3>The 6th day (2000)</h3>
+			<br /><a href="files/clase21/movie_The6thDay_Montage.jpg"><img src="files/clase21/movie_The6thDay.jpg"/></a>
+		</ul>
+	</section>
+	<section>
+		<br /><h3>fork() retorna...</h3>
+		<ul>
+		<li>0 : En el proceso nuevo (hijo)</li>
+		<li>-1 : Si hay un error</li>
+		<li>pid: El process ID del proceso hijo al padre</li>
+		</ul>
+		<br /><br /><br />
+		<h3>Ejemplo1:</h3>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o ej1 ej_fork.c
+		</code></pre>
+	</section>
+	<section>
+		<h2>Fork: Funciones</h2>
+		<br /><ul>
+			<li>getpid() - Obtiene el PID del proceso actual.</li>
+			<li>getppid() - Obtiene el PID del proceso padre.</li>
+			<li>wait() - Espera a que un proceso cambie de estado.</li>
+		</ul>
+		<br /><br /><p>man 2 wait</p>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+pid_t wait(int *status);
+pid_t waitpid(pid_t pid, int *status, int options);
+		</code></pre>
+	</section>
+	<section>
+		<br /><h2>Ejemplo2:</h2>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+gcc -o ej2 ej_fork_kill.c
+		</code></pre>
+		</ul>
+		<br /><p>Para el segundo ejemplo utilizaremos los comandos:</p>
+		<ul>
+			<li>kill - Dado un PID lo "mata".</li>
+			<li>ps - Lista los procesos corriendo en la máquina.</li>
+				<ul>
+					<li style="font-size: 90%;"><span style="font-family: monospace; text-align: left;">ps ax</span><span style="margin-left: 38px;">: Ver todos los procesos</li>
+					<li style="font-size: 90%;"><span style="font-family: monospace; text-align: left;">ps elf</span><span style="margin-left: 20px;">: Para ver todas las columnas</span></li>
+				</ul>
+			<li>top / htop - Monitoreo "online" de procesos.</li>
+			<ul>
+				<li>top viene, htop hay que instalarlo.</li>
+			</ul>
+			<li>pstree - Arbol de procesos.</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Ejemplo3:</h2>
+		<br />
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+gcc -o ej3 ej_fork_count.c
+		</code></pre>
+		<br /><p>En este ejemplo vemos padre e hijo trabajando en paralelo.</p>
+	</section>
+</section>
+
+<section>
 <section>
 <h2>Ejemplos de código:</h2>
 <p>(a mover a otra sección)</p>
@@ -1149,6 +1319,7 @@ drwx------    2 root     root         4096 Jun 18 21:20 scripts
 </ul>
 </section>
 </section>
+
 
 			</div>
 
