@@ -172,8 +172,7 @@ a2.nota1 = 7.5;
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 a2 = a1;
 </code></pre>
-<p style="font-style: italic;"><span style="color: orange;">Importante</span>: depende del compilador, sino copiar campo x campo.</p>
-<p style="font-size: 75%;">Si no puede copiar (cosa rara) también se puede usar memcpy(). Pero en ambos casos hay que tener en cuenta el problema de "shallow copy": <a href="http://blog.zhangliaoyuan.com/blog/2013/01/28/structure-assignment-and-its-pitfall-in-C-language/">Articulo (EN)</a>, <a href="http://courses.cs.vt.edu/~cs2505/fall2010/Notes/pdf/T30.CDeepCopy.pdf">presentacion (EN)</a>, y <a href="./files/clase10/DeepCopy.html">resumen (HTML)</a>.</p>
+<p style="font-size: 75%;">La copia es como un memcpy(), byte a byte. Pero existe el problema de "shallow copy" si tenemos punteros dentro de la estructura (<a href="http://blog.zhangliaoyuan.com/blog/2013/01/28/structure-assignment-and-its-pitfall-in-C-language/">Articulo (EN)</a>, <a href="http://courses.cs.vt.edu/~cs2505/fall2010/Notes/pdf/T30.CDeepCopy.pdf">presentacion (EN)</a>, y <a href="./files/clase10/DeepCopy.html">resumen (HTML)</a>.</p>
 </ul>
 </section>
 
