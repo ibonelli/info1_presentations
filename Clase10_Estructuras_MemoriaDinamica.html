@@ -350,25 +350,117 @@ str[2] = NULL;
 
 <section>
 <h2>Campo de Bits y Uniones</h2>
+<br/>
 <ul>
 	<li>Uniones: Código ejemplo
 		<ul>
 			<li><a href="files/clase10/Uniones-y-CamposBits/campos-de-bit.c">campos-de-bit.c</a> : Ejemplo trivial de uniones y campos de Bits (necesita el archivo <a href="files/clase10/Uniones-y-CamposBits/getch.h">getch.h</a>)</li>
 		</ul>
 	</li>
-	<li>Uniones - Ejercicio
-		<ul>
+<br/>
+	<li>Ejercicios:
+		<ol>
 			<li>Realizar un programa que devuelva el primer carácter (inicial) de un string/nombre usando uniones.</li>
 			<li>Realizar un programa que tome un número en punto flotante y devuelva sus partes usando uniones y campos de bit.</li>
-		</ul>
+		</ol>
 	</li>
+</ul>
+</section>
+
+<section>
+<h2>Acceso bit a bit con campos de bits</h2>
+<ul>
+<br/>
 	<li>Ejemplos acceso a bits:
 		<ul>
-			<li>Acceder a los bits de un byte utilizando una mascara (operaciones bit a bit): <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_1p-mascara.c">bits-de-un-byte_1p-mascara.c</a></li>
-			<li>Acceder a los bits de un byte utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_2p-campobit.c">bits-de-un-byte_2p-campobit.c</a></li>
+			<li>Acceder a los bits de un byte utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_campobit.c">bits-de-un-byte_campobit.c</a></li>
+			<li>Acceder a los bits de un int utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/campos_bit_int.c">campos_bit_int.c</a></li>
 		</ul>
 	</li>
 </ul>
+</section>
+
+<section>
+<h2>Máscaras (I)</h2>
+<br/>
+<p><a href="https://ibonelli.github.io/info1_presentations/Clase01_Sistemas_Numeracion.html#/4/3">Recordemos las operaciones lógicas</a> (vistas previamente)</p>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="txt">
+&& : AND logico
+
+& : AND binario (bit a bit)
+
+A B R
+0 0 0 --> Como A esta en 0 vale 0
+0 1 0 --> Como A esta en 0 vale 0
+1 0 0 --> Como A esta en 1 vale B
+1 1 1 --> Como A esta en 1 vale B
+
+	=> Para poner en 0 usamos una AND
+</code></pre>
+</section>
+
+<section>
+<h2>Máscaras (II)</h2>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="txt">
+|| : OR logico
+
+| : OR binario (bit a bit)
+
+A B R
+0 0 0 --> Como A esta en 0 vale B
+0 1 1 --> Como A esta en 0 vale B
+1 0 1 --> Como A esta en 1 vale 1
+1 1 1 --> Como A esta en 1 vale 1
+
+	=> Para poner en 1 usamos una OR
+</code></pre>
+<br/>
+<p>Acceder a los bits de un byte utilizando una mascara:<br/><a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_mascara.c">bits-de-un-byte-mascara.c</a></p>
+</section>
+
+<section>
+<h2>Operadores de desplazamiento</h2>
+<br/>
+<p><a href="https://ibonelli.github.io/info1_presentations/Clase02_Programacion.html#/2/13">Recordemos los Operadores</a> (vistos previamente)</p>
+<ul>
+	<li><b>>></b> : Mover bits a la derecha</li>
+	<li><b><<</b> : Mover bits a la izquierda</li>
+</ul>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+masc_b0 = 0x01; // 0000'0001
+masc_b1 = 0x02; // 0000'0010
+masc_b2 = 0x04; // 0000'0100
+masc_b3 = 0x08; // 0000'1000
+
+byte = 0xFF;    // 1111'1111
+
+res0 = byte & masc_b0; // 0000'0001
+res = res0 >> 0;       // 0000'0001
+res1 = byte & masc_b1; // 0000'0010
+res = res1 >> 1;       // 0000'0001
+res2 = byte & masc_b2; // 0000'0100
+res = res2 >> 2;       // 0000'0001
+</code></pre>
+</section>
+
+<section>
+<h2>Desplazamiento y rotación</h2>
+<br/>
+<p style="font-size: 75%;" >Si bien esto no está soportado directamente por C, usando desplazamiento y mascaras se puede lograr también rotar. Y ciertos compiladores con GCC pueden detectar este código y traducirlo correctamente a una operación de assembler de rotación.</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+unsigned int data=0x0F;
+data= data>> (unsigned) 1 | data<< (unsigned)31;
+</code></pre>
+<p>compiles to ASM:</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="asm">
+ror  %eax
+</code></pre>
+<br/>
+<p>Rotando (además de desplazando) bits: <a href="files/clase10/Uniones-y-CamposBits/bit_rotate.c">bit_rotate.c</a></p>
+<p>Ejemplos de desplazamiento y rotación bit a bit: <a href="files/clase10/Uniones-y-CamposBits/operadores_bits_y_rotacion.txt">operadores_bits_y_rotacion.txt</a></p>
 </section>
 
 </section><section>

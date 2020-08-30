@@ -1,0 +1,37 @@
+ignacio@thinkpadE490:~/info1/2020/Borrar$ ./campos_bit_int
+
+En decimal:
+        305419896
+En hexa:
+        12'34'56'78
+En binario:
+        0001'0010'0011'0100'0101'0110'0111'1000
+
+ignacio@thinkpadE490:~/info1/2020/Borrar$ ./bit_rotate
+
+Ingrese un numero: 305419896
+Cuanto lo quiere rotar? 1
+305419896 rotado 1 veces a la izquierda = 610839792
+305419896 rotado 1 veces a la derecha = 152709948
+
+ignacio@thinkpadE490:~/info1/2020/Borrar$ ./campos_bit_int
+
+Ingrese el numero: 610839792
+
+En decimal:
+        610839792
+En hexa:
+        24'68'ac'f0
+En binario:
+        0010'0100'0110'1000'1010'1100'1111'0000
+
+ignacio@thinkpadE490:~/info1/2020/Borrar$ ./campos_bit_int
+
+Ingrese el numero: 152709948
+
+En decimal:
+        152709948
+En hexa:
+        9'1a'2b'3c
+En binario:
+        0000'1001'0001'1010'0010'1011'0011'1100
