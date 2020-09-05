@@ -1214,6 +1214,22 @@ systemd(1)─┬─ModemManager(535)─┬─{ModemManager}(557)
 		<a href="files/clase21/htop.png"><img src="files/clase21/htop.png"/></a>
 	</section>
 	<section>
+		<h2>Priorizando procesos</h2>
+		<br />
+		<p>Exite el comando nice que nos permite definir la prioridad de un proceso a correr.</p>
+		<p style="font-family: monospace; font-size: 75%; text-align: left; margin-left: 40px;">nice &lt;priority&gt; &lt;proceso&gt; &amp;</p>
+		<pre><code data-trim style="margin-top: 20px;" class="bash">
+nice -n -20 ls -lR &amp;
+		</code></pre>
+		<p style="font-size: 60%;">Donde -20 es la más alta prioridad y 19 es la más baja.</p>
+		<br />
+		<p>También existe ionice que nos permite definir la prioridad de Entrada/Salida que utilizará el proceso.</p>
+		<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+ionice -c 3 du -sk * | sort -n -k1,1
+		</code></pre>
+		<p style="font-size: 60%;">Donde la <b>-c</b> (class) son 3. 1 es mayor la de mayor prioridad (real-time), <br />2 la normal (best-effort) y 3 la más baja (idle).</p>
+	</section>
+	<section>
 		<h2>Dos formas de crear procesos...</h2>
 		<br />
 		<h3>Fork</h3>
