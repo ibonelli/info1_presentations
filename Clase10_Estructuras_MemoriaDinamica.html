@@ -606,6 +606,26 @@ vec = (struct vendedor *) malloc( sizeof( struct vendedor ) * 10);
 </section>
 
 <section>
+<h2>Matriz Dinámica</h2>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#define FIL 5
+#define COL 5
+
+void main(void) {
+	int **v, i, j;
+	v = malloc(sizeof(*int)*FIL);
+	for(i=0;i&lt;FIL;i++) {
+		v[i] = malloc(sizeof(int)*COL);
+
+	srandom(15);
+	for(i=0;i&lt;FIL;i++) {
+		for(j=0;j&lt;COL;j++) {
+...
+</code></pre>
+</section>
+
+<section>
 <h2>Introducción a listas</h2>
 <br/>
 <pre><code class="cpp">void *p = NULL;
