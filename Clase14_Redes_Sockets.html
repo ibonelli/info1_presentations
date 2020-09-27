@@ -52,6 +52,19 @@
 </section>
 
 <section>
+	<h2>¿Qué es una red informática?</h2>
+	<br />
+	<ul class="col" style="width: 400px;">
+		<a href="./files/clase14/Computadores_Internet.jpg"><img src="./files/clase14/Computadores_Internet.jpg"/></a>
+	</ul>
+	<ul class="col" style="width: 380px;">
+		<a href="./files/clase14/Mundo_Conectado.jpg"><img src="./files/clase14/Mundo_Conectado.jpg"/></a>
+	</ul>
+	<br/><br/>
+	<h3><a href="https://www.youtube.com/watch?v=z7Q_NRGyKt4">Video EducAr</a><h3>
+</section>
+
+<section>
 <h2>Modelo OSI y TCP/IP</h2>
 <br />
 <ul class="col" style="width: 350px;">
@@ -176,9 +189,38 @@ iface eth0 inet static
 <br />
 <a href="./files/clase14/ejemplo_red.jpg"><img style="width: 400px;" src="./files/clase14/ejemplo_red.jpg"/></a>
 </section>
+
+<section>
+<h2>¿Como me conecto a Internet?</h2>
+<br/>
+<ol style="font-size: 80%;">
+	<li>Tengo un modem de algún proveedor con una IP pública</li>
+	<li>Ese modem me da servicios de: Router, Switch/WiFi, Proxy, DHCP, etc...</li>
+	<li>Mi máquina arranca sin IP... ¡Necesita una para poder conectarse!</li>
+	<li>Dentro de la red interna (Ethernet o WLAN) hace un pedido de broadcast (todos lo reciben) via DHCP</li>
+	<li>En el modem existe un server DHCP que asigna una IP privada y la asocia a la dirección física (MAC Address)</li>
+	<li>DHCP me asigna: Una IP, la red, el router y el DNS más cercano.</li>
+</ol>
+<br/><br/>
+<p>¡Ya puedo navegar por internet!</p>
+</section>
 </section>
 
 <section>
+<section>
+<h2>Puertos TCP</h2>
+<br/>
+<p style="text-align: left;">Ya tenemos la dirección IP... ¿Que nos falta?</p>
+<ul>
+	<li>Imaginemos nuestra máquina como un edificio...</li>
+	<li>Dentro del edificio hay muchas oficinas...</li>
+	<li>Dentro de una máquina hay muchos programas...</li>
+	<li>Entonces... ¿Como distinguimos entre ellos?</li>
+	<li>¡Necesitamos algo más que la dirección!</li>
+	<li>Puertos TCP/UDP al rescate...</li>
+</ul>
+</section>
+
 <section>
 <h2>Resumen TCP/IP</h2>
 <br/>
@@ -195,6 +237,11 @@ iface eth0 inet static
 </ul>
 <br/><br/>
 <p>Cada uno, espacios de puertos por protocolo.</p>
+</section>
+
+<section>
+<h2>Paquete TCP</h2>
+<img src="./files/clase14/TCP_UDP_headers.jpg"/>
 </section>
 
 <section>
@@ -348,6 +395,17 @@ $ ping www.wikipedia.org
 </section>
 
 <section>
+<h2>Arquitectura Cliente / Servidor</h2>
+<br />
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/cliente-servidor.jpg"><img src="./files/clase14/cliente-servidor.jpg"/></a>
+</ul>
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/cliente-servidor-concepto-funcion.jpg"><img src="./files/clase14/cliente-servidor-concepto-funcion.jpg"/></a>
+</ul>
+</section>
+
+<section>
 <h2>Sockets</h2>
 <br/>
 <pre><code>int socket(int domain, int type, int protocol);</code></pre>
@@ -360,6 +418,63 @@ $ ping www.wikipedia.org
 <ul style="font-size: 85%;">
 	<li>Los sockets son una abstracción que nos permite comunicarnos con otros programas usando descriptores de fichero estándar de Unix.</li>
 	<li>Hay distintos tipos, usaremos AF_INET (IPv4). Dentro de estos existen TCP (SOCK_STREAM) o UDP (SOCK_DGRAM). Para crearlos usaremos la función socket()</li>
+</ul>
+</section>
+
+<section>
+<a href="./files/clase14/Esquema_TCP.jpg"><img src="./files/clase14/Esquema_TCP.jpg"/></a>
+<h3>Socket TCP</h3>
+</section>
+
+<section>
+<h2>Uso sockets</h2>
+<div style="text-align: left;">
+<ul>
+	<li>Server
+		<ol>
+			<li>bind()</li>
+			<li>listen()</li>
+			<li>accept()</li>
+		</ol>
+	</li>
+	<br/>
+	<li>Cliente
+		<ol>
+			<li>socket connect()</li>
+		</ol>
+	</li>
+</ul>
+</div>
+<br/>
+<p>Luego lo usamos mediante el file descriptor (ambos)</p>
+</section>
+
+<section>
+<a href="./files/clase14/Esquema_UDP.jpg"><img src="./files/clase14/Esquema_UDP.jpg"/></a>
+<h3>Socket UDP</h3>
+</section>
+
+<section>
+<h2>Uso UDP</h2>
+<div style="text-align: left;">
+<ul>
+	<li>No nos conectamos:
+		<ol>
+			<li>sendto()</li>
+			<li>recvfrom()</li>
+		</ol>
+	</li>
+</ul>
+<br/><br/>
+<p>Como la comunicación es inconexa no es necesario conectarse al socket, solo usarlo. Igual es como si hubiera un servidor/cliente. Siempre uno tiene que quedarse escuchando, el que recibe.</p>
+</section>
+
+<section>
+<h2>Codigo de ejemplo:</h2>
+<ul>
+	<li><a href="files/clase14/codigo_ej-udp.zip">Ejemplo UDP (zip)</a></li>
+	<li><a href="files/clase14/sockets_1server.c">Ejemplo TCP Server</a></li>
+	<li><a href="files/clase14/sockets_2client.c">Ejemplo TCP Client</a></li>
 </ul>
 </section>
 </section>
@@ -397,69 +512,6 @@ cat test.txt | nc 127.0.0.1 4161
 </section>
 
 <section>
-<h2>¿Problemas de red?</h2>
-<br/>
-<p>Si misma red y problemas:</p>
-<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
-sudo iptables -F
-</code></pre>
-<br/>
-<p>iptables es un firewall que viene con linux.<br/>Esto limpia las reglas que trae.</p>
-<br/>
-<p>Para saber que hay configurado:</p>
-<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
-sudo iptables -L
-</code></pre>
-</section>
-
-<section>
-<h2>Uso sockets</h2>
-<div style="text-align: left;">
-<ul>
-	<li>Server
-		<ol>
-			<li>bind()</li>
-			<li>listen()</li>
-			<li>accept()</li>
-		</ol>
-	</li>
-	<br/>
-	<li>Cliente
-		<ol>
-			<li>socket connect()</li>
-		</ol>
-	</li>
-</ul>
-</div>
-<br/>
-<p>Luego lo usamos mediante el file descriptor (ambos)</p>
-</section>
-
-<section>
-<h2>Uso UDP</h2>
-<div style="text-align: left;">
-<ul>
-	<li>No nos conectamos:
-		<ol>
-			<li>sendto()</li>
-			<li>recvfrom()</li>
-		</ol>
-	</li>
-</ul>
-<br/><br/>
-<p>Como la comunicación es inconexa no es necesario conectarse al socket, solo usarlo. Igual es como si hubiera un servidor/cliente. Siempre uno tiene que quedarse escuchando, el que recibe.</p>
-</section>
-
-<section>
-<h2>Codigo de ejemplo:</h2>
-<ul>
-	<li><a href="files/clase14/codigo_ej-udp.zip">Ejemplo UDP (zip)</a></li>
-	<li><a href="files/clase14/sockets_1server.c">Ejemplo TCP Server</a></li>
-	<li><a href="files/clase14/sockets_2client.c">Ejemplo TCP Client</a></li>
-</ul>
-</section>
-
-<section>
 <h2>Herramientas 2</h2>
 <br/>
 <h3>TCPdump</h3>
@@ -478,13 +530,26 @@ kdesu wireshark -i lo
 </section>
 
 <section>
+<h2>¿Problemas de red?</h2>
+<br/>
+<p>Si misma red y problemas:</p>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo iptables -F
+</code></pre>
+<br/>
+<p>iptables es un firewall que viene con linux.<br/>Esto limpia las reglas que trae.</p>
+<br/>
+<p>Para saber que hay configurado:</p>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+sudo iptables -L
+</code></pre>
+</section>
+
+<section>
 	<h3><a href="files/clase14/Guia_Beej_de_Programacion_en_Redes.pdf">Guia Beej para redes en castellano (pdf local)</a></h3>
 	<br/>
 	<h3><a href="http://beej.us/guide/bgnet/">Guia Beej para redes (online, original y en ingles)</a></h3>
-	<br/>
-	<h3><a href="https://www.youtube.com/watch?v=z7Q_NRGyKt4">¿Qué es una red informática? (video EducAr)</a><h3>
 </section>
-
 </section>
 
 <section>
