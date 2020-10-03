@@ -44,6 +44,9 @@
 			<div class="slides">
 
 <!-- SLIDES HERE -->
+
+<!-- ==== 1st Section ==== -->
+
 <section>
 <section>
 <h1>Redes de datos y Sockets</h1>
@@ -54,8 +57,8 @@
 <section>
 	<h2>¿Qué es una red informática?</h2>
 	<br />
-	<ul class="col" style="width: 400px;">
-		<a href="./files/clase14/Computadores_Internet.jpg"><img src="./files/clase14/Computadores_Internet.jpg"/></a>
+	<ul class="col" style="width: 380px;">
+		<a href="./files/clase14/medios-comunicacion.jpg"><img src="./files/clase14/medios-comunicacion.jpg"/></a>
 	</ul>
 	<ul class="col" style="width: 380px;">
 		<a href="./files/clase14/Mundo_Conectado.jpg"><img src="./files/clase14/Mundo_Conectado.jpg"/></a>
@@ -185,6 +188,31 @@ iface eth0 inet static
 </section>
 
 <section>
+<h2>Espacio de direcciones</h2>
+<p>Internet Topology Map, January 2009 (UC Regent)</p>
+<img src="./files/clase14/ipv4_ipv6_address_space_small.jpg"/>
+<p>Imagenes detalladas del <a href="./files/clase14/ipv4_ipv6_address_space.jpg">2009</a> y del <a href="./files/clase14/ipv4_ipv6_address_space_2014.jpg">2014</a></p>
+</section>
+
+<section>
+<h2>Mi Configuracion</h2>
+<br/>
+<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
+$ ip a
+</code></pre>
+<br/>
+<ul>
+<li>lo: loopback</li>
+<li>eth0 / e* : Cable</li>
+<li>wlan0 / w* : WiFi</li>
+</ul>
+</section>
+</section>
+
+<!-- ==== 2nd Section ==== -->
+
+<section>
+<section>
 <h2>Ejemplo de red</h2>
 <br />
 <a href="./files/clase14/ejemplo_red.jpg"><img style="width: 400px;" src="./files/clase14/ejemplo_red.jpg"/></a>
@@ -204,9 +232,21 @@ iface eth0 inet static
 <br/><br/>
 <p>¡Ya puedo navegar por internet!</p>
 </section>
-</section>
 
 <section>
+<h2>DNS</h2>
+<p>www.nachodigital.com.ar -> 66.228.47.221</p>
+<br/>
+<pre><code>
+$ ping www.wikipedia.org
+	PING dyna.wikimedia.org (208.80.154.224): 56 data bytes
+	64 bytes from 208.80.154.224: icmp_seq=0 ttl=52 time=175.908 ms
+	64 bytes from 208.80.154.224: icmp_seq=1 ttl=52 time=174.921 ms
+</code></pre>
+<br/>
+<p>El DNS nos ha dicho que la IP de <br/><a href="http://www.wikipedia.org">www.wikipedia.org</a> es 208.80.154.224</p>
+</section>
+
 <section>
 <h2>Puertos TCP</h2>
 <br/>
@@ -245,6 +285,16 @@ iface eth0 inet static
 </section>
 
 <section>
+<h2>Puertos TCP</h2>
+<br/>
+<ul style="font-size: 85%;">
+	<li>TCP usa el concepto de número de puerto para identificar a las aplicaciones emisoras y receptoras. Cada lado de la conexión TCP tiene asociado un número de puerto (de 16 bits sin signo, con lo que existen 65536 puertos posibles) asignado por la aplicación emisora o receptora.</li>
+	<li>Los puertos bien conocidos son asignados por la Internet Assigned Numbers Authority (IANA), van del 0 al 1023 y son usados normalmente por el sistema o por procesos con privilegios.</li>
+	<li>Los puertos registrados son normalmente usados por aplicaciones privadas (por ejemplo 8080). Los puertos dinámicos/privados también son usalmente usados por las aplicaciones de usuario.</li>
+</ul>
+</section>
+
+<section>
 <h2>Puertos (<a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers">IANA</a>)</h2>
 <ul>
 	<li>SSH -> 22</li>
@@ -266,218 +316,16 @@ iface eth0 inet static
 <h2>Ejemplo de puertos</h2>
 <ul>
 <li>2001</li>
+<li>3000</li>
 <li>4004</li>
 <li>4161</li>
+<li>8080</li>
 </ul>
 <p>Siempre arriba de 1024</p>
 </section>
-
-<section>
-<h2>Mi Configuracion</h2>
-<br/>
-<pre style="width: 520px;"><code data-trim style="font-size: 24px; margin-top: 20px;" class="bash">
-$ ip a
-</code></pre>
-<br/>
-<ul>
-<li>lo: loopback</li>
-<li>eth0 / e* : Cable</li>
-<li>wlan0 / w* : WiFi</li>
-</ul>
 </section>
 
-<section>
-<h2>Espacio de direcciones</h2>
-<p>Internet Topology Map, January 2009 (UC Regent)</p>
-<img src="./files/clase14/ipv4_ipv6_address_space_small.jpg"/>
-<p>Imagenes detalladas del <a href="./files/clase14/ipv4_ipv6_address_space.jpg">2009</a> y del <a href="./files/clase14/ipv4_ipv6_address_space_2014.jpg">2014</a></p>
-</section>
-
-<section>
-<h2>DNS</h2>
-<p>www.nachodigital.com.ar -> 66.228.47.221</p>
-<br/>
-<pre><code>
-$ ping www.wikipedia.org
-	PING dyna.wikimedia.org (208.80.154.224): 56 data bytes
-	64 bytes from 208.80.154.224: icmp_seq=0 ttl=52 time=175.908 ms
-	64 bytes from 208.80.154.224: icmp_seq=1 ttl=52 time=174.921 ms
-</code></pre>
-<br/>
-<p>El DNS nos ha dicho que la IP de <br/><a href="http://www.wikipedia.org">www.wikipedia.org</a> es 208.80.154.224</p>
-</section>
-</section>
-
-<section>
-<section>
-<h1>Programación de Sockets</h1>
-<br/>
-<p><a href="files/clase14/redes_y_sockets.odp">Bajar presentación de redes y sockets</a></p>
-</section>
-
-<section>
-<h2>Orden de bytes para el host y la red</h2>
-<br/>
-<ul>
-	<li>big-endian (TCP/IP, IBM RS6000, SUN, ...)
-		<ul>
-			<li>dirección N : byte más significativo</li>
-			<li>dirección N+1: byte menos significativo</li>
-		</ul>
-	</li>
-	<br/>
-	<li>Little-endian (Intel x86, DEC Alpha, ...)
-		<ul>
-			<li>dirección N : byte menos significativo</li>
-			<li>dirección N+1: byte más significativo</li>
-		</ul>
-	</li>
-</ul>
-</section>
-
-<section>
-<h2>Orden de bytes para el host y la red</h2>
-<br/>
-<a href="./files/clase14/little-big_endian.jpg"><img src="./files/clase14/little-big_endian.jpg"/></a>
-</section>
-
-<section>
-<h2>Orden de bytes para el host y la red</h2>
-<h2>Funciones</h2>
-<br/>
-<pre><code>unsigned long htonl (unsigned long hostlong)</code></pre>
-<p>Convierte un long del formato de la máquina al de la red.</p>
-<pre><code>unsigned short htons (unsigned short hostshort)</code></pre>
-<p>Convierte un short del formato de la máquina al de la red.</p>
-<pre><code>unsigned long ntohl (unsigned long netlong)</code></pre>
-<p>Convierte un long del formato de la red al de la máquina.</p>
-<pre><code>unsigned short ntohs (unsigned short netshort)</code></pre>
-<p>Convierte un short del formato de la red al de la máquina.</p>
-</section>
-
-<section>
-<h2>TCP (1)</h2>
-<br/>
-<ul>
-	<li>TCP usa el concepto de número de puerto para identificar a las aplicaciones emisoras y receptoras. Cada lado de la conexión TCP tiene asociado un número de puerto (de 16 bits sin signo, con lo que existen 65536 puertos posibles) asignado por la aplicación emisora o receptora.</li>
-	<li>Los puertos son clasificados en tres categorías:
-		<ul>
-			<li>Bien conocidos: 0 a 1023</li>
-			<li>Registrados, Dinámicos o privados: 1024 y superiores</li>
-		</ul>
-	</li>
-</ul>
-</section>
-
-<section>
-<h2>TCP (2)</h2>
-<br/>
-<ul>
-	<li>Los puertos bien conocidos son asignados por la Internet Assigned Numbers Authority (IANA), van del 0 al 1023 y son usados normalmente por el sistema o por procesos con privilegios.
-		<ul>
-			<li>Las aplicaciones que usan este tipo de puertos son ejecutadas como servidores y se quedan a la escucha de conexiones.</li>
-			<li>Algunos ejemplos son: FTP (21), SSH (22), Telnet (23), SMTP (25) y HTTP (80).</li>
-		</ul>
-	</li>
-	<li>Los puertos registrados son normalmente usados por aplicaciones privadas (por ejemplo 8080). Los puertos dinámicos/privados también son usalmente usados por las aplicaciones de usuario.</li>
-</ul>
-</section>
-
-<section>
-<h2>TCP: Conexión</h2>
-<br />
-<ul class="col" style="width: 400px;">
-	<a href="./files/clase14/tcp1.png"><img src="./files/clase14/tcp1.png"/></a>
-</ul>
-<ul class="col" style="width: 400px;">
-	<a href="./files/clase14/tcp2.png"><img src="./files/clase14/tcp2.png"/></a>
-</ul>
-</section>
-
-<section>
-<h2>Arquitectura Cliente / Servidor</h2>
-<br />
-<ul class="col" style="width: 400px;">
-	<a href="./files/clase14/cliente-servidor.jpg"><img src="./files/clase14/cliente-servidor.jpg"/></a>
-</ul>
-<ul class="col" style="width: 400px;">
-	<a href="./files/clase14/cliente-servidor-concepto-funcion.jpg"><img src="./files/clase14/cliente-servidor-concepto-funcion.jpg"/></a>
-</ul>
-</section>
-
-<section>
-<h2>Sockets</h2>
-<br/>
-<pre><code>int socket(int domain, int type, int protocol);</code></pre>
-<ul>
-	<li>Domain: AF_UNIX, AF_INET, AF_INET6, mas...</li>
-	<li>Type: SOCK_STREAM, SOCK_DGRAM, mas...</li>
-	<li>Protocols: Con estas opciones puede ser 0</li>
-</ul>
-<br /><br />
-<ul style="font-size: 85%;">
-	<li>Los sockets son una abstracción que nos permite comunicarnos con otros programas usando descriptores de fichero estándar de Unix.</li>
-	<li>Hay distintos tipos, usaremos AF_INET (IPv4). Dentro de estos existen TCP (SOCK_STREAM) o UDP (SOCK_DGRAM). Para crearlos usaremos la función socket()</li>
-</ul>
-</section>
-
-<section>
-<a href="./files/clase14/Esquema_TCP.jpg"><img src="./files/clase14/Esquema_TCP.jpg"/></a>
-<h3>Socket TCP</h3>
-</section>
-
-<section>
-<h2>Uso sockets</h2>
-<div style="text-align: left;">
-<ul>
-	<li>Server
-		<ol>
-			<li>bind()</li>
-			<li>listen()</li>
-			<li>accept()</li>
-		</ol>
-	</li>
-	<br/>
-	<li>Cliente
-		<ol>
-			<li>socket connect()</li>
-		</ol>
-	</li>
-</ul>
-</div>
-<br/>
-<p>Luego lo usamos mediante el file descriptor (ambos)</p>
-</section>
-
-<section>
-<a href="./files/clase14/Esquema_UDP.jpg"><img src="./files/clase14/Esquema_UDP.jpg"/></a>
-<h3>Socket UDP</h3>
-</section>
-
-<section>
-<h2>Uso UDP</h2>
-<div style="text-align: left;">
-<ul>
-	<li>No nos conectamos:
-		<ol>
-			<li>sendto()</li>
-			<li>recvfrom()</li>
-		</ol>
-	</li>
-</ul>
-<br/><br/>
-<p>Como la comunicación es inconexa no es necesario conectarse al socket, solo usarlo. Igual es como si hubiera un servidor/cliente. Siempre uno tiene que quedarse escuchando, el que recibe.</p>
-</section>
-
-<section>
-<h2>Codigo de ejemplo:</h2>
-<ul>
-	<li><a href="files/clase14/codigo_ej-udp.zip">Ejemplo UDP (zip)</a></li>
-	<li><a href="files/clase14/sockets_1server.c">Ejemplo TCP Server</a></li>
-	<li><a href="files/clase14/sockets_2client.c">Ejemplo TCP Client</a></li>
-</ul>
-</section>
-</section>
+<!-- ==== 3rd Section ==== -->
 
 <section>
 <section>
@@ -552,6 +400,258 @@ sudo iptables -L
 </section>
 </section>
 
+<!-- ==== 4th Section ==== -->
+
+<section>
+<section>
+<h1>Programación de Sockets</h1>
+<br/>
+<p><a href="files/clase14/redes_y_sockets.odp">Bajar presentación de redes y sockets</a></p>
+</section>
+
+<section>
+<h2>Orden de bytes para el host y la red</h2>
+<br/>
+<ul>
+	<li>big-endian (TCP/IP, IBM RS6000, SUN, ...)
+		<ul>
+			<li>dirección N : byte más significativo</li>
+			<li>dirección N+1: byte menos significativo</li>
+		</ul>
+	</li>
+	<br/>
+	<li>Little-endian (Intel x86, DEC Alpha, ...)
+		<ul>
+			<li>dirección N : byte menos significativo</li>
+			<li>dirección N+1: byte más significativo</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Orden de bytes para el host y la red</h2>
+<br/>
+<a href="./files/clase14/little-big_endian.jpg"><img src="./files/clase14/little-big_endian.jpg"/></a>
+</section>
+
+<section>
+<h2>Funciones de orden de bytes<br/> para el host y la red</h2>
+<br/>
+<pre><code>unsigned long htonl (unsigned long hostlong)</code></pre>
+<p>Convierte un long del formato de la máquina al de la red.</p>
+<pre><code>unsigned short htons (unsigned short hostshort)</code></pre>
+<p>Convierte un short del formato de la máquina al de la red.</p>
+<pre><code>unsigned long ntohl (unsigned long netlong)</code></pre>
+<p>Convierte un long del formato de la red al de la máquina.</p>
+<pre><code>unsigned short ntohs (unsigned short netshort)</code></pre>
+<p>Convierte un short del formato de la red al de la máquina.</p>
+</section>
+
+<section>
+<h2>TCP: Conexión</h2>
+<br />
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/tcp1.png"><img src="./files/clase14/tcp1.png"/></a>
+</ul>
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/tcp2.png"><img src="./files/clase14/tcp2.png"/></a>
+</ul>
+</section>
+
+<section>
+<h2>Arquitectura Cliente / Servidor</h2>
+<br />
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/cliente-servidor.jpg"><img src="./files/clase14/cliente-servidor.jpg"/></a>
+</ul>
+<ul class="col" style="width: 400px;">
+	<a href="./files/clase14/cliente-servidor-concepto-funcion.jpg"><img src="./files/clase14/cliente-servidor-concepto-funcion.jpg"/></a>
+</ul>
+</section>
+
+<section>
+<h2>Sockets</h2>
+<br/>
+<pre><code>int socket(int domain, int type, int protocol);</code></pre>
+<ul>
+	<li>Domain: AF_UNIX, AF_INET, AF_INET6, mas...</li>
+	<li>Type: SOCK_STREAM, SOCK_DGRAM, mas...</li>
+	<li>Protocols: Con estas opciones puede ser 0</li>
+</ul>
+<br /><br />
+<ul style="font-size: 85%;">
+	<li>Los sockets son una abstracción que nos permite comunicarnos con otros programas usando descriptores de fichero estándar de Unix.</li>
+	<li>Hay distintos tipos, usaremos AF_INET (IPv4). Dentro de estos existen TCP (SOCK_STREAM) o UDP (SOCK_DGRAM). Para crearlos usaremos la función socket()</li>
+</ul>
+</section>
+
+<section>
+<a href="./files/clase14/Esquema_TCP.jpg"><img src="./files/clase14/Esquema_TCP.jpg"/></a>
+<h3>Socket TCP</h3>
+</section>
+
+<section>
+<h2>Uso sockets</h2>
+<div style="text-align: left;">
+<ul>
+	<li>Server
+		<ol>
+			<li>bind()</li>
+			<li>listen()</li>
+			<li>accept()</li>
+		</ol>
+	</li>
+	<br/>
+	<li>Cliente
+		<ol>
+			<li>socket connect()</li>
+		</ol>
+	</li>
+</ul>
+</div>
+<br/>
+<p>Luego lo usamos mediante el file descriptor (ambos)</p>
+</section>
+
+<section>
+<h2>bind</h2>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+int bind(int sockfd, const struct sockaddr *addr,
+                                           socklen_t addrlen);
+</code></pre>
+<br/>
+<ul>
+	<li><span style="font-family: monospace; font-size: 90%;">sockfd</span>: Valor retornado por socket()</li>
+	<li><span style="font-family: monospace; font-size: 90%;">sockaddr</span>: Estructura de direcciones</li>
+	<li><span style="font-family: monospace; font-size: 90%;">addrlen</span>: Tamaño de la estructura</li>
+</ul>
+</section>
+
+<section>
+<h3>bind: Sus estructuras</h3>
+<p>Existe un struct sockaddr, pero para un manejo<br/> mas sencillo en TCP/IP se usa:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+struct sockaddr_in {
+    short int          sin_family;    // familia de direcciones, AF_INET
+    unsigned short int sin_port;      // Número de puerto
+    struct in_addr     sin_addr;      // Dirección de Internet
+    unsigned char      sin_zero[8];   // Relleno para preservar el tamaño
+                                      // original de struct sockaddr
+};
+</code></pre>
+<p>Dirección de Internet (una estructura por herencia histórica):</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+struct in_addr {
+    unsigned long s_addr;        // Esto es un long de 32 bits, ó 4 bytes
+};
+</code></pre>
+</section>
+
+<section>
+<h3>listen</h3>
+<br/>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+int listen(int sockfd, int backlog);
+</code></pre>
+<br/>
+<ul>
+	<li><span style="font-family: monospace; font-size: 90%;">backlog</span>: Cantidad de conexiones que pueden quedar en la cola de conexión esperando.</li>
+</ul>
+</section>
+
+<section>
+<h3>accept</h3>
+<br/>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+int accept(int sockfd, struct sockaddr *addr,
+                                  socklen_t *addrlen);
+</code></pre>
+<br/>
+<ul>
+	<li><span style="font-family: monospace; font-size: 90%;">addr</span> y <span style="font-family: monospace; font-size: 90%;">addrlen</span>: Dirección del cliente remoto y su tamaño.</li>
+	<li>Este llamado es bloqueante y el programa queda en este punto hasta que aparezca una conexión nueva.</li>
+</ul>
+</section>
+
+<section>
+<h3>connect</h3>
+<br/>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+int connect(int sockfd, const struct sockaddr *addr,
+                                  socklen_t addrlen);
+</code></pre>
+<br/>
+<ul>
+	<li>Pide una conexión con un socket para manejarla (<span style="font-family: monospace; font-size: 90%;">sockfd</span>) y la dirección del servidor (<span style="font-family: monospace; font-size: 90%;">addr/addrlen</span>).</li>
+</ul>
+</section>
+
+<section>
+<h3>read/write</h3>
+<br/>
+<p>read() - Lectura de archivos o sockets:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+ssize_t read(int fd, void *buf, size_t count);
+</code></pre>
+<br/><br/>
+<p>write() - Escritura en archivos o sockets:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+ssize_t write(int fd, const void *buf, size_t count);
+</code></pre>
+<br/><br/>
+<p style="font-size: 90%;">Ambas funciones son bloqueantes y pensadas para archivos.<br/> Se quedan esperando hasta que algo haya para leer o se pueda<br/> enviar la data a enviar.</p>
+</section>
+
+<section>
+<h3>send/recv</h3>
+<br/>
+<p style="font-size: 90%;">Estas funciones son especificas para manejo de sockets<br/> y proveen información adicional (flags).</p>
+<br/>
+<p>send() - Envio de datos por un socket:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+</code></pre>
+<br/><br/>
+<p>recv() - Recepción de datos desde un socket:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+ssize_t recv(int sockfd, void *buf, size_t len, int flags);
+</code></pre>
+</section>
+
+<section>
+<a href="./files/clase14/Esquema_UDP.jpg"><img src="./files/clase14/Esquema_UDP.jpg"/></a>
+<h3>Socket UDP</h3>
+</section>
+
+<section>
+<h2>Uso UDP</h2>
+<div style="text-align: left;">
+<ul>
+	<li>No nos conectamos:
+		<ol>
+			<li>sendto()</li>
+			<li>recvfrom()</li>
+		</ol>
+	</li>
+</ul>
+<br/><br/>
+<p>Como la comunicación es inconexa no es necesario conectarse al socket, solo usarlo. Igual es como si hubiera un servidor/cliente. Siempre uno tiene que quedarse escuchando, el que recibe.</p>
+</section>
+
+<section>
+<h2>Codigo de ejemplo:</h2>
+<ul>
+	<li><a href="files/clase14/codigo_ej-udp.zip">Ejemplo UDP (zip)</a></li>
+	<li><a href="files/clase14/sockets_1server.c">Ejemplo TCP Server</a></li>
+	<li><a href="files/clase14/sockets_2client.c">Ejemplo TCP Client</a></li>
+</ul>
+</section>
+</section>
+
+<!-- ==== 5th Section ==== -->
+
 <section>
 	<section>
 		<h1>Procesos y Sockets</h1>
@@ -572,10 +672,7 @@ sudo iptables -L
 				<ul><li>Creamos distintos procesos: fork()</li></ul>
 		</ul>
 	</section>
-</section>
 
-<!-- Nested vertical slides: NONBLOCKING -->
-<section data-background="#007777">
 	<section>
 		<h2>NONBLOCKING</h2>
 		<p>Parte no bloqueante de sockets_3client_nonblocking.c</p>
@@ -618,7 +715,104 @@ $ gcc -o server sockets_3server_nonblocking.c
 	</section>
 </section>
 
-<section data-background="#8c4738">
+<!-- ==== 6th Section ==== -->
+
+<section data-background="#4d7e65">
+	<section>
+		<h2>Usando fork()</h2>
+		<p>Fork nos permite crear un proceso "hijo", copia del "padre".</p>
+		<br /><p>man 2 fork</p>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;unistd.h&gt;
+pid_t fork(void);
+		</code></pre>
+		<br /><p>El proceso hijo es un duplicado del padre, pero<br />tiene un PID distinto (valor retornado pid_t).</p> 
+	</section>
+	<section>
+		<h2>¿Como identificamos clones?</h2>
+		<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+			<br />
+			<img style="height: 400px;" src="files/clase21/movie_multiplicity.jpg"/>
+		</ul>
+		<ul class="col" style="width: 400px;">
+			<br /><br />
+			<h3>The 6th day (2000)</h3>
+			<br /><a href="files/clase21/movie_The6thDay_Montage.jpg"><img src="files/clase21/movie_The6thDay.jpg"/></a>
+		</ul>
+	</section>
+	<section>
+		<br /><h3>fork() retorna...</h3>
+		<ul>
+		<li>0 : En el proceso nuevo (hijo)</li>
+		<li>-1 : Si hay un error</li>
+		<li>pid: El process ID del proceso hijo al padre</li>
+		</ul>
+		<br /><br /><br />
+		<h3>Ejemplo1:</h3>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ gcc -o ej1 ej_fork.c
+		</code></pre>
+	</section>
+	<section>
+		<h2>Fork: Funciones</h2>
+		<br /><ul>
+			<li>getpid() - Obtiene el PID del proceso actual.</li>
+			<li>getppid() - Obtiene el PID del proceso padre.</li>
+			<li>wait() - Espera a que un proceso cambie de estado.</li>
+		</ul>
+		<br /><br /><p>man 2 wait</p>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+pid_t wait(int *status);
+pid_t waitpid(pid_t pid, int *status, int options);
+		</code></pre>
+	</section>
+	<section>
+		<br /><h2>Ejemplo2:</h2>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+gcc -o ej2 ej_fork_kill.c
+		</code></pre>
+		</ul>
+		<br /><p>Para el segundo ejemplo utilizaremos los comandos:</p>
+		<ul>
+			<li>kill - Dado un PID lo "mata".</li>
+			<li>ps - Lista los procesos corriendo en la máquina.</li>
+				<ul>
+					<li style="font-size: 90%;"><span style="font-family: monospace; text-align: left;">ps ax</span><span style="margin-left: 38px;">: Ver todos los procesos</li>
+					<li style="font-size: 90%;"><span style="font-family: monospace; text-align: left;">ps elf</span><span style="margin-left: 20px;">: Para ver todas las columnas</span></li>
+				</ul>
+			<li>top / htop - Monitoreo "online" de procesos.</li>
+			<ul>
+				<li>top viene, htop hay que instalarlo.</li>
+			</ul>
+			<li>pstree - Arbol de procesos.</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Ejemplo3:</h2>
+		<br />
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+gcc -o ej3 ej_fork_count.c
+		</code></pre>
+		<br /><p>En este ejemplo vemos padre e hijo trabajando en paralelo.</p>
+	</section>
+
+	<section>
+		<h2>Ejemplos vistos</h2>
+		<ul>
+			<li><a href="files/clase21/ej_fork.c">ej_fork.c</a></li>
+			<li><a href="files/clase21/ej_fork_v2.c">ej_fork_v2.c</a></li>
+			<li><a href="files/clase21/ej_fork_kill.c">ej_fork_kill.c</a></li>
+			<li><a href="files/clase21/ej_fork_kill_v2.c">ej_fork_kill_v2.c</a></li>
+			<li><a href="files/clase21/ej_fork_count.c">ej_fork_count.c</a></li>
+		</ul>
+	</section>
+</section>
+
+<!-- ==== 7th Section ==== -->
+
+<section>
 	<section>
 		<h2>Ejemplo TCP fork</h2>
 		<p></p>
@@ -649,17 +843,10 @@ $ ./ej4-udp-clt 127.0.0.1 Hola
 $ ./ej4-udp-clt 127.0.0.1 Mundo
 		</code></pre>
 	</section>
-</section>
 
-<section>
 	<section>
 		<h2>Ejemplos vistos</h2>
 		<ul>
-			<li><a href="files/clase21/ej_fork.c">ej_fork.c</a></li>
-			<li><a href="files/clase21/ej_fork_v2.c">ej_fork_v2.c</a></li>
-			<li><a href="files/clase21/ej_fork_kill.c">ej_fork_kill.c</a></li>
-			<li><a href="files/clase21/ej_fork_kill_v2.c">ej_fork_kill_v2.c</a></li>
-			<li><a href="files/clase21/ej_fork_count.c">ej_fork_count.c</a></li>
 			<li><a href="files/clase21/sockets_3client_nonblocking.c">sockets_3client_nonblocking.c</a></li>
 			<li><a href="files/clase21/sockets_3server_nonblocking.c">sockets_3server_nonblocking.c</a></li>
 			<li><a href="files/clase21/tcp-cliente.c">tcp-cliente.c</a></li>
@@ -670,16 +857,34 @@ $ ./ej4-udp-clt 127.0.0.1 Mundo
 	</section>
 </section>
 
+<!-- ==== 8th Section ==== -->
+
 <section>
+	<section>
+	<h2>Reciclando nuestro bind</h2>
+	<br/><br/>
+	<ol>
+		<li>Pedir un int que valga 1:
+			<pre><code>const int uno=1;</code></pre>
+			</li>
+		<br/>
+		<li>Antes de armar el socket agregar:</li>
+	</ol>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno,
+                                                      (socklen_t)(sizeof(uno)));
+</code></pre>
+	</section>
+
 	<section>
 		<h2>Ejemplo Allegro/TCP pooling</h2>
 		<p></p>
-		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="bash">
 $ gcc -o al08_keyboard_client al08_keyboard_client.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
 $ gcc -o al08_keyboard_server al08_keyboard_server.c -lallegro -lallegro_main -lallegro_image -lallegro_primitives
 		</code></pre>
 		<br />
-		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="bash">
 $ ./al08_keyboard_server
 $ ./al08_keyboard_client 127.0.0.1
 		</code></pre>
@@ -688,16 +893,6 @@ $ ./al08_keyboard_client 127.0.0.1
 	<section>
 		<h2>Presentacion Pizarron</h2>
 		<a href="files/clase21/Presentacion_Pizarron_Juego.jpg"><img style="width: 900px;" src="files/clase21/Presentacion_Pizarron_Juego.jpg"/></a>
-	</section>
-
-	<section>
-	<h2>Reciclando nuestro bind</h2>
-		<ol>
-			<li>Pedir un int que valga 1:
-<pre><code>const int uno=1;</code></pre></li>
-			<li>Antes de armar el socket agregar:
-<pre><code>setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno, (socklen_t)(sizeof(uno)));</code></pre></li>
-		</ol>
 	</section>
 </section>
 

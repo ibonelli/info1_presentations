@@ -38,7 +38,10 @@ int main(int argc, char *argv[])
 	if (sockfd < 0)
 		error("ERROR opening socket");
 
+	// Del servidor al que me voy a conectar:
+	//    -> 1ro configuro el puerto
 	portno = atoi(argv[2]);
+	//    -> 2do consigo la IP ya sea con el nombre DNS o la IP
 	server = gethostbyname(argv[1]);
 
 	if (server == NULL) {
@@ -46,14 +49,18 @@ int main(int argc, char *argv[])
 		exit(0);
 	}
 
+	// Inicializo la estructura del serv_addr con ceros
 	memset((void *) &serv_addr, '\0', sizeof(serv_addr));
 
+	// Usamos IPv4
 	serv_addr.sin_family = AF_INET;
 
+	// Copio de la estructura devuelta por gethostbyname() a serv_addr.sin_addr.s_addr
 	bcopy((char *)server->h_addr,
 		  (char *)&serv_addr.sin_addr.s_addr,
 		  server->h_length);
 
+	// Configuro el puerto y lo convierto de formato host a network con htons()
 	serv_addr.sin_port = htons(portno);
 
 	// Paso2 hacer el connect() al server
@@ -63,13 +70,15 @@ int main(int argc, char *argv[])
 	// Paso3 -> Ya nos podemos comunicar a través de sockfd
 	printf("Escriba su mensaje: ");
 
+	// Com1 (Paso4) -> El cliente envía un mensaje
 	memset((void *) buffer, '\0', 256);
 	fgets(buffer,255,stdin);
 	n = write(sockfd,buffer,strlen(buffer));
 
 	if (n < 0)
-		  error("ERROR writing to socket");
+		error("ERROR writing to socket");
 
+	// Com2 (Paso5) -> El cliente recibe la confirmacion del servidor
 	memset((void *) buffer, '\0', 256);
 	n = read(sockfd,buffer,255);
 
@@ -77,6 +86,8 @@ int main(int argc, char *argv[])
 		  error("ERROR reading from socket");
 	printf("%s\n",buffer);
 
+	// Paso6 -> Cerramos el socket
 	close(sockfd);
+
 	return 0;
 }

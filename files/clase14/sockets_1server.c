@@ -41,9 +41,9 @@ int main(int argc, char *argv[])
 
 	// Armando la estructura "sockaddr_in" que va a usar el bind
 	portno = atoi(argv[1]);
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_addr.s_addr = INADDR_ANY;
-	serv_addr.sin_port = htons(portno);
+	serv_addr.sin_family = AF_INET;				// Usamos IPv4
+	serv_addr.sin_addr.s_addr = INADDR_ANY;		// Vamos a aceptar cualquier dirección de cliente
+	serv_addr.sin_port = htons(portno);			// El puerto donde vamos a quedarnos esperando conexiones de clientes
 	memset((void *) &(serv_addr.sin_zero), '\0', 8); // Poner a cero el resto de la estructura
 		// Lo mismo que hacer:
 		//			for(i=0;i<8;i++) serv_addr.sin_zero[i] = 0;
@@ -53,32 +53,37 @@ int main(int argc, char *argv[])
 			error("ERROR on binding");
 
 	// Paso3 listen() que nos deja al server escuchando el puerto definido en bind()
-	listen(sockfd,5);
+	listen(sockfd,1);
 
 	clilen = sizeof(cli_addr);
 
 	printf("Esperando conexiones...\n");
 	// Paso4 accept() que se queda (bloqueado) esperando una conexión del cliente
 	newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
+		// Importante notar que accept() nos devuelve un newsockfd que nos permitira comunicarnos con el cliente
+		// El sockfd solo se usara para aceptar conexiones nuevas listen()/accept()
+		// De estos sockets tendremos uno por cliente (cuando podamos aceptar más de un cliente en programas futuros)
 	printf("\tConexion aceptada!\n");
 
 	// Paso5 -> Ya nos podemos comunicar a través de newsockfd
 	if (newsockfd < 0)
 		error("ERROR on accept");
 
+	// Com1 (Paso6) -> El servidor recibe el mensaje del cliente
 	memset((void *) buffer, '\0', 256);
-
 	n = read(newsockfd,buffer,255);
 
-	if (n < 0) error("ERROR reading from socket");
-
+	if (n < 0)
+		error("ERROR reading from socket");
 	printf("Este es su mensaje: %s\n",buffer);
+
+	// Com2 (Paso7) -> El servidor le confirma la recepcion al cliente
 	n = write(newsockfd,"Recibí tu mensaje!",18);
 
 	if (n < 0) error("ERROR writing to socket");
 
+	// Paso 8 -> Cerramos los sockets usados
 	close(newsockfd);
-
 	close(sockfd);
 
 	return 0;
