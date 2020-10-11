@@ -641,6 +641,24 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 </section>
 
 <section>
+<h3>sendto/recvfrom</h3>
+<br/>
+<p style="font-size: 90%;">Estas funciones son el send/recv con manejo de sockets UDP<br/> ya que permiten especificar el otro participante.</p>
+<br/>
+<p>sendto() - Envio de datos por un socket UDP:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
+                      const struct sockaddr *dest_addr, socklen_t addrlen);
+</code></pre>
+<br/><br/>
+<p>recvfrom() - Recepción de datos desde un socket UDP:</p>
+<pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
+ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
+                      struct sockaddr *src_addr, socklen_t *addrlen);
+</code></pre>
+</section>
+
+<section>
 <h2>Codigo de ejemplo:</h2>
 <ul>
 	<li><a href="files/clase14/codigo_ej-udp.zip">Ejemplo UDP (zip)</a></li>
@@ -728,18 +746,27 @@ pid_t fork(void);
 		</code></pre>
 		<br /><p>El proceso hijo es un duplicado del padre, pero<br />tiene un PID distinto (valor retornado pid_t).</p> 
 	</section>
+
 	<section>
 		<h2>¿Como identificamos clones?</h2>
+		<ul class="col" style="width: 400px;">
+			<br />
+			<h3>The 6th day (2000)</h3>
+			<br /><a href="files/clase21/movie_The6thDay_Montage.jpg"><img src="files/clase21/movie_The6thDay.jpg"/></a>
+		</ul>
+		<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+			<br />
+			<h3>Gravity Falls</h3>
+			<br /><a href="files/clase21/gravity_falls_S1e7_clones.jpg"><img style="width: 400px;" src="files/clase21/gravity_falls_S1e7_clones.jpg"/></a>
+		</ul>
+		<!--
 		<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
 			<br />
 			<img style="height: 400px;" src="files/clase21/movie_multiplicity.jpg"/>
 		</ul>
-		<ul class="col" style="width: 400px;">
-			<br /><br />
-			<h3>The 6th day (2000)</h3>
-			<br /><a href="files/clase21/movie_The6thDay_Montage.jpg"><img src="files/clase21/movie_The6thDay.jpg"/></a>
-		</ul>
+		-->
 	</section>
+
 	<section>
 		<br /><h3>fork() retorna...</h3>
 		<ul>
@@ -753,6 +780,7 @@ pid_t fork(void);
 $ gcc -o ej1 ej_fork.c
 		</code></pre>
 	</section>
+
 	<section>
 		<h2>Fork: Funciones</h2>
 		<br /><ul>
@@ -768,6 +796,15 @@ pid_t wait(int *status);
 pid_t waitpid(pid_t pid, int *status, int options);
 		</code></pre>
 	</section>
+
+	<section>
+		<h3>Memoria del child process</h3>
+		<br/>
+		<p>Si bien Unix originalmente copiaba toda la memoria del proceso padre, Linux desde el principio fue pensando para intel 386 que tiene "<a href="https://es.wikipedia.org/wiki/Copy-on-write">copy on write</a>" lo que permite usar la misma memoria hasta que el programa cambie un dato.</p>
+		<br/>
+		<p>Por esto una vez copiado, la dirección a mostrar es la misma. Pero existe otra razón adicional, Linux tiene un manejo de memoria virtual. Lo que nos muestra puede tener el mismo puntero, pero no es la misma dirección de memoria física (<a href="./files/clase21/fork_and_virtual_memory.md">ref</a>).</p>
+	</section>
+
 	<section>
 		<br /><h2>Ejemplo2:</h2>
 		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
@@ -789,6 +826,7 @@ gcc -o ej2 ej_fork_kill.c
 			<li>pstree - Arbol de procesos.</li>
 		</ul>
 	</section>
+
 	<section>
 		<h2>Ejemplo3:</h2>
 		<br />

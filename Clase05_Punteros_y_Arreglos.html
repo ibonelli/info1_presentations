@@ -383,6 +383,17 @@ a = input("%i")
 
 <section>
 <section>
+<h2>Arquitectura de 64bits</h2>
+<h3>¿Punteros de 64bits o 48bits?</h3>
+<br/>
+<p>En las máquinas actuales de 64bits se manejan punteros de 48bits. Esto es por que con eso ya pueden direccionar 256 terabyte de memoria cosa que les pareció suficiente a los fabricantes de procesadores (<a href="https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space">ref</a>). De esta manera los fabricantes se ahorran los transitores de esos últimos 16bits.</p>
+<br/>
+<p>Por esto los punteros que veremos con %p serán de<br/> 48bits o 6 bytes.</p>
+</section>
+</section>
+
+<section>
+<section>
 <h1>Arreglos</h1>
 <br/><h3>(Clase 2)</h3>
 </section>
@@ -827,6 +838,17 @@ int main(void) {
 	printf("%s\n", str);
 }
 </code></pre>
+</section>
+
+<section>
+	<h3>Mejor usar fgets() [III]</h3>
+	<p>¿Por qué esto es importante?</p>
+	<p>¡Seguridad en el código que ejecutamos a ataques!</p>
+	<br/>
+	<ul>
+		<li><a href="http://www.underhanded-c.org/">Underhanded C</a> (en <a href="https://en.wikipedia.org/wiki/Underhanded_C_Contest">Wikipedia</a>)</li>
+		<li><a href="https://en.wikipedia.org/wiki/Wargame_(hacking)">Wargame (hacking)</a>, <a href="https://gist.github.com/fakhrullah/e8794f4847f3114316235ad7b0530dec">List of hacking games</a><br/> y <a href="https://overthewire.org/wargames/">OverTheWire</a></li>
+	</ul>
 </section>
 
 <section>
