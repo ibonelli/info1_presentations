@@ -590,22 +590,23 @@ int connect(int sockfd, const struct sockaddr *addr,
 
 <section>
 <h3>read/write</h3>
+<h4>unistd.h</h4>
 <br/>
 <p>read() - Lectura de archivos o sockets:</p>
 <pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
 ssize_t read(int fd, void *buf, size_t count);
 </code></pre>
-<br/><br/>
 <p>write() - Escritura en archivos o sockets:</p>
 <pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
 ssize_t write(int fd, const void *buf, size_t count);
 </code></pre>
-<br/><br/>
+<br/>
 <p style="font-size: 90%;">Ambas funciones son bloqueantes y pensadas para archivos.<br/> Se quedan esperando hasta que algo haya para leer o se pueda<br/> enviar la data a enviar.</p>
 </section>
 
 <section>
 <h3>send/recv</h3>
+<h4>sys/socket.h</h4>
 <br/>
 <p style="font-size: 90%;">Estas funciones son especificas para manejo de sockets<br/> y proveen información adicional (flags).</p>
 <br/>
@@ -613,7 +614,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 <pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
 ssize_t send(int sockfd, const void *buf, size_t len, int flags);
 </code></pre>
-<br/><br/>
 <p>recv() - Recepción de datos desde un socket:</p>
 <pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
 ssize_t recv(int sockfd, void *buf, size_t len, int flags);
@@ -642,6 +642,7 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 
 <section>
 <h3>sendto/recvfrom</h3>
+<h4>sys/socket.h</h4>
 <br/>
 <p style="font-size: 90%;">Estas funciones son el send/recv con manejo de sockets UDP<br/> ya que permiten especificar el otro participante.</p>
 <br/>
@@ -650,7 +651,6 @@ ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
                       const struct sockaddr *dest_addr, socklen_t addrlen);
 </code></pre>
-<br/><br/>
 <p>recvfrom() - Recepción de datos desde un socket UDP:</p>
 <pre><code data-trim style="font-size: 20px; margin-top: 20px;" class="cpp">
 ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
@@ -721,8 +721,9 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
 	</section>
 	<section>
 		<h2>¿Y en el servidor cambia algo?</h2>
-		<p>No en este ejemplo, pero se puede cambiar el server a una máquina de estados. De esa manera y como no bloqueante se pueden manejar multiples conexiones simultaneamente.</p>
-		<p>Pero para poder manejar distintos sockets es mejor usar fork()</p>
+		<div style="font-size: 80%;">
+			<p>No en este ejemplo, pero se puede cambiar el server a una máquina de estados. De esa manera y como no bloqueante se pueden manejar multiples conexiones simultaneamente. Pero para poder manejar distintos sockets es mejor usar fork()</p>
+		</div>
 		<br />
 		<p>Compilar los ejemplos de código:</p>
 		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
@@ -730,6 +731,14 @@ $ gcc -o client sockets_3client_nonblocking.c
 $ gcc -o server sockets_3server_nonblocking.c
 		</code></pre>
 		</ul>
+		<br/>
+		<div style="font-size: 85%;">
+			<p style="text-align: left; margin-left: 200px;">Codigo:</p>
+			<ul>
+				<li><a href="files/clase21/sockets_3client_nonblocking.c">sockets_3client_nonblocking.c</a></li>
+				<li><a href="files/clase21/sockets_3server_nonblocking.c">sockets_3server_nonblocking.c</a></li>
+			</ul>
+		</div>
 	</section>
 </section>
 
@@ -853,6 +862,21 @@ gcc -o ej3 ej_fork_count.c
 <section>
 	<section>
 		<h2>Ejemplo TCP fork</h2>
+		<ul class="col" style="width: 380px;">
+			<a href="./files/clase21/socket_fork.png"><img src="./files/clase21/socket_fork.png"/></a>
+		</ul>
+		<br/><br/>
+		<div style="font-size: 85%;">
+			<p style="text-align: left; margin-left: 300px;">Codigo:</p>
+			<ul>
+				<li><a href="files/clase21/tcp-cliente.c">tcp-cliente.c</a></li>
+				<li><a href="files/clase21/tcp-servidor.c">tcp-servidor.c</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section>
+		<h2>Ejemplo TCP fork</h2>
 		<p></p>
 		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ gcc -o ej3-tcp-clt tcp-cliente.c
@@ -867,6 +891,7 @@ $ ./ej3-tcp-clt 127.0.0.1
 $ ps ax | grep ej3
 		</code></pre>
 	</section>
+
 	<section>
 		<h2>Otro ejemplo UDP</h2>
 		<p></p>
@@ -880,18 +905,14 @@ $ ./ej4-udp-svr
 $ ./ej4-udp-clt 127.0.0.1 Hola
 $ ./ej4-udp-clt 127.0.0.1 Mundo
 		</code></pre>
-	</section>
-
-	<section>
-		<h2>Ejemplos vistos</h2>
-		<ul>
-			<li><a href="files/clase21/sockets_3client_nonblocking.c">sockets_3client_nonblocking.c</a></li>
-			<li><a href="files/clase21/sockets_3server_nonblocking.c">sockets_3server_nonblocking.c</a></li>
-			<li><a href="files/clase21/tcp-cliente.c">tcp-cliente.c</a></li>
-			<li><a href="files/clase21/tcp-servidor.c">tcp-servidor.c</a></li>
-			<li><a href="files/clase21/udp-cliente.c">udp-cliente.c</a></li>
-			<li><a href="files/clase21/udp-servidor.c">udp-servidor.c</a></li>
-		</ul>
+		<br/><br/>
+		<div style="font-size: 85%;">
+			<p style="text-align: left; margin-left: 300px;">Codigo:</p>
+			<ul>
+				<li><a href="files/clase21/udp-cliente.c">udp-cliente.c</a></li>
+				<li><a href="files/clase21/udp-servidor.c">udp-servidor.c</a></li>
+			</ul>
+		</div>
 	</section>
 </section>
 
@@ -926,6 +947,14 @@ $ gcc -o al08_keyboard_server al08_keyboard_server.c -lallegro -lallegro_main -l
 $ ./al08_keyboard_server
 $ ./al08_keyboard_client 127.0.0.1
 		</code></pre>
+		<br/>
+		<div style="font-size: 85%;">
+			<p style="text-align: left; margin-left: 240px;">Codigo:</p>
+			<ul>
+				<li><a href="files/clase21/al09_keyboard_client.c">al09_keyboard_client.c</a></li>
+				<li><a href="files/clase21/al09_keyboard_server.c">al09_keyboard_server.c</a></li>
+			</ul>
+		</div>
 	</section>
 
 	<section>
