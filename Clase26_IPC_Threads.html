@@ -72,7 +72,7 @@
 		<ul>
 			<li>Sockets</li>
 			<li>Message Queues</li>
-			<li>Pipes</li>
+			<li>Pipes (p/ej FIFO)</li>
 		</ul>
 	</li>
 </ul>
@@ -286,9 +286,35 @@ man 2 signal
 
 <section>
 <h2>Threads</h2>
+<br />
+<a href="files/clase26/threads_exit.jpg"><img style="width: 500px;" src="files/clase26/threads_exit.jpg"/></a>
+</section>
+
+<section>
+<h2>Threads</h2>
+<p>(ejemplo sencillo)</p>
+<h3><a href="files/clase26/threads_v1.c">threads.c</a> (<a href="files/clase26/threads_v2.c">v2</a>)</h3>
+<br /><br />
+<p style="text-align: left;">Formas de sincronizar threads:</p>
+<ul style="font-size: 90%;">
+	<li>Mutual Exclusion (Mutex) Locks</li>
+	<li>Condition Variables (muy similar a semáforos, pero sin IPCs)</li>
+	<li>Semáforos</li>
+</ul>
+</section>
+
+<section>
+<h2>Threads</h2>
 <h3>Prototipos &lt;pthread.h&gt;</h3>
 <br />
-<pre><code>/* Retornar el pthread ID actual */
+<pre><code>/* Creando un thread */
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
+                   void *(*start_routine) (void *), void *arg);
+
+/* Volviendo a unirse */
+int pthread_join(pthread_t thread, void **retval);
+
+/* Retornar el pthread ID actual */
 pthread_t pthread_self(void);
 
 /* ¿Son tid1 y tid2 el mismo thread?                  */
@@ -297,20 +323,7 @@ int pthread_equal(pthread_t tid1, pthread_t tid2);
 
 /* Salir del thread/función en el que estamos */
 void pthread_exit(void *retval);
-
-/* Creando un thread */
-int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
-                   void *(*start_routine) (void *), void *arg);
-
-/* Volviendo a unirse */
-int pthread_join(pthread_t thread, void **retval);
 </code></pre>
-</section>
-
-<section>
-<h2>Threads</h2>
-<br />
-<a href="files/clase26/threads_exit.jpg"><img style="width: 500px;" src="files/clase26/threads_exit.jpg"/></a>
 </section>
 
 <section>
@@ -328,19 +341,6 @@ int pthread_join(pthread_t thread, void **retval);
 	</li>
 	<li>pthread_attr_init() : Nos permite crear los atributos de un thread.</li>
 	<li>pthread_join() : Es bloqueante como el wait() del fork().</li>
-</ul>
-</section>
-
-<section>
-<h2>Threads</h2>
-<p>(ejemplo sencillo)</p>
-<h3><a href="files/clase26/threads_v1.c">threads.c</a> (<a href="files/clase26/threads_v2.c">v2</a>)</h3>
-<br /><br />
-<p style="text-align: left;">Formas de sincronizar threads:</p>
-<ul style="font-size: 90%;">
-	<li>Mutual Exclusion (Mutex) Locks</li>
-	<li>Condition Variables (muy similar a semáforos, pero sin IPCs)</li>
-	<li>Semáforos</li>
 </ul>
 </section>
 
@@ -472,6 +472,7 @@ Job 2 finished
 	<li><a href="https://es.wikipedia.org/wiki/Tuber%C3%ADa_(inform%C3%A1tica)">Explicación de que es un pipe (en castellano)</a></li>
 	<li><a href="https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_pipes.htm">Explicación de que es un pipe (en inglés y bastante mejor)</a></li>
 	<li><a href="https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/">Ejemplo de un programa en C</a></li>
+	<li><a href="https://stackoverflow.com/questions/43023329/difference-between-mkfifo-and-mknod">Difference between mkfifo() and mknod()</a></li>
 </ul>
 </section>
 </section>
