@@ -347,7 +347,7 @@ void pthread_exit(void *retval);
 <section>
 <h2>Threads Mutex</h2>
 <br />
-<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando.</p>
+<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para serializar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando.</p>
 <br />
 <p>En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
 <br />
@@ -455,7 +455,6 @@ Job 2 finished
 <p style="text-align: left;">Para leer mas...</p>
 <ul style="font-size: 80%;">
 	<li><a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">Problemas evidentemente paralelos (en inglés)</a></li>
-	<li><a href="http://www2.electron.frba.utn.edu.ar/~mdoallo/presentaciones.save.2010/clase-20100916-threads">Threads en Linux</a> (por Ing. Marcelo Doallo)</li>
 	<li>Linux Threads: <a href="http://www.thegeekstuff.com/2012/03/linux-threads-intro/">Intro</a>, <a href="http://www.thegeekstuff.com/2012/04/create-threads-in-linux/">creating</a>, <a href="http://www.thegeekstuff.com/2012/04/terminate-c-thread/">finishing them</a></li>
 	<li>Threads: <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node29.html#SECTION002900000000000000000">Basics</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node30.html#SECTION003000000000000000000">Advanced</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node31.html#SECTION003100000000000000000">Synchronization</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node32.html#SECTION003200000000000000000">Ejemplos</a></li>
 	<li>Paralelización en python: <a href="https://realpython.com/intro-to-python-threading/">Intro</a> y <a href="https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html">parelización con numpy/scipy</a></li>
@@ -465,14 +464,52 @@ Job 2 finished
 
 <section>
 <section>
-<h2>Pipes</h2>
-<h3>(A desarrollar)</h3>
+<h2>Named Pipes / FIFO</h2>
 <br/><br/>
-<ul>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+
+int mkfifo(const char *pathname, mode_t mode);
+</code></pre>
+<br />
+<p>Es como crear un archivo. Solo que un proceso lo escribe y el segundo proceso lo lee. Siempre en orden FIFO.</p>
+<br />
+<p>Luego para usarlo es igual que con archivos/sockets, usaremos: open(), read() y write().</p>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
+<br /><br />
+<p style="text-align: left;">Ejemplo 1:</p>
+<ul style="font-size: 80%;">
+	<li><a href="./files/clase26/fifo1_speak.c">fifo_speak.c</a> : Este programa permitirá escribir en un "extremo" de la FIFO.</li>
+	<li><a href="./files/clase26/fifo1_listen.c">fifo_listen.c</a> : Este programa recibe y lee lo que hay en la FIFO.</li>
+</ul>
+</br></br>
+<p style="text-align: left;">Ejemplo 2:</p>
+<ul style="font-size: 80%;">
+	<li><a href="./files/clase26/fifo2_writes_first.c">fifo_writes_first.c</a> : Este programa escribirá en un pipe.</li>
+	<li><a href="./files/clase26/fifo2_reads_first.c">fifo_reads_first.c</a> : Este programa leerá del mismo pipe en el que se escribió.</li>
+</ul>
+</section>
+
+<section>
+<br /><br /><br />
+<p style="text-align: left;">Para leer mas...</p>
+<ul style="font-size: 80%;">
 	<li><a href="https://es.wikipedia.org/wiki/Tuber%C3%ADa_(inform%C3%A1tica)">Explicación de que es un pipe (en castellano)</a></li>
 	<li><a href="https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_pipes.htm">Explicación de que es un pipe (en inglés y bastante mejor)</a></li>
 	<li><a href="https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/">Ejemplo de un programa en C</a></li>
-	<li><a href="https://stackoverflow.com/questions/43023329/difference-between-mkfifo-and-mknod">Difference between mkfifo() and mknod()</a></li>
+	<li><a href="https://stackoverflow.com/questions/43023329/difference-between-mkfifo-and-mknod">Difference between mkfifo() and mknod()</a>
+		<ul><li>mkfifo() es mas estándar y portable que mknod().</li></ul>
+	</li>
+	<li><a href="https://www.embhack.com/pipe-and-fifo/">Difference between pipe() and fifo()</a>
+		<ul>
+			<li>El uso de mkfifo() es más nuevo y usa nombres.</li>
+			<li>pipe() no usa nombres y no tiene representación en el FileSystem.</li>
+		</ul>
+	</li>
 </ul>
 </section>
 </section>
@@ -580,22 +617,10 @@ int msgctl(int msqid, int cmd, struct msqid_ds *buf);
 
 <section>
 <section>
-<h2>Catedra:</h2>
+<h2>Otros ejemplos...</h2>
+<p>Más ejemplos de la catedra en: ./files/clase26/ejemplos_catedra/*</p>
 <br/>
-<p style="text-align: left;">Ejemplos:
-	<ul>
-		<li>./files/clase26/ejemplos_catedra/NamedPipes_o_FIFOs</li>
-		<li>./files/clase26/ejemplos_catedra/pipes</li>
-		<li>./files/clase26/ejemplos_catedra/select</li>
-		<li>./files/clase26/ejemplos_catedra/semaforos</li>
-		<li>./files/clase26/ejemplos_catedra/senales</li>
-		<li>./files/clase26/ejemplos_catedra/SharedMemory</li>
-		<li>./files/clase26/ejemplos_catedra/sockets</li>
-		<li>./files/clase26/ejemplos_catedra/threads</li>
-	</ul>
-</p>
-<br/>
-<p style="text-align: left;">En recuperatorios y finales se tomó Named Pipes (o FIFOs) y pipes.</p>
+<p style="text-align: left;">En recuperatorios y finales se tomó Named Pipes (o FIFOs).</p>
 </section>
 </section>
 
