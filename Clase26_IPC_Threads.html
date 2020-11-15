@@ -421,6 +421,32 @@ Job 2 finished
 </section>
 
 <section>
+<h2>Threads & LWP ID</h2>
+<br/>
+<p>FORK & PID</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+ps elf | head -n1
+ps elf | grep tcp | grep -v grep
+watch -n 1 "ps elf | grep tcp | grep -v grep"
+
+F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY     TIME COMMAND
+0  1000 19398 17451  20   0  84348  1032 -      Sl+  pts/7   0:00 ./threads_m2
+</code></pre>
+<br/>
+<p>Threads & LWP</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+ps -eLf | head -n1
+ps -eLf | grep threads_m2 | grep -v grep
+watch -n 1 "ps -eLf | grep threads | grep -v grep"
+
+UID        PID  PPID   LWP  C NLWP STIME TTY          TIME CMD
+ignacio  19926 17451 19926  0    3 09:30 pts/7    00:00:00 ./threads_m2
+ignacio  19926 17451 19927  1    3 09:30 pts/7    00:00:00 ./threads_m2
+ignacio  19926 17451 19928  0    3 09:30 pts/7    00:00:00 ./threads_m2
+</code></pre>
+</section>
+
+<section>
 <h2>Threads Join</h2>
 <h3>No bloqueantes</h3>
 <br />
