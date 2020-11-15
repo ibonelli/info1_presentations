@@ -466,7 +466,7 @@ Job 2 finished
 <section>
 <h2>Named Pipes / FIFO</h2>
 <br/><br/>
-<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
 #include &lt;sys/types.h&gt;
 #include &lt;sys/stat.h&gt;
 
@@ -495,6 +495,16 @@ int mkfifo(const char *pathname, mode_t mode);
 </section>
 
 <section>
+<h2>Named Pipes / FIFO</h2>
+<p>Datos curiosos...</p>
+<br /><br />
+<ul>
+	<li>Se puede usar "cat" para ver la salida de una fifo (<a href="./files/clase26/fifo_and_cat.png">Captura</a>).</li>
+	<li>Se puede tener 2 escritores simultaneos, pero solo una salida activa (<a href="./files/clase26/fifo_escritores_simultaneos.png">Captura</a>).</li>
+</ul>
+</section>
+
+<section>
 <br /><br /><br />
 <p style="text-align: left;">Para leer mas...</p>
 <ul style="font-size: 80%;">
@@ -511,6 +521,29 @@ int mkfifo(const char *pathname, mode_t mode);
 		</ul>
 	</li>
 </ul>
+</section>
+
+<section>
+<h3>Ejercicio FIFO</h3>
+<div style="font-size: 70%; text-align: left;">
+	<p style="text-align: left;">Implemente una función que lea un archivo de texto desde el final hacia el principio y lo escriba en una FIFO, que debe ser creada por la función.</p>
+	<p style="text-align: left;">El prototipo de la función es el siguiente:</p>
+	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+	int enviarInvertido (char *fifoName, char *fileName);
+	</code></pre>
+	<p style="text-align: left;">Donde:</p>
+	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
+		<li>fifoName: Es el nombre de la fifo que debe crear la función y donde debe escribir el texto cifrado.</li>
+		<li>fileName: El nombre del archivo de texto a enviar.</li>
+	</ul>
+	<p style="text-align: left;">Y devuelve un número positivo indicando la cantidad de caracteres escritos en la fifo y un número negativo en caso de error.</p>
+	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
+		<li>-1 : Si no puede crear la fifo.</li>
+		<li>-2 : Si no puede abrir el archivo.</li>
+		<li>-3 : Si no puede leer el archivo.</li>
+		<li>-4 : Si no puede escribir en la fifo.</li>
+	</ul>
+</div>
 </section>
 </section>
 

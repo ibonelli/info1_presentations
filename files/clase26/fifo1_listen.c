@@ -14,8 +14,9 @@ int main()
 	char s[300];
 	int num, fd;
 
-	if ((fd=mkfifo (FIFO_NAME, 0666))<0)
-		fprintf (stderr, "Error creando la FIFO %s. Código de error %s\n",FIFO_NAME,strerror(fd));
+	//CHEQUEAR SI EXISTE!!! (Como???)
+	//if ((fd=mkfifo (FIFO_NAME, 0666))<0)
+	//	fprintf (stderr, "Error creando la FIFO %s. Código de error %s\n",FIFO_NAME,strerror(fd));
 
 	printf("Esperando un proceso escritor...\n");
 
@@ -35,5 +36,8 @@ int main()
 			printf("tick: %d bytes leídos: \"%s\"\n", num, s);
 		}
 	} while (num > 0);
+
+	close(fd);
+
 	return 0;
 }

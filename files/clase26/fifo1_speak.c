@@ -34,5 +34,9 @@ int main()
 		else
 			printf("speak: %d bytes escritos\n", num);
 	}
+
+	close(fd);
+
+	remove(FIFO_NAME);
 	return 0;
 }
