@@ -386,9 +386,9 @@ a = input("%i")
 <h2>Arquitectura de 64bits</h2>
 <h3>¿Punteros de 64bits o 48bits?</h3>
 <br/>
-<p>En las máquinas actuales de 64bits se manejan punteros de 48bits. Esto es por que con eso ya pueden direccionar 256 terabyte de memoria cosa que les pareció suficiente a los fabricantes de procesadores (<a href="https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space">ref</a>). De esta manera los fabricantes se ahorran los transitores de esos últimos 16bits.</p>
+<p>En las máquinas actuales de 64 bits se manejan punteros de 48 bits. Esto es por que con eso ya pueden direccionar 256 terabyte de memoria cosa que les pareció suficiente a los fabricantes de procesadores (<span style="font-size: 75%;"><a href="https://en.wikipedia.org/wiki/X86-64#Virtual_address_space_details">Wikipedia X86-64 Virtual address space</a> y <a href="https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space">StackOverflow Q&A</a></span>). De esta manera los fabricantes se ahorran los transitores de esos últimos 16 bits.</p>
 <br/>
-<p>Por esto los punteros que veremos con %p serán de<br/> 48bits o 6 bytes.</p>
+<p>Por esto los punteros que veremos con %p serán de<br/> 48 bits o 6 bytes. Pero si hacemos un sizeof() nos va a decir 8 bytes. La arquitectura puede direccionar 64bits/8bytes, pero el hardware se queda con los 48bits/6bytes inferiores.</p>
 </section>
 </section>
 
