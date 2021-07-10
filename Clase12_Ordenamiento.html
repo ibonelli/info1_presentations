@@ -126,24 +126,11 @@ char (*func)()
 </br>
 <p style="text-align: left;">Código ejemplo:</p>
 <ul>
-	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc1_sumar-resta.c">ej1_pfunc.c</a> : Selección de funciones usando vector con sus punteros.</span></li>
-	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc2_cuadrado-cubo.c">ej2_pfunc.c</a> : Pasaje de punteros a función como argumentos.</span></li>
+	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc1_sumar-resta.c">pfunc_abstraer.c</a> : Selección de funciones usando vector con sus punteros.</span></li>
+	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc2_cuadrado-cubo.c">pfunc_seleccion.c</a> : Pasaje de punteros a función como argumentos.</span></li>
 </ul>
 </br></br></br>
-<p style="text-align: left; font-size: 70%;">Nota: Estos ejemplos necesitan <a href="files/clase12/Punteros_Funciones/getch.h">getch.h</a> para compilar.</p>
-</section>
-
-<section>
-<h2>Punteros a función (II)</h2>
-</br>
-<p style="text-align: left;">Usando punteros a funcion como un switch/case:</p>
-<ul>
-	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc3_alarmas_mascara.c">ej3_alarmas_switch.c</a> : Version con switch/case.</span></li>
-	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc3_alarmas_pointer.c">ej3_alarmas_pfunc.c</a> : Usando punteros a funcion en lugar del switch/case.</span></li>
-	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc3_alarmas_mascara.c">ej3_alarmas_mascara.c</a> : Agregando el uso de máscaras.</span></li>
-</ul>
-</br></br></br>
-<p style="text-align: left; font-size: 70%;">Nota: Estos ejemplos necesitan <a href="files/clase12/Punteros_Funciones/getch.h">getch.h</a> para compilar.</p>
+<p style="text-align: left; font-size: 70%;">Nota: Estos ejemplos necesitan <a href="files/clase12/getch.h">getch.h</a> para compilar.</p>
 </section>
 
 <section>
@@ -158,6 +145,20 @@ char (*func)()
 		<li><b>Que una selección tarde lo mismo para cada opción</b>: Un switch es como una cadena de if anidados, para llegar al último debemos pasar por el primero. Un vector de punteros a función no tiene esta limitación, es más rápido y tarda lo mismo para todas las opciones.</li>
 	</ul>
 </span>
+</section>
+
+<section>
+<h2>Punteros a función</h2>
+<h3>Ejemplos de uso adicionales</h3>
+</br>
+<p style="text-align: left;">Usando punteros a funcion como un switch/case:</p>
+<ul>
+	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc3_alarmas_switch.c">alarmas_switch.c</a> : Version con switch/case.</span></li>
+	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc3_alarmas_pointer.c">alarmas_pfunc.c</a> : Usando punteros a funcion en lugar del switch/case.</span></li>
+	<li><span style="font-size: 80%;"><a href="files/clase12/pfunc3_alarmas_mascara.c">alarmas_mascara.c</a> : Agregando el uso de máscaras.</span></li>
+</ul>
+</br></br></br>
+<p style="text-align: left; font-size: 70%;">Nota: Estos ejemplos necesitan <a href="files/clase12/getch.h">getch.h</a> para compilar.</p>
 </section>
 
 <section>
