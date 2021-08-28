@@ -6,6 +6,8 @@
 //		gcc -o float float.c
 
 typedef struct { 
+	// Es importante este orden: LSB to MSB
+	// Adicionalmente deben ser "unsigned int" por que frac es mayor a 8
 	unsigned int frac:23;
 	unsigned int exp:8;
 	unsigned int s:1;
