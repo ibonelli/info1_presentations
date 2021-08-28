@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <ctype.h>
+
 #define N 10
 #define DEBUG 0
 
-int main()
+int main(void)
 {
 	FILE *fp1, *fp2;
 	int v[N],aux;
@@ -29,4 +29,6 @@ int main()
 	// Cerrando
 	fclose(fp1);
 	fclose(fp2);
+
+	return 0;
 }
