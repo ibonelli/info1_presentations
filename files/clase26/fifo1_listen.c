@@ -14,7 +14,7 @@ int main()
 	char s[300];
 	int num, fd;
 
-	//CHEQUEAR SI EXISTE!!! (Como???)
+	//CHEQUEAR SI EXISTE!!! (Como: Fijarse si existe el "archivo" --- En realidad entrada de directorio, por qué no es un archivo)
 	//if ((fd=mkfifo (FIFO_NAME, 0666))<0)
 	//	fprintf (stderr, "Error creando la FIFO %s. Código de error %s\n",FIFO_NAME,strerror(fd));
 
@@ -26,18 +26,22 @@ int main()
 
 	/*Si bloquea, ni bien un proceso abra el FIFO para escritura se desbloquea este proceso y continúa con el printf siguiente*/
 
-	printf("Conseguimos un escritor!!\n");
+	if(fd>0) {
+		printf("Conseguimos un escritor!!\n");
 
-	do {
-		if ((num = read(fd, s, 300)) == -1)
-			fprintf(stderr, "Error en función read. Código de error %s\n", strerror(fd));
-		else {
-			s[num] = '\0';
-			printf("tick: %d bytes leídos: \"%s\"\n", num, s);
-		}
-	} while (num > 0);
+		do {
+			if ((num = read(fd, s, 300)) == -1)
+				fprintf(stderr, "Error en función read. Código de error %s\n", strerror(fd));
+			else {
+				s[num] = '\0';
+				printf("tick: %d bytes leídos: \"%s\"\n", num, s);
+			}
+		} while (num > 0);
 
-	close(fd);
+		close(fd);
+	} else {
+		printf("No tenemos escritor... Saliendo.\n");
+	}
 
 	return 0;
 }

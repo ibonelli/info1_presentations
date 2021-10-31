@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Info1 - IPC & Threads</title>
+		<title>Info1 - IPC, Zombies, FIFO & Shared Memory</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Ignacio Bonelli">
@@ -44,7 +44,8 @@
 			<div class="slides">
 
 <section>
-	<h1>IPCs, Procesos Zombies y Threads</h1>
+	<h1>IPC, Zombies, FIFO & Shared Memory</h1>
+	<h2>(Threads a titulo informativo)</h2>
 	<p>
 		<small>Ing. Ignacio Javier Bonelli</small>
 	</p>
@@ -246,6 +247,124 @@ man 2 signal
 </ol>
 <br /><br />
 <p>Bonus: Usamos un signal handler, y hacemos algo: <a href="files/clase26/zombie5.c">zombie5.c</a></p>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Named Pipes / FIFO</h2>
+<br/><br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+
+int mkfifo(const char *pathname, mode_t mode);
+</code></pre>
+<br />
+<p>Es como crear un archivo. Solo que un proceso lo escribe y el segundo proceso lo lee. Siempre en orden FIFO.</p>
+<br />
+<p>Luego para usarlo es igual que con archivos/sockets, usaremos: open(), read() y write().</p>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
+<br /><br />
+<p style="text-align: left;">Ejemplo 1:</p>
+<ul style="font-size: 80%;">
+	<li><a href="./files/clase26/fifo1_speak.c">fifo_speak.c</a> : Este programa permitirá escribir en un "extremo" de la FIFO.</li>
+	<li><a href="./files/clase26/fifo1_listen.c">fifo_listen.c</a> : Este programa recibe y lee lo que hay en la FIFO.</li>
+</ul>
+</br></br>
+<p style="text-align: left;">Ejemplo 2:</p>
+<ul style="font-size: 80%;">
+	<li><a href="./files/clase26/fifo2_writes_first.c">fifo_writes_first.c</a> : Este programa escribirá en un pipe.</li>
+	<li><a href="./files/clase26/fifo2_reads_first.c">fifo_reads_first.c</a> : Este programa leerá del mismo pipe en el que se escribió.</li>
+</ul>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
+<p>Datos curiosos...</p>
+<br /><br />
+<ul>
+	<li>Se puede usar "cat" para ver la salida de una fifo (<a href="./files/clase26/fifo_and_cat.png">Captura</a>).</li>
+	<li>Se puede tener 2 escritores simultaneos, pero solo una salida activa (<a href="./files/clase26/fifo_escritores_simultaneos.png">Captura</a>).</li>
+</ul>
+</section>
+
+<section>
+<br /><br /><br />
+<p style="text-align: left;">Para leer mas...</p>
+<ul style="font-size: 80%;">
+	<li><a href="https://es.wikipedia.org/wiki/Tuber%C3%ADa_(inform%C3%A1tica)">Explicación de que es un pipe (en castellano)</a></li>
+	<li><a href="https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_pipes.htm">Explicación de que es un pipe (en inglés y bastante mejor)</a></li>
+	<li><a href="https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/">Ejemplo de un programa en C</a></li>
+	<li><a href="https://stackoverflow.com/questions/43023329/difference-between-mkfifo-and-mknod">Difference between mkfifo() and mknod()</a>
+		<ul><li>mkfifo() es mas estándar y portable que mknod().</li></ul>
+	</li>
+	<li><a href="https://www.embhack.com/pipe-and-fifo/">Difference between pipe() and fifo()</a>
+		<ul>
+			<li>El uso de mkfifo() es más nuevo y usa nombres.</li>
+			<li>pipe() no usa nombres y no tiene representación en el FileSystem.</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h3>Ejercicio FIFO</h3>
+<div style="font-size: 70%; text-align: left;">
+	<p style="text-align: left;">Implemente una función que lea un archivo de texto desde el final hacia el principio y lo escriba en una FIFO, que debe ser creada por la función.</p>
+	<p style="text-align: left;">El prototipo de la función es el siguiente:</p>
+	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+	int enviarInvertido (char *fifoName, char *fileName);
+	</code></pre>
+	<p style="text-align: left;">Donde:</p>
+	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
+		<li>fifoName: Es el nombre de la fifo que debe crear la función y donde debe escribir el texto cifrado.</li>
+		<li>fileName: El nombre del archivo de texto a enviar.</li>
+	</ul>
+	<p style="text-align: left;">Y devuelve un número positivo indicando la cantidad de caracteres escritos en la fifo y un número negativo en caso de error.</p>
+	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
+		<li>-1 : Si no puede crear la fifo.</li>
+		<li>-2 : Si no puede abrir el archivo.</li>
+		<li>-3 : Si no puede leer el archivo.</li>
+		<li>-4 : Si no puede escribir en la fifo.</li>
+	</ul>
+</div>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Shared Memory</h2>
+<br />
+<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
+<ul>
+	<li>La forma clásica (System V):
+		<ul>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
+		</ul>
+	</li>
+	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
+	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
+	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
+</ul>
+</section>
+
+<section>
+<h2>Semáforos y Memoria compartida</h2>
+<img style="width: 700px;" src="files/clase26/logger_system.png"/>
+<br />
+<ul>
+	<li>log server: <a href="files/clase26/logger_server.c">logger_server.c</a></li>
+	<li>log client (N): <a href="files/clase26/logger_client.c">logger_client.c</a></li>
+</ul>
+<br /><br />
+<p style="font-size: 50%;">From <a href="https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux">https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux</a></p>
 </section>
 </section>
 
@@ -490,91 +609,6 @@ ignacio  19926 17451 19928  0    3 09:30 pts/7    00:00:00 ./threads_m2
 
 <section>
 <section>
-<h2>Named Pipes / FIFO</h2>
-<br/><br/>
-<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
-#include &lt;sys/types.h&gt;
-#include &lt;sys/stat.h&gt;
-
-int mkfifo(const char *pathname, mode_t mode);
-</code></pre>
-<br />
-<p>Es como crear un archivo. Solo que un proceso lo escribe y el segundo proceso lo lee. Siempre en orden FIFO.</p>
-<br />
-<p>Luego para usarlo es igual que con archivos/sockets, usaremos: open(), read() y write().</p>
-</section>
-
-<section>
-<h2>Named Pipes / FIFO</h2>
-<br /><br />
-<p style="text-align: left;">Ejemplo 1:</p>
-<ul style="font-size: 80%;">
-	<li><a href="./files/clase26/fifo1_speak.c">fifo_speak.c</a> : Este programa permitirá escribir en un "extremo" de la FIFO.</li>
-	<li><a href="./files/clase26/fifo1_listen.c">fifo_listen.c</a> : Este programa recibe y lee lo que hay en la FIFO.</li>
-</ul>
-</br></br>
-<p style="text-align: left;">Ejemplo 2:</p>
-<ul style="font-size: 80%;">
-	<li><a href="./files/clase26/fifo2_writes_first.c">fifo_writes_first.c</a> : Este programa escribirá en un pipe.</li>
-	<li><a href="./files/clase26/fifo2_reads_first.c">fifo_reads_first.c</a> : Este programa leerá del mismo pipe en el que se escribió.</li>
-</ul>
-</section>
-
-<section>
-<h2>Named Pipes / FIFO</h2>
-<p>Datos curiosos...</p>
-<br /><br />
-<ul>
-	<li>Se puede usar "cat" para ver la salida de una fifo (<a href="./files/clase26/fifo_and_cat.png">Captura</a>).</li>
-	<li>Se puede tener 2 escritores simultaneos, pero solo una salida activa (<a href="./files/clase26/fifo_escritores_simultaneos.png">Captura</a>).</li>
-</ul>
-</section>
-
-<section>
-<br /><br /><br />
-<p style="text-align: left;">Para leer mas...</p>
-<ul style="font-size: 80%;">
-	<li><a href="https://es.wikipedia.org/wiki/Tuber%C3%ADa_(inform%C3%A1tica)">Explicación de que es un pipe (en castellano)</a></li>
-	<li><a href="https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_pipes.htm">Explicación de que es un pipe (en inglés y bastante mejor)</a></li>
-	<li><a href="https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/">Ejemplo de un programa en C</a></li>
-	<li><a href="https://stackoverflow.com/questions/43023329/difference-between-mkfifo-and-mknod">Difference between mkfifo() and mknod()</a>
-		<ul><li>mkfifo() es mas estándar y portable que mknod().</li></ul>
-	</li>
-	<li><a href="https://www.embhack.com/pipe-and-fifo/">Difference between pipe() and fifo()</a>
-		<ul>
-			<li>El uso de mkfifo() es más nuevo y usa nombres.</li>
-			<li>pipe() no usa nombres y no tiene representación en el FileSystem.</li>
-		</ul>
-	</li>
-</ul>
-</section>
-
-<section>
-<h3>Ejercicio FIFO</h3>
-<div style="font-size: 70%; text-align: left;">
-	<p style="text-align: left;">Implemente una función que lea un archivo de texto desde el final hacia el principio y lo escriba en una FIFO, que debe ser creada por la función.</p>
-	<p style="text-align: left;">El prototipo de la función es el siguiente:</p>
-	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
-	int enviarInvertido (char *fifoName, char *fileName);
-	</code></pre>
-	<p style="text-align: left;">Donde:</p>
-	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
-		<li>fifoName: Es el nombre de la fifo que debe crear la función y donde debe escribir el texto cifrado.</li>
-		<li>fileName: El nombre del archivo de texto a enviar.</li>
-	</ul>
-	<p style="text-align: left;">Y devuelve un número positivo indicando la cantidad de caracteres escritos en la fifo y un número negativo en caso de error.</p>
-	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
-		<li>-1 : Si no puede crear la fifo.</li>
-		<li>-2 : Si no puede abrir el archivo.</li>
-		<li>-3 : Si no puede leer el archivo.</li>
-		<li>-4 : Si no puede escribir en la fifo.</li>
-	</ul>
-</div>
-</section>
-</section>
-
-<section>
-<section>
 <h2>Semáforos</h2>
 <h3>Prototipos &lt;semaphore.h&gt;</h3>
 <br />
@@ -604,39 +638,6 @@ int sem_destroy(sem_t *sem);
 <h2>Semáforos</h2>
 <br /><br />
 <p>Ejemplo usando semaforos y threads: <a href="files/clase26/sem_thread.c">sem_thread.c</a></p>
-</section>
-</section>
-
-<section>
-<section>
-<h2>Shared Memory</h2>
-<br />
-<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
-<ul>
-	<li>La forma clásica (System V):
-		<ul>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
-		</ul>
-	</li>
-	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
-	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
-	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
-</ul>
-</section>
-
-<section>
-<h2>Semáforos y Memoria compartida</h2>
-<img style="width: 700px;" src="files/clase26/logger_system.png"/>
-<br />
-<ul>
-	<li>log server: <a href="files/clase26/logger_server.c">logger_server.c</a></li>
-	<li>log client (N): <a href="files/clase26/logger_client.c">logger_client.c</a></li>
-</ul>
-<br /><br />
-<p style="font-size: 50%;">From <a href="https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux">https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux</a></p>
 </section>
 </section>
 

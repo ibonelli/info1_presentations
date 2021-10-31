@@ -5,13 +5,11 @@
 #include<sys/wait.h>
 #include<sys/types.h>
 
-void func(int signum)
-{
+void func() {
 	wait(NULL);
 }
 
-int main()
-{
+int main() {
 	int i;
 	int pid = fork();
 	if (pid == 0) {
