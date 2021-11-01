@@ -280,6 +280,14 @@ int mkfifo(const char *pathname, mode_t mode);
 
 <section>
 <h2>Named Pipes / FIFO</h2>
+<br/><br/>
+<img style="width: 700px;" src="files/clase26/Pipe_vs_SharedMemory_1.png"/>
+<br/><br/>
+<p>Una sola dirección, lectura "destructiva".</p>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
 <br /><br />
 <p style="text-align: left;">Ejemplo 1:</p>
 <ul style="font-size: 80%;">
@@ -365,6 +373,14 @@ int mkfifo(const char *pathname, mode_t mode);
 	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
 	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
 </ul>
+</section>
+
+<section>
+<h2>Shared Memory</h2>
+<br/><br/>
+<img style="width: 500px;" src="files/clase26/Pipe_vs_SharedMemory_2.png"/>
+<br/><br/>
+<p>mmap: Todos pueden leer y escribir al mismo tiempo...<br/>¡Falta coordinación!</p>
 </section>
 
 <section>
