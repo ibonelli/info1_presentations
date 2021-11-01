@@ -171,6 +171,8 @@ int kill(pid_t pid, int sig);
 	<li><a href="./files/clase26/signals.c">signals.c</a></li>
 	<li><a href="./files/clase26/sig_talk.c">sig_talk.c</a></li>
 </ul>
+<br/><br/>
+<p style="font-size: 60%;">Más información de <a href="https://www.gnu.org/software/libc/manual/html_node/index.html">"GNU C Library"</a> sección <a href="https://www.gnu.org/software/libc/manual/html_node/Signal-Handling.html">"Signal Handling"</a></p>
 </section>
 </section>
 
@@ -247,6 +249,16 @@ man 2 signal
 </ol>
 <br /><br />
 <p>Bonus: Usamos un signal handler, y hacemos algo: <a href="files/clase26/zombie5.c">zombie5.c</a></p>
+</section>
+
+<section>
+<h2>Función de manejo de señales</h2>
+<br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+typedef void (*sighandler_t)(int);
+</code></pre>
+<br/><br/>
+<p style="font-size: 75%;">Más información de <a href="https://www.gnu.org/software/libc/manual/html_node/index.html">"GNU C Library"</a> sección <a href="https://www.gnu.org/software/libc/manual/html_node/Signal-Handling.html">"Signal Handling"</a></p>
 </section>
 </section>
 
