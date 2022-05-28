@@ -142,6 +142,10 @@ Como punteros:
 Direccion de los punteros:
 	&p: 0x7ffc54ca38a0, &q: 0x7ffc54ca38a8, &r: 0x7ffc54ca38b0
 </code></pre>
+<ul>Importante:
+	<li><code style="color: #3366FF;">p</code> igual a <code style="color: #3366FF;">q</code> : Por qué apuntan a lo mismo.</li>
+	<li><code style="color: #3366FF;">&p</code> distinta de <code style="color: #3366FF;">&q</code> : Por qué son distintas variables.</li>
+</ul>
 </section>
 
 <section>
@@ -291,10 +295,19 @@ m = *p;
 </section>
 
 <section>
-<h2>Ejercicio de punteros2</h2>
+<h2>Ejercicio de punteros 2</h2>
+<pre><code data-trim class="cpp">
+int a, b, *p, *q, **r, **s;
+p=q=NULL; r=s=NULL;
+a=9; b=4;
+p=&a; q=&b;
+r=&p; s=&q;
+**r=*q;
+// ...mas... (ver enunciado)
+</code></pre>
 <ul>
-	<li><a href="">Enunciado.</a></li>
-	<li><a href="">Presentación sobre como resolverlo (p/ Ing. Carlos Cuttita).</a></li>
+	<li><a href="files/clase05/ejercicio_punteros_enunciado.pdf">Enunciado.</a></li>
+	<li><a href="files/clase05/ejercicio_punteros_tabla.pdf">Presentación sobre como resolverlo (p/ Ing. Carlos Cuttita).</a></li>
 	<li><a href="files/clase05/ejercicio_punteros.c">Programa que muestra lo que sucede.</a></li>
 </ul>
 </section>

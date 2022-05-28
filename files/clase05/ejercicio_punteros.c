@@ -2,7 +2,7 @@
 
 int main(void) {
 	int a, b, *p, *q, **r, **s;
-	
+
 	p=q=NULL;
 	r=s=NULL;
 
