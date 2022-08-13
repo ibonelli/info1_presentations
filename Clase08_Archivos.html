@@ -308,6 +308,87 @@
 
 <section data-background="#4d7e65">
 <section>
+<h1>Funciones Unix<br/>de Archivos</h1>
+</section>
+
+<section>
+<h2>open</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 open
+
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+
+int open(const char *pathname, int flags);
+int open(const char *pathname, int flags, mode_t mode);
+</code></pre>
+<p><b>flags:</b> O_RDONLY, O_WRONLY & O_RDWR</p>
+<p><b>mode:</b> O_APPEND, O_CREAT, O_TRUNC, más...</p>
+</section>
+
+<section>
+<h2>close</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 close
+
+#include &lt;unistd.h&gt;
+
+int close(int fd);
+</code></pre>
+</section>
+
+<section>
+<h2>read</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 read
+
+#include &lt;unistd.h&gt;
+
+ssize_t read(int fd, void *buf, size_t count);
+</code></pre>
+</section>
+
+<section>
+<h2>write</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 write
+
+#include &lt;unistd.h&gt;
+
+ssize_t write(int fd, const void *buf, size_t count);
+</code></pre>
+</section>
+
+<section>
+<h2>lseek</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 lseek
+
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+off_t lseek(int fd, off_t offset, int whence);
+</code></pre>
+<p><b>whence:</b> SEEK_SET, SEEK_CUR & SEEK_END</p>
+</section>
+
+<section>
+<h2>fcntl</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 fcntl
+
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+
+int fcntl(int fd, int cmd, ... /* arg */ );
+</code></pre>
+<p><b>cmd:</b> F_DUPFD - Duplicating a file descriptor (y otros...)</p>
+</section>
+</section>
+
+<section data-background="#4d7e65">
+<section>
 <h2 style="font-family: monospace; font-size: 90%;">FILE *fopen(const char *filename, const char *mode);</h2>
 <h3 style="font-family: monospace; font-size: 90%;">(I)</h3>
 <br/>
