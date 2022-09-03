@@ -16,7 +16,7 @@ void main(void) {
 	union byte A;
 	char str[3];
 
-	A.b = 0x3A;
+	A.b = 0x48;
 	printf("nh: %d\n",A.h.nh); /* Muestra 4 */
 	printf("nl: %d\n",A.h.nl); /* Muestra 8 */
 
