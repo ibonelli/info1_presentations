@@ -12,15 +12,15 @@
 
 #define MAX 5
 
-void ingresa (int *, int **, int *, int *, int *);
-void lee (int *, int **, int *, int *, int *);
-void lista (int *, int *, int *, int);
+void ingresa (int *vec, int *pon, int *flle, int fvac, int sac);
+void lee (int *vec, int *sac, int *fvac, int *flle, int pon);
+void lista (int *vec, int sac, int pon, int vac);
 void press_key(char *msg);
 
 void main(void) 
 {
 	char c, op[3];
-	int lle = 0, vac = 1, el, da[MAX], *sac = da, *pon = da;
+	int lle = 0, vac = 1, el, da[MAX], sac=0, pon=0;
 	do {
 		system("clear");
 		printf ("1 - Ingresa datos\n");
@@ -51,7 +51,7 @@ void main(void)
 	system("clear");
 }
 
-void ingresa(int *d, int **pon, int *lle, int *vac, int *sac) 
+void ingresa(int *d, int *pon, int *lle, int *vac, int sac) 
 {
 	char k, dato[3];
 	do {
@@ -61,12 +61,12 @@ void ingresa(int *d, int **pon, int *lle, int *vac, int *sac)
 		}
 		printf ("\n\nIngrese el dato : ");
 		fgets(dato,3,stdin);
-		**pon=atoi(dato);
+		d[*pon]=atoi(dato);
 		*vac = 0;
 		(*pon)++;
 		// Verificamos si llegamos al limite del vector para darle "circularidad"
-		if (*pon == d + MAX)
-			*pon = d;
+		if (*pon == MAX)
+			*pon = 0;
 		// Solo aqui podemos darnos cuenta que se lleno el vector
 		if (*pon == sac)
 			*lle = 1;
@@ -76,7 +76,7 @@ void ingresa(int *d, int **pon, int *lle, int *vac, int *sac)
 	} while (k == 'S');
 }
 
-void lee(int *d, int **sac, int *vac, int *lle, int *pon) 
+void lee(int *d, int *sac, int *vac, int *lle, int pon) 
 {
 	char k, dato[3];
 	do {
@@ -85,11 +85,11 @@ void lee(int *d, int **sac, int *vac, int *lle, int *pon)
 			return;
 		}
 		*lle = 0;
-		printf ("\n\nEl dato es : %d\n", **sac);
+		printf ("\n\nEl dato es : %d\n", d[*sac]);
 		(*sac)++;
 		// Verificamos si llegamos al limite del vector para darle "circularidad"
-		if (*sac == d + MAX)
-			*sac = d;
+		if (*sac == MAX)
+			*sac = 0;
 		if (*sac == pon)
 			*vac = 1;
 		printf("\nOtro dato ( S / N )? : ");
@@ -98,15 +98,15 @@ void lee(int *d, int **sac, int *vac, int *lle, int *pon)
 	} while (k == 'S');
 }
 
-void lista(int *d, int *sac, int *pon, int vac) 
+void lista(int *d, int sac, int pon, int vac) 
 {
 	char k, dato[3];
 	system("clear");
 	while (!vac) {
-		printf ("%d\t", *sac);
+		printf ("%d\t", d[sac]);
 		sac++;
-		if (sac == d + MAX)
-			sac = d;
+		if (sac == MAX)
+			sac = 0;
 		if (sac == pon)
 			vac = 1;
 	}

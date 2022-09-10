@@ -12,15 +12,29 @@
 
 #define MAX 5
 
-void ingresa (int *, int **, int *, int *, int *);
-void lee (int *, int **, int *, int *, int *);
-void lista (int *, int *, int *, int);
+typedef struct {
+	int lle;
+	int vac;
+	int sac;
+	int pon;
+} status;
+
+status ingresa (int *vec, status estado);
+status lee (int *vec, status estado);
+void lista (int *vec, status estado);
 void press_key(char *msg);
 
 void main(void) 
 {
 	char c, op[3];
-	int lle = 0, vac = 1, el, da[MAX], *sac = da, *pon = da;
+	int da[MAX], el;
+	status estado;
+
+	estado.lle=0;
+	estado.vac=1;
+	estado.sac=0;
+	estado.pon=0;
+
 	do {
 		system("clear");
 		printf ("1 - Ingresa datos\n");
@@ -33,13 +47,13 @@ void main(void)
 		el=atoi(op);
 		switch (el) {
 			case 1:
-				ingresa(da, &pon, &lle, &vac, sac);
+				estado=ingresa(da, estado);
 				break;
 			case 2:
-				lee(da, &sac, &vac, &lle, pon);
+				estado=lee(da, estado);
 				break;
 			case 3:
-				lista(da, sac, pon, vac);
+				lista(da, estado);
 				break;
 			case 4:
 				exit(0);
@@ -51,64 +65,66 @@ void main(void)
 	system("clear");
 }
 
-void ingresa(int *d, int **pon, int *lle, int *vac, int *sac) 
+status ingresa(int *d, status estado) 
 {
 	char k, dato[3];
 	do {
-		if (*lle) {
+		if (estado.lle) {
 			press_key("\nCola llena\nPresione una tecla para continuar\n");
 			return;
 		}
 		printf ("\n\nIngrese el dato : ");
 		fgets(dato,3,stdin);
-		**pon=atoi(dato);
-		*vac = 0;
-		(*pon)++;
+		d[estado.pon]=atoi(dato);
+		estado.vac = 0;
+		(estado.pon)++;
 		// Verificamos si llegamos al limite del vector para darle "circularidad"
-		if (*pon == d + MAX)
-			*pon = d;
+		if (estado.pon == MAX)
+			estado.pon = 0;
 		// Solo aqui podemos darnos cuenta que se lleno el vector
-		if (*pon == sac)
-			*lle = 1;
+		if (estado.pon == estado.sac)
+			estado.lle = 1;
 		printf("\nOtro dato ( S / N )? ");
 		fgets(dato,3,stdin);
 		k = toupper(dato[0]);
 	} while (k == 'S');
+	return estado;
 }
 
-void lee(int *d, int **sac, int *vac, int *lle, int *pon) 
+status lee(int *d, status estado)
 {
 	char k, dato[3];
 	do {
-		if (*vac) {
+		if (estado.vac) {
 			press_key("\nCola vacia\nPresione una tecla para continuar\n");
 			return;
 		}
-		*lle = 0;
-		printf ("\n\nEl dato es : %d\n", **sac);
-		(*sac)++;
+		estado.lle = 0;
+		printf ("\n\nEl dato es : %d\n", d[estado.sac]);
+		(estado.sac)++;
 		// Verificamos si llegamos al limite del vector para darle "circularidad"
-		if (*sac == d + MAX)
-			*sac = d;
-		if (*sac == pon)
-			*vac = 1;
+		if (estado.sac == MAX)
+			estado.sac = 0;
+		if (estado.sac == estado.pon)
+			estado.vac = 1;
 		printf("\nOtro dato ( S / N )? : ");
 		fgets(dato,3,stdin);
 		k = toupper(dato[0]);
 	} while (k == 'S');
+	return estado;
 }
 
-void lista(int *d, int *sac, int *pon, int vac) 
+void lista(int *d, status estado)
 {
 	char k, dato[3];
 	system("clear");
-	while (!vac) {
-		printf ("%d\t", *sac);
-		sac++;
-		if (sac == d + MAX)
-			sac = d;
-		if (sac == pon)
-			vac = 1;
+	while (!estado.vac) {
+		printf ("%d\t", d[estado.sac]);
+		estado.sac++;
+		if (estado.sac == MAX)
+			estado.sac = 0;
+		if (estado.sac == estado.pon)
+			estado.vac = 1;
 	}
 	printf("\nDesea continuar ( S / N )? : ");
 	fgets(dato,3,stdin);
