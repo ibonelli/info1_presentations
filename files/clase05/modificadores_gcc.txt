@@ -1,0 +1,58 @@
+gcc compila tanto C como C++. Por lo tanto, anda... Pero no es C.
+	De: https://en.cppreference.com/w/c/language/array_initialization
+	Y: https://stackoverflow.com/questions/201101/how-to-initialize-all-members-of-an-array-to-the-same-value
+
+No falla, solo restringe a cierta sintaxis:
+	gcc -ansi -std=c89 -o arreglo_init arreglo_init.c
+
+Falla con sintaxis de C++:
+	gcc -Wall -pedantic-errors arreglo_init.c
+
+https://stackoverflow.com/questions/201101/how-to-initialize-all-members-of-an-array-to-the-same-value
+    Don't overlook the obvious solution, though:
+        int myArray[10] = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+    Elements with missing values will be initialized to 0:
+        int myArray[10] = { 1, 2 }; // initialize to 1,2,0,0,0...
+    So this will initialize all elements to 0:
+        int myArray[10] = { 0 }; // all elements 0
+    In C++, an empty initialization list will also initialize every element to 0. This is not allowed with C:
+        int myArray[10] = {}; // all elements 0 in C++
+    Remember that objects with static storage duration will initialize to 0 if no initializer is specified:
+        static int myArray[10]; // all elements 0
+
+------------
+
+Otros modificadores:
+
+-ansi
+	Modo ANSI/ISO C (no usa cosas especificas de GNU)
+-std=c89
+	Pueden configurarse los distintos estándar de C
+-pedantic
+	Todas las advertencias de ANSI/ISO C
+-pedantic-errors
+	Lo mismo pero toma las advertencias como errores
+-traditional
+	Apoyo de sintaxis de C de Kernighan & Ritchie 
+
+------------
+
+Para por ejemplo evitar optimizaciones (y que "reviente" una funcion recursiva):
+    gcc -O0 -o ej ej-fact-stack.c
+        (ver files/clase07/RECUR3b_Factorial_RecursivoStack-MasConsumo.c)
+
+------------
+
+
+Variable Length Arrays in C and C++
+    De: https://www.geeksforgeeks.org/variable-length-arrays-in-c-and-c/
+        void fun(int n) {
+            int arr[n];
+            // ......
+        }
+
+    Variable length arrays is a feature where we can allocate an auto array (on stack) of variable size. C supports variable sized arrays from C99 standard.
+    Also note that in C99 or C11 standards, there is feature called “flexible array members” (https://en.wikipedia.org/wiki/Flexible_array_member), which works same as the above.
+
+Esto da error si compilamos con:
+    gcc -Wall -std=c89 -pedantic-errors -o prog mi_variable_array.c

@@ -1,6 +1,10 @@
+----------------------------------
 From:
 	https://stackoverflow.com/questions/5656530/how-to-use-shared-memory-with-linux-in-c
-
+----------------------------------
+Also useful:
+	https://en.wikipedia.org/wiki/Mmap
+	https://linuxhint.com/using_mmap_function_linux/
 ----------------------------------
 
 There are two approaches: shmget and mmap. I'll talk about mmap, since it's more modern and flexible, but you can take a look at man shmget (or this tutorial) if you'd rather use the old-style tools.

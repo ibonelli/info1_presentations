@@ -66,7 +66,21 @@
 
 <section>
 <h2>Medios de Almacenamiento</h2>
+<h3>Discos Rígidos de primer generación</h3>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/>
+	<img src="files/clase08/12_HDD_Pack.jpg"/>
+</ul>
+<ul class="col" style="width: 300px; display: inline-block; vertical-align: top;">
+	<a href="files/clase08/13_HDD_Machine.jpg"><img src="files/clase08/13_HDD_Machine.jpg"/></a>
+</ul>
+<a href="https://en.wikipedia.org/wiki/Disk_pack"><p style="font-size: 60%;">Discos rígidos removibles (Disk Pack).</p></a>
+</section>
+
+<section>
+<h2>Medios de Almacenamiento</h2>
 <h3>Discos Magneticos (Flexibles/Rigidos)</h3>
+<br/>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
 	<img src="files/clase08/21_FDD.jpg"/>
 </ul>
@@ -94,8 +108,10 @@
 	<img src="files/clase08/31_Pendrive.png"/>
 </ul>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/>
 	<img src="files/clase08/32_microSD.jpg"/>
 </ul>
+<a href="https://www.xataka.com/componentes/1956-gb-disco-duro-salia-a-9-2-millones-dolares-2019-precio-no-llega-a-dos-centavos"><p style="font-size: 60%;">En 1956 el GB de disco duro salía a 9,2 millones de dólares.</p></a>
 </section>
 
 <section>
@@ -105,6 +121,7 @@
 	<a href="files/clase08/27_tapes_2018.jpg"><img src="files/clase08/27_tapes_2018.jpg"/></a>
 </ul>
 <ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<br/><br/>
 	<a href="files/clase08/28_tapes_2018.jpg"><img src="files/clase08/28_tapes_2018.jpg"/></a>
 </ul>
 <a href="files/clase08/ModernTapeStorage.txt"><p style="font-size: 60%;">24 PB in a standard 19-inch rack. LTO8 tapes have 12TB and go up to 30 TB compressed capacity.</p></a>
@@ -139,7 +156,21 @@
 </section>
 
 <section>
-<h2>Espacio usado vs. espacio de los archivos</h2>
+<h2>Espacio usado vs. espacio de los archivos (I)</h2>
+<br/>
+<ul>
+	<li><span style="font-size: 90%;">Discos disponibles en el sistema:</span><span style="padding-left: 20px; font-family: monospace;">lsblk</span></li>
+	<li><span style="font-size: 90%;">Estructura de la partición:</span><span style="padding-left: 20px; font-family: monospace;">fdisk /dev/sda1</span></li>
+	<li><span style="font-size: 90%;">Detalles del sistema de archivos:</span><br/><span style="padding-left: 200px; font-family: monospace;">dumpe2fs /dev/sda1 | less</span></li>
+	<br/>
+	<li><span style="font-size: 90%;">Espacio libre:</span><span style="padding-left: 20px; font-family: monospace;">df -k</span></li>
+	<li><span style="font-size: 90%;">Espacio "ocupado":</span><span style="padding-left: 20px; font-family: monospace;">du -bh</span></li>
+	<li><span style="font-size: 90%;">Espacio usado realmente:</span><span style="padding-left: 20px; font-family: monospace;">du -h</span></li>
+</ul>
+</section>
+
+<section>
+<h2>Espacio usado vs. espacio de los archivos (II)</h2>
 <ul>
 	<li>¿Donde se guarda la estructura del disco? ... ¡EN EL DISCO!</li>
 	<li>¿Cuanto puedo direccionar dentro del disco? ... Depende del tamaño de cluster</li>
@@ -271,6 +302,98 @@
 	<li style="margin-left: 100px;">fprintf() y fscanf()</li></ul></li>
 <li>Posicionamiento en un stream:<ul>
 	<li style="margin-left: 100px;">feof(), ftell(), rewind(), fseek(), fgetpos() y fsetpos()</li></ul></li>
+</ul>
+</section>
+</section>
+
+<section data-background="#4d7e65">
+<section>
+<h1>Funciones Unix<br/>de Archivos</h1>
+</section>
+
+<section>
+<h2>open</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 open
+
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+
+int open(const char *pathname, int flags);
+int open(const char *pathname, int flags, mode_t mode);
+</code></pre>
+<p><b>flags:</b> O_RDONLY, O_WRONLY & O_RDWR</p>
+<p><b>mode:</b> O_APPEND, O_CREAT, O_TRUNC, más...</p>
+</section>
+
+<section>
+<h2>close</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 close
+
+#include &lt;unistd.h&gt;
+
+int close(int fd);
+</code></pre>
+</section>
+
+<section>
+<h2>read</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 read
+
+#include &lt;unistd.h&gt;
+
+ssize_t read(int fd, void *buf, size_t count);
+</code></pre>
+</section>
+
+<section>
+<h2>write</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 write
+
+#include &lt;unistd.h&gt;
+
+ssize_t write(int fd, const void *buf, size_t count);
+</code></pre>
+</section>
+
+<section>
+<h2>lseek</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 lseek
+
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+off_t lseek(int fd, off_t offset, int whence);
+</code></pre>
+<p><b>whence:</b> SEEK_SET, SEEK_CUR & SEEK_END</p>
+</section>
+
+<section>
+<h2>fcntl</h2>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+$ man 2 fcntl
+
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+
+int fcntl(int fd, int cmd, ... /* arg */ );
+</code></pre>
+<p><b>cmd:</b> F_DUPFD - Duplicating a file descriptor (y otros...)</p>
+</section>
+
+<section>
+<h2>Ejemplos</h2>
+<ul>
+	<li>Leer de un archivo y mostrar por pantalla: <a href="files/clase08/ej_unix_1.c">ej_unix_1.c</a></li>
+	<li>Leer de un archivo y escribir en otro: <a href="files/clase08/ej_unix_2.c">ej_unix_2.c</a></li>
+	<li>Leer de un archivo y escribir en otro (v2): <a href="files/clase08/ej_unix_3.c">ej_unix_3.c</a></li>
+	<li>Escribir un archivo de texto: <a href="files/clase08/ej_unix_4.c">ej_unix_4.c</a></li>
+	<li>Archivo usado en los ejemplos <a href="files/clase08/miarch.txt">miarch.txt</a></li>
 </ul>
 </section>
 </section>
@@ -473,6 +596,8 @@ int main()
    return(0);
 }
 </code></pre>
+<br/>
+<p style="font-size:80%;">Nota: El "if" no itera. El <a href="files/clase08/ej2_2.c">ej2_2.c</a></h2> es una versión con número de línea y que itera.</p>
 </section>
 
 <section>
@@ -627,7 +752,7 @@ int main()
   <br/><br/>
   <p>Calcular el tamaño del archivo: <a href="files/clase08/miarch.txt">miarch.txt</a></p>
   <br/><br/><br/><br/><br/><br/><br/>
-  <p style="font-size:80%;">Nota: Tienen algo así en una parte del ejemplo de copia de archivos</p>
+  <p style="font-size:80%;">Nota: Tienen algo así en una parte del ejemplo de copia de archivos (<a href="ej6.c">ej6.c</a>).</p>
 </section>
 
 <section>
@@ -661,6 +786,19 @@ int main()
 <br/><br/>
 <p style="font-size: 90%;">Lo mejor es solo usar fpos_t entre ambas funciones, <br/>ya que no se puede asegurar la portabilidad del dato.</p>
 </section>
+
+<section>
+<h2>funciones similares</h2>
+<br/><br/>
+<p>fgetc(stdin);  === getc();</p>
+<p>fputc(stdout); === putc();</p>
+<p>fprintf(stdout, ...); === printf(...);</p>
+<p>fscanf(stdin, ...); === scanf(...);</p>
+<br/>
+<p>ftell() === fgetpos()</p>
+<p>fseek() === fsetpos()</p>
+</section>
+
 </section>
 
 			</div>

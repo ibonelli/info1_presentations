@@ -45,41 +45,6 @@
 
 <section>
 <section>
-	<h1>Suma</h1>
-	<h3>Primer ejemplo C</h3>
-	<br/>
-	<ul>
-		<li><a href="./files/clase01n/suma.c">suma.c</a></li>
-		<li><a href="./files/clase01n/suma.txt">suma.txt</a></li>
-	</ul>
-</section>
-</section>
-
-<section>
-<section>
-	<h3>Herramientas: Geany</h3>
-	<a href="./files/clase01n/screen1_Geany_C.png">
-		<img src="files/clase01n/screen1_Geany_C.png"/>
-	</a>
-</section>
-
-<section>
-	<h3>Herramientas: Bless (c)</h3>
-	<a href="./files/clase01n/screen2_Bless_C.png">
-		<img src="files/clase01n/screen2_Bless_C.png"/>
-	</a>
-</section>
-
-<section>
-	<h3>Herramientas: Bless (bin)</h3>
-	<a href="./files/clase01n/screen3_Bless_bin.png">
-		<img src="files/clase01n/screen3_Bless_bin.png"/>
-	</a>
-</section>
-</section>
-
-<section>
-<section>
 	<h3>Unidad 2: Sistemas de Numeración y Representación numérica. Aritmética Binaria</h3>
 	<ul>
 		<li>Introducción. Los sistemas de numeración y su evolución histórica.</li>
@@ -99,16 +64,61 @@
 		<li>Representación de caracteres: Binario Codificado Decimal (BCD), ASCII, EBCDIC, Unicode.</li>
 	</ul>
 </section>
+
+<section>
+<h1>Video OnLine<h1>
+<br />
+<h3><a href="https://www.youtube.com/watch?v=IOGM5but_Vo">Sistema Binario ¿Cómo es?</a></h3>
+</section>
 </section>
 
 <section>
 <section>
-	<h3>Bit y Byte</h3>
-	<p>bit, nibble, byte...</p>
+	<h3>Bit, Nibble y Byte</h3>
+	<ul>
+		<li>BIT = 0 o 1</li>
+		<li>nibble = 4 bits
+			<ul>
+				<li><a href="https://en.wikipedia.org/wiki/Intel_4004">Intel 4004</a> : 1971, 2'250 Transistores</li>
+			</ul>
+		</li>
+		<li>Bytes = 8 bits
+			<ul>
+				<li><a href="https://en.wikipedia.org/wiki/Intel_8008">Intel 8008</a> : 1972, 3'500 Transistores</li>
+				<li><a href="https://en.wikipedia.org/wiki/Intel_8088">Intel 8088</a> : 1979, 29'000 Transistores</li>
+			</ul>
+		</li>
+	</ul>
+	<br/><br/>
+	<p style="text-align: left;">Cantidad de bits:</p>
+	<p>
+		<ul style="font-size: 75%;">
+			<li>1 bit => 2 símbolos (2<sup>n</sup> c/ n=1 => 2)</li>
+			<li>2 bits => 4 símbolos (2<sup>n</sup> c/ n=2 => 4)</li>
+			<li>3 bits => 8 símbolos (2<sup>n</sup> c/ n=3 => 8)</li>
+			<li>4 bits = nibble => 16 símbolos (2<sup>n</sup> c/ n=4 => 16)</li>
+			<li>8 bits = byte => 256 símbolos (2<sup>n</sup> c/ n=8 => 256)</li>
+		</ul>
+	</p>
 </section>
 
 <section>
-	<h3>Representación</h3>
+	<h3>Tamaño de la memoria (en Bytes)</h3>
+	<br/><br/>
+	<ul>
+		<li>KiloByte = 1KB = 1024 bytes (10<sup>3</sup>)</li>
+		<li>MegaByte = 1MB = 1024 KB (10<sup>6</sup>)</li>
+		<li>GigaByte = 1GB = 1024 MB (10<sup>9</sup>)</li>
+		<li>TeraByte = 1TB = 1024 GB (10<sup>12</sup>)</li>
+		<li>PetaByte = 1PB = 1024 TB (10<sup>15</sup>)</li>
+		<li>y siguen <a href="https://en.wikipedia.org/wiki/Unit_prefix">Exa, Zetta y Yotta</a>.</li>
+	</ul>
+	<br/><br/><br/>
+	<p style="font-size: 70%;">Nota: Acá hablamos de Bytes, pero también estas unidades pueden ser en bits. Normalmente se usa la "B" mayúscula para bytes y la "b" minúscula para bits. Por ejemplo cuando se habla de velocidad de transmisión se suelen usar MegaBits.</p>
+</section>
+
+<section>
+	<h3>Representación / Interpretación</h3>
 	<p>hexa, binario, ASCII</p>
 	<br/>
 	<p>Distintos significado de "hecho":
@@ -129,7 +139,7 @@
 </section>
 
 <section>
-	<h3>Representación</h3>
+	<h3>Representación / Interpretación</h3>
 	<ul class="col" style="width: 350px;">
 		<a href="./files/clase01n/duck-rabbit.jpg">
 			<img src="files/clase01n/duck-rabbit.jpg"/>
@@ -150,21 +160,30 @@
 
 <section>
 	<h3>Sistemas de Numeración</h3>
-	<ul>
+	<ul class="col" style="width: 500px;">
 		<li>Dos tipos:
-			<ul>
-				<li>No posicionales: p/ej numeración romana</li>
-				<li>Posicionales: Como nuestro sistema decimal</li>
+			<ul style="font-size: 75%;">
+				<li>No posicionales:</li>
+					<ul><li>p/ej numeración romana</li></ul>
+				<li>Posicionales:</li>
+					<ul><li>Como nuestro sistema decimal</li></ul>
 			</ul>
 		</li>
+	</ul>
+	<ul class="col" style="width: 200px;">
+		<a href="./files/clase01n/NumerosRomanos.png">
+			<img style="width: 170px;" src="files/clase01n/NumerosRomanos.png"/>
+		</a>
+	</ul>
+	<ul>
 		<br/><li>Bases:
-			<ul>
+			<ul style="font-size: 75%;">
 				<li>Decimal: Base 10 (Mano)</li>
 				<li>Duodecimal: Base 12 (Meses año)</li>
 			</ul>
 		</li>
 		<br/><li>Computadora: Binaria!
-			<ul>
+			<ul style="font-size: 75%;">
 				<li>Base 2 (binario)</li>
 				<li>Base 8 (octal)</li>
 				<li>Base 16 (hexadecimal)</li>
@@ -197,6 +216,8 @@
 	<img src="files/clase01n/Conversiones2.png"/>
 	</a>
 	<img src="files/clase01n/Conversiones3.png"/>
+	<br/><br/>
+	<p style="font-size: 70%"><a href="files/clase01n/ConversionBinarioPesos.ods">Ejemplo de cálculo por pesos en una hoja de calculos</a>.</p>
 </section>
 
 <section>
@@ -218,7 +239,7 @@ int main(void) {
 }
 	</code></pre>
 	<p>Compilemos y corramos el programa</p>
-	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+	<pre style="width: 1050px;"><code data-trim style="font-size: 28px; padding: 15px; width: 1050px;" class="bash">
 $ gcc -o conv conversion.c
 $ ./conv
 	</code></pre>
@@ -228,6 +249,18 @@ $ ./conv
 <section>
 <section>
 	<h1>Códigos</h1>
+</section>
+
+<section>
+	<h3>Binario codificado en decimal (BCD)</h3>
+	<a href="./files/clase01n/bttf_7seg.png">
+		<img style="width: 400px;" src="files/clase01n/bttf_7seg.png"/>
+		<p style="font-size:50%;">Back to the future</p>
+	</a>
+	<a href="./files/clase01n/Tomorrowland_NixiePixie.jpg">
+		<img style="width: 500px;" src="files/clase01n/Tomorrowland_NixiePixie.jpg"/>
+		<p style="font-size:50%;">Tomorrowland</p>
+	</a>
 </section>
 
 <section>
@@ -242,6 +275,13 @@ $ ./conv
 	<p>(American Standard Code for Information Interchange)</p>
 	<a href="./files/clase01n/ASCII.png">
 		<img src="files/clase01n/ASCII.png"/>
+	</a>
+</section>
+
+<section>
+	<h3>Tabla ASCII con los caracteres no imprimibles</h3>
+	<a href="./files/clase01n/USASCII_code_chart.png">
+		<img src="files/clase01n/USASCII_code_chart.png"/>
 	</a>
 </section>
 </section>
@@ -265,6 +305,8 @@ $ ./conv
 	<br/><a href="./files/clase01n/Operadores_Binarios.png">
 		<img src="files/clase01n/Operadores_Binarios.png"/>
 	</a>
+	<br/><br/><br/>
+	<p style="font-size: 70%;">Nota: Al símbolo &tilde; se lo denomina <a href="https://es.wikipedia.org/wiki/Virgulilla#Inform%C3%A1tica">Virgulilla</a> o tilde (del ingles). Para el profe es y será un ñuflo.</p>
 </section>
 
 <section>
@@ -322,6 +364,18 @@ $ ./conv
 	<a href="./files/clase01n/CA2.png">
 		<img src="files/clase01n/CA2.png"/>
 	</a>
+</section>
+
+<section>
+	<h2>Usando CA2 en C</h2>
+	<br/>
+	<h3>Tipos de datos</h3>
+	<br/>
+	<ul>
+		<li>char : 8bits</li>
+		<li>int : 16bits</li>
+		<li>long : 32bits</li>
+	</ul>
 </section>
 
 <section>
@@ -387,6 +441,10 @@ $ ./conv
 
 <section>
 	<h3>Números fraccionales: <a href="./files/clase01n/Conversiones.ods">Calculadora</a></h3>
+	<br/>
+	<p>Se puede ver con la calculadora que ciertos números fráccionarios pierden precisión al pasarlos de decimal a binario (p/ej 6.1)</p>
+	<br/>
+	<p>Para que el número no pierda precisión su parte decimal debe ser múltiplo de 1/2<sup>n</sup></p>
 </section>
 </section>
 
@@ -395,6 +453,35 @@ $ ./conv
 	<h1>IEEE 754</h1>
 	<br/>
 	<h3>(informativo)</h3>
+</section>
+
+<section>
+	<h2>Números con coma...</h2>
+	<br/>
+	<ul>
+		<li><a href="https://es.wikipedia.org/wiki/N%C3%BAmero_racional">Racionales</a>: <span style="text-align: left; font-size: 75%;">Números que pueden representarse como el cociente de dos números enteros (es decir una fracción común)</span><ul>
+			<li>3/4 = 0,75</li>
+			<li>8/5 = 1,6</li>
+		</ul></li>
+		<li><a href="https://es.wikipedia.org/wiki/N%C3%BAmero_decimal_peri%C3%B3dico">Periódicos</a>: <span style="text-align: left; font-size: 75%;">Es un número racional con parte fraccionaria caracterizado por tener un período (cifras que se repiten infinitamente) en su expansión decimal.</span><ul>
+			<li>2/3 = 0,6666666...</li>
+			<li>1/9 = 0,1111111...</li>
+		</ul></li>
+		<li><a href="https://es.wikipedia.org/wiki/N%C3%BAmero_irracional">Irracionales</a>: <span style="text-align: left; font-size: 75%;">Es un número que no puede ser expresado como una fracción.</span><ul>
+			<li>Pi = 3,14159...</li>
+			<li>e = 2,7182...</li>
+		</ul></li>
+	</ul>
+</section>
+
+<section>
+	<h2>Cáculos en los microcontroladores</h2>
+	<br/>
+	<ul>
+		<li>Enteros: Se realizan en la <a href="https://en.wikipedia.org/wiki/Intel_8086">unidad aritmético lógica (ej. 8086)</a> que permite sumar, restar, multiplicar, dividir, realizar operaciones binarias, etc... (el acrónimo ALU viene del inglés: <a href="https://es.wikipedia.org/wiki/Unidad_aritm%C3%A9tica_l%C3%B3gica">Aritmetic Logic Unit</a>).</li>
+		<br/>
+		<li>Fraccionarias: Se pueden realizar por software (lento) o utilizar una <a href="https://en.wikipedia.org/wiki/Intel_8087">unidad funto flotante (ej. 8087)</a> y permite realizar las cuentas matemáticas que hace una calculadora (también denominada FPU del inglés <a href="https://es.wikipedia.org/wiki/Unidad_de_coma_flotante">Floting Point Unit</a>).</li>
+	</ul>
 </section>
 
 <section>

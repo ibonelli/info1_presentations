@@ -12,68 +12,82 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h> 
+#include <netdb.h>
 
 void error(const char *msg)
 {
-    perror(msg);
-    exit(0);
+	perror(msg);
+	exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-    int sockfd, portno, n;
-    struct sockaddr_in serv_addr;
-    struct hostent *server;
+	int sockfd, portno, n;
+	struct sockaddr_in serv_addr;
+	struct hostent *server;
 
-    char buffer[256];
-    if (argc < 3) {
-       fprintf(stderr,"usage %s hostname port\n", argv[0]);
-       exit(0);
-    }
+	char buffer[256];
+	if (argc < 3) {
+		fprintf(stderr,"usage %s hostname port\n", argv[0]);
+		exit(0);
+	}
 
-    portno = atoi(argv[2]);
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	// Paso1 crear el socket() con el que el cliente se va a comunicar con el servidor
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (sockfd < 0) 
-        error("ERROR opening socket");
+	if (sockfd < 0)
+		error("ERROR opening socket");
 
-    server = gethostbyname(argv[1]);
+	// Del servidor al que me voy a conectar:
+	//    -> 1ro configuro el puerto
+	portno = atoi(argv[2]);
+	//    -> 2do consigo la IP ya sea con el nombre DNS o la IP
+	server = gethostbyname(argv[1]);
 
-    if (server == NULL) {
-        fprintf(stderr,"ERROR, no such host\n");
-        exit(0);
-    }
+	if (server == NULL) {
+		fprintf(stderr,"ERROR, no such host\n");
+		exit(0);
+	}
 
-    memset((void *) &serv_addr, '\0', sizeof(serv_addr));
+	// Inicializo la estructura del serv_addr con ceros
+	memset((void *) &serv_addr, '\0', sizeof(serv_addr));
 
-    serv_addr.sin_family = AF_INET;
+	// Usamos IPv4
+	serv_addr.sin_family = AF_INET;
 
-    bcopy((char *)server->h_addr, 
-         (char *)&serv_addr.sin_addr.s_addr,
-         server->h_length);
+	// Copio de la estructura devuelta por gethostbyname() a serv_addr.sin_addr.s_addr
+	bcopy((char *)server->h_addr,
+		  (char *)&serv_addr.sin_addr.s_addr,
+		  server->h_length);
 
-    serv_addr.sin_port = htons(portno);
+	// Configuro el puerto y lo convierto de formato host a network con htons()
+	serv_addr.sin_port = htons(portno);
 
-    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
-        error("ERROR connecting");
+	// Paso2 hacer el connect() al server
+	if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+		error("ERROR connecting");
 
-    printf("Escriba su mensaje: ");
+	// Paso3 -> Ya nos podemos comunicar a través de sockfd
+	printf("Escriba su mensaje: ");
 
-    memset((void *) buffer, '\0', 256);
-    fgets(buffer,255,stdin);
-    n = write(sockfd,buffer,strlen(buffer));
+	// Com1 (Paso4) -> El cliente envía un mensaje
+	memset((void *) buffer, '\0', 256);
+	fgets(buffer,255,stdin);
+	n = write(sockfd,buffer,strlen(buffer));
 
-    if (n < 0) 
-         error("ERROR writing to socket");
+	if (n < 0)
+		error("ERROR writing to socket");
 
-    memset((void *) buffer, '\0', 256);
-    n = read(sockfd,buffer,255);
+	// Com2 (Paso5) -> El cliente recibe la confirmacion del servidor
+	memset((void *) buffer, '\0', 256);
+	n = read(sockfd,buffer,255);
 
-    if (n < 0) 
-         error("ERROR reading from socket");
-    printf("%s\n",buffer);
+	if (n < 0)
+		  error("ERROR reading from socket");
+	printf("%s\n",buffer);
 
-    close(sockfd);
-    return 0;
+	// Paso6 -> Cerramos el socket
+	close(sockfd);
+
+	return 0;
 }

@@ -172,8 +172,7 @@ a2.nota1 = 7.5;
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 a2 = a1;
 </code></pre>
-<p style="font-style: italic;"><span style="color: orange;">Importante</span>: depende del compilador, sino copiar campo x campo.</p>
-<p style="font-size: 75%;">Si no puede copiar (cosa rara) también se puede usar memcpy(). Pero en ambos casos hay que tener en cuenta el problema de "shallow copy": <a href="http://blog.zhangliaoyuan.com/blog/2013/01/28/structure-assignment-and-its-pitfall-in-C-language/">Articulo (EN)</a>, <a href="http://courses.cs.vt.edu/~cs2505/fall2010/Notes/pdf/T30.CDeepCopy.pdf">presentacion (EN)</a>, y <a href="./files/clase10/DeepCopy.html">resumen (HTML)</a>.</p>
+<p style="font-size: 75%;">La copia es como un memcpy(), byte a byte. Pero existe el problema de "shallow copy" si tenemos punteros dentro de la estructura (<a href="http://blog.zhangliaoyuan.com/blog/2013/01/28/structure-assignment-and-its-pitfall-in-C-language/">Articulo (EN)</a>, <a href="http://courses.cs.vt.edu/~cs2505/fall2010/Notes/pdf/T30.CDeepCopy.pdf">presentacion (EN)</a>, y <a href="./files/clase10/DeepCopy.html">resumen (HTML)</a>.</p>
 </ul>
 </section>
 
@@ -199,6 +198,17 @@ void calculaNota(struct Alumnos a1) { ...
 </ul>
 </section>
 
+<section>
+<h2>Ejemplos con archivos</h2>
+<ul>
+	<li>Tomo un archivo de texto y lo convierto a datos/estructuras: <a href="files/clase10/ej_struct_1.c">ej_struct_1.c</a></li>
+	<li>Archivo de texto usado en el ejemplo anterior: <a href="files/clase10/alumnos.txt">alumnos.txt</a></li>
+	<li>Levanto el archivo de datos y lo muestro: <a href="files/clase10/ej_struct_2.c">ej_struct_2.c</a></li>
+</ul>
+</section>
+</section>
+
+<section>
 <section>
 <h2>Estructuras anidadas</h2>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
@@ -253,6 +263,17 @@ typedef char bool;
 /* Si mi compilador soporta C99 */
 typedef _BOOL bool;
 </code></pre>
+</section>
+
+<section>
+<h2>sizeof struct</h2>
+<br/>
+<p>Es importante en estructuras (así como con tipos de datos simples) utilizar el operador sizeof para averiguar su tamaño.</p>
+<br/>
+<p>Esto es así por que queremos escribir programas portables, y para que sean portables debemos averiguar el tamaño de cada dato en tiempo de compilación.</p>
+<br/>
+<p style="font-size: 75%;">Un detalle de color en intel 64bits es que dependiendo del orden puede ocupar distinto tamaño los mismos datos, dependiendo del orden. El mínimo a reservar en un campo será 4bytes. La única excepción será si puede "empacarlos" (ver en el ejemplo "<a href="./files/clase10/estructuras.c">estructuras.c</a>" el tipo de datos_t4).</p>
+<p style="font-size: 60%;">Articulos (EN): "<a href="https://en.wikipedia.org/wiki/Data_structure_alignment">Data structure alignment (Wikipedia)</a>" & "<a href="https://software.intel.com/content/www/us/en/develop/articles/coding-for-performance-data-alignment-and-structures.html">Coding for Performance (Intel)</a>".</p>
 </section>
 
 </section><section>
@@ -330,8 +351,8 @@ printf("%d",A.h.nh); /* Muestra 4 */
 printf("%d",A.h.nl); /* Muestra 8 */
 
 /* Convirtiendo en string */
-str[0] = '0' + A.h.nh;
-str[1] = '0' + A.h.nl;
+str[0] = '0' + A.h.nh; // Version simplificada
+str[1] = '0' + A.h.nl; // Falta 'A', ver union_ej2.c
 str[2] = NULL;
 </code></pre>
 <br/>
@@ -340,25 +361,117 @@ str[2] = NULL;
 
 <section>
 <h2>Campo de Bits y Uniones</h2>
+<br/>
 <ul>
 	<li>Uniones: Código ejemplo
 		<ul>
 			<li><a href="files/clase10/Uniones-y-CamposBits/campos-de-bit.c">campos-de-bit.c</a> : Ejemplo trivial de uniones y campos de Bits (necesita el archivo <a href="files/clase10/Uniones-y-CamposBits/getch.h">getch.h</a>)</li>
 		</ul>
 	</li>
-	<li>Uniones - Ejercicio
-		<ul>
+<br/>
+	<li>Ejercicios:
+		<ol>
 			<li>Realizar un programa que devuelva el primer carácter (inicial) de un string/nombre usando uniones.</li>
-			<li>Realizar un programa que tome un número en punto flotante y devuelva sus partes usando uniones y campos de bit.</li>
-		</ul>
+			<li>Realizar un programa que tome un número en punto flotante y devuelva sus partes usando uniones y campos de bit. <span style="font-size:60%;">(<a href="./files/clase10/Uniones-y-CamposBits/float.c">resC</a>+<a href="./files/clase10/Uniones-y-CamposBits/binary.h">resH</a>)</span></li>
+		</ol>
 	</li>
+</ul>
+</section>
+
+<section>
+<h2>Acceso bit a bit con campos de bits</h2>
+<ul>
+<br/>
 	<li>Ejemplos acceso a bits:
 		<ul>
-			<li>Acceder a los bits de un byte utilizando una mascara (operaciones bit a bit): <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_1p-mascara.c">bits-de-un-byte_1p-mascara.c</a></li>
-			<li>Acceder a los bits de un byte utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_2p-campobit.c">bits-de-un-byte_2p-campobit.c</a></li>
+			<li>Acceder a los bits de un byte utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_campobit.c">bits-de-un-byte_campobit.c</a></li>
+			<li>Acceder a los bits de un int utilizando campos de bits: <a href="files/clase10/Uniones-y-CamposBits/campos_bit_int.c">campos_bit_int.c</a></li>
 		</ul>
 	</li>
 </ul>
+</section>
+
+<section>
+<h2>Máscaras (I)</h2>
+<br/>
+<p><a href="https://ibonelli.github.io/info1_presentations/Clase01_Sistemas_Numeracion.html#/4/3">Recordemos las operaciones lógicas</a> (vistas previamente)</p>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="txt">
+&& : AND logico
+
+& : AND binario (bit a bit)
+
+A B R
+0 0 0 --> Como A esta en 0 vale 0
+0 1 0 --> Como A esta en 0 vale 0
+1 0 0 --> Como A esta en 1 vale B
+1 1 1 --> Como A esta en 1 vale B
+
+	=> Para poner en 0 usamos una AND
+</code></pre>
+</section>
+
+<section>
+<h2>Máscaras (II)</h2>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="txt">
+|| : OR logico
+
+| : OR binario (bit a bit)
+
+A B R
+0 0 0 --> Como A esta en 0 vale B
+0 1 1 --> Como A esta en 0 vale B
+1 0 1 --> Como A esta en 1 vale 1
+1 1 1 --> Como A esta en 1 vale 1
+
+	=> Para poner en 1 usamos una OR
+</code></pre>
+<br/>
+<p>Acceder a los bits de un byte utilizando una mascara:<br/><a href="files/clase10/Uniones-y-CamposBits/bits-de-un-byte_mascara.c">bits-de-un-byte-mascara.c</a></p>
+</section>
+
+<section>
+<h2>Operadores de desplazamiento</h2>
+<br/>
+<p><a href="https://ibonelli.github.io/info1_presentations/Clase02_Programacion.html#/2/13">Recordemos los Operadores</a> (vistos previamente)</p>
+<ul>
+	<li><b>>></b> : Mover bits a la derecha</li>
+	<li><b><<</b> : Mover bits a la izquierda</li>
+</ul>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+masc_b0 = 0x01; // 0000'0001
+masc_b1 = 0x02; // 0000'0010
+masc_b2 = 0x04; // 0000'0100
+masc_b3 = 0x08; // 0000'1000
+
+byte = 0xFF;    // 1111'1111
+
+res0 = byte & masc_b0; // 0000'0001
+res = res0 >> 0;       // 0000'0001
+res1 = byte & masc_b1; // 0000'0010
+res = res1 >> 1;       // 0000'0001
+res2 = byte & masc_b2; // 0000'0100
+res = res2 >> 2;       // 0000'0001
+</code></pre>
+</section>
+
+<section>
+<h2>Desplazamiento y rotación</h2>
+<br/>
+<p style="font-size: 75%;" >Si bien esto no está soportado directamente por C, usando desplazamiento y mascaras se puede lograr también rotar. Y ciertos compiladores con GCC pueden detectar este código y traducirlo correctamente a una operación de assembler de rotación.</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+unsigned int data=0x0F;
+data= data>> (unsigned) 1 | data<< (unsigned)31;
+</code></pre>
+<p>compiles to ASM:</p>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="asm">
+ror  %eax
+</code></pre>
+<br/>
+<p>Rotando (además de desplazando) bits: <a href="files/clase10/Uniones-y-CamposBits/bit_rotate.c">bit_rotate.c</a></p>
+<p>Ejemplos de desplazamiento y rotación bit a bit: <a href="files/clase10/Uniones-y-CamposBits/operadores_bits_y_rotacion.txt">operadores_bits_y_rotacion.txt</a></p>
 </section>
 
 </section><section>
@@ -501,6 +614,26 @@ vec = (struct vendedor *) malloc( sizeof( struct vendedor ) * 10);
 <ul class="col" style="width: 400px;">
 <img src="files/clase10/12_Lista.jpg"/>
 </ul>
+</section>
+
+<section>
+<h2>Matriz Dinámica</h2>
+<br/>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+#define FIL 5
+#define COL 5
+
+void main(void) {
+	int **v, i, j;
+	v = malloc(sizeof(*int)*FIL);
+	for(i=0;i&lt;FIL;i++) {
+		v[i] = malloc(sizeof(int)*COL);
+
+	srandom(15);
+	for(i=0;i&lt;FIL;i++) {
+		for(j=0;j&lt;COL;j++) {
+...
+</code></pre>
 </section>
 
 <section>

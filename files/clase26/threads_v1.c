@@ -9,8 +9,10 @@
 #include<stdlib.h>
 #include<unistd.h>
 
-pthread_t tid[2];
-int ret1,ret2;
+// Variables globales compartidas por los threads
+
+pthread_t tid[2];	// Vector con los descriptores de cada thread
+int ret1,ret2;		// Valor de retorno de cada thread
 
 void *doSomeThing(void *arg) {
     unsigned long i = 0;
@@ -35,7 +37,7 @@ int main(void)
 {
     int i = 0;  
     int err;
-    int *ptr[2];
+    int *ptr[2];	// Puntero a los valores de retorno del thread
 
     while(i < 2) {
         err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);

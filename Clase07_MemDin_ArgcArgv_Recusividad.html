@@ -143,7 +143,9 @@ void main(int argc,char *argv[]) {
 <section data-background="#8c4738">
 <section>
 <h1>Recursividad</h1>
-<br/><h3>(no mas parte del programa)</h3>
+<br/><p>(¿no mas parte del programa?)</p>
+<br/>
+<p><a href="https://www.youtube.com/watch?v=-PX0BV9hGZY">Tail Call Optimization: The Musical</a></p>
 </section>
 
 <section>
@@ -164,13 +166,15 @@ void main(int argc,char *argv[]) {
 </section>
 
 <section>
-<h3>Recursividad</h3>
-<br/>
+<h3>Imagen recursiva</h3>
 <img src="files/clase07/Imagen_Recursiva.png"/>
+<br/>
+<p style="font-size: 90%;">El <a href="https://es.wikipedia.org/wiki/Tri%C3%A1ngulo_de_Sierpinski">Triángulo de Sierpinski</a> es un <a href="https://es.wikipedia.org/wiki/Fractal">fractal</a>, y los fractales<br/> los podemos ver como imagenes recursivas.</p>
+<p style="font-size: 70%;">Más información didáctica <a href="https://mathigon.org/course/fractals/sierpinski">sobre fractales</a> (en ingles).</p>
 </section>
 
 <section>
-<h3>Recursividad</h3>
+<h3>Llamados a funciones no recursivos</h3>
 <br/>
 <img src="files/clase07/Llamados_Funciones.png"/>
 </section>
@@ -178,29 +182,27 @@ void main(int argc,char *argv[]) {
 <section>
 <h3>Recursividad</h3>
 <br/>
-<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial</p>
-<br/>
-<img src="files/clase07/Factorial.png"/>
-</section>
-
-<section>
-<h3>Recursividad: Factorial Iterativo</h3>
-</section>
-
-<section>
-<h3>Recursividad: Factorial Recursivo</h3>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<br/>
-<img src="files/clase07/Factorial_llamados.png"/>
-</section>
-
-<section>
-<h3>Recursividad</h3>
-<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
+<p>Un ejemplo sencillo de un algoritmo recursivo es el factorial:</p>
+<img style="width: 400px;" src="files/clase07/Factorial.png"/>
+<br/><br/>
 <ul>
+	<li><a href="files/clase07/RECUR2_Factorial_Recursivo.c">Recursivo</a> <span style="font-size: 60%;">(ver diagrama de llamados en el siguiente slide)</span></li>
+	<li><a href="files/clase07/RECUR1_Factorial_Iterativo.c">Iterativo</a></li>
+	<li><a href="files/clase07/RECUR3a_Factorial_RecursivoStack.c">Recursivo v2 (mostrando el stack)</a></li>
+	<li><a href="files/clase07/RECUR3b_Factorial_RecursivoStack-MasConsumo.c">Recursivo v3 (uso intensivo del stack)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Ejemplo factorial recursivo (llamados)</h3>
+<br/>
+<img style="width: 500px;" src="files/clase07/Factorial_llamados.png"/>
+</section>
+
+<section>
+<h3>Recursividad (condición de cierre)</h3>
+<p>¿Qué pasa si se hace una llamada recursiva que no termina?</p>
+<ul style="font-size: 80%;">
 	<li>Cada llamada recursiva almacena los parámetros que se pasaron al procedimiento, y otras variables necesarias para el correcto funcionamiento del programa.</li>
 	<li>Por tanto si se produce una llamada recursiva infinita (que no termina nunca) llega un momento en el que no quedará memoria para almacenar más datos</li>
 	<li>En ese momento se abortará la ejecución del programa.</li>
@@ -249,7 +251,6 @@ void main(int argc,char *argv[]) {
 
 <section>
 <h2>Memoria dinámica</h2>
-<br/><br/>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
 #define MAX_STR 20
@@ -267,13 +268,15 @@ str = (char *) malloc( sizeof(char) * MAX_STR );
 	<li>Si se puede alojar la memoria malloc() retorna el puntero a la memoria reservada.</li>
 	<li>Si no se puede alojar la memoria malloc() retornara un puntero a NULL.</li>
 </ul>
+<br/><br/>
+<p style="font-size: 75%;"><a href="files/clase07/malloc_ejemplo.c">Bajar el ejemplo para correr en consola</a>.</p>
 </section>
 
 <section>
 <h2>Estructuras dinámicas de datos</h2>
-<br/><br/>
+<br/>
 <p>Por ejemplo, puedo crear un vector en forma dinámica:</p>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
+<pre><code data-trim style="font-size: 22px; margin-top: 20px;" class="cpp">
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 
@@ -281,12 +284,16 @@ void main(void) {
 	char *str, tam;
 	printf("Ingrese el tamaño de cadena deseado: ");
 	scanf("%d",&tam);
+	setbuf(stdin, NULL); // Limpio el buffer de teclado
 	str = (char *) malloc ( sizeof(char) * tam );
 	printf("Ingrese su cadena: ");
-	scanf("%s",str);
+	fgets(str, tam, stdin);
 	printf("\nSu cadena es: %s",str);
+	free(str);
 }
 </code></pre>
+<br/><br/>
+<p style="font-size: 75%;"><a href="files/clase07/malloc_str_fgets.c">Bajar el ejemplo para correr en consola</a>.</p>
 </section>
 
 <section>
@@ -302,6 +309,20 @@ void main(void) {
 <section>
 <h3>void free(void *ptr);</h3>
 <br/><p>Para liberar la memoria que pedimos <br/> (¡Seamos "ecológicos"!)</p>
+</section>
+
+<section>
+<h3>Vectores dinámicos</h3>
+<br/>
+<pre style="max-width: 500px;"><code data-trim style="max-width: 500px; font-size: 25px; margin-top: 20px;" class="bash">
+void fun(int n) {
+	int arr[n];
+	// ......
+}
+</code></pre><br/>
+<p>Esto da error si compilamos con:</p>
+<p style="font-size: 70%; font-family: monospace; color: #18c976; background-color: #3F3F3F;">gcc -Wall -std=c89 -pedantic-errors -o prog mi_variable_array.c</p>
+<br/><br/><p style="font-size: 70%;"><a href="./files/clase05/modificadores_gcc.txt">Los arreglos de tamaño variable fueron introducidos en el C99.</a></p>
 </section>
 </section>
 

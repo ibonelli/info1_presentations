@@ -373,35 +373,116 @@ $ git checkout mi-new-branch
 					</section>
 				</section>
 
-				<section data-background="#8c4738">
-					<h2>Doxygen</h2>
-					<p>Usaremos los apuntes del Ing. Jerónimo F. Atencio:</p>
-					<p><a href="./files/clase11/doxygen_atencio_v1.2.2_IBmod.odp">doxygen_atencio_v1.2.2_IBmod.odp</a></p>
-					<br/>
-					<p style="text-align: left;">Para instalarlo:</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-$ sudo apt-get install doxygen doxygen-gui
-					</code></pre>
-					<br/>
-					<p>Ejemplo: <a href="./files/clase11/doxygen_template.zip">doxygen_template.zip</a></p>
-					<p>Corriendo el GUI:   <b style="color: black;">doxywizard</b></p>
-					<p>Doxygen para C: <a href="./files/clase11/doxygen_QuickReferenceLenguajeC.pdf">doxygen_QuickReferenceLenguajeC.pdf</a></p>
-				</section>
+<section>
+	<section data-background="#8c4738">
+		<h2>Documentación</h2>
+		<br/>
+		<ul>
+			<li>Con el código fuente: MarkDown
+				<ul>
+					<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown Cheatsheet</a></li>
+					<li><a href="https://hackmd.io/">Herramienta de edición online</a></li>
+					<li><a href="https://github.com/ibonelli/info1_presentations/blob/gh-pages/README.md">README.md en los repos de github, gitlab, etc...</a></li>
+				</ul>
+			</li>
+			<br/>
+			<li>Desde el código fuente: Doxygen</li>
+		</ul>
+	</section>
 
-				<section data-background="#5C3F66">
-					<h2>Debuggers</h2>
-					<br/>
-					<p style="text-align: left;">Instalando:</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+	<section data-background="#8c4738">
+		<h2>Doxygen</h2>
+		<p>Usaremos los apuntes del Ing. Jerónimo F. Atencio:</p>
+		<p><a href="./files/clase11/doxygen_atencio_v1.2.2_IBmod.odp">doxygen_atencio_v1.2.2_IBmod.odp</a></p>
+		<br/>
+		<p style="text-align: left;">Para instalarlo:</p>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install doxygen doxygen-gui
+		</code></pre>
+		<br/>
+		<p>Ejemplo: <a href="./files/clase11/doxygen_template.zip">doxygen_template.zip</a></p>
+		<p>Corriendo el GUI:   <b style="color: black;">doxywizard</b></p>
+		<p>Doxygen para C: <a href="./files/clase11/doxygen_QuickReferenceLenguajeC.pdf">doxygen_QuickReferenceLenguajeC.pdf</a></p>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h3>Herramientas</h3>
+		<ul>
+			<li>Debugging: gdb, ddd, kdbg, etc...</li>
+			<li>Compiler/Linker: gcc</li>
+			<li>Editor: geany, kate, gedit, etc...</li>
+			<li>Proyecto: make</li>
+			<li>Control Versiones: git, svn, cvs, etc...</li>
+			<li>Documentación: doxygen</li>
+			<li>Logging: librerías vistas...</li>
+		</ul>
+	</section>
+
+	<section data-background="#5C3F66">
+		<h2>Debuggers</h2>
+		<br/>
+		<p style="text-align: left;">GDB</p>
+		<ul>
+			<li><a href="./files/clase25/cgdb.html">CGDB Manual</a></li>
+			<li><a href="./files/clase25/cgdb_cheat_sheet.txt">Notas sobre CGDB</a></li>
+		</ul>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install cgdb
+		</code></pre>
+		<br/><br/>
+		<p style="text-align: left;">Instalando KDBG:</p>
+		<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 $ sudo apt-get install kdbg
-					</code></pre>
-					<br/>
-					<p style="text-align: left;">Necesario en Ubuntu 14.04 LTS (trusty):</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-$ sudo rm /usr/share/kde4/apps/kdbg/icons/hicolor/22x22/actions/pulse.mng
-					</code></pre>
-					<p>El archivo "pulse.mng" es un Multiple-image Network Graphics que segun parece está corrupto.</p>
-				</section>
+		</code></pre>
+		<p><a href="/files/clase11/problema_gdb_ubuntu_trusty.html">Problemas en Ubuntu 14.04 LTS (trusty)</a></p>
+	</section>
+	<section>
+		<h3>Interface</h3>
+		<p>CLI vs GUI</p>
+		<br />
+		<img src="files/clase25/IDEs_2016-11-19.jpg"/>
+	</section>
+	<section>
+		<h3>INSTALL</h3>
+		<br />
+		<ul>
+			<li style="font-family:monospace; font-weight: bold;">apt install build-essential cmake qtcreator</li>
+				<p>QTcreator es piola para crear entornos gráficos (usa las librerias QT de KDE).</p>
+			<li style="font-family:monospace; font-weight: bold;">apt install openjdk-11-jdk</li>
+				<p style="text-align: left; margin-left: 100px; font-size:75%;">Ese es el paquete básico (corre sobre Java) <br/>y luego <a href="https://www.eclipse.org/downloads/packages/">bajarse eclipse para Linux</a> desde el sitio oficial.</p>
+				<p>Eclise es un framework para generar IDEs y se usó para crear el IDE del LPCxpresso</p>
+		</ul>
+		<br /><br />
+		<p>Otros:
+		<ul>
+			<li>apt-get install kdevelop</li>
+			<li>apt-get install codeblocks</li>
+		</ul>
+		</p>
+	</section>
+	<section>
+	<h3>Ejemplos de uso</h3>
+	<ul><li>Geany:
+			<ul>
+				<li>Uso simple: ejemplos/getline.c</li>
+				<li>Muchos Archivos: ejemplos/punto3D/main.cpp</li>
+			</ul>
+		</li>
+		<li>QTCreator: Armar un proyecto con QT y ver opciones</li>
+		<li>Eclipse CDT: Armar un proyecto y mostrar debugging factorial</li>
+	</ul>
+	</section>
+	<section>
+		<h3>Otros</h3>
+		<ul>
+			<li>Agregar pantallas: snapshot*</li>
+			<li>Alt+Enter sobre el proyecto creado factorial: Clase25b_IDE_eclipse_allegr.png</li>
+		</ul>
+	</section>
+</section>
+
 			</div>
 
 		</div>

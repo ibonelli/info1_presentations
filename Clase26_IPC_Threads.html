@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Info1 - IPC & Threads</title>
+		<title>Info1 - IPC, Zombies, FIFO & Shared Memory</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Ignacio Bonelli">
@@ -44,7 +44,8 @@
 			<div class="slides">
 
 <section>
-	<h1>IPCs, Procesos Zombies y Threads</h1>
+	<h1>IPC, Zombies, FIFO & Shared Memory</h1>
+	<h2>(Threads a titulo informativo)</h2>
 	<p>
 		<small>Ing. Ignacio Javier Bonelli</small>
 	</p>
@@ -72,7 +73,7 @@
 		<ul>
 			<li>Sockets</li>
 			<li>Message Queues</li>
-			<li>Pipes</li>
+			<li>Pipes (p/ej FIFO)</li>
 		</ul>
 	</li>
 </ul>
@@ -170,6 +171,8 @@ int kill(pid_t pid, int sig);
 	<li><a href="./files/clase26/signals.c">signals.c</a></li>
 	<li><a href="./files/clase26/sig_talk.c">sig_talk.c</a></li>
 </ul>
+<br/><br/>
+<p style="font-size: 60%;">Más información de <a href="https://www.gnu.org/software/libc/manual/html_node/index.html">"GNU C Library"</a> sección <a href="https://www.gnu.org/software/libc/manual/html_node/Signal-Handling.html">"Signal Handling"</a></p>
 </section>
 </section>
 
@@ -247,6 +250,150 @@ man 2 signal
 <br /><br />
 <p>Bonus: Usamos un signal handler, y hacemos algo: <a href="files/clase26/zombie5.c">zombie5.c</a></p>
 </section>
+
+<section>
+<h2>Función de manejo de señales</h2>
+<br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+typedef void (*sighandler_t)(int);
+</code></pre>
+<br/><br/>
+<p style="font-size: 75%;">Más información de <a href="https://www.gnu.org/software/libc/manual/html_node/index.html">"GNU C Library"</a> sección <a href="https://www.gnu.org/software/libc/manual/html_node/Signal-Handling.html">"Signal Handling"</a></p>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Named Pipes / FIFO</h2>
+<br/><br/>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="cpp">
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+
+int mkfifo(const char *pathname, mode_t mode);
+</code></pre>
+<br />
+<p>Es como crear un archivo. Solo que un proceso lo escribe y el segundo proceso lo lee. Siempre en orden FIFO.</p>
+<br />
+<p>Luego para usarlo es igual que con archivos/sockets, usaremos: open(), read() y write().</p>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
+<br/><br/>
+<img style="width: 700px;" src="files/clase26/Pipe_vs_SharedMemory_1.png"/>
+<br/><br/>
+<p>Una sola dirección, lectura "destructiva".</p>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
+<br /><br />
+<p style="text-align: left;">Ejemplo 1:</p>
+<ul style="font-size: 80%;">
+	<li><a href="./files/clase26/fifo1_speak.c">fifo_speak.c</a> : Este programa permitirá escribir en un "extremo" de la FIFO.</li>
+	<li><a href="./files/clase26/fifo1_listen.c">fifo_listen.c</a> : Este programa recibe y lee lo que hay en la FIFO.</li>
+</ul>
+</br></br>
+<p style="text-align: left;">Ejemplo 2:</p>
+<ul style="font-size: 80%;">
+	<li><a href="./files/clase26/fifo2_writes_first.c">fifo_writes_first.c</a> : Este programa escribirá en un pipe.</li>
+	<li><a href="./files/clase26/fifo2_reads_first.c">fifo_reads_first.c</a> : Este programa leerá del mismo pipe en el que se escribió.</li>
+</ul>
+</section>
+
+<section>
+<h2>Named Pipes / FIFO</h2>
+<p>Datos curiosos...</p>
+<br /><br />
+<ul>
+	<li>Se puede usar "cat" para ver la salida de una fifo (<a href="./files/clase26/fifo_and_cat.png">Captura</a>).</li>
+	<li>Se puede tener 2 escritores simultaneos, pero solo una salida activa (<a href="./files/clase26/fifo_escritores_simultaneos.png">Captura</a>).</li>
+</ul>
+</section>
+
+<section>
+<br /><br /><br />
+<p style="text-align: left;">Para leer mas...</p>
+<ul style="font-size: 80%;">
+	<li><a href="https://es.wikipedia.org/wiki/Tuber%C3%ADa_(inform%C3%A1tica)">Explicación de que es un pipe (en castellano)</a></li>
+	<li><a href="https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_pipes.htm">Explicación de que es un pipe (en inglés y bastante mejor)</a></li>
+	<li><a href="https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/">Ejemplo de un programa en C</a></li>
+	<li><a href="https://stackoverflow.com/questions/43023329/difference-between-mkfifo-and-mknod">Difference between mkfifo() and mknod()</a>
+		<ul><li>mkfifo() es mas estándar y portable que mknod().</li></ul>
+	</li>
+	<li><a href="https://www.embhack.com/pipe-and-fifo/">Difference between pipe() and fifo()</a>
+		<ul>
+			<li>El uso de mkfifo() es más nuevo y usa nombres.</li>
+			<li>pipe() no usa nombres y no tiene representación en el FileSystem.</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h3>Ejercicio FIFO</h3>
+<div style="font-size: 70%; text-align: left;">
+	<p style="text-align: left;">Implemente una función que lea un archivo de texto desde el final hacia el principio y lo escriba en una FIFO, que debe ser creada por la función.</p>
+	<p style="text-align: left;">El prototipo de la función es el siguiente:</p>
+	<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+	int enviarInvertido (char *fifoName, char *fileName);
+	</code></pre>
+	<p style="text-align: left;">Donde:</p>
+	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
+		<li>fifoName: Es el nombre de la fifo que debe crear la función y donde debe escribir el texto cifrado.</li>
+		<li>fileName: El nombre del archivo de texto a enviar.</li>
+	</ul>
+	<p style="text-align: left;">Y devuelve un número positivo indicando la cantidad de caracteres escritos en la fifo y un número negativo en caso de error.</p>
+	<ul style="text-align: left; margin-left: 100px; font-size: 85%;">
+		<li>-1 : Si no puede crear la fifo.</li>
+		<li>-2 : Si no puede abrir el archivo.</li>
+		<li>-3 : Si no puede leer el archivo.</li>
+		<li>-4 : Si no puede escribir en la fifo.</li>
+	</ul>
+</div>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Shared Memory</h2>
+<br />
+<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
+<ul>
+	<li>La forma clásica (System V):
+		<ul>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
+			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
+		</ul>
+	</li>
+	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
+	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
+	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
+</ul>
+</section>
+
+<section>
+<h2>Shared Memory</h2>
+<br/><br/>
+<img style="width: 500px;" src="files/clase26/Pipe_vs_SharedMemory_2.png"/>
+<br/><br/>
+<p>mmap: Todos pueden leer y escribir al mismo tiempo...<br/>¡Falta coordinación!</p>
+</section>
+
+<section>
+<h2>Semáforos y Memoria compartida</h2>
+<img style="width: 700px;" src="files/clase26/logger_system.png"/>
+<br />
+<ul>
+	<li>log server: <a href="files/clase26/logger_server.c">logger_server.c</a></li>
+	<li>log client (N): <a href="files/clase26/logger_client.c">logger_client.c</a></li>
+</ul>
+<br /><br />
+<p style="font-size: 50%;">From <a href="https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux">https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux</a></p>
+</section>
 </section>
 
 <section>
@@ -286,9 +433,35 @@ man 2 signal
 
 <section>
 <h2>Threads</h2>
+<br />
+<a href="files/clase26/threads_exit.jpg"><img style="width: 500px;" src="files/clase26/threads_exit.jpg"/></a>
+</section>
+
+<section>
+<h2>Threads</h2>
+<p>(ejemplo sencillo)</p>
+<h3><a href="files/clase26/threads_v1.c">threads.c</a> (<a href="files/clase26/threads_v2.c">v2</a>)</h3>
+<br /><br />
+<p style="text-align: left;">Formas de sincronizar threads:</p>
+<ul style="font-size: 90%;">
+	<li>Mutual Exclusion (Mutex) Locks</li>
+	<li>Condition Variables (muy similar a semáforos, pero sin IPCs)</li>
+	<li>Semáforos</li>
+</ul>
+</section>
+
+<section>
+<h2>Threads</h2>
 <h3>Prototipos &lt;pthread.h&gt;</h3>
 <br />
-<pre><code>/* Retornar el pthread ID actual */
+<pre><code>/* Creando un thread */
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
+                   void *(*start_routine) (void *), void *arg);
+
+/* Volviendo a unirse */
+int pthread_join(pthread_t thread, void **retval);
+
+/* Retornar el pthread ID actual */
 pthread_t pthread_self(void);
 
 /* ¿Son tid1 y tid2 el mismo thread?                  */
@@ -297,20 +470,7 @@ int pthread_equal(pthread_t tid1, pthread_t tid2);
 
 /* Salir del thread/función en el que estamos */
 void pthread_exit(void *retval);
-
-/* Creando un thread */
-int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
-                   void *(*start_routine) (void *), void *arg);
-
-/* Volviendo a unirse */
-int pthread_join(pthread_t thread, void **retval);
 </code></pre>
-</section>
-
-<section>
-<h2>Threads</h2>
-<br />
-<a href="files/clase26/threads_exit.jpg"><img style="width: 500px;" src="files/clase26/threads_exit.jpg"/></a>
 </section>
 
 <section>
@@ -332,22 +492,9 @@ int pthread_join(pthread_t thread, void **retval);
 </section>
 
 <section>
-<h2>Threads</h2>
-<p>(ejemplo sencillo)</p>
-<h3><a href="files/clase26/threads_v1.c">threads.c</a> (<a href="files/clase26/threads_v2.c">v2</a>)</h3>
-<br /><br />
-<p style="text-align: left;">Formas de sincronizar threads:</p>
-<ul style="font-size: 90%;">
-	<li>Mutual Exclusion (Mutex) Locks</li>
-	<li>Condition Variables (muy similar a semáforos, pero sin IPCs)</li>
-	<li>Semáforos</li>
-</ul>
-</section>
-
-<section>
 <h2>Threads Mutex</h2>
 <br />
-<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para seralizar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando.</p>
+<p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para serializar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando.</p>
 <br />
 <p>En ciertas situaciones esto es importante y permite preservar la parte del programa que no puede trabajar en paralelo.</p>
 <br />
@@ -421,6 +568,32 @@ Job 2 finished
 </section>
 
 <section>
+<h2>Threads & LWP ID</h2>
+<br/>
+<p>FORK & PID</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+ps elf | head -n1
+ps elf | grep tcp | grep -v grep
+watch -n 1 "ps elf | grep tcp | grep -v grep"
+
+F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY     TIME COMMAND
+0  1000 19398 17451  20   0  84348  1032 -      Sl+  pts/7   0:00 ./threads_m2
+</code></pre>
+<br/>
+<p>Threads & LWP</p>
+<pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
+ps -eLf | head -n1
+ps -eLf | grep threads_m2 | grep -v grep
+watch -n 1 "ps -eLf | grep threads | grep -v grep"
+
+UID        PID  PPID   LWP  C NLWP STIME TTY          TIME CMD
+ignacio  19926 17451 19926  0    3 09:30 pts/7    00:00:00 ./threads_m2
+ignacio  19926 17451 19927  1    3 09:30 pts/7    00:00:00 ./threads_m2
+ignacio  19926 17451 19928  0    3 09:30 pts/7    00:00:00 ./threads_m2
+</code></pre>
+</section>
+
+<section>
 <h2>Threads Join</h2>
 <h3>No bloqueantes</h3>
 <br />
@@ -455,7 +628,6 @@ Job 2 finished
 <p style="text-align: left;">Para leer mas...</p>
 <ul style="font-size: 80%;">
 	<li><a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">Problemas evidentemente paralelos (en inglés)</a></li>
-	<li><a href="http://www2.electron.frba.utn.edu.ar/~mdoallo/presentaciones.save.2010/clase-20100916-threads">Threads en Linux</a> (por Ing. Marcelo Doallo)</li>
 	<li>Linux Threads: <a href="http://www.thegeekstuff.com/2012/03/linux-threads-intro/">Intro</a>, <a href="http://www.thegeekstuff.com/2012/04/create-threads-in-linux/">creating</a>, <a href="http://www.thegeekstuff.com/2012/04/terminate-c-thread/">finishing them</a></li>
 	<li>Threads: <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node29.html#SECTION002900000000000000000">Basics</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node30.html#SECTION003000000000000000000">Advanced</a>, <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node31.html#SECTION003100000000000000000">Synchronization</a> y <a href="https://users.cs.cf.ac.uk/Dave.Marshall/C/node32.html#SECTION003200000000000000000">Ejemplos</a></li>
 	<li>Paralelización en python: <a href="https://realpython.com/intro-to-python-threading/">Intro</a> y <a href="https://scipy-cookbook.readthedocs.io/items/ParallelProgramming.html">parelización con numpy/scipy</a></li>
@@ -499,39 +671,6 @@ int sem_destroy(sem_t *sem);
 
 <section>
 <section>
-<h2>Shared Memory</h2>
-<br />
-<p style="text-align: left; margin-left: 30px;">Dos opciones:</p>
-<ul>
-	<li>La forma clásica (System V):
-		<ul>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmget()</span>: Allocates shared memory segment</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmctl()</span>: Shared memory control</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmat()</span>: Shared memory Attach operation</li>
-			<li style="font-size: 90%;"><span style="font-family: monospace;">shmdt()</span>: Shared memory Detach operation</li>
-		</ul>
-	</li>
-	<li>La forma mas moderna: <span style="font-size: 90%; font-family: monospace;">mmap()/munmap()</span></li>
-	<p style="margin-left: 30px;">map or unmap files or devices into memory</p>
-	<a style="margin-left: 100px;" href="files/clase26/shared_memory2.c">shared_memory2.c</a>
-</ul>
-</section>
-
-<section>
-<h2>Semáforos y Memoria compartida</h2>
-<img style="width: 700px;" src="files/clase26/logger_system.png"/>
-<br />
-<ul>
-	<li>log server: <a href="files/clase26/logger_server.c">logger_server.c</a></li>
-	<li>log client (N): <a href="files/clase26/logger_client.c">logger_client.c</a></li>
-</ul>
-<br /><br />
-<p style="font-size: 50%;">From <a href="https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux">https://www.softprayog.in/programming/interprocess-communication-using-posix-shared-memory-in-linux</a></p>
-</section>
-</section>
-
-<section>
-<section>
 <h2>IPCs : Message Queue</h2>
 <br/>
 <p>Librerias a usar:</p>
@@ -561,6 +700,24 @@ int msgctl(int msqid, int cmd, struct msqid_ds *buf);
 <p>Ejemplo sencillo IPC:</p>
 <p><a href="http://beej.us/guide/bgipc/">Mensajes por Beej</a>: <a href="files/clase26/beej_kirk.c">kirk.c</a> y <a href="files/clase26/beej_spock.c">spock.c</a></p>
 <p>El comando "ipcs" lista los IPC abiertos, si lo corremos mientras los procesos kirk/spock corren reporta sobre la actividad.</p>
+</section>
+</section>
+
+<section>
+<section>
+<h2>Otros ejemplos...</h2>
+<br/>
+<p>Más ejemplos de la catedra en:<br/><a href="./files/clase26/ejemplos_catedra/">./files/clase26/ejemplos_catedra/*</a></p>
+<br/>
+<p style="text-align: left;">En recuperatorios y finales se tomó Named Pipes (o FIFOs).</p>
+</section>
+
+<section>
+<h2>Ejercicios Integradores</h2>
+<br/>
+<p style="text-align: left;">Librería Sockets Info1: <a href="./files/clases_integradoras/Integradores3_SocketsForkSignal/sock-lib.h">sock-lib.h</a> y <a href="./files/clases_integradoras/Integradores3_SocketsForkSignal/sock-lib.c">sock-lib.c</a>.</p>
+<br/>
+<p>Más ejemplos de la catedra en: <a href="./files/clases_integradoras/">./files/clases_integradoras/*</a></p>
 </section>
 </section>
 

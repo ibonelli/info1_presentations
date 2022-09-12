@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head><meta name="GENERATOR" content="TtH 3.85">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+ 
+
+<title> Logic Gates - Building an ALU</title></head><body bgcolor="#ffffff">
+ 
+<h1 align="center">Logic Gates - Building an ALU </h1>
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc1">
+1</a>&nbsp;&nbsp;Introduction</h2>
+
+<ul>
+<li> The goal of this tutorial is to understand the basics of building complex circuit from simple 
+AND, OR, NOT and XOR logical gates. (We have studied in class the functionalities of the corresponding 
+bitwise operators.) This tutorial will teach you how to build an Arithmetic Logic Unit (ALU) 
+from scratch, using these simple logic gates and other components. 
+
+<font color="brown">Read each tutorial step carefully 
+and complete the activities listed in each step. </font>
+
+<!--At the end of this tutorial you will find some <a href=#assign>activities that you will need 
+to complete</a>.-->
+
+<div class="p"><!----></div>
+</li>
+
+<li> The ALU will take in two 32-bit values, and 2 control lines. Depending
+on the value of the control lines, the output will be the addition,
+subtraction, bitwise AND or bitwise OR of the inputs.
+Schematically, here is what we want to build:
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/aluiface.gif" alt="Figs/aluiface.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> Note! This is an <em>interface</em> for the ALU: what goes in, what
+comes out. It also shows the ALU as an <em>abstraction</em>: you can't
+see how it works, but you do know what it does.
+<div class="p"><!----></div>
+</li>
+
+<li> Also note that there are three status outputs as well as the main
+result: is the result zero, was there a carry, and did the operation
+result in an overflow?
+<div class="p"><!----></div>
+</li>
+
+<li> Note: just a reminder on the difference between a carry and an overflow:
+
+<div class="p"><!----></div>
+
+<ul>
+<li> <b>Carry</b>: was there a carry in the most-significant bit which
+we could not output in the given number of bits (32 bits, above)?
+<div class="p"><!----></div>
+</li>
+
+<li> <b>Overflow</b>: does the sign of the output differ from the inputs,
+indicating (for example) that a sum of two positive numbers has overflowed
+and is now a negative result?
+<div class="p"><!----></div>
+</li>
+</ul>
+<div class="p"><!----></div>
+</li>
+
+<li> Some of the data and control lines are shown with a slash and a number
+like 32. 
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/buswidth.gif" alt="Figs/buswidth.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> This indicates that the line is actually 32 lines in parallel, e.g.
+the result is 32-bits wide. If you don't see a slash in the diagrams
+below, you can assume that the line is only 1-bit wide.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.1">
+1.1</a>&nbsp;&nbsp;Basic Components</h3>
+
+<ul>
+<li> We are going to use four logic gates: AND, OR, NOT and XOR. You should
+Below are the icons for each, and their truth table. (We have already seen the truth tables in class.) 
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/4basicgates.gif" alt="Figs/4basicgates.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> We are going to use another component, the <em>multiplexor</em>. The
+job of the multiplexor is to choose one of several inputs, based on
+a control line, and send the chosen input to the output.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/1bitmultiplexor.gif" alt="Figs/1bitmultiplexor.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> This multiplexor above is a 1-bit wide 2-way multiplexor: 2 inputs,
+1 bit wide each. If you add extra control lines, you can choose more
+inputs: 2 control lines is used in a 4-way multiplexor, 3 control
+lines in an 8-way multiplexor etc.
+<div class="p"><!----></div>
+</li>
+
+<li> And by using multiple multiplexors in parallel, you can make N-bit
+wide multiplexors.
+<div class="p"><!----></div>
+</li>
+
+<li> I'm not going to show you the internals of the multiplexor. You should,
+however, know that it can be easily built with the 4 logic gates above.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.2">
+1.2</a>&nbsp;&nbsp;Bitwise AND</h3>
+
+<ul>
+<li> Bitwise AND is very useful, for example to calculate an IP network's
+identity:
+
+<div class="p"><!----></div>
+
+<ul>
+<li> 131.245.7.18 AND 255.255.255.0 =&gt; 131.245.7.0
+<div class="p"><!----></div>
+</li>
+</ul>
+<div class="p"><!----></div>
+</li>
+
+<li> Building the logic to do 32-bit AND on two inputs is easy: as each
+bit is independent, we just need 32 AND gates in parallel.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/32bitand.gif" alt="Figs/32bitand.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> Note the interface diagram on the right. Each time we build a larger
+component, we are going to hide it behind an interface.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<h3><font color="brown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What To Do</font></h3><font color="brown">
+</font><ul><font color="brown">
+</font><li><font color="brown"> Download the digital logic circuit simulator 
+<a href="http://ozark.hendrix.edu/~burch/logisim/">Logisim</a>. </font>Make sure you select the correct 
+binary for your platform. 
+<div class="p"><!----></div>
+</li>
+<li> <font color="brown">Run Logisim and and go through the tutorial available under the Help menu.</font>
+Cover the Beginner's section first, then the Subcircuits and the Wire bundle section. 
+You will need to use a splitter wire in your ALU implementation. 
+The interface is simple and intuitive.
+<div class="p"><!----></div>
+</li>
+<li> Here is a 4-bit ALU implemented in Logisim: <a href="http://www.csc.villanova.edu/~mdamian/Past/csc2400fa13/assign/ALU4.circ">ALU4.circ</a>. 
+Download this file and make a copy of it called ALU6.circ. (You will need the original ALU4.circ in later steps.)  
+Open ALU6.circ in Logisim, then 
+double-click on the 4-bit AND component in the left drop-down menu. The 4-bit AND circuit should 
+open up for you.
+Select the Hand icon in the top-left of the Logisim window, then 
+click on the data inputs to change their values. Make sure that the AND component works as expected.
+<p></p></li><li> <font color="brown"> Extend the AND component to work with 6-bit values instead of 4 bits. </font>
+</li></ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.3">
+1.3</a>&nbsp;&nbsp;Bitwise OR</h3>
+
+<ul>
+<li> 32-bit bitwise OR is just as easy as bitwise AND, we just need 32
+OR gates in parallel.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/32bitor.gif" alt="Figs/32bitor.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<h3><font color="brown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What To Do</font></h3>
+<ul>
+<li> Make a copy of your current ALU4.circ version, in case you need to revert to it later. 
+<p></p></li><li> Open the 4-bit OR circuit by double-clicking on it in the left drop-down menu. 
+Select the Hand icon in the top-left of the Logisim window, then
+click on the data inputs to change their values. Make sure that the OR component works as expected.
+<p></p></li><li> <font color="brown"> Extend the OR component to work with 6-bit values instead of 4 bits. </font>
+</li></ul>
+
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.4">
+1.4</a>&nbsp;&nbsp;Addition</h3>
+
+<ul>
+<li> Addition isn't going to be so easy.
+<div class="p"><!----></div>
+</li>
+
+<li> We saw previously that we have to add bits, and this may produce a
+carry. Columns further up need to accept a carry as input, along with
+two inputs, and produce the 1-bit output and another carry for the
+next column up.
+<div class="p"><!----></div>
+</li>
+
+<li> The component which will perform a 1-bit ADD, receiving a carry in
+and producing a 1-bit output and a carry out is called a <b>full
+adder</b>. Its interface looks like the following:
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/fulladderiface.gif" alt="Figs/fulladderiface.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> Internally, here is what a full adder looks like, just 5 logic gates.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/fulladder.gif" alt="Figs/fulladder.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> The truth table for the full adder is:
+
+<div class="p"><!----></div>
+
+<center>
+<table border="1">
+<tbody><tr><td align="center"><b>Cin</b> </td><td align="center"><b>&nbsp;A&nbsp;</b> </td><td align="center"><b>&nbsp;B&nbsp;</b> </td><td align="center"><b>Result</b> </td><td align="center"><b>Cout</b></td></tr>
+<tr><td></td></tr>
+<tr><td align="center">0 </td><td align="center">0 </td><td align="center">0 </td><td align="center">0 </td><td align="center">0</td></tr>
+
+<tr><td align="center">0 </td><td align="center">0 </td><td align="center">1 </td><td align="center">1 </td><td align="center">0</td></tr>
+
+<tr><td align="center">0 </td><td align="center">1 </td><td align="center">0 </td><td align="center">1 </td><td align="center">0</td></tr>
+
+<tr><td align="center">0 </td><td align="center">1 </td><td align="center">1 </td><td align="center">0 </td><td align="center">1</td></tr>
+
+<tr><td align="center">1 </td><td align="center">0 </td><td align="center">0 </td><td align="center">1 </td><td align="center">0</td></tr>
+
+<tr><td align="center">1 </td><td align="center">0 </td><td align="center">1 </td><td align="center">0 </td><td align="center">1</td></tr>
+
+<tr><td align="center">1 </td><td align="center">1 </td><td align="center">0 </td><td align="center">0 </td><td align="center">1</td></tr>
+
+<tr><td align="center">1 </td><td align="center">1 </td><td align="center">1 </td><td align="center">1 </td><td align="center">1</td></tr>
+</tbody></table>
+
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> At some point sit down, try some inputs, and convince yourself that
+the logic works as advertised!
+<div class="p"><!----></div>
+</li>
+
+<li> To make a 32-bit full adder, we simply have to string 32 of these
+1-bit full adders together.
+<div class="p"><!----></div>
+</li>
+
+<li> Except for the least-significant adder, each one is going to receive
+its carry from the one below and pass up its own carry to the one
+above.
+<div class="p"><!----></div>
+</li>
+
+<li> For the most significant bit, if the carry is a 1, then we ran out
+of bits to store the result.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/32bitfulladder.gif" alt="Figs/32bitfulladder.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> When the final carry output is 1, this indicates that the result was
+too big to fit into 32 bits.
+<div class="p"><!----></div>
+</li>
+
+<li> I'm going to delay showing you the interface diagram for the 32-bit
+full adder, because we can modify it to also do subtraction.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.5">
+1.5</a>&nbsp;&nbsp;Subtraction</h3>
+
+<ul>
+<li> We could build a completely separate component, a 32-bit subtractor,
+once we work out how to build a 1-bit subtractor.
+<div class="p"><!----></div>
+</li>
+
+<li> Fortunately, we can simplify things a bit.
+<div class="p"><!----></div>
+</li>
+
+<li> According to the rules of maths: 3<font face="symbol">-</font>2=3+(<font face="symbol">-</font>2).
+<div class="p"><!----></div>
+</li>
+
+<li> If we could negate one of the inputs, we could use the existing 32-bit
+full adder.
+<div class="p"><!----></div>
+</li>
+
+<li> We have already learned how to negate a twos complement binary
+integer: invert every bit in the number, then add 1.
+<div class="p"><!----></div>
+</li>
+
+<li> Putting all of the above together, we can say:
+
+<div class="p"><!----></div>
+
+<center><em>A - B = A + (-B) = A + <tt>~</tt>B + 1</em>
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> Inverting every bit is easy: we can use a NOT gate for each bit in
+B.
+<div class="p"><!----></div>
+</li>
+
+<li> But now we need to do <em>A + <tt>~</tt>B + 1</em>. How can we do this?
+<div class="p"><!----></div>
+</li>
+
+<li> We are going to use a very clever trick.
+
+<div class="p"><!----></div>
+
+<ul>
+<li> Set the initial carry-in to 1 instead of 0, thus adding an extra 1
+to the sum.
+<div class="p"><!----></div>
+</li>
+
+<li> And instead of using NOT gates, we will use XOR gates.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<center>
+<img src="Logic%20Gates%20-%20Building%20an%20ALU_files/addsubxor.gif" alt="Figs/addsubxor.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> If we are doing addition (Control=0), then one arm of the XOR gates
+is zero, and the B bits go into the adders unchanged, and the carry-in
+is zero.
+<div class="p"><!----></div>
+</li>
+
+<li> If we are doing subtraction (Control=1), then one arm of the XOR gates
+is one. This inverts all of the B bits before they get to the adders.
+As well, the carry-in is now 1, so we achieve the result of doing
+<em>A - B = A + <tt>~</tt>B + 1</em>!
+<div class="p"><!----></div>
+</li>
+
+<li> Overall, we end up with this unit which can do addition and subtraction:
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/addsubunit.gif" alt="Figs/addsubunit.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> If the operation bit is 0, we pass in B and perform A+B. If the operation
+bit is 1, we invert B and do <em>A + <tt>~</tt>B + 1.</em>
+<div class="p"><!----></div>
+</li>
+
+<li> We can now distinguish between <b>data lines</b> (which pass data
+around) and <b>control lines</b> (which control the actions of the
+components).
+<div class="p"><!----></div>
+</li>
+
+<li> The data lines are also known as <b>datapaths</b>.
+<div class="p"><!----></div>
+</li>
+
+<li> The <em>Operation</em> line above is a control line, as it controls
+the action being performed. But note, it is also used as a 1-value
+for the carry-in, so it is also a piece of data!
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.6">
+1.6</a>&nbsp;&nbsp;Overflow Output</h3>
+
+<ul>
+<li> We've seen that a carry occurs when the final addition or subtraction
+is too big to fit into 32 bits.
+<div class="p"><!----></div>
+</li>
+
+<li> A related mathematical output is <em>overflow</em>. This indicates that
+the sign of the maths result differs from the sign of the two inputs.
+<div class="p"><!----></div>
+</li>
+
+<li> Imagine we were using 4-bit numbers: you do 7 + 7 and get the result
+-2!
+<div class="p"><!----></div>
+</li>
+
+<li> Why? Because 7 (0111) + 7 (0111) = 1110, which in 4-bit twos-complement
+is -2.
+<div class="p"><!----></div>
+</li>
+
+<li> Overflow occurs when the size of the inputs is such that there is
+a carry which changes the most-significant sign bit.
+<div class="p"><!----></div>
+</li>
+
+<li> The ALU will always output both carry and overflow, but both only
+makes sense when the operation is add or subtract.
+<div class="p"><!----></div>
+</li>
+
+<li> When we are doing the logical operations (AND and OR), the values
+on the carry and overflow outputs have no meaning.
+<div class="p"><!----></div>
+</li>
+
+<li> As overflow is only maths related, this should be implemented in the
+ADD/SUBTRACT unit.
+<div class="p"><!----></div>
+</li>
+
+<li> The logic is follows: when adding, if the sign of the two inputs is
+the same, but the result sign is different, then we have an overflow.
+<div class="p"><!----></div>
+</li>
+
+<li> The boolean expression is [<font face="symbol">~</font>a31]·[<font face="symbol">~</font>b31]·result31+a31·b31·[<font face="symbol">~</font>result31].
+<div class="p"><!----></div>
+</li>
+
+<li> We have to do this only for addition, so we take the b31 value after
+the XOR gate, i.e. just as it goes into the most-significant adder.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/overflow.gif" alt="Figs/overflow.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.7">
+1.7</a>&nbsp;&nbsp;Negative Output</h3>
+
+<ul>
+<li> When is the result negative? When its most-significant bit is 1.
+<div class="p"><!----></div>
+</li>
+
+<li> We can wire this bit directly out of the ALU, so that it indicates
+if the result is negative.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.8">
+1.8</a>&nbsp;&nbsp;Zero Output</h3>
+
+<ul>
+<li> One thing left to do is to provide the zero output: is the result
+zero?
+<div class="p"><!----></div>
+</li>
+
+<li> This is only true if <b>all</b> of the bits of the result are zero.
+We can do this for the logical and the maths units.
+<div class="p"><!----></div>
+</li>
+
+<li> To do this, we can use a 32-bit OR gate followed by a 1-bit NOT gate:
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/zerodetect.gif" alt="Figs/zerodetect.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> The OR gate outputs a 0 only if all input bits are 0. If any input
+bit is a 1, the OR's output is a 1.
+<div class="p"><!----></div>
+</li>
+
+<li> The NOT gate simply inverts this, giving the result:
+
+<div class="p"><!----></div>
+
+<ul>
+<li> if any result bit is on, the output is 0, i.e. not zero.
+<div class="p"><!----></div>
+</li>
+
+<li> if all result bits are off, the output is 1, i.e. zero.
+<div class="p"><!----></div>
+</li>
+</ul>
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<h3><font color="brown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What To Do</font></h3>
+<ul>
+<li> Make a copy of your current ALU4.circ version, in case you need to revert to it later.
+<p></p></li><li> Open the 4-bit Adder/Subtracter circuit by double-clicking on it in the left drop-down menu.
+Select the Hand icon in the top-left of the Logisim window, then click on the data inputs to change their values. 
+Note that when the 1-bit Add/Sub control is 0 the circuit performs addition, otherwise it performs subtraction. 
+<p></p></li><li> <font color="brown"> Extend the Adder/Subtracter cicrcuit to work with 6-bit values instead of 4 bits. </font>
+</li></ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.9">
+1.9</a>&nbsp;&nbsp;Putting It All Together</h3>
+
+<ul>
+<li> We are getting close to being able to build the full ALU.
+<div class="p"><!----></div>
+</li>
+
+<li> We now have three main units:
+
+<div class="p"><!----></div>
+
+<ul>
+<li> a 32-bit bitwise AND unit,
+<div class="p"><!----></div>
+</li>
+
+<li> a 32-bit bitwise OR unit, and
+<div class="p"><!----></div>
+</li>
+
+<li> a 32-bit ADD/SUBTRACT unit with a control line.
+<div class="p"><!----></div>
+</li>
+
+<li> the logic to output carry, overflow, zero and negative.
+<div class="p"><!----></div>
+</li>
+</ul>
+<div class="p"><!----></div>
+</li>
+
+<li> We can pass the inputs A and B to all three units, and perform all
+three operations in parallel:
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/alu3units.gif" alt="Figs/alu3units.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> But, we need to choose which of the three results we want, based on
+the two control lines coming into the ALU. We would like:
+
+<div class="p"><!----></div>
+
+<center><b></b>
+<table border="1">
+<tbody><tr><td align="center"><b>c<sub>1</sub></b> </td><td align="center"><b>c<sub>0</sub></b> </td><td align="center"><b>Result</b></td></tr>
+<tr><td></td></tr>
+<tr><td align="center">0 </td><td align="center">0 </td><td align="center">A AND B</td></tr>
+
+<tr><td align="center">0 </td><td align="center">1 </td><td align="center">A OR B</td></tr>
+
+<tr><td align="center">1 </td><td align="center">0 </td><td align="center">A + B</td></tr>
+
+<tr><td align="center">1 </td><td align="center">1 </td><td align="center">A - B</td></tr>
+</tbody></table>
+
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> How do we control which of the four operations actually becomes the
+result? With multiplexors again.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/nearlyfullalu.gif" alt="Figs/nearlyfullalu.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> When c<sub>0</sub>=0, the ANDORresult is A AND B, and the ADDSUBresult
+is A + B.
+<div class="p"><!----></div>
+</li>
+
+<li> When c<sub>0</sub>=1, the ANDORresult is A OR B, and the ADDSUBresult is
+A - B.
+<div class="p"><!----></div>
+</li>
+
+<li> Now we just have to choose between these two results, and that is
+done with the second multiplexor, which chooses either the bitwise
+logic result or the maths result.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.10">
+1.10</a>&nbsp;&nbsp;Finally</h3>
+
+<ul>
+<li> To finish off, we can draw the three components, the multiplexors
+and the zero logic, to reveal the final 32-bit ALU.
+
+<div class="p"><!----></div>
+
+<center><img src="Logic%20Gates%20-%20Building%20an%20ALU_files/fullalu.gif" alt="Figs/fullalu.gif">
+
+<div class="p"><!----></div>
+</center>
+<div class="p"><!----></div>
+</li>
+
+<li> The dotted line shows the interface to the ALU.
+<div class="p"><!----></div>
+</li>
+</ul>
+
+
+
+<h3><font color="brown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What To Do</font></h3>
+<ul>
+<li> Make a copy of your current ALU4.circ version, in case you need to revert to it later.
+<p></p></li><li> Open the main ALU circuit by double-clicking on it in the left drop-down menu. It 
+is designed to operate on 4 bits, so you can test it only in the original ALU4.circ version. 
+<p></p></li><li> Open the original ALU4.circ file and try out some additions, subtractions, ANDs and ORs, 
+and satisfy yourself that the ALU works as advertised.
+
+<p></p></li><li> <font color="brown"> Extend the ALU to work with 6-bit values instead of 4 bits. </font>
+    
+<p> </p></li><li> See if you can put in some input values which cause an oveflow.
+
+<p> </p></li><li><font color="brown"><b>Turn in printed copies of your ALU (showing an overflow) and all its subcircuits.</b></font>
+</li></ul>
+    
+    
+<div class="p"><!----></div>
+<h3><a name="tth_sEc1.12">
+1.12</a>&nbsp;&nbsp;Conclusion</h3>
+        
+<ul>
+<li> That's about all we can cover in terms of ALU design in this subject.
+<div class="p"><!----></div>
+</li>
+
+<li> Obviously, real ALUs perform many more operations, and use many performance
+optimizations.
+<div class="p"><!----></div>
+</li>
+
+<li> This is just a taste of ALU design, but you should now understand
+that:
+
+<div class="p"><!----></div>
+
+<ul>
+<li> an ALU is just a collection of logic components;
+<div class="p"><!----></div>
+</li>
+
+<li> the logic components can be made from ordinary logic gates;
+<div class="p"><!----></div>
+</li>
+
+<li> data can flow in parallel to multiple units;
+<div class="p"><!----></div>
+</li>
+
+<li> everything operates in parallel: several units can produce output
+internally;
+<div class="p"><!----></div>
+</li>
+
+<li> control logic, via multiplexors, chooses which output to use as the
+result.
+<div class="p"><!----></div>
+</li>
+</ul>
+<div class="p"><!----></div>
+</li>
+<div class="p"><!----></div>
+
+</ul>
+
+<div class="p"><!----></div>
+
+<hr>
+    <b>Acknowledgement.</b> This tutorial has been developed by Dr. Warren Toomey, and slightly modified by Dr. Mirela Damian.
+
+<!--Its original version can be found <a href="http://minnie.tuhs.org/CompArch/Tutes/week02.html">here</a>.-->
+
+
+</body></html>

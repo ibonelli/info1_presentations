@@ -57,6 +57,39 @@
 
 <section>
 <section>
+<h2>estructura básica de la computadora</h2>
+<img src="files/clase05/memoria-ram-pc.jpg"/>
+<p>¿Donde están las variables? En la memoria RAM, que se organiza en "celdas". Cada una de estas "celdas" tiene un posición que nos permite encontrar nuestra variable.</p>
+</section>
+
+<section>
+<h2>Diagrama de la memoria</h2>
+<img style="height: 500px;" src="files/clase05/memoria-diagrama.png"/>
+<p>Lo que vemos a la izquierda serán posiciones, y en las "celdas" de la derecha guardaremos variables.</p>
+</section>
+
+<section>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<h3>Pasaje por valor</h3>
+	<img src="files/clase05/pasaje-por-valor.gif"/>
+	<p style="font-size: 75%;">Vamos a copiar las variables para que las use la funcion.</p>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+	<h3>Pasaje por referencia</h3>
+	<img src="files/clase05/pasaje-por-referencia.gif"/>
+	<p style="font-size: 75%;">Vamos a decirle a la funcion donde están las variables, para que la función opere directamente sobre ellas.</p>
+</ul>
+</section>
+
+<section>
+<h2>Pasaje por valor:</h2>
+<img src="files/clase05/pass-by-value.png"/>
+<p>Cuando entramos a una funcion se crea un área de memoria que contiene copias de los valores pasados como argumentos y también variables locales de la función. A este área de memoria con la cuál trabaja la función se denomina pila o stack.</p>
+</section>
+</section>
+
+<section>
+<section>
 <h2>Introducción a punteros</h2>
 <h2>Definición de arreglos, estructuras y cadenas de texto</h2>
 </section>
@@ -92,6 +125,26 @@ int *q=&a;
 
 int *r=&b;
 	</code></pre>
+</ul>
+</section>
+
+<section>
+<h3>Punteros, corrida <a href="files/clase05/punteros_ejemplo1.c">ejemplo1</a>:</h3>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="text">
+En decimal:
+	a: 100, b: 100
+Como hexa:
+	a: 64, b: 64
+Como hexa:
+	p: 7ffc54ca3898, q: 7ffc54ca3898, r: 7ffc54ca389c
+Como punteros:
+	p: 0x7ffc54ca3898, q: 0x7ffc54ca3898, r: 0x7ffc54ca389c
+Direccion de los punteros:
+	&p: 0x7ffc54ca38a0, &q: 0x7ffc54ca38a8, &r: 0x7ffc54ca38b0
+</code></pre>
+<ul>Importante:
+	<li><code style="color: #3366FF;">p</code> igual a <code style="color: #3366FF;">q</code> : Por qué apuntan a lo mismo.</li>
+	<li><code style="color: #3366FF;">&p</code> distinta de <code style="color: #3366FF;">&q</code> : Por qué son distintas variables.</li>
 </ul>
 </section>
 
@@ -234,12 +287,28 @@ m = *p;
 <section>
 <h2>Ejercicio de punteros: Tabla</h2>
 <img src="files/clase05/06_punteros_ej_tabla.png"/>
-</ul>
 </section>
 
 <section>
 <h2>Ejercicio de punteros: Memoria</h2>
 <img src="files/clase05/06_punteros_ej_memoria.png"/>
+</section>
+
+<section>
+<h2>Ejercicio de punteros 2</h2>
+<pre><code data-trim class="cpp">
+int a, b, *p, *q, **r, **s;
+p=q=NULL; r=s=NULL;
+a=9; b=4;
+p=&a; q=&b;
+r=&p; s=&q;
+**r=*q;
+// ...mas... (ver enunciado)
+</code></pre>
+<ul>
+	<li><a href="files/clase05/ejercicio_punteros_enunciado.pdf">Enunciado.</a></li>
+	<li><a href="files/clase05/ejercicio_punteros_tabla.pdf">Presentación sobre como resolverlo (p/ Ing. Carlos Cuttita).</a></li>
+	<li><a href="files/clase05/ejercicio_punteros.c">Programa que muestra lo que sucede.</a></li>
 </ul>
 </section>
 </section>
@@ -350,6 +419,17 @@ a = input("%i")
 
 <section>
 <section>
+<h2>Arquitectura de 64bits</h2>
+<h3>¿Punteros de 64bits o 48bits?</h3>
+<br/>
+<p>En las máquinas actuales de 64 bits se manejan punteros de 48 bits. Esto es por que con eso ya pueden direccionar 256 terabyte de memoria cosa que les pareció suficiente a los fabricantes de procesadores (<span style="font-size: 75%;"><a href="https://en.wikipedia.org/wiki/X86-64#Virtual_address_space_details">Wikipedia X86-64 Virtual address space</a> y <a href="https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space">StackOverflow Q&A</a></span>). De esta manera los fabricantes se ahorran los transitores de esos últimos 16 bits.</p>
+<br/>
+<p>Por esto los punteros que veremos con %p serán de<br/> 48 bits o 6 bytes. Pero si hacemos un sizeof() nos va a decir 8 bytes. La arquitectura puede direccionar 64bits/8bytes, pero el hardware se queda con los 48bits/6bytes inferiores.</p>
+</section>
+</section>
+
+<section>
+<section>
 <h1>Arreglos</h1>
 <br/><h3>(Clase 2)</h3>
 </section>
@@ -444,13 +524,33 @@ int A[100] = {25, 5, 100, 25, 5}
 <br/>
 <li>Declaración e inicialización de un arreglo de 10 caracteres: 
 <pre style="width: 1050px;"><code data-trim style="font-size: 28px; padding: 15px; width: 1050px;" class="cpp">
-char A[10] = {'a', 'z', 'E', 'e', 65, '\65', '@', 'U', '*', '\n'}
+char A[10] = {'a', 'z', 'E', 'e', 65, '\x41', '@', 'U', '*', '\n'}
 </code></pre></li>
 <br/>
 <li>Determinación del tamaño de un arreglo en forma implícita: 
 <pre><code data-trim style="font-size: 28px; padding: 15px;" class="cpp">
 int A[] = {5, 10, 2, 15, 20}
 </code></pre></li>
+</ul>
+</section>
+
+<section>
+<h2>Caracteres de escape en C</h2>
+<br/>
+<ul>
+	<li>La barra (\) es un <a href="https://en.wikipedia.org/wiki/Escape_sequences_in_C">caracter de escape en C</a>.
+		<ul>
+			<li>'\n' es un salto de linea</li>
+			<li>'\t' es una tabulación</li>
+		</ul>
+	</li>
+	<br/>
+	<li>También se puede hacer (<a href="files/clase05/char_escape.c">ver ejemplo</a>):
+		<ul>
+			<li>'\nnn' donde nnn es interpretado como el valor octal en la tabla ASCII</li>
+			<li>'\xhh' donde hh es interpretado como el valor hexadecimal en la tabla ASCII</li>
+		</ul>
+	</li>
 </ul>
 </section>
 
@@ -491,8 +591,9 @@ float promedioArray (int D[ ], int num_elementos) {
     }
 </code></pre></li>
 </ul>
-<br/><br/><br/>
-<p><b>Importante</b>: A una función, además de pasarle la dirección de comienzo del array, hay que pasarle los límites del array. El lenguaje C no comprueba los limites de los arreglos.</p>
+<br/><br/>
+<p style="font-size: 80%;">Se pueden bajar <a href="./files/clase05/func_array.c">una versión completa (con llamado y main) se adjunta</a> usando además casting para la conversión long/int y int/float.</p>
+<p style="font-size: 80%;"><b>Importante</b>: A una función, además de pasarle la dirección de comienzo del array, hay que pasarle los límites del array. El lenguaje C no comprueba los limites de los arreglos.</p>
 </section>
 
 <section>
@@ -519,18 +620,50 @@ float promedioArray (int D[ ], int num_elementos) {
 <section>
 <h2>Ejercicios de Arrays Unidimensionales</h2>
 <ul>
-<li>Realizar el estructograma y la codificación en C de:<ul>
-	<li>Un programa que solicita 5 números y luego los imprime en orden inverso</li>
-	<li>Un programa que pregunta los coeficientes de un polinomio de grado 5</li>
-	<br/>
-	<img src="files/clase05/12_Polinomio.png"/>
-	<br/><br/>
-	<li>Y finalmente evalúe el polinomio desde:<ul>
-		<li style="font-family: monospace; font-size: 85%;"><span style="color: #4FC7CF;">x = -10</span> a <span style="color: #4FC7CF;">x = 10</span></li>
+	<li>Realizar el estructograma y la codificación en C de:
+		<ul>
+			<li>Un programa que solicita 5 números y luego los imprime en orden inverso</li>
+			<li>Un programa que pregunta los coeficientes de un polinomio de grado 5</li>
+			<br/>
+			<img src="files/clase05/12_Polinomio.png"/>
+			<br/><br/>
+			<li>Y finalmente evalúe el polinomio desde:
+				<ul>
+					<li style="font-family: monospace; font-size: 85%;"><span style="color: #4FC7CF;">x = -10</span> a <span style="color: #4FC7CF;">x = 10</span> en pasos de a 1 entero.</li>
+				</ul>
 		</ul>
-	</ul>
-</li>
+	</li>
 </ul>
+<br/><br/>
+<p>También pueden ver <a href="files/clase05/ejercicios_arreglos-vectores.txt">un ejemplo de arreglos/vectores</a> y notas.</p>
+</section>
+
+<section>
+	<h2>Inicialización en C++ de arrays</h2>
+	<pre><code data-trim style="font-size: 26px; padding: 20px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main(void){
+	int vec[3]={};
+}
+	</code></pre>
+	<p>Este código es invalido en C, pero valido en C++.</p>
+	<p>En C++ inicializa el vector con ceros.</p>
+	<br/><br/>
+	<p>Dependiendo de los modificadores que le pasamos al compilador, vemos o no el error.</p>
+	<pre><code data-trim style="font-size: 26px; padding: 20px;" class="bash">
+$ gcc -pedantic -o prueba arreglo_con_llaves.c
+	</code></pre>
+</section>
+
+<section>
+	<h2>Finales Informática 1</h2>
+	<br/><br/>
+	<p>Código que compila en gcc pero es invalido en C, equivale a un aplazo en el final. Se lo considera un error de concepto.</p>
+	<br/>
+	<p>Son importantes en este sentido las <a href="https://en.wikipedia.org/wiki/C_(programming_language)#History">evoluciones del estándard de C</a>: <a href="https://en.wikipedia.org/wiki/C99">C99</a>, <a href="https://en.wikipedia.org/wiki/C11_(C_standard_revision)">C11</a>, <a href="https://en.wikipedia.org/wiki/C17_(C_standard_revision)">C17</a> y <a href="http://c0x.coding-guidelines.com/">C2x (sin terminar)</a></p>
+	<br/>
+	<p>En el archivo <a href="./files/clase05/modificadores_gcc.txt">modificadores_gcc.txt</a> se pueden ver modificadores de gcc para ver/evitar estos tipo de confusiones.</p>
 </section>
 </section>
 
@@ -571,6 +704,20 @@ void main(void) {
 </section>
 
 <section>
+	<p>Recordemos la diferencia entre representación e interpretación...</p>
+	<ul class="col" style="width: 350px;">
+		<a href="./files/clase01n/duck-rabbit.jpg">
+			<img src="files/clase01n/duck-rabbit.jpg"/>
+		</a>
+	</ul>
+	<ul class="col" style="width: 350px;">
+		<a href="./files/clase01n/duck-rabbit2.jpg">
+			<img src="files/clase01n/duck-rabbit2.jpg"/>
+		</a>
+	</ul>
+</section>
+
+<section>
 <h3>Programa que imprime la tabla ASCII</h3>
 <pre style="width: 1120px; max-height: 500px;"><code data-trim style="font-size: 22px; padding: 20px; width: 1120px; max-height: 500px;" class="cpp">
 #include &lt;stdio.h&gt;
@@ -597,14 +744,6 @@ void main(void) {
 </section>
 
 <section>
-	<h3>¿Unicode en C?</h3>
-	<br/>
-	<ul>
-		<li><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU Unicode (libunistring)</a></li>
-	</ul>
-</section>
-
-<section>
 <h2>¿Qué es un string? (I)</h2>
 <p>En muchos lenguajes existe el tipo de dato string, <br/>pero C en un intento de simplificación (y refuerzo <br/>del concepto de punteros) no lo tiene.</li>
 <br/><br/><br/>
@@ -621,25 +760,45 @@ void main(void) {
 </section>
 
 <section>
-<h2>Inicialización de un string</h2>
+<h2>Inicialización de un string (I)</h2>
 <ul>
-<li>Formas de declarar strings:
-<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
+	<li>Formas de declarar strings:
+		<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
 char s[5] = "Hola";
 char s[15] = "Hola";
-char s[5] = {'H', 'o', 'l', 'a', '\0'};
-char s[5] = {'H', 'o', 'l', 'a', 0};
-char *pS = "Hola";
-/* *pS[i] no se puede escribir mas tarde (const string) */
-</code></pre>
-</li>
+char s[5] = {'H', 'o', 'l', 'a', NULL};
+		</code></pre>
+	</li>
+	<br/>
+	<li style="font-size: 75%;">Notas:
+		<ul>
+			<li>El fin de un string se marca con NULL, que equivale 0 decimal/binario, o '\0' que es el ASCII cero.</li>
+			<li>Al poner el texto entre comillas dobles el compilador crea el string</li>
+		</ul>
+	</li>
+</ul>
+</section>
+
+<section>
+<h2>Inicialización de un string (II)</h2>
 <br/>
-<li>Notas:<ul>
-<li>El fin de un string se marca con un carácter NULL (ASCII = 0)</li>
-<li>Al poner el texto entre comillas dobles el compilador crea el string</li>
-</ul>
-</li>
-</ul>
+<p>Otra formas de declarar strings:</p>
+<pre style="width: 850px;"><code data-trim style="font-size: 26px; padding: 20px; width: 850px;" class="cpp">
+char *pS = "Hola";
+</code></pre>
+<p style="font-size: 75%;">Esto falla por que en pS[i] no se puede escribir mas tarde <br/>ya que *pS apunta a un: <span style="font-family: monospace;">const string</span></p>
+<br/>
+<pre style="width: 850px;"><code data-trim style="padding: 20px; width: 850px;" class="cpp">
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	char *pS = "ABCD";
+	printf("Ingrese el string a grabar: ");
+	scanf("%s", pS);
+}
+</code></pre>
+<br/>
+<p>Resultado: <span style="font-family: monospace;">Segmentation fault</span></p>
 </section>
 
 <section>
@@ -684,6 +843,88 @@ printf("%s\n", str);
 </code></pre>
 </ul>
 </section>
+</section>
+
+<section>
+<section>
+	<h3>Mejor usar fgets() [I]</h3>
+	<p>scanf() para strings no tiene proteccion por tamaño...</p>
+<pre><code data-trim style="padding: 15px;" class="cpp">
+#define N 5
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	char str[N];
+	scanf("%s", &str[0]);
+		// Tambien pueden &str[0] hacerlo str
+	printf("%s\n", str);
+}
+</code></pre>
+</section>
+
+<section>
+	<h3>Mejor usar fgets() [II]</h3>
+	<p>El teclado es stdin, y la pantalla es stdout...</p>
+<pre><code data-trim style="padding: 15px;" class="cpp">
+#define N 5
+#include &lt;stdio.h&gt;
+
+int main(void) {
+	char str[N] = "ABCD";
+		// Protegido por tamaño del string
+	fgets(str, N, stdin);
+	printf("%s\n", str);
+}
+</code></pre>
+</section>
+
+<section>
+	<h3>Mejor usar fgets() [III]</h3>
+	<p>¿Por qué esto es importante?</p>
+	<p>¡Seguridad en el código que ejecutamos a ataques!</p>
+	<br/>
+	<ul>
+		<li><a href="http://www.underhanded-c.org/">Underhanded C</a> (en <a href="https://en.wikipedia.org/wiki/Underhanded_C_Contest">Wikipedia</a>)</li>
+		<li><a href="https://en.wikipedia.org/wiki/Wargame_(hacking)">Wargame (hacking)</a>, <a href="https://gist.github.com/fakhrullah/e8794f4847f3114316235ad7b0530dec">List of hacking games</a><br/> y <a href="https://overthewire.org/wargames/">OverTheWire</a></li>
+	</ul>
+</section>
+
+<section>
+	<h3>Problemas con scanf() y los strings (I)</h3>
+	<h4>Scanf() y el buffer stdin:</h4>
+	<br/>
+	<ul>
+		<li><span style="font-family: monospace;">scanf("%c");</span></li>
+		<li><span style="font-family: monospace;">scanf("%s");</span></li>
+		<br/>
+		<li>¿Como evitamos el buffer?</li>
+		<ul style="font-size: 80%;">
+			<li>fflush(stdin); /* no suele andar */</li>
+			<li>setbuf(stdin,NULL); /* Anda mejor */</li>
+			<li>scanf(" %c"); /* mejor para Linux */</li>
+			<li>scanf("%3.2f"); scanf("%.2f);</li>
+		</ul>
+	</ul>
+</section>
+
+<section>
+	<h3>Problemas con scanf() y los strings (II)</h3>
+	<h4>Scanf() y el buffer stdin:</h4>
+	<br/>
+	<ul>
+		<li>También podemos usar funciones especificas para string y chars de stdio.h:</li>
+		<ul style="font-size: 80%;">
+			<li>int getchar(void);</li>
+			<li>char *gets(char *s);</li>
+			<li>int putchar(int c);</li>
+			<li>int puts(const char *s);</li>
+		</ul>
+	</ul>
+	<br/><br/><br/>
+	<p>Nota: <a href="files/clase06/fflush/fflush.c">Ver código de fflush()/setbuf()</a></p>
+</section>
+</section>
+
 </section>
 
 			</div>

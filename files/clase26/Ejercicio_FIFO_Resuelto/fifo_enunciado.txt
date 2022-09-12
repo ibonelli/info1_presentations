@@ -1,0 +1,13 @@
+Implemente una función que lea un archivo de texto desde el final hacia el principio y lo escriba en una FIFO, que debe ser creada por la función.
+
+El prototipo de la función es el siguiente:
+	int enviarInvertido (char *fifoName, char *fileName);
+Donde:
+	fifoName: Es el nombre de la fifo que debe crear la función y donde debe escribir el texto cifrado.
+	fileName: El nombre del archivo de texto a enviar.
+Devuelve:
+	Un número positivo indicando la cantidad de caracteres escritos en la fifo y un número negativo en caso de error.
+		-1 : Si no puede crear la fifo.
+		-2 : Si no puede abrir el archivo.
+		-3 : Si no puede leer el archivo.
+		-4 : Si no puede escribir en la fifo.
