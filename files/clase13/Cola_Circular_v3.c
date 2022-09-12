@@ -11,6 +11,7 @@
 #include <ncurses.h>
 
 #define MAX 5
+#define STRINTSIZE 5
 
 typedef struct {
 	int lle;
@@ -26,7 +27,7 @@ void press_key(char *msg);
 
 void main(void) 
 {
-	char c, op[3];
+	char c, op[STRINTSIZE];
 	int da[MAX], el;
 	status estado;
 
@@ -43,7 +44,7 @@ void main(void)
 		printf ("4 - Salir\n\n");
 		printf ("Ingrese una opcion ( 1 - 4 ) : ");
 		setbuf(stdin, NULL);
-		fgets(op,3,stdin);
+		fgets(op,STRINTSIZE,stdin);
 		el=atoi(op);
 		switch (el) {
 			case 1:
@@ -67,14 +68,14 @@ void main(void)
 
 status ingresa(int *d, status estado) 
 {
-	char k, dato[3];
+	char k, dato[STRINTSIZE];
 	do {
 		if (estado.lle) {
 			press_key("\nCola llena\nPresione una tecla para continuar\n");
-			return;
+			return estado;
 		}
 		printf ("\n\nIngrese el dato : ");
-		fgets(dato,3,stdin);
+		fgets(dato,STRINTSIZE,stdin);
 		d[estado.pon]=atoi(dato);
 		estado.vac = 0;
 		(estado.pon)++;
@@ -85,7 +86,7 @@ status ingresa(int *d, status estado)
 		if (estado.pon == estado.sac)
 			estado.lle = 1;
 		printf("\nOtro dato ( S / N )? ");
-		fgets(dato,3,stdin);
+		fgets(dato,STRINTSIZE,stdin);
 		k = toupper(dato[0]);
 	} while (k == 'S');
 	return estado;
@@ -93,11 +94,11 @@ status ingresa(int *d, status estado)
 
 status lee(int *d, status estado)
 {
-	char k, dato[3];
+	char k, dato[STRINTSIZE];
 	do {
 		if (estado.vac) {
 			press_key("\nCola vacia\nPresione una tecla para continuar\n");
-			return;
+			return estado;
 		}
 		estado.lle = 0;
 		printf ("\n\nEl dato es : %d\n", d[estado.sac]);
@@ -108,7 +109,7 @@ status lee(int *d, status estado)
 		if (estado.sac == estado.pon)
 			estado.vac = 1;
 		printf("\nOtro dato ( S / N )? : ");
-		fgets(dato,3,stdin);
+		fgets(dato,STRINTSIZE,stdin);
 		k = toupper(dato[0]);
 	} while (k == 'S');
 	return estado;
@@ -116,7 +117,7 @@ status lee(int *d, status estado)
 
 void lista(int *d, status estado)
 {
-	char k, dato[3];
+	char k, dato[STRINTSIZE];
 	system("clear");
 	while (!estado.vac) {
 		printf ("%d\t", d[estado.sac]);
@@ -127,7 +128,7 @@ void lista(int *d, status estado)
 			estado.vac = 1;
 	}
 	printf("\nDesea continuar ( S / N )? : ");
-	fgets(dato,3,stdin);
+	fgets(dato,STRINTSIZE,stdin);
 	k = toupper(dato[0]);
 }
 

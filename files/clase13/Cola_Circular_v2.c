@@ -11,15 +11,16 @@
 #include <ncurses.h>
 
 #define MAX 5
+#define STRINTSIZE 5
 
-void ingresa (int *vec, int *pon, int *flle, int fvac, int sac);
+void ingresa (int *vec, int *pon, int *flle, int *fvac, int sac);
 void lee (int *vec, int *sac, int *fvac, int *flle, int pon);
 void lista (int *vec, int sac, int pon, int vac);
 void press_key(char *msg);
 
 void main(void) 
 {
-	char c, op[3];
+	char c, op[STRINTSIZE];
 	int lle = 0, vac = 1, el, da[MAX], sac=0, pon=0;
 	do {
 		system("clear");
@@ -29,7 +30,7 @@ void main(void)
 		printf ("4 - Salir\n\n");
 		printf ("Ingrese una opcion ( 1 - 4 ) : ");
 		setbuf(stdin, NULL);
-		fgets(op,3,stdin);
+		fgets(op,STRINTSIZE,stdin);
 		el=atoi(op);
 		switch (el) {
 			case 1:
@@ -53,14 +54,14 @@ void main(void)
 
 void ingresa(int *d, int *pon, int *lle, int *vac, int sac) 
 {
-	char k, dato[3];
+	char k, dato[STRINTSIZE];
 	do {
 		if (*lle) {
 			press_key("\nCola llena\nPresione una tecla para continuar\n");
 			return;
 		}
 		printf ("\n\nIngrese el dato : ");
-		fgets(dato,3,stdin);
+		fgets(dato,STRINTSIZE,stdin);
 		d[*pon]=atoi(dato);
 		*vac = 0;
 		(*pon)++;
@@ -71,14 +72,14 @@ void ingresa(int *d, int *pon, int *lle, int *vac, int sac)
 		if (*pon == sac)
 			*lle = 1;
 		printf("\nOtro dato ( S / N )? ");
-		fgets(dato,3,stdin);
+		fgets(dato,STRINTSIZE,stdin);
 		k = toupper(dato[0]);
 	} while (k == 'S');
 }
 
 void lee(int *d, int *sac, int *vac, int *lle, int pon) 
 {
-	char k, dato[3];
+	char k, dato[STRINTSIZE];
 	do {
 		if (*vac) {
 			press_key("\nCola vacia\nPresione una tecla para continuar\n");
@@ -93,14 +94,14 @@ void lee(int *d, int *sac, int *vac, int *lle, int pon)
 		if (*sac == pon)
 			*vac = 1;
 		printf("\nOtro dato ( S / N )? : ");
-		fgets(dato,3,stdin);
+		fgets(dato,STRINTSIZE,stdin);
 		k = toupper(dato[0]);
 	} while (k == 'S');
 }
 
 void lista(int *d, int sac, int pon, int vac) 
 {
-	char k, dato[3];
+	char k, dato[STRINTSIZE];
 	system("clear");
 	while (!vac) {
 		printf ("%d\t", d[sac]);
@@ -111,7 +112,7 @@ void lista(int *d, int sac, int pon, int vac)
 			vac = 1;
 	}
 	printf("\nDesea continuar ( S / N )? : ");
-	fgets(dato,3,stdin);
+	fgets(dato,STRINTSIZE,stdin);
 	k = toupper(dato[0]);
 }
 
