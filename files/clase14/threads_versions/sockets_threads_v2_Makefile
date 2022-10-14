@@ -1,0 +1,12 @@
+# the compiler: gcc for C
+CC = gcc
+
+# compiler flags
+CFLAGS = -g
+
+make: ttweetcl.c ttweetsrv.c
+    gcc -o ttweetcli ttweetcl.c && gcc -o ttweetsrv ttweetsrv.c -lpthread
+
+.PHONY: clean
+clean:
+    rm -f ./ttweetcli ./ttweetsrv 
