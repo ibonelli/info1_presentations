@@ -387,6 +387,27 @@ int fcntl(int fd, int cmd, ... /* arg */ );
 </section>
 
 <section>
+<h2>Tamaño Archivo</h2>
+<p>Se podría usar lseek, pero tiene un int como tamaño.</p>
+<pre><code data-trim style="font-size:110%; margin-top:20px;" class="cpp">
+#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+ 
+int main() {
+	char filename[] = "somefile.txt";
+ 
+	struct stat st;
+	stat(filename, &st);
+	off_t size = st.st_size;
+ 
+	printf("The file size id %d bytes.\n", size);
+
+	return 0;
+}
+</code></pre>
+</section>
+
+<section>
 <h2>Ejemplos</h2>
 <ul>
 	<li>Leer de un archivo y mostrar por pantalla: <a href="files/clase08/ej_unix_1.c">ej_unix_1.c</a></li>
