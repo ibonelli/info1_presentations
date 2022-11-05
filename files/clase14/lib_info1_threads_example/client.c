@@ -1,3 +1,6 @@
+// To Compile:
+//		gcc -o clt client.c sock-lib.c -lpthread -Wall
+
 #include "sock-lib.h"
 
 #define LIMIT 5

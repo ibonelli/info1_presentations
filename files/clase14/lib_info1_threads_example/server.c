@@ -1,3 +1,6 @@
+// To Compile:
+//		gcc -o srv server.c sock-lib.c -lpthread -Wall
+
 #include "sock-lib.h"
 
 #include<stdio.h>
@@ -6,6 +9,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 
+#define DELAY 5000
 #define LIMIT 5
 #define STRSIZE 20
 #define THREAD_LIMIT 4
@@ -23,7 +27,7 @@ void *doSomeThing(void *input) {
 	int i,j;
 
 	for(i=0;i<LIMIT;i++) {
-		for(j=0; j<1000; j++) {
+		for(j=0; j<DELAY; j++) {
 			usleep(1000);
 		}
 		((struct args*)input)->msg_cnt++;
