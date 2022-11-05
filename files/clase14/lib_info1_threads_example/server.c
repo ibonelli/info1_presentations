@@ -6,69 +6,81 @@
 #include<stdlib.h>
 #include<unistd.h>
 
-pthread_t tid[BACKLOG];
-int thread_count;
-char msg_counter;
-char message[20];
+#define LIMIT 5
+#define STRSIZE 20
+#define THREAD_LIMIT 4
 
-void set_msg(void) {
-	if (msg_counter != 'Z') {
-		message[15]=msg_counter;
-		msg_counter++;
-	else {
-		msg_counter='A';
-		message[15]=msg_counter;
+struct args {
+	int socket;
+	char clt_cnt;
+	char message[STRSIZE];
+	char msg_cnt;
+};
+
+int ret[BACKLOG];
+
+void *doSomeThing(void *input) {
+	int i,j;
+
+	for(i=0;i<LIMIT;i++) {
+		for(j=0; j<1000; j++) {
+			usleep(1000);
+		}
+		((struct args*)input)->msg_cnt++;
+		snprintf(((struct args*)input)->message, STRSIZE, "clt %d, msg %d\n", ((struct args*)input)->clt_cnt, ((struct args*)input)->msg_cnt);
+		if(write(((struct args*)input)->socket, ((struct args*)input)->message, STRSIZE) == -1) {
+			perror("Error escribiendo mensaje en socket");
+			exit (1);
+		}
 	}
+
+	close(((struct args*)input)->socket);
+
+	i=((struct args*)input)->clt_cnt;
+	ret[i]=100*(i+1);
+	pthread_exit((void *)&ret[i]);
+
+	return NULL;
 }
 
-void *doSomeThing(void *arg) {
-	set_msg();
+int main () {
+	int err;
+	int thr_cnt;
+	pthread_t tid[BACKLOG];
 
-	if (write (sockdup, message , sizeof (message)) == -1) {
-		perror("Error escribiendo mensaje en socket");
-		exit (1);
-	}
-	close(sockdup);
-
-    return NULL;
-}
-
-int main ()
-{
 	int sockfd; /* File Descriptor del socket por el que el servidor "escuchará" conexiones*/
 	struct sockaddr_in my_addr;	/* contendrá la dirección IP y el número de puerto local */
-	int sockdup;
 
 	int i;
-    int *ptr[2];
+	int *ptr[BACKLOG];
+	struct args svr[BACKLOG];
 
-	strcpy(message,"Server message  ");
-	msg_counter='A';
+	thr_cnt=0;
+	for(i=0;i<BACKLOG;i++) {
+		svr[i].msg_cnt=0;
+	}
 
-	thread_count=0;
-
-	if ((sockfd = Open_conection (&my_addr)) == -1)
-	{
+	if ((sockfd = Open_conection (&my_addr)) == -1) {
 		perror ("Falló la creación de la conexión"); 
 		exit (1);
 	}
 
-	while(1)
-	{
-		sockdup = Aceptar_pedidos (sockfd);
+	while(thr_cnt<THREAD_LIMIT) {
+		svr[thr_cnt].socket = Aceptar_pedidos (sockfd);
+		svr[thr_cnt].clt_cnt = thr_cnt;
 
-        err = pthread_create(&(tid[thread_count]), NULL, &doSomeThing, NULL);
-        if (err != 0)
-            printf("\ncan't create thread :[%s]", strerror(err));
-        else
-            printf("\n Thread created successfully\n");
+		err = pthread_create(&(tid[thr_cnt]), NULL, &doSomeThing, (void *)(&svr[thr_cnt]));
+		if (err != 0)
+			printf("\ncan't create thread: [%s]", strerror(err));
+		else
+			printf("\n Thread %d created successfully\n", thr_cnt);
 
-		thread_count++;
+		thr_cnt++;
 	}
 
-	for(i=0;i<thread_count;i++) {
-	    pthread_join(tid[i], (void**)&(ptr[0]));
-		printf("\n return value from first thread is [%d]\n", *ptr[0]);
+	for(i=0;i<thr_cnt;i++) {
+		pthread_join(tid[i], (void**)&(ptr[i]));
+		printf("\n return value from thread %d is [%d]\n", i, *ptr[i]);
 	}
 
 	exit(0);
