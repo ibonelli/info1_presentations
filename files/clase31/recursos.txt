@@ -1,0 +1,8 @@
+<info1>/Git_Info1_Repo/Bibliografia/Numerical Recipes in C/*
+
+<zCatBag>/Thinkpad_Backup/info0_1y2_viejo/Info2/Temas_Clase/CalculoNumerico/*
+
+<info1>/2022/
+    metodos_numericos_Python.pdf
+    numerical_recipes_3rd_edition.pdf
+    Python_Programming_and_Numerical_Methods.pdf

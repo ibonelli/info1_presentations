@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Métodos Numéricos</title>
+
+
+		<!-- Remote usando -- https://cdnjs.com/libraries/reveal.js/4.3.1 !-->
+		<!--
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/simple.min.css" id="theme">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/moon.min.css">
+		!-->
+
+		<!-- Local !-->
+		<link rel="stylesheet" href="./files/reveal.js.v4.3.1/reveal.min.css">
+		<link rel="stylesheet" href="./files/reveal.js.v4.3.1/simple.min.css" id="theme">
+		<link rel="stylesheet" href="./files/reveal.js.v4.3.1/moon.min.css">
+
+		<!-- Best way to run/edit locally
+			<code>
+				npm install reload -g
+				reload -b
+			</code>
+		!-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section data-background="#C6F3C9">
+					<section>
+						<h2>Métodos numéricos</h2>
+					</section>
+					<section>
+						<h3>Antes, OpenCV</h3>
+						<p><a href="./Clase16_OpenCV.html">Biblioteca open source para C/C++ para procesamiento de imagenes y vision computarizada</a></p>
+						<ul style="font-size:75%;">
+							<li>Disponible en Linux, Mac, y Windows</li>
+							<li>Tiene estructuras básicas de datos para operaciones con matrices y procesamiento de imagenes.</li>
+							<li>Permite visualizar datos muy sencillamente y extraer informacion de imagenes y videos.</li>
+							<li>Tiene funciones de captura y presentacion de imagenes.</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Algoritmos Numéricos</h3>
+						<ul style="font-size:75%;">
+							<li>Algoritmo estándar: corrección y eficiencia (tiempo y recursos)</li>
+							<li>Algoritmo numérico: estimación y control (estabilidad) del error</li>
+							<li>Algoritmos aproximados:
+								<ul>
+									<li>Errores de truncación, redondeo, etc.</li>
+									<li>Limitación en representación de números: rango (p.ej., long) y precisión (p. ej. float)</li>
+									<li>Limitaciones de cálculo: algoritmo exacto requiere infinitos pasos</li>
+									<li>Aproximados (los exactos pueden ser inestables o ineficientes)</li>
+								</ul>
+							</li>
+							<li>Grandes volúmenes de datos</li>
+							<li>Paralelización (p/ej <a href="./Clase26_IPC_Threads.html#/6/19">cálculos de matrices</a>)</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Opciones...</h3>
+						<ul style="font-size:75%;">
+							<li>Numerical Recipes: Antes en C, hoy en C++ (<a href="http://numerical.recipes/book/book.html">Online</a> y <a href="https://e-maxx.ru/bookz/files/numerical_recipes.pdf">PDF</a>).</li>
+							<li><a href="https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html">Python Programming And Numerical Methods</a>.</li>
+						</ul>
+						<ul style="font-size:60%;">
+							<li>Sistemas de ecuaciones</li>
+							<li>Búsqueda de raíces</li>
+							<li>Interpolación</li>
+							<li>Diferenciación e integración numérica</li>
+							<li>Ecuaciones diferenciales</li>
+							<li>Transformada Rápida de Fourier</li>
+							<li>Otros...</li>
+						</ul>
+					</section>
+				</section>
+			</div>
+
+		</div>
+
+		<!-- Remote usando -- https://cdnjs.com/libraries/reveal.js/4.3.1 !-->
+		<!--
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+		!-->
+
+		<!-- Local !-->
+		<script src="./files/reveal.js.v4.3.1/reveal.js"></script>
+		<script src="./files/reveal.js.v4.3.1/markdown.min.js"></script>
+		<script src="./files/reveal.js.v4.3.1/highlight.min.js"></script>
+		<script src="./files/reveal.js.v4.3.1/notes.min.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+		</script>
+
+	</body>
+</html>
