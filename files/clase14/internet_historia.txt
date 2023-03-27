@@ -1,0 +1,27 @@
+From IEEE Article
+	https://spectrum.ieee.org/computer-networking
+		The Do-or-Die Moments That Determined the Fate of the Internet
+		A handful of demos shaped today’s networked world
+
+-------------------
+
+{"text":"Funding for the ARPANET begins.","title":"1966"},
+{"text":"FCC permits electrical connections of private equipment to AT&T’s monopoly telephone network, opening the door to long-distance computer networking.","title":"1968"},
+{"text":"First four nodes of the ARPANET are connected.","title":"1969"},
+
+{"text":"The Cyclades computer network in France demonstrates the use of packet switching for internetworking.","title":"1973"},
+{"text":"The specification for Internet Transmission Control Protocol is established.","title":"1974"},
+{"text":"Telenet, the first public packet-switched data network, begins operation.","title":"1975"},
+
+{"text":"The International Organization for Standardization publishes a draft version of its OSI (Open Systems Interconnection) model.","title":"1980"},
+{"text":"CSNET (Computer Science Network) receives funding from U.S. National Science Foundation and starts to link universities.","title":"1981"},
+{"text":"TCP/IP (Transmission Control Protocol/Internet Protocol) is formalized.","title":"1983"},
+{"text":"The International Organization for Standardization and the International Telecommunication Union publish the final OSI model.","title":"1984"},
+{"text":"NSFNET is established by the U.S. National Science Foundation to link supercomputing centers.","title":"1985"},
+{"text":"The Internet Engineering Task Force is created.","title":"1986"},
+{"text":"The World Wide Web is invented at CERN (the European Organization for Nuclear Research).","title":"1989"},
+
+{"text":"The first Web servers outside of CERN are set up.","title":"1991"},{"text":"The Mosaic Web browser is released.","title":"1993"},
+{"text":"Google’s search engine launches.","title":"1997"},
+{"text":"The nonprofit Internet Corporation for Assigned Names and Numbers (ICANN) is created to ensure the continued stability and security of the Internet.","title":"1998"}]},
+
