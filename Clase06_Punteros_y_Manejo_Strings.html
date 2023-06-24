@@ -435,8 +435,9 @@ for(i=0;i&lt;2;i++)
 	<br/>
 	<li>STRING.H<ul>
 		<li>strcat(), strcpy(), strlen()</li>
-		<li>strchr(), strcmp(), strcmpi(), strncmp()</li>
-		<li>strtok()</li>
+		<li>strchr(), strcmp(), strncmp()</li>
+		<li>strcasecmp(), strncasecmp() <span style="font-size: 75%;">(solo p/Linux, no Windows)</span></li>
+		<li>strstr(), strtok()</li>
 	</ul></li>
 </ul>
 <br/><br/>
@@ -490,7 +491,7 @@ int main(void) {
 
 int main(void) {
    char destination[25];
-   char *espacio = " ", *s1 = "Curso", *s2 = "Informatica 1";
+   char *espacio = " ", *s1 = "Curso", *s2 = "Info 1";
 
    strcpy(destination, s1);
    strcat(destination, espacio);
@@ -518,7 +519,6 @@ char *strncat(char *dest, const char *src, size_t n);
 
 <section>
 <h3>int strcmp(const char *s1, const char *s2);</h3>
-<h3>int strcmpi(const char *s1, const char *s2);</h3>
 <pre><code data-trim style="font-size: 24px; margin-top: 20px;" class="cpp">
 #include &lt;string.h&gt;
 #include &lt;stdio.h&gt;
@@ -663,7 +663,7 @@ gcc -lcurses -o ej1 mi_ejercicio.c
 int substring(char st_salida[], char st_entrada[], int pos, int n)
 </code></pre></li>
 <ul style="font-size: 80%;"><li>Ejemplo:<ul>
-<li style="font-family: monospace; font-size: 80%;"><span style="color: #FF8840;">substring(str,"Curso de informatica1", 10, 4);</span></li>
+<li style="font-family: monospace; font-size: 80%;"><span style="color: #FF8840;">substring(str,"Curso de informatica1", 9, 4);</span></li>
 <li>Imprime "info"</li>
 </ul></li></ul></p>
 <li>Función que hace preguntas
