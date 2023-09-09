@@ -104,7 +104,7 @@ void borrar_vendedor(struct nodo **Pini)
 
 void listar(struct nodo *Pini)
 {
-	if(DEGUB) printf("Pini: %p\n", Pini);
+	if(DEGUB) printf("\n=====================\nPini: %p\n\n", Pini);
 	struct nodo *paux;
 	paux=Pini;
 	while(paux) {
@@ -113,6 +113,7 @@ void listar(struct nodo *Pini)
 		if(DEGUB) printf("Sig: %p\n\n", paux->sig);
 		paux=paux->sig;
 		}
+	printf("=====================\n\n");
 }
 
 void cerrar_mes(struct nodo *Pini)
@@ -121,12 +122,15 @@ void cerrar_mes(struct nodo *Pini)
 	int total_ventas;
 	float total_a_pagar;
 	paux=Pini;
+	printf("\n=====================\n");
 	while(paux) {
 		mostrar_datos(paux->dato);
+		printf("\n");
 		total_ventas+=(paux->dato).vent;
 		total_a_pagar+=(paux->dato).acum;
 		paux=paux->sig;
 		}
 	printf("total de ventas: %d\n", total_ventas);
 	printf("total a pagar:%f\n",total_a_pagar);
+	printf("=====================\n\n");
 }
