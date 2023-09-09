@@ -24,7 +24,8 @@ void ingresar_dato(char *nom, struct nodo **Pini,float comision)
 {
 	struct nodo *paux, *pact, *pant;
 	paux=(struct nodo*)malloc(sizeof(struct nodo));
-	if (Pini==NULL) {
+	// Ingreso del nodo a la lista
+	if (*Pini==NULL) {
 		// Lista vacia
 		*Pini=paux;
 		paux->sig=NULL;
@@ -51,6 +52,7 @@ void ingresar_dato(char *nom, struct nodo **Pini,float comision)
 				paux->sig=pact;
 			}
 		}
+		// Ingreso los datos del nodo
 		(paux->dato).acum=0;
 		(paux->dato).vent=0;
 		(paux->dato).com=comision;

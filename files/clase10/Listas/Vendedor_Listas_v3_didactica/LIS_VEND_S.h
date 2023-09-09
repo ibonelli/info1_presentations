@@ -22,7 +22,7 @@ struct nodo {
 void ingresar_dato(char *nom, struct nodo **Pini,float comision)
 {
 	struct nodo *paux;
-	if (Pini==NULL) {
+	if (*Pini==NULL) {
 		// Lista vacia
 		paux=(struct nodo*) malloc(sizeof(struct nodo));
 		(paux->dato).acum=0;

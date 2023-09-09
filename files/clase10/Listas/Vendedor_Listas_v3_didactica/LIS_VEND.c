@@ -8,20 +8,18 @@ del mes se debe generar un cierre del mes informando total
 de ventas y comisiones a pagar.
 */
 
+/*
+ * Depende de cual usamos usara se inserta al principio o ordenadamente.
+ * Sin ordernar (LIS_VEND_S.h) ingresa al principio.
+ * Y LIS_VEND_SO.h ingresa ordenadamente por nombre los nodos.
+ */
+
 #include <stdio.h>
 //Lista sin ordernar
 //#include "LIS_VEND_S.h"
 //Lista ordernada por nombre
 #include "LIS_VEND_SO.h"
 #include "LIS_VEND.h"
-
-/*
- * Depende de cual usamos usara listas simples o dobles
- *
- * #include "LIS_VEND_D.h"
- * #include "LIS_VEND_S.h"
- *
- */
 
 void main (void)
 {
