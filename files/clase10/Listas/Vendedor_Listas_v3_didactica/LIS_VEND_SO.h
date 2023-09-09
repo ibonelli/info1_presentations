@@ -66,7 +66,7 @@ int verificar_existencia_dato(char *nom, struct nodo *Pini)
 	struct nodo *paux;
 	paux=Pini;
 	if(paux!=NULL) {
-		while(strcmp(nom,(paux->dato).nom) && paux->sig != NULL)
+		while(strcmp(nom,(paux->dato).nom)==0 && paux->sig != NULL)
 			paux=paux->sig;
 		if(paux!=NULL) {
 			if(strcmp(nom,(paux->dato).nom)==0) {
