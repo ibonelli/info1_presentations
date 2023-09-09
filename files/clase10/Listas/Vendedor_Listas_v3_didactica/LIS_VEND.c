@@ -9,7 +9,10 @@ de ventas y comisiones a pagar.
 */
 
 #include <stdio.h>
-#include "LIS_VEND_S.h"
+//Lista sin ordernar
+//#include "LIS_VEND_S.h"
+//Lista ordernada por nombre
+#include "LIS_VEND_SO.h"
 #include "LIS_VEND.h"
 
 /*
