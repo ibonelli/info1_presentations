@@ -1,4 +1,4 @@
-#define DEGUB 1
+#define DEBUG 1
 
 /*
  *    Archivo a incluir en LIS_VEND.c
@@ -32,26 +32,6 @@ void mostrar_datos_listar(vend aux)
 	printf("comision sobre las ventas %f\n", aux.com);
 }
 
-int verificar_existencia_dato(char *nom,struct nodo *Pini)
-{
-	struct nodo *paux;
-	paux=Pini;
-	if( paux != NULL ) {
-		while(strcmp(nom,(paux->dato).nom) && paux->sig != NULL)
-			paux=paux->sig;
-		if( paux != NULL ) {
-			if(!strcmp(nom,(paux->dato).nom))
-				return 0;
-			else
-				return 1;
-		} else {
-			return 1;
-		}
-	} else {
-		return 1;
-	}
-}
-
 void ingresar_vendedor(struct nodo **Pini)
 {
 	int i;
@@ -59,7 +39,8 @@ void ingresar_vendedor(struct nodo **Pini)
 	float com;
 	printf("Ingrese el nombre del vendedor:\n");
 	scanf("%s", nombre);
-	if (verificar_existencia_dato(nombre,*Pini)) {
+	if (!verificar_existencia_dato(nombre,*Pini)) {
+		// Solo lo ingresa si no existía
 		printf("Ingrese la comision:\n");
 		scanf("%f",& com);
 		ingresar_dato(nombre,Pini,com);
@@ -82,7 +63,8 @@ void ingresar_venta(struct nodo *PINI)
 	float valor_venta;
 	printf("Ingrese el nombre del vendedor:\n");
 	scanf("%s",nombre);
-	if (!verificar_existencia_dato(nombre,PINI)) {
+	if (verificar_existencia_dato(nombre,PINI)) {
+		// Solo lo ingresa si existe
 		printf("Ingrese el valor de la venta:\n");
 		scanf("%f",&valor_venta);
 		modificar_valor_dato(nombre,PINI,valor_venta);
@@ -97,20 +79,21 @@ void borrar_vendedor(struct nodo **Pini)
 	printf("ingrese el nombre del vendedor:\n");
 	scanf("%s",nombre);
 	if (verificar_existencia_dato(nombre,*Pini))
+		// Solo lo puede borrar si el vendedor existe
 		borrar_dato(nombre,Pini);
 	else
-		printf("el vendedor no existe");
+		printf("el vendedor no existe\n\n");
 }
 
 void listar(struct nodo *Pini)
 {
-	if(DEGUB) printf("\n=====================\nPini: %p\n\n", Pini);
+	if(DEBUG) printf("\n=====================\nPini: %p\n\n", Pini);
 	struct nodo *paux;
 	paux=Pini;
 	while(paux) {
-		if(DEGUB) printf("Nodo: %p\n", paux);
+		if(DEBUG) printf("Nodo: %p\n", paux);
 		mostrar_datos_listar(paux->dato);
-		if(DEGUB) printf("Sig: %p\n\n", paux->sig);
+		if(DEBUG) printf("Sig: %p\n\n", paux->sig);
 		paux=paux->sig;
 		}
 	printf("=====================\n\n");
