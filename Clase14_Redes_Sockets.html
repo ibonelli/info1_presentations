@@ -696,6 +696,49 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
 
 <section>
 	<section>
+		<h1>Librería de la catedra y ejemplos</h1>
+		<br/>
+		<h3>Server/cliente usando la librerías<br/>sencillo, concurrente fork y threads.</h3>
+	</section>
+	<section>
+		<h2>Libreria de la Catedra</h2>
+		<p style="text-align: left; margin-left: 250px;">Archivos:</p>
+		<ul>
+			<li><a href="files/clase14/lib_info1_threads_example/sock-lib.h">sock-lib.h</a></li>
+			<li><a href="files/clase14/lib_info1_threads_example/sock-lib.c">sock-lib.c</a></li>
+		</ul>
+	</section>
+	<section>
+		<h2>Ejemplo de uso server/cliente TCP</h2>
+		<p style="text-align: left; margin-left: 250px;">Archivos:</p>
+		<ul>
+			<li><a href="files/clases_integradoras/Integradores1_SocketsLibCatedra/server.c">server.c</a></li>
+			<li><a href="files/clases_integradoras/Integradores1_SocketsLibCatedra/client.c">client.c</a></li>
+		</ul>
+	</section>
+	<section>
+		<h2>Sockets y Fork</h2>
+		<p style="text-align: left; margin-left: 250px;">Archivos:</p>
+		<ul>
+			<li><a href="files/clases_integradoras/Integradores2_SocketsFork/server.c">server.c</a></li>
+			<li><a href="files/clases_integradoras/Integradores2_SocketsFork/client.c">client.c</a></li>
+		</ul>
+	</section>
+	<section>
+		<h2>Sockets y Threads</h2>
+		<p style="text-align: left; margin-left: 250px;">Archivos:</p>
+		<ul>
+			<li><a href="files/clase14/lib_info1_threads_example/server_v1.c">server_v1.c</a></li>
+			<li><a href="files/clase14/lib_info1_threads_example/server_v2.c">server_v2.c</a></li>
+			<li><a href="files/clase14/lib_info1_threads_example/client.c">client.c</a></li>
+		</ul>
+	</section>
+</section>
+
+<!-- ==== 6th Section ==== -->
+
+<section>
+	<section>
 		<h1>Procesos y Sockets</h1>
 		<br/>
 		<h3>¡Quiero hacer un servidor que atienda<br/>a varios clientes al mismo tiempo!</h3>
@@ -766,7 +809,7 @@ $ gcc -o server sockets_3server_nonblocking.c
 	</section>
 </section>
 
-<!-- ==== 6th Section ==== -->
+<!-- ==== 7th Section ==== -->
 
 <section data-background="#4d7e65">
 	<section>
@@ -881,7 +924,7 @@ gcc -o ej3 ej_fork_count.c
 	</section>
 </section>
 
-<!-- ==== 7th Section ==== -->
+<!-- ==== 8th Section ==== -->
 
 <section>
 	<section>
@@ -952,38 +995,7 @@ $ ./ej4-udp-clt 127.0.0.1 Mundo
 	</section>
 </section>
 
-<section>
-	<section>
-		<h2>Libreria de la Catedra</h2>
-		<ul>Archivos:
-			<li><a href="files/clase14/lib_info1_threads_example/sock-lib.h">sock-lib.h</a></li>
-			<li><a href="files/clase14/lib_info1_threads_example/sock-lib.c">sock-lib.c</a></li>
-		</ul>
-	</section>
-	<section>
-		<h2>Ejemplo de uso server/cliente TCP</h2>
-		<ul>Archivos:
-			<li><a href="files/clases_integradoras/Integradores1_SocketsLibCatedra/server.c">server.c</a></li>
-			<li><a href="files/clases_integradoras/Integradores1_SocketsLibCatedra/client.c">client.c</a></li>
-		</ul>
-	</section>
-	<section>
-		<h2>Sockets y Fork</h2>
-		<ul>Archivos:
-			<li><a href="files/clases_integradoras/Integradores2_SocketsFork/server.c">server.c</a></li>
-			<li><a href="files/clases_integradoras/Integradores2_SocketsFork/client.c">client.c</a></li>
-		</ul>
-	</section>
-	<section>
-		<h2>Sockets y Threads</h2>
-		<ul>Archivos:
-			<li><a href="files/clase14/lib_info1_threads_example/server_v1.c">server_v1.c</a></li>
-			<li><a href="files/clase14/lib_info1_threads_example/server_v2.c">server_v2.c</a></li>
-			<li><a href="files/clase14/lib_info1_threads_example/client.c">client.c</a></li>
-		</ul>
-	</section>
-</section>
-<!-- ==== 8th Section ==== -->
+<!-- ==== 9th Section ==== -->
 
 <section>
 	<section>
