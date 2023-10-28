@@ -14,11 +14,13 @@ int counter;
 pthread_mutex_t lock;
 
 void *doSomeThing(void *arg) {
+    printf("\n Job started\n");
+
     pthread_mutex_lock(&lock);
 
     unsigned long i = 0;
     counter += 1;
-    printf("\n Job %d started\n", counter);
+    printf("\n Job %d processing\n", counter);
 
     for(i=0; i<1000; i++) {
         usleep(1000);
