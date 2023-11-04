@@ -1,3 +1,16 @@
+/*
+ * Ejemplo de threads y una cola circular:
+ * 		1. Main lee la cola circular y la vacía.
+ * 		2. Hay un thread que genera valores aleatorios.
+ * 		3. Hay 4 threads que van agregando datos a la cola circular.
+ * El valor que va a la cola circular tiene empacado:
+ * 		- En los dos bytes altos (<< 16) el ID
+ * 		- En los dos bytes bajos el valor aleatorio capturado
+ *
+ * threads_colacircular.c - compile with:
+ *           gcc -o tcc threads_colacircular.c -lpthread
+ */
+
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -72,6 +85,7 @@ int main() {
 	pthread_detach(thread_id1);
 	pthread_detach(thread_id2);
 	pthread_detach(thread_id3);
+	pthread_detach(thread_id4);
 
 	while (1) {
 		getchar();
