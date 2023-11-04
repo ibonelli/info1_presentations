@@ -1,4 +1,4 @@
-Pi Using Numerical Integration: Pthreads
+Pi Using Numerical Integration: Pthreads (original)
 	https://www.stolaf.edu/people/rab/os/pub0/modules/Pi_Integration_SharedMemory/Pthreads/Pthreads.html
 
 An implementation of the area computation with the POSIX threads (Pthreads) explicit threading model is shown here. In the main() routine, a number (NUMTHREADS) of threads are spawned to execute the function Area(). This function takes one argument: (a pointer to) the thread number generated and stored in the tNum array. After the child threads are launched, the main() thread will call pthread_join to wait for each thread, in turn, to complete computation. The computed area of the half circle will then be stored in gPi. Multiply this result by 2.0 to compute the approximation to pi.
@@ -6,3 +6,30 @@ An implementation of the area computation with the POSIX threads (Pthreads) expl
 The threaded function Area() uses the thread number (0..NUMTHREADS-1) to initialize the local loop iteration variable. This value is used to compute the midpoint of a rectangle, the height of the rectangle, and then the area of the rectangle. Notice how the increment value in the for-loop is the number of threads. In the code given, this will have the loop of the first thread (myNum == 0) take on values 0, 4, 8, 12, etc., while the last thread (myNum == 3) will use the iteration values 3, 7, 11, 15, etc. This scheme ensures that all values in the NUM_RECT range are used and only used by one thread.
 
 Rather than update the shared summation variable, gPi, each time a new rectangle area is computed, a local partial sum variable is used within each thread. Once the loop has completed, each partial sum is added to the shared sum with a critical region protected by the mutex object gLock. In this way, protected updates to the shared variable are done only once per thread (4 times) rather than once per rectangle (NUM_RECT times).
+
+NUM_RECT 1000
+	Computed value of Pi:   3.141623457
+NUM_RECT 10'000
+	Computed value of Pi:   3.141593628
+NUM_RECT 100'000
+	Computed value of Pi:   3.141592684
+NUM_RECT 1'000'000
+	Computed value of Pi:   3.141592655
+NUM_RECT 10'000'000
+	Computed value of Pi:   3.141592653
+NUM_RECT 100'000'000
+	Computed value of Pi:   3.141592668
+NUM_RECT 1'000'000'000
+	Computed value of Pi:   3.141592654
+
+---------
+
+Explanation with graphs:
+	http://www.austintek.com/python_class/austintek_python_programming.pi.html
+
+- Upper Bound of area under slices of a circle
+	http://www.austintek.com/python_class/images/pi_upper_bounds.png
+- Lower Bounds of area under slices of a circle
+	http://www.austintek.com/python_class/images/pi_lower_bounds.png
+- Lower Bounds of area under 100 slices of a circle
+	http://www.austintek.com/python_class/images/pi_lower_bounds_100_intervals.png
