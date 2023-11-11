@@ -33,3 +33,9 @@ Explanation with graphs:
 	http://www.austintek.com/python_class/images/pi_lower_bounds.png
 - Lower Bounds of area under 100 slices of a circle
 	http://www.austintek.com/python_class/images/pi_lower_bounds_100_intervals.png
+
+Center value:
+	https://www.stolaf.edu/people/rab/os/pub0/modules/PiUsingNumericalIntegration/Introduction/Introduction.html
+
+Semicircle
+	https://www.stolaf.edu/people/rab/os/pub0/modules/PiUsingNumericalIntegration/_images/halfCircle.png
