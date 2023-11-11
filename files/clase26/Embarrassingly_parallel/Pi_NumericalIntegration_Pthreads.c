@@ -9,7 +9,12 @@
 #define NUM_RECT 10000000
 #define NUMTHREADS 4
 
-double gPi = 0.0;  //  global accumulator for areas computed
+// long double (80 bits, but typically 96 bits or 128 bits in memory with padding bytes)
+//		https://en.wikipedia.org/wiki/C_data_types
+//		https://en.wikipedia.org/wiki/Long_double
+
+//double	gPi = 0.0;  //  global accumulator for areas computed
+long double	gPi = 0.0;  //  global accumulator for areas computed
 pthread_mutex_t gLock;
 
 void *Area(void *pArg){
@@ -46,7 +51,7 @@ for ( i = 0; i < NUMTHREADS; ++i ) {
 }
 
 gPi *= 2.0;
-printf("Computed value of Pi:  %12.9f\n", gPi );
+printf("Computed value of Pi:  %12.18Lf\n", gPi );
 
 pthread_mutex_destroy(&gLock);
 

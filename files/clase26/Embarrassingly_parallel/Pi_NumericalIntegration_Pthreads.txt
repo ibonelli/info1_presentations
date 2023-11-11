@@ -7,20 +7,44 @@ The threaded function Area() uses the thread number (0..NUMTHREADS-1) to initial
 
 Rather than update the shared summation variable, gPi, each time a new rectangle area is computed, a local partial sum variable is used within each thread. Once the loop has completed, each partial sum is added to the shared sum with a critical region protected by the mutex object gLock. In this way, protected updates to the shared variable are done only once per thread (4 times) rather than once per rectangle (NUM_RECT times).
 
+https://decimal.info/digits-of-pi/value-of-pi-to-100-decimal-places.html
+	3.1415926535'8979323846'2643383279'5028841971'6939937510'5820974944'5923078164'0628620899'8628034825'3421170679
+
+NUM_RECT 100
+	Computed value of Pi:   3.142565552
 NUM_RECT 1000
 	Computed value of Pi:   3.141623457
 NUM_RECT 10'000
 	Computed value of Pi:   3.141593628
 NUM_RECT 100'000
 	Computed value of Pi:   3.141592684
+			         real: 	3.141592653
 NUM_RECT 1'000'000
 	Computed value of Pi:   3.141592655
-NUM_RECT 10'000'000
-	Computed value of Pi:   3.141592653
-NUM_RECT 100'000'000
-	Computed value of Pi:   3.141592668
+			         real: 	3.141592653
+
+NUM_RECT 10'000'000 (double vs long double)
+		     double: 3.141592653
+		long double: 3.141592653 456540707
+			   real: 3.141592653 589793238
+
+NUM_RECT 100'000'000 ----> Raro...
+	Computed value of Pi
+		     double: 3.1415926 68
+		long double: 3.1415926 68490375995
+			   real: 3.1415926 53589793238
 NUM_RECT 1'000'000'000
-	Computed value of Pi:   3.141592654
+	Computed value of Pi:
+		     double: 3.1415926 54
+		long double: 3.1415926 54075062385
+			   real: 3.1415926 53589793238
+NUM_RECT 10'000'000'000
+			No terminó, y parece haber otro problema.
+			Quizás se queda sin precision otras variables:
+				int myNum = *((int *)pArg);
+				double h = 2.0 / NUM_RECT;
+				double partialSum = 0.0, x;  // local to each thread
+				for (int i = myNum; i < NUM_RECT; i += NUMTHREADS){
 
 ---------
 
