@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Herramientas de desarrollo e IDEs</title>
+
+
+	<!-- Remote usando -- https://cdnjs.com/libraries/reveal.js/4.3.1 !-->
+	<!--
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/simple.min.css" id="theme">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/moon.min.css">
+		!-->
+
+	<!-- Local !-->
+	<link rel="stylesheet" href="./files/reveal.js.v4.3.1/reveal.min.css">
+	<link rel="stylesheet" href="./files/reveal.js.v4.3.1/simple.min.css" id="theme">
+	<link rel="stylesheet" href="./files/reveal.js.v4.3.1/moon.min.css">
+
+	<!-- Best way to run/edit locally
+			<code>
+				npm install reload -g
+				reload -b
+			</code>
+		!-->
+</head>
+
+<body>
+
+	<div class="reveal">
+		<div class="slides">
+			<section data-background="#4D4D4D" style="font-size: 70%;">
+				<section>
+					<h2>Herramientas de compilación</h2>
+				</section>
+				<section>
+					<h2>Compiladores</h2>
+					<img src="files/clase03/Compiladores.png" />
+				</section>
+				<section>
+					<h2>Compiladores</h2>
+					<ul>
+						<li>Traducen nuestro código fuente en código de máquina (o sea dependiente de la arquitectura del
+							procesador). </li>
+						<li>El código generado es reubicable en memoria y se puede enlazar con otros códigos. </li>
+						<li>Esto facilita y reduce el tiempo de compilación, solo se compila lo que cambió y luego se arma el
+							ejecutable. </li>
+					</ul>
+				</section>
+				<section>
+					<h2>Linker</h2>
+					<img src="files/clase03/Linker.png" />
+				</section>
+				<section>
+					<h2>Linker</h2>
+					<ul>
+						<li>Es un programa que toma los objetos generados en los primeros pasos del proceso de compilación
+							(compilador) y la información de todos los recursos necesarios (bibliotecas)</li>
+						<li>Quita aquellos recursos que no necesita (p/ej tabla de símbolos), y enlaza el código objeto con su(s)
+							biblioteca(s)</li>
+						<li>Finalmente produce un archivo ejecutable (o una biblioteca)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Entornos de compilación (I)</h3>
+					<p>(Integrated Development Enviroment o IDE)</p>
+					<ul>
+						<li>GPL / Open Source<ul>
+								<li>Geany (GCC, muy pequeño y liviano) </li>
+								<li>Eclipse (Inicialmente JAVA. Muy grande y pensado como un Framework. Mucho otros IDE. Un ejemplo es
+									el compilador de Code Red Tech usado en informática 2 con Kit ARM)</li>
+								<p style="font-size: 85%; font-family: monospace; color: #69C198;">
+									apt-get install eclipse-cdt</p>
+								<li>QT Creator (GCC + librerias QT, también usado en informática 2 para desarrollos en entornos
+									gráficos) </li>
+								<p style="font-size: 85%; font-family: monospace; color: #69C198;">
+									apt-get install cmake qtcreator</p>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Entornos de compilación (II)</h3>
+					<ul>
+						<li>GPL / Open Source
+							<ul>
+								<li>CodeBlocks (GCC + Entorno de desarrollo Win/Lin/Mac cross-platform usando librerías wxWidget) </li>
+								<li><a href="http://wxdsgn.sourceforge.net/">wxDev-C++</a> (GCC + Entorno de desarrollo para Windows
+									<i><b>solamente</b></i> usando librerías del proyecto wxWidgets) </li>
+							</ul>
+						</li>
+						<li>MS Visual Studio Code: <a href="https://code.visualstudio.com/">code.visualstudio.com</a> (c/ <a
+								href="https://code.visualstudio.com/docs/cpp/config-mingw#_prerequisites">MinGW</a>)</li>
+						<li>Propietarios/Pagos:
+							<ul>
+								<li>Microsoft Visual Studio (actualmente .NET)</li>
+								<li>CodeWarrior (entorno de desarrollo motorola)</li>
+								<li>XCode (de Apple)</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>El GCC</h2>
+					<br />
+					<ul>
+						<li>GNU Compiler Collection (GCC): <a href="http://gcc.gnu.org/">gcc.gnu.org</a></li>
+						<li>Lenguajes: <ul>
+								<li>C, C++ &amp; Objective-C </li>
+								<li>Fortran &amp; Java </li>
+								<li>Ada &amp; Go </li>
+							</ul>
+						</li>
+						<li>Ampliamente usado y muchas plataformas: <ul>
+								<li>Alpha, amd64, arm, x86, , x86_64, ia64, m68k, mips, powerPC, sparc, mas... </li>
+							</ul>
+						</li>
+					</ul>
+					<br /><br /><br />
+					<p style="font-size: 75%;">Nota: Otros compiladores nuevos pero <br />ni remotamente tan populares son <a
+							href="https://llvm.org/">LLVM</a> y <a href="http://oldhome.schmorp.de/egcs.html">EGCS</a></p>
+				</section>
+
+				<section>
+					<h2>Compilando con GCC (I)</h2>
+					<ul>
+						<li>compilo directamente a binario:<br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -o hola
+								hola.c</span>
+						</li>
+						<li>Compilador para mostrar errores:<br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -Wall -o
+								hola hola.c</span><br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -Wall
+								-std=c89 -pedantic-errors -o hola hola.c</span>
+						</li>
+						<li>Para agregar información de debugging:<br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -Wall -g -o
+								hola hola.c</span>
+						</li>
+						<li>Solo compilo (no linkeo):<br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -c -o hola.o
+								hola.c</span>
+						</li>
+						<li>Compilo con información adicional:<br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -c -g -o
+								hola.o hola.c</span>
+						</li>
+						<li>Para ver el código assembler:<br />
+							<span style="padding-left: 50px; font-size: 80%; font-family: monospace; color: #69C198;">gcc -S hola.c -o
+								-</span>
+						</li>
+					</ul>
+					</br>
+					<p align="left" style="padding-left: 650px; font-size: 60%; font-family: monospace;">Archivo ejemplo: <a
+							href="./files/clase03/hola.c">hola.c</a></p>
+				</section>
+
+				<section>
+					<h2>Compilando con GCC (II)</h2>
+					<ul>
+						<li>Utilidades
+							<ul>
+								<li><span style="color: #69C198;">file hola.o</span> - información sobre el programa objeto</li>
+								<li><span style="color: #69C198;">objdump -htr hola.o</span> - información detallada</li>
+							</ul>
+						</li>
+						<li>Enlace o linkeo
+							<ul>
+								<li><span style="color: #69C198;">ld -o hola hola.o -lc</span> - enlace de un objeto (ERROR...)</li>
+								<li><span style="color: #69C198;">gcc -g -o hola hola.o -v</span> - información adicional sobre las
+									librerías usadas</li>
+							</ul>
+						</li>
+						<li>Debugging
+							<ul>
+								<li><span style="color: #69C198;">gdb -tui</span> - GNU debugger
+									<pre><code data-trim style="font-size: 25px; margin-top: 20px;" class="bash">
+file hola
+break main
+run
+				</code></pre>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					</br></br>
+					<p style="font-size: 70%;"><a href="http://cseweb.ucsd.edu/classes/wi11/cse141/tutorial_gcc_gdb.html">Tutorial
+							GCC y GDB</a> & <a href="http://www.network-theory.co.uk/docs/gccintro/gccintro_38.html">GCC intro</a> &
+						<a href="http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html">Opciones de debug</a> & <a
+							href="files/clase03/debuggers.txt">Otros debuggers</a>
+					</p>
+				</section>
+			</section>
+			<section data-background="#007777" style="font-size: 70%;">
+				<section>
+					<h3>Herramientas</h3>
+					<ul>
+						<li>Debugging: gdb, ddd, kdbg, etc...</li>
+						<li>Compiler/Linker: gcc</li>
+						<li>Editor: geany, kate, gedit, etc...</li>
+						<li>Proyecto: make</li>
+						<li>Control Versiones: git, svn, cvs, etc...</li>
+						<li>Documentación: doxygen</li>
+						<li>Logging: librerías vistas...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Debuggers</h2>
+					<br />
+					<p style="text-align: left;">GDB (<a href="./files/clase25/cgdb.html">Manual</a> y <a href="./files/clase25/cgdb_cheat_sheet.txt">Notas</a>)</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install cgdb
+		</code></pre>
+					<br />
+					<p style="text-align: left;">Instalando KDBG:</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+$ sudo apt-get install kdbg
+		</code></pre>
+					<p><a href="/files/clase11/problema_gdb_ubuntu_trusty.html">Problemas en Ubuntu 14.04 LTS (trusty)</a></p>
+				</section>
+				<section>
+					<h3>Interface</h3>
+					<p>CLI vs GUI</p>
+					<br />
+					<img src="files/clase25/IDEs_2016-11-19.jpg" />
+				</section>
+				<section>
+					<h3>INSTALL</h3>
+					<br />
+					<ul>
+						<li style="font-family:monospace; font-weight: bold;">apt install build-essential cmake qtcreator</li>
+						<p>QTcreator es piola para crear entornos gráficos (usa las librerias QT de KDE).</p>
+						<li style="font-family:monospace; font-weight: bold;">apt install openjdk-11-jdk</li>
+						<p style="text-align: left; margin-left: 100px; font-size:75%;">Ese es el paquete básico (corre sobre Java)
+							<br />y luego <a href="https://www.eclipse.org/downloads/packages/">bajarse eclipse para Linux</a> desde
+							el sitio oficial.</p>
+						<p>Eclise es un framework para generar IDEs y se usó para crear el IDE del LPCxpresso</p>
+					</ul>
+					<br /><br />
+					<p>Otros:
+					<ul>
+						<li>apt-get install kdevelop</li>
+						<li>apt-get install codeblocks</li>
+					</ul>
+					</p>
+				</section>
+				<section>
+					<h3>Ejemplos de uso</h3>
+					<ul>
+						<li>Geany:
+							<ul>
+								<li>Uso simple: ejemplos/getline.c</li>
+								<li>Muchos Archivos: ejemplos/punto3D/main.cpp</li>
+							</ul>
+						</li>
+						<li>QTCreator: Armar un proyecto con QT y ver opciones</li>
+						<li>Eclipse CDT: Armar un proyecto y mostrar debugging factorial</li>
+						<li>Visual Studio Code: Podemos hacer lo mismo que con Eclipse</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Visual Studio Code</h3>
+					</br>
+					<ul>
+						<li><a href="https://code.visualstudio.com/docs/cpp/cpp-debug">Debug C++ in Visual Studio Code</a></li>
+						<li><a href="https://code.visualstudio.com/docs/cpp/config-mingw">Using GCC with MinGW</a></li>
+						<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">vsCode C/C++
+								extension</a></li>
+					</ul>
+					</br></br>
+					<p>En vsCode usar "Ctrl+P", pegar y ejecutar:</p>
+					<p style="font-size:75%;">(el "Ctrl+P" despliega el "Go to file" box que recibe ese comando)</p>
+					<code>ext install ms-vscode.cpptools</code>
+					<br /><br />
+					<p style="font-size:80%;">No es necesario para debugging, pero de la misma manera se puede instalar:</p>
+					<code style="font-size:80%;">ext install ms-vscode.cpptools-extension-pack</code>
+				</section>
+			</section>
+		</div>
+
+	</div>
+
+	<!-- Remote usando -- https://cdnjs.com/libraries/reveal.js/4.3.1 !-->
+	<!--
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+		!-->
+
+	<!-- Local !-->
+	<script src="./files/reveal.js.v4.3.1/reveal.js"></script>
+	<script src="./files/reveal.js.v4.3.1/markdown.min.js"></script>
+	<script src="./files/reveal.js.v4.3.1/highlight.min.js"></script>
+	<script src="./files/reveal.js.v4.3.1/notes.min.js"></script>
+
+	<script>
+
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+
+	</script>
+
+</body>
+
+</html>
