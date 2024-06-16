@@ -562,7 +562,6 @@ void main(void) {
 <li>STDLIB.H<ul style="font-size: 85%;">
 <li>atof() atoi() &amp; atol() (<a style="font-size: 90%;" href="files/clase06/str_to_num.c">ejemplo de uso</a>)</li>
 <li>itoa() &amp; ltoa() (no ANSI C, <a style="font-size: 90%;" href="files/clase06/itoa_ltoa.html">implementado scanf()</a>)</li>
-<li>srand() &amp; rand()</li>
 </ul>
 </li>
 </ul>
@@ -653,6 +652,51 @@ gcc -lcurses -o ej1 mi_ejercicio.c
 
 <section>
 <section>
+	<h2>Números Random</h2>
+	<br/>
+	<h3>STDLIB.H</h3>
+	<p>srand() &amp; rand()</p>
+	<br/><br/>
+	<p style="font-size: 70%;">Fuentes de entriopia físicas: <br/><a href="https://en.wikipedia.org/wiki/Lavarand">Lavalamps or pendulums</a>, <a href="https://link.springer.com/chapter/10.1007/11424826_67">Weak Radioactive source</a> &amp; <a href="https://en.m.wikipedia.org/wiki/Hardware_random_number_generator">Hardware</a>.</p>
+</section>
+<section>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+<p>Lavarand</p>
+<a href="https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/"><img src="files/clase06/cloudflare_lavalamps_from_SGI.jpg"/></a>
+</ul>
+<ul class="col" style="width: 400px; display: inline-block; vertical-align: top;">
+<p>pendulums</p>
+<a href="https://www.ianvisits.co.uk/articles/inside-the-london-office-where-swinging-pendulums-keep-cyber-threats-at-bay-71054/"><img src="files/clase06/cloudflare_pendulum_london.jpg"/></a>
+</ul>
+<br/><br/>
+<p style="font-size: 70%;"><a href="https://www.lavarand.org/download/index.html">Lavarand original SGI code</a></p>
+</section>
+<section>
+<h2>Ejemplo: "Tirando un dado"</h2>
+<pre ><code data-trim style="font-size: 18px;" class="cpp">
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+int main() {
+  int num_rolls, i;
+  printf("Enter the number of dice rolls: ");
+  scanf("%d", &num_rolls);
+  // Seed the random number generator with the current time
+  srand(time(NULL));
+  // Generate the specified number of random dice rolls
+  for (i = 0; i &lt; num_rolls; i++) {
+    int roll = (rand() % 6) + 1; // Generates a random number between 1 and 6
+    printf("Roll %d: %d\n", i+1, roll);
+  }
+  return 0;
+}
+</code></pre>
+</section>
+</section>
+
+<section>
+<section>
 	<h2>Clase practica</h2>
 </section>
 <section>
@@ -707,7 +751,6 @@ char *pregunta(char texto[], char opc1[], char opc2[])
 <p><a href="files/clase06/strtok_memory.c">Uso de memoria de la función strtok</a></p>
 </section>
 </section>
-
 			</div>
 
 		</div>
