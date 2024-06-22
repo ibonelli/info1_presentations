@@ -34,11 +34,14 @@ int main(void)
 			    alarma5 , alarma6 , alarma7 ,alarma8 };
 	int dato;
 
-	while ( 1 ) {
+	while (dato>=0 && dato<=7) {
 		printf("Ingrese un numero de 0 a 7\tValor: ");
 		scanf("%d",&dato);
-		(*pf[dato])( );
+		if(dato>=0 && dato<=7) {
+			(*pf[dato])( );
+		} else {
+			printf("Opcion no valida!\n");
+		}
 	}
-
 	return 0;
 }

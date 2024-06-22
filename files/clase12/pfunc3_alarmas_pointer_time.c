@@ -1,6 +1,7 @@
 /* Seleccion de funciones de alarma usando punteros a funcion  */
 /* GCC : gcc -o alarmas ej3_alarmas.c -g -ggdb -Wall               */
 #include <stdio.h>
+#include <sys/time.h>
 
 /*  Prototipos  */
 void alarma1( ) {
@@ -30,11 +31,14 @@ void alarma8( ) {
 
 int main(void)
 {
-	int dato;
+
+    struct timeval st, et;
+	int dato, elapsed;
 
 	while ( 1 ) {
 		printf("Ingrese un numero de 0 a 7\tValor: ");
 		scanf("%d",&dato);
+		gettimeofday(&st,NULL);
 		switch(dato) {
 			case 0: alarma1(); break;
 			case 1: alarma2(); break;
@@ -45,7 +49,9 @@ int main(void)
 			case 6: alarma7(); break;
 			case 7: alarma8(); break;
 		}
+		gettimeofday(&et,NULL);
+		elapsed = ((et.tv_sec - st.tv_sec) * 1000000) + (et.tv_usec - st.tv_usec);
+		printf("Execution time: %d micro seconds\n",elapsed);	
 	}
-
 	return 0;
 }
