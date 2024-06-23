@@ -1,6 +1,7 @@
 /* Seleccion de funciones de alarma usando punteros a funcion  */
-/* GCC : gcc -o alarmas ej3_alarmas.c -g -ggdb -Wall               */
-// Correr con sudo para tener permisos de monitoreo.
+/* GCC : gcc -o alarmas ej3_alarmas.c -g -ggdb -Wall           */
+/* ToRun: sudo ./alarmas                                       */
+/*    Se debe correr con sudo para tener permisos de monitoreo */
 
 #include <stdlib.h>
 #include <stdio.h>
