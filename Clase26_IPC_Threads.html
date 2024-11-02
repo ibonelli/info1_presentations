@@ -248,7 +248,7 @@ man 2 signal
 	<a style="margin-left: 100px;" href="files/clase26/zombie4.c">zombie4.c</a>
 </ol>
 <br /><br />
-<p>Bonus: Usamos un signal handler, y hacemos algo: <a href="files/clase26/zombie5.c">zombie5.c</a></p>
+<p style="font-size: 75%;">Bonus: Usamos un signal handler haciendo algo <a href="files/clase26/zombie5.c">zombie5.c</a> y cerramos al padre <a href="files/clase26/zombie6.c">zombie6.c</a></p>
 </section>
 
 <section>
@@ -634,6 +634,23 @@ ignacio  19926 17451 19928  0    3 09:30 pts/7    00:00:00 ./threads_m2
 <p>Sumando y restando una matriz</p>
 <img src="files/clase26/parallel_example1.png"/>
 <p><a href="files/clase26/parallel_example1.c">parallel_example1.c</a></p>
+</section>
+
+<section>
+<h2>Thread Safety</h2>
+<ul>
+	<li>Funciones Thread Safe</li>
+	<li>Archivos y cursor compartido (shared memory)</li>
+</ul>
+<pre><code data-trim style="font-size: 24px; margin-top: 20px; margin-left: 100px;" class="bash">
+man 3 exit
+┌──────────┬───────────────┬─────────────────────┐
+│Interface │ Attribute     │ Value               │
+├──────────┼───────────────┼─────────────────────┤
+│exit()    │ Thread safety │ MT-Unsafe race:exit │
+└──────────┴───────────────┴─────────────────────┘
+</code></pre>
+<p>The exit() function uses a global variable that is not protected, <br/>so it is not thread-safe.</p>
 </section>
 
 <section>
