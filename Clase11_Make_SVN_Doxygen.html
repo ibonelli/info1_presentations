@@ -275,6 +275,74 @@ clean:
 					</section>
 				</section>
 
+				<section data-background="#4553B0">
+					<section>
+						<h2>Precompilador</h2>
+						<h3>#include & #define</h3>
+						<br/><br/>
+						<p>¿Esto es todo lo que hay?</p>
+					</section>
+					<section>
+						<h2>Precompilador</h2>
+						<h3>Incluyendo archivos</h3>
+						<br/><br/>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#ifndef __ARCHIVO_H__
+#define __ARCHIVO_H__
+
+/*... declaraciones de funciones, etc. ...*/
+
+#endif
+						</code></pre>
+					</section>
+					<section>
+						<h2>Precompilador</h2>
+						<h3>Compilación condicional</h3>
+						<br/><br/>
+						<ul>
+							<ul class="col" style="width: 200px; display: inline-block; vertical-align: top;">
+								<li>#ifdef</li>
+								<li>#ifndef</li>
+							</ul>
+							<ul class="col" style="width: 200px; display: inline-block; vertical-align: top;">
+								<li>#else</li>
+								<li>#elif</li>
+							</ul>
+							<ul class="col" style="width: 200px; display: inline-block; vertical-align: top;">
+								<li>#endif</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h3>Compilación condicional: Ejemplo</h3>
+						<br/><br/>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#define __unix__
+
+#ifdef __unix__ /* __unix__ is usually defined by compilers targeting Unix systems */
+#include &lt;unistd.h&gt;
+#elif defined _WIN32 /* _WIN32 is usually defined by compilers targeting 32 bit Windows systems */
+#include &lt;windows.h&gt;
+#elif defined _WIN64 /* _WIN64 targeting 64 bit Windows systems */
+#include &lt;win64.h&gt;
+#endif
+						</code></pre>
+					</section>
+					<section>
+						<h3>Define y macros</h3>
+						<br/><br/>
+						<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;" class="cpp">
+#define PI 3.14159
+
+#define RADAGRA(x) ((x) * 57.29578)
+
+#define MIN(a,b) ((a)>(b)?(b):(a))
+						</code></pre>
+						<br/><br/>
+						<p style="font-size: 70%;">Más en Wikipedia <a href="https://en.wikipedia.org/wiki/C_preprocessor">EN</a> & <a href="https://es.wikipedia.org/wiki/Preprocesador_de_C">ES</a></p>
+					</section>
+				</section>
+
 				<section data-background="#4d7e65">
 					<section>
 						<h2>GIT</h2>
