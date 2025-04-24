@@ -1,0 +1,11 @@
+Starts - https://youtu.be/DxREm3s1scA?t=4724 (1h18m44s)
+Ends - https://youtu.be/DxREm3s1scA?t=4766 (1h19m26s)
+
+we're really primarily running C here because C++ is too much overhead and we
+have our own C compiler to get maximum performance we actually wrote
+our own C compiler and are continuing to optimize our C compiler for
+maximum efficiency in fact we've just recently done a new Rev on a c compiler
+that will compile directly to our autopilot Hardware
+
+Subtitle Download:
+	yt-dlp --skip-download --write-auto-subs --write-subs --sub-lang en https://www.youtube.com/watch?v=DxREm3s1scA
