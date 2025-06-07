@@ -507,12 +507,16 @@ int main(void) {
 
 <section>
 <h3>¿Como evitamos problemas por no tener espacio suficiente en el string de destino?</h3>
-<h4>Para srtcpy() y strcat()</h4>
 <br/>
-<p>Podemos usar : strncpy() y strncat()</p>
+<p>En el caso de srtcpy() podemos usar strncpy():</p>
 <br/>
 <pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
 char *strncpy(char *dest, const char *src, size_t n);
+</code></pre>
+<br/>
+<p>En lugar de strcat(), también existe strncat().<br/>Pero solo limita la cantidad que copio:</p>
+<br/>
+<pre style="width: 900px;"><code data-trim style="font-size: 24px; margin-top: 20px; width: 900px;" class="cpp">
 char *strncat(char *dest, const char *src, size_t n);
 </code></pre>
 </section>
