@@ -642,6 +642,62 @@ gcc -lcurses -o ej1 mi_ejercicio.c
 <br/><br/>
 <a href="files/clase06/getch_kbhit/ncurses.html" style="text-align: left; font-size: 70%;">Mas ejemplos y informacion sobre como usar ncurses.</a>
 </section>
+</section>
+
+<section>
+<section>
+	<h1>UTF8</h1>
+	<h3><a href="https://es.wikipedia.org/wiki/UTF-8">Unicode</a></h3>
+	<p>ISO 10646</p>
+</section>
+<section>
+	<h3>De ASCII a UTF8</h3>
+	<br/>
+	<p>UTF-8 es el estándar de codificación de caracteres más común en Internet, ya que puede representar cualquier carácter Unicode y es compatible con ASCII, lo que permite mostrar correctamente textos en diversos idiomas en todo el mundo.</p>
+	<p>Se utiliza para codificar textos usando de uno a cuatro bytes por carácter, haciendo que la codificación sea de longitud variable y permitiendo la compatibilidad retroactiva con el antiguo ASCII.</p>
+</section>
+<section>
+	<h3>De ASCII a UTF8</h3>
+	<br/>
+	<p style="text-align: left;">Características principales:</p>
+	<ul>
+		<li><b>Universalidad</b>: Sirve para todos los lenguajes.</li>
+		<li><b>Retrocompatibilidad con ASCII</b>: Los caracteres ASCII (los primeros 128) se codifican con un solo byte.</li>
+		<li><b>Longitud variable</b>: Utiliza entre uno y cuatro bytes por carácter, dependiendo del carácter.</li>
+		<li><b>Estándar de la industria</b>: Es el estándar para la web, los sistemas operativos modernos.</li>
+	</ul>
+	<br/><br/>
+	<p style="font-size: 80%; text-align: left;"><b>Historia</b>: UTF-8 fue ideado por Kenneth Thompson bajo los criterios de diseño de Rob Pike el 2 de septiembre de 1992. Ambos lo implementaron e implantaron en su sistema operativo Plan 9 from Bell Labs.</p>
+</section>
+<section>
+	<h3>UTF8 y su tamaño</h3>
+	<br/>
+	<p>En base a los primeros bits UTF-8 sabe cuántos bytes debe usar.</p>
+	<br/>
+	<p style="text-align: left;">¿Cómo Funciona?</p>
+	<ul>
+		<li><b>1 byte</b>: Si el primer bit del byte es un 0. Esto es compatible con la parte estándar del código ASCII, los primeros 128 bytes,</li>
+		<li><b>Más de 1 byte</b>: Si el primer byte de la secuencia comienza con una serie de 1s seguidos por un 0.</li>
+	</ul>
+</section>
+
+
+<section>
+	<h3>UTF8 y su tamaño</h3>
+	<br/>
+	<p>Más de 1 byte...</p>
+	<br/>
+	<p style="text-align: left;">La cantidad de 1s indica el número total de bytes en la secuencia:</p>
+	<ul>
+		<li><b>110xxxxx</b>: La secuencia tiene 2 bytes.</li>
+		<li><b>1110xxxx</b>: La secuencia tiene 3 bytes.</li>
+		<li><b>11110xxx</b>: La secuencia tiene 4 bytes.</li>
+	</ul>
+	<br/><br/>
+	<p>Bytes de continuación: Los bytes que siguen al byte de prefijo siempre comienzan con los bits 10.</p>
+</section>
+
+
 <section>
 	<h3>¿Unicode en C?</h3>
 	<br/>
