@@ -1,0 +1,6 @@
+Created using:
+    Marp
+        <Nextcloud>/Aramark/Tools/Markdown_Presentations.md
+    MS Copilot discussion on how to learn C pointers
+
+Marp which outputs to HTML, PDF or PPTX using [marp-cli](https://github.com/marp-team/marp-cli)
