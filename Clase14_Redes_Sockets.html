@@ -754,6 +754,52 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
 			<li>Transferencia de Archivos: <span style="font-size: 70%;">"LIST" y "GET archivo.txt"</span></li>
 		</ol>
 	</section>
+	<section>
+		<h2>Protocolo TLV</h2>
+		<p>(Tipo-Longitud-Valor)</p>
+		<br/>
+		<ol>
+			<li>Tipo / Identificador: <span style="font-size: 70%;">Un código numérico que identifica el tipo de dato que se está enviando.</span></li>
+			<li>Longitud: <span style="font-size: 70%;">Un entero que especifica el tamaño en bytes del campo Valor.</span></li>
+			<li>Valor: <span style="font-size: 70%;">Los datos que se está enviando (texto, enteros u otros) con la cantidad exacta de bytes indicados en el campo longitud.</span></li>
+		</ol>
+		<br/><br/>
+		<pre><code class="nohighlight">+-------------------+---------------------+----------------------------------+
+|   Type (1-4 B)    |    Length (1-4 B)   |         Value (L bytes)          |
++-------------------+---------------------+----------------------------------+
+| Ej: 0x01 (Nombre) | Ej: 0x0006 (6 B)    | "Juan\0" o datos binarios        |
++-------------------+---------------------+----------------------------------+</code></pre>
+	</section>
+	<section>
+		<h2>Ejemplo Protocolo TLV</h2>
+		<br/>
+		<pre><code data-trim class="cpp">
+#include &lt;stdint.h&gt;
+
+// Definición de Tipos (Type)
+#define TLV_USER_ID    1  // Value: uint32_t (4 bytes)
+#define TLV_USERNAME   2  // Value: string (variable)
+#define TLV_AUTH_TOKEN 3  // Value: byte array (variable)
+
+// Estructura de cabecera fija
+typedef struct {
+    uint16_t type;
+    uint16_t length;
+} tlv_header_t;
+		</code></pre>
+	</section>
+	<section>
+		<h2>Protocolo TLV: Ventajas</h2>
+		<br/>
+		<ol>
+			<li>Resuelve el delimitado de mensajes en TCP: TCP no garantiza que un `send()` se reciba en un único `recv()`.</li>
+			<li>Soporta campos de longitud variable.</li>
+			<li>Extensibilidad y compatibilidad hacia atrás.</li>
+			<li>Anidamiento: Un valor puede contener a su vez una secuencia de sub-estructuras TLV.</li>
+		</ol>
+		<br/>
+		<p style="font-size: 50%;">Para más detalles consultar <a href="files/clase14/Type-Length-Value__TLV__Protocol.md">TLV-Protocol.md</a> y <a href="https://en.wikipedia.org/wiki/Type%E2%80%93length%E2%80%93value">TLV @ Wikipedia</a></p>
+	</section>
 </section>
 
 <!-- ==== 6th Section ==== -->
