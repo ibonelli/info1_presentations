@@ -63,6 +63,12 @@ int main() {
 
 	pthread_mutex_init(&mutex, NULL);
 
+	printf("Uso:\n");
+	printf("\tSe muestra cuantos datos hay en el buffer.\n");
+	printf("\tPara que main() procese los datos, presionar ENTER.\n");
+	printf("\tPara salir, presionar CTRL+C.\n");
+	printf("------------\n\n");
+
 	pthread_create(&thread_id, NULL, DatoAleatorio, NULL);
 
 	a = 0xa2;

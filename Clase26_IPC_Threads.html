@@ -151,7 +151,6 @@ POSIX.1-1990, POSIX.1-2001, POSIX.1-2008, SVr4, 4.3BSD, ...
 
 Signals can be numbered from 0 to 31.
 </code></pre>
-<p style="font-size: 70%;">Para obtener la lista completa correr:<br/><span style="font-family: monospace;">man 7 signal</p>
 </section>
 
 <section>
@@ -249,7 +248,7 @@ man 2 signal
 	<a style="margin-left: 100px;" href="files/clase26/zombie4.c">zombie4.c</a>
 </ol>
 <br /><br />
-<p style="font-size: 75%;">Bonus: Usamos un signal handler haciendo algo <a href="files/clase26/zombie5.c">zombie5.c</a> y cerramos al padre <a href="files/clase26/zombie6.c">zombie6.c</a></p>
+<p>Bonus: Usamos un signal handler, y hacemos algo: <a href="files/clase26/zombie5.c">zombie5.c</a></p>
 </section>
 
 <section>
@@ -493,6 +492,19 @@ void pthread_exit(void *retval);
 </section>
 
 <section>
+<h2>Threads Safety</h2>
+<p>man 3 sleep ; man 3 usleep</p>
+<br />
+<pre style="font-size: 75%; font-family: monospace; white-space: pre; background: transparent; border: none; box-shadow: none; margin: 0; padding: 0; color: inherit;">┌────────────────┬───────────────┬─────────────────────────────┐
+│Interface       │ Attribute     │ Value                       │
+├────────────────┼───────────────┼─────────────────────────────┤
+│sleep()         │ Thread safety │ MT-Unsafe sig:SIGCHLD/linux │
+├────────────────┼───────────────┼─────────────────────────────┤
+│usleep()        │ Thread safety │ MT-Safe                     │
+└────────────────┴───────────────┴─────────────────────────────┘</pre>
+</section>
+
+<section>
 <h2>Threads Mutex</h2>
 <br />
 <p>Los mutual exclusion locks (mutexes) son uno de los métodos usados para serializar la ejecución de threads. Nos permiten asegurar que en un momento solo un thread se estará ejecutando.</p>
@@ -573,9 +585,7 @@ Job 2 finished
 <br/>
 <p>FORK & PID</p>
 <pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
-ps elf | head -n1
-ps elf | grep tcp | grep -v grep
-watch -n 1 "ps elf | grep tcp | grep -v grep"
+watch -n 1 "ps elf | head -n1 ; ps elf | grep tcp | grep -v grep"
 
 F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY     TIME COMMAND
 0  1000 19398 17451  20   0  84348  1032 -      Sl+  pts/7   0:00 ./threads_m2
@@ -583,9 +593,7 @@ F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY     TIME COMMAND
 <br/>
 <p>Threads & LWP</p>
 <pre><code data-trim style="font-size: 18px; margin-top: 20px;" class="bash">
-ps -eLf | head -n1
-ps -eLf | grep threads_m2 | grep -v grep
-watch -n 1 "ps -eLf | grep threads | grep -v grep"
+watch -n 1 "ps -eLf | head -n1 ; ps -eLf | grep threads | grep -v grep"
 
 UID        PID  PPID   LWP  C NLWP STIME TTY          TIME CMD
 ignacio  19926 17451 19926  0    3 09:30 pts/7    00:00:00 ./threads_m2
@@ -635,23 +643,6 @@ ignacio  19926 17451 19928  0    3 09:30 pts/7    00:00:00 ./threads_m2
 <p>Sumando y restando una matriz</p>
 <img src="files/clase26/parallel_example1.png"/>
 <p><a href="files/clase26/parallel_example1.c">parallel_example1.c</a></p>
-</section>
-
-<section>
-<h2>Thread Safety</h2>
-<ul>
-	<li>Funciones Thread Safe</li>
-	<li>Archivos y cursor compartido (shared memory)</li>
-</ul>
-<pre><code data-trim style="font-size: 24px; margin-top: 20px; margin-left: 100px;" class="bash">
-man 3 exit
-┌──────────┬───────────────┬─────────────────────┐
-│Interface │ Attribute     │ Value               │
-├──────────┼───────────────┼─────────────────────┤
-│exit()    │ Thread safety │ MT-Unsafe race:exit │
-└──────────┴───────────────┴─────────────────────┘
-</code></pre>
-<p>The exit() function uses a global variable that is not protected, <br/>so it is not thread-safe.</p>
 </section>
 
 <section>
