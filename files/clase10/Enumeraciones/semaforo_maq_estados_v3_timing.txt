@@ -1,0 +1,26 @@
+¿Cuántos ciclos completos querés simular? 3
+	ROJO     -> Detenerse
+		Elapsed time: 3.004286 seconds
+	VERDE    -> Avanzar
+		Elapsed time: 3.002919 seconds
+	AMARILLO -> Precaución
+		Elapsed time: 0.998950 seconds
+
+--- Ciclo 1 terminado ---
+	ROJO     -> Detenerse
+		Elapsed time: 2.998914 seconds
+	VERDE    -> Avanzar
+		Elapsed time: 3.008947 seconds
+	AMARILLO -> Precaución
+		Elapsed time: 0.998906 seconds
+
+--- Ciclo 2 terminado ---
+	ROJO     -> Detenerse
+		Elapsed time: 2.996922 seconds
+	VERDE    -> Avanzar
+		Elapsed time: 2.999896 seconds
+	AMARILLO -> Precaución
+		Elapsed time: 0.998992 seconds
+
+--- Ciclo 3 terminado ---
+	Fin de la simulación.
